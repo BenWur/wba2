@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<!-- zuerst simple-type 
+		-rezeptname 
+	  	-url
+	  	-beschreibung 
+	  	-zutatname 
+	  	-arbeitszeit 
+	  	-schwierigkeitsgrad 
+	  	-brennwert 
+	  	-arbeitsschritte
+	  	-portionen 
+-->
+<!-- Restriktionen:
+	-rezeptname max. 100 Zeichen
+	-untertitel max. 200 Zeichen
+	-url max. 150 Zeichen	
+	-beschreibung max. 50 Zeichen
+	-zutatname max. 100 Zeichen
+	
+	-menge, portionen, arbeitszeit und brennwert dürfen nicht negativ sein, deswegen habe ich den 
+	 Datentyp decimal gewählt.	
+	-portionen ist dabei aber auf max. 100 Portionen begrenzt
+	-Arbeitsschritte würde ich nicht begrenzen, da manche Rezepte sehr umfangreich sind 
+	 (siehe http://www.chefkoch.de/rezepte/1426751247563051/Spareribs-NT-im-Bratschlauch.html )
+-->
+<xs:element name="arbeitsschritte" type="xs:sting"/>
+
+<xs:element name="rezeptname">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:minInclusive value="2"/>
+      <xs:maxInclusive value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+<xs:element name="untertitel">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="200"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+<xs:element name="beschreibung">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:minInclusive value="10"/>
+      <xs:maxInclusive value="50"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+<xs:element name="zutatname">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:minInclusive value="2"/>
+      <xs:maxInclusive value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:element>
+
+<!-- Restriktionen für Attribute -->
+
+<xs:attribute name="arbeitszeit" type="xs:decimal"/>
+<xs:attribute name="brennwert" type="xs:string" default="keine Angabe"/>
+
+<xs:attribute name="url">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:minInclusive value="4"/>
+      <xs:maxInclusive value="150"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:attribute>
+
+<xs:attribute name="mengeneinheit">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="g"/>
+      <xs:enumeration value="l"/>
+      <xs:enumeration value="anzahl"/>
+      <xs:enumeration value="kg"/>
+      <xs:enumeration value="ml"/>
+      <xs:enumeration value="TL"/>
+      <xs:enumeration value="EL"/>
+      <xs:enumeration value="Scheiben"/>
+      <xs:enumeration value=""/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:attribute>
+
+<xs:attribute name="portionen">
+  <xs:simpleType>
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="1"/>
+      <xs:maxInclusive value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:attribute>
+
+<xs:attribute name="kochBackZeit">
+  <xs:simpleType>
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="200"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:attribute>
+
+<xs:attribute name="ruheZeit">
+  <xs:simpleType>
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="200"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:attribute>
+
+<xs:attribute name="schwierigkeitsgrad">
+  <xs:simpleType>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="simpel"/>
+      <xs:enumeration value="normal"/>
+      <xs:enumeration value="pfiffig"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:attribute>
+
+
+
+<!-- komplexe Elemente 
+
+		complex-types:	
+			-rezept (rezeptname,untertitel,bilder,zutaten,zubereitung)
+		  	-bilder (bild)*
+		  	-zutaten (portionen,(zutat)+)
+		  	-zubereitung (arbeitszeit,schwierigkeitsgrad,brennwert,kochBackZeit?,ruheZeit?,arbeitsschritte)
+		  	-zutat (menge,zutatname)
+		  	-bild (url,beschreibung)
+		  	-menge(mengeneinheit,anzahl)
+-->
+
+<xs:element name="rezept">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element ref="rezeptname"/>
+      <xs:element ref="untertitel" minOccurs="0" />
+      <xs:element ref="bilder" minOccurs="0" maxOccurs="1" />
+      <xs:element ref="zutaten"/>
+      <xs:element ref="zubereitung"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="bilder">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element ref="bild" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="zutaten">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element ref="zutat" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute ref="portionen" />
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="zutat">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element ref="menge"/>
+      <xs:element ref="zutatname"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="zubereitung">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element ref="arbeitsschritte"/>
+    </xs:sequence>
+    <xs:attribute ref="arbeitszeit"/>
+    <xs:attribute ref="schwierigkeitsgrad"/>
+    <xs:attribute ref="brennwert"/>
+    <xs:attribute ref="kochBackZeit" minOccurs="0" maxOccurs="1"/>
+    <xs:attribute ref="ruheZeit" minOccurs="0" maxOccurs="1"/>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="bild">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element ref="beschreibung"/>
+    </xs:sequence>
+    <xs:attribute ref="url"/>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="menge">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="anzahl" type="xs:decimal"/>
+      <xs:element ref="mengeneinheit" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>

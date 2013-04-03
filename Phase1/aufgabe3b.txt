@@ -16,6 +16,9 @@ Antwort:
 	-Manche Rezepte besitzen Untertitel
 	-Manche Zutaten sind kategorisiert ("Für den Belag:","Für den Boden:")
 	-Mengenangaben müssen nicht festgelegt werden
+	-Es gibt weitere Attribute wie z.B.:
+		Koch-/Backzeit: ca. 20 Min.	 
+		Ruhezeit: ca. 16 Std
 	
 	
 c) Arbeiten Sie die Kriterien heraus, die für die Entwicklung einer XML-Schema-Datei beachtet werden müssen. 
@@ -36,23 +39,24 @@ simple-types:
 	-rezeptname 
   	-url
   	-beschreibung 
-  	-menge
-  	-name 
+  	-zutatname 
   	-arbeitszeit 
   	-schwierigkeitsgrad 
   	-brennwert 
   	-arbeitsschritte
-  	-portionen 
+  	-portionen
+  	-untertitel 
   	
 Complexe-types enthalten weiteren Elemente
   	
 complex-types:	
-	-rezept (rezeptname,bilder,zutaten,zubereitung)
+	-rezept (rezeptname,untertitel,bilder,zutaten,zubereitung)
   	-bilder (bild)*
   	-zutaten (portionen,(zutat)+)
-  	-zubereitung (arbeitszeit,schwierigkeitsgrad,brennwert,arbeitsschritte)
-  	-zutat (menge,name)
+  	-zubereitung (arbeitszeit,schwierigkeitsgrad,brennwert,kochBackZeit?,ruheZeit?,arbeitsschritte)
+  	-zutat (menge,zutatname)
   	-bild (url,beschreibung)
+  	-menge(mengeneinheit,anzahl)
   	
 Abbildung in Attribute:
 	-bild kann das feste Attribut URL enthalten
@@ -63,10 +67,11 @@ Abbildung in Attribute:
 	
 Datentypen:
 	-rezeptname(String)
+	-untertitel(String)
 	-url(String)
 	-beschreibung(String)
 	-menge(decimal)
-	-name(String)
+	-zutatname(String)
 	-Arbeitszeit(decimal)
 	-brennwert(decimal)
 	-arbeitsschritte(String)
@@ -74,8 +79,10 @@ Datentypen:
 	
 Restriktionen:
 	-rezeptname max. 100 Zeichen
+	-untertitel max. 200 Zeichen
 	-url max. 150 Zeichen	
 	-beschreibung max. 50 Zeichen
+	-zutatname max. 100 Zeichen
 	
 	-menge, portionen, arbeitszeit und brennwert dürfen nicht negativ sein, deswegen habe ich den 
 	 Datentyp decimal gewählt.	

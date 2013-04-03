@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <!DOCTYPE rezept [
-  <!ELEMENT rezept (rezeptname,bilder,zutaten,zubereitung)+>
+  <!ELEMENT rezept (rezeptname,untertitel?,bilder,zutaten,zubereitung)+>
   <!ELEMENT bilder (bild)*>
   <!ELEMENT zutaten (portionen,(zutat)+)>
   <!ELEMENT zubereitung (arbeitszeit,schwierigkeitsgrad,brennwert,arbeitsschritte)>
-  <!ELEMENT zutat (menge,name)>
+  <!ELEMENT zutat (menge,zutatname)>
   <!ELEMENT bild (url,beschreibung)>
   
   <!ELEMENT rezeptname (#PCDATA)>
+  <!ELEMENT untertitel (#PCDATA)>
   <!ELEMENT url (#PCDATA)>
   <!ELEMENT portionen (#PCDATA)>
   <!ELEMENT beschreibung (#PCDATA)>
   <!ELEMENT menge (#PCDATA)>
-  <!ELEMENT name (#PCDATA)>
+  <!ELEMENT zutatname (#PCDATA)>
   <!ELEMENT arbeitszeit (#PCDATA)>
   <!ELEMENT schwierigkeitsgrad (#PCDATA)>
   <!ELEMENT brennwert (#PCDATA)>
@@ -37,13 +38,13 @@
 	
 	<zutaten>
 		<portionen>16 </portionen>
-		<zutat> <menge>200g</menge> 	<name>Butter</name> </zutat>
-		<zutat> <menge>200g</menge> 	<name>Zucker</name> </zutat>
-		<zutat> <menge>200g</menge> 	<name>Schokolade,Blockschokolade</name> </zutat>
-		<zutat> <menge>120g</menge> 	<name>Mehl</name> </zutat>
-		<zutat> <menge>1/2 TL</menge> 	<name>Backpulver</name> </zutat>
-		<zutat> <menge>1 Pkt.</menge> 	<name>Vanillezucker</name> </zutat>
-		<zutat> <menge>4</menge> 	<name>Eier</name> </zutat>
+		<zutat> <menge>200g</menge> 	<zutatname>Butter</zutatname> </zutat>
+		<zutat> <menge>200g</menge> 	<zutatname>Zucker</zutatname> </zutat>
+		<zutat> <menge>200g</menge> 	<zutatname>Schokolade,Blockschokolade</zutatname> </zutat>
+		<zutat> <menge>120g</menge> 	<zutatname>Mehl</zutatname> </zutat>
+		<zutat> <menge>1/2 TL</menge> 	<zutatname>Backpulver</zutatname> </zutat>
+		<zutat> <menge>1 Pkt.</menge> 	<zutatname>Vanillezucker</zutatname> </zutat>
+		<zutat> <menge>4</menge> 	<zutatname>Eier</zutatname> </zutat>
 	</zutaten>
 	
 	<zubereitung>
