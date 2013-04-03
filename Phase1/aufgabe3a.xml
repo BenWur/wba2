@@ -23,8 +23,14 @@
 	<rezeptname>Lenchen’s Schokoladenkuchen</rezeptname>
 	
 	<bilder>
-		<bild><url>lenchen_s_schokoladenkuchen.jpg</url> <beschreibung>1/60: Foto von Ben</beschreibung></bild>
-		<bild><url>kuchen2.jpg</url> <beschreibung>2/60: Foto von Dennis</beschreibung></bild>
+		<bild>
+			<url>lenchen_s_schokoladenkuchen.jpg</url> 
+			<beschreibung>1/60: Foto von Ben</beschreibung>
+		</bild>
+		<bild>
+			<url>kuchen2.jpg</url> 
+			<beschreibung>2/60: Foto von Dennis</beschreibung>
+		</bild>
 	</bilder>
 	
 	<zutaten>
