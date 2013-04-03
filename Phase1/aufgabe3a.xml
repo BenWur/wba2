@@ -9,7 +9,9 @@
   <!ELEMENT bild (url,beschreibung)>
   
   <!ELEMENT rezeptname (#PCDATA)>
-  <!ELEMENT bild (#PCDATA)>
+  <!ELEMENT url (#PCDATA)>
+  <!ELEMENT portionen (#PCDATA)>
+  <!ELEMENT beschreibung (#PCDATA)>
   <!ELEMENT menge (#PCDATA)>
   <!ELEMENT name (#PCDATA)>
   <!ELEMENT arbeitszeit (#PCDATA)>
