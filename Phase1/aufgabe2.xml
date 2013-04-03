@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE gruppenanmeldung [
+  <!ELEMENT gruppenanmeldung (gruppenleiter,(person)+)>
+  <!ELEMENT gruppenleiter (vorname,nachname,email,geburtsdatum,erfahrung,schlagzeug,anmerkung)>
+  <!ELEMENT person (vorname,nachname,email,geburtsdatum,erfahrung,schlagzeug)>
+  <!ELEMENT vorname (#PCDATA)>
+  <!ELEMENT nachname (#PCDATA)>
+  <!ELEMENT email (#PCDATA)>
+  <!ELEMENT geburtsdatum (#PCDATA)>
+  <!ELEMENT erfahrung (#PCDATA)>
+  <!ELEMENT schlagzeug (#PCDATA)>
+  <!ELEMENT anmerkung (#PCDATA)>
+]>
+
+<gruppenanmeldung>
+
+	<gruppenleiter>
+	  <vorname>Beno</vorname>
+	  <nachname>Urth</nachname>
+	  <email>BenoUrth@gmx.de</email>
+	  <geburtsdatum>01.09.1891</geburtsdatum>
+	  <erfahrung>Profi</erfahrung>
+	  <schlagzeug>vorhanden</schlagzeug>
+	  <anmerkung>Unser Motto ist Party Party Party</anmerkung>  
+	</gruppenleiter>
+
+	<person>
+	  <vorname>Domi</vorname>
+	  <nachname>Chilli</nachname>
+	  <email>chillidom@hotmail.com</email>
+	  <geburtsdatum>06.06.1906</geburtsdatum>
+	  <erfahrung>Profi</erfahrung>
+	  <schlagzeug>vorhanden</schlagzeug>
+	</person>
+
+</gruppenanmeldung>
