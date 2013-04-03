@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE rezept [
+  <!ELEMENT rezept (rezeptname,bilder,zutaten,zubereitung)+>
+  <!ELEMENT bilder (bild)*>
+  <!ELEMENT zutaten (portionen,(zutat)+)>
+  <!ELEMENT zubereitung (arbeitszeit,schwierigkeitsgrad,brennwert,arbeitsschritte)>
+  <!ELEMENT zutat (menge,name)>
+  <!ELEMENT bild (url,beschreibung)>
+  
+  <!ELEMENT rezeptname (#PCDATA)>
+  <!ELEMENT bild (#PCDATA)>
+  <!ELEMENT menge (#PCDATA)>
+  <!ELEMENT name (#PCDATA)>
+  <!ELEMENT arbeitszeit (#PCDATA)>
+  <!ELEMENT schwierigkeitsgrad (#PCDATA)>
+  <!ELEMENT brennwert (#PCDATA)>
+  <!ELEMENT arbeitsschritte (#PCDATA)> 
+]>
+
+<rezept>
+
+	<rezeptname>Lenchen’s Schokoladenkuchen</rezeptname>
+	
+	<bilder>
+		<bild><url>lenchen_s_schokoladenkuchen.jpg</url> <beschreibung>1/60: Foto von Ben</beschreibung></bild>
+		<bild><url>kuchen2.jpg</url> <beschreibung>2/60: Foto von Dennis</beschreibung></bild>
+	</bilder>
+	
+	<zutaten>
+		<portionen>16 </portionen>
+		<zutat> <menge>200g</menge> 	<name>Butter</name> </zutat>
+		<zutat> <menge>200g</menge> 	<name>Zucker</name> </zutat>
+		<zutat> <menge>200g</menge> 	<name>Schokolade,Blockschokolade</name> </zutat>
+		<zutat> <menge>120g</menge> 	<name>Mehl</name> </zutat>
+		<zutat> <menge>1/2 TL</menge> 	<name>Backpulver</name> </zutat>
+		<zutat> <menge>1 Pkt.</menge> 	<name>Vanillezucker</name> </zutat>
+		<zutat> <menge>4</menge> 	<name>Eier</name> </zutat>
+	</zutaten>
+	
+	<zubereitung>
+		<arbeitszeit> ca 1 Std. </arbeitszeit>
+		<schwierigkeitsgrad> normal </schwierigkeitsgrad>
+		<brennwert> 295 kcal </brennwert>
+		<arbeitsschritte> Butter und Schokolade im Wasserbad schmelzen. Eier trennen. Eiweiß steif schlagen. 
+		Eigelbe, Zucker und Vanillezucker verrühren. Geschmolzene Butter-Schokomasse hinzufügen und mischen. 
+		Mehl mit dem Backpulver in die Masse sieben und zum Schluss die steifen Eiweiße vorsichtig unterheben. 
+		In eine gut gefettete Form geben. 
+		Bei 180°Grad 40 – 50 Minuten backen. </arbeitsschritte>
+	</zubereitung>
+	
+</rezept>
