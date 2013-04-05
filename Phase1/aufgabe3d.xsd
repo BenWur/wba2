@@ -133,7 +133,7 @@ komplexe Elemente
     <xs:sequence>
       <xs:element ref="rezeptname"/>
       <xs:element ref="untertitel" minOccurs="0" />
-      <xs:element ref="bilder" minOccurs="0" maxOccurs="1" />
+      <xs:element ref="bilder" minOccurs="0"/>
       <xs:element ref="zutaten"/>
       <xs:element ref="zubereitung"/>
     </xs:sequence>
@@ -143,7 +143,7 @@ komplexe Elemente
 <xs:element name="bilder">
   <xs:complexType>
     <xs:sequence>
-      <xs:element ref="bild" minOccurs="0"/>
+      <xs:element ref="bild" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 </xs:element>
@@ -161,7 +161,7 @@ komplexe Elemente
   <xs:complexType>
     <xs:sequence>
       <xs:element ref="menge"/>
-      <xs:element name="zutatname" type="xs:decimal"/>
+      <xs:element name="zutatname" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 </xs:element>

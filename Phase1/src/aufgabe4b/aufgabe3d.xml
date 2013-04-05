@@ -10,8 +10,8 @@
 	<rezeptname>Selbstgemachte Butter</rezeptname>
 	
 	<bilder>
-		<bild url="bild1.jpg"> <beschreibung> 1/2 Foto von Heino </beschreibung> </bild>
-		<bild url="bild2.jpg"> <beschreibung> 1/2 Foto von Heini </beschreibung> </bild>
+		<bild url="bild1.jpg"><beschreibung>1/2 Foto von Heino</beschreibung></bild>
+		<bild url="bild2.jpg"><beschreibung>1/2 Foto von Heini</beschreibung></bild>
 	</bilder>
 	
 	<zutaten portionen="1">
@@ -57,8 +57,6 @@
 	
 <rezept>
 	<rezeptname>Schokosoufflee medium</rezeptname>
-	
-	<bilder></bilder>
 	
 	<zutaten portionen="4">
 		<zutat>
