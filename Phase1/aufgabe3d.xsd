@@ -1,5 +1,4 @@
-
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
 <!-- 
@@ -13,8 +12,8 @@
 <xs:element name="rezeptname">
   <xs:simpleType>
     <xs:restriction base="xs:string">
-      <xs:minInclusive value="2"/>
-      <xs:maxInclusive value="100"/>
+      <xs:minLength value="2"/>
+      <xs:maxLength value="100"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:element>
@@ -22,8 +21,8 @@
 <xs:element name="untertitel">
   <xs:simpleType>
     <xs:restriction base="xs:string">
-      <xs:minInclusive value="0"/>
-      <xs:maxInclusive value="200"/>
+      <xs:minLength value="0"/>
+      <xs:maxLength value="200"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:element>
@@ -31,8 +30,8 @@
 <xs:element name="beschreibung">
   <xs:simpleType>
     <xs:restriction base="xs:string">
-      <xs:minInclusive value="10"/>
-      <xs:maxInclusive value="50"/>
+      <xs:minLength value="10"/>
+      <xs:maxLength value="50"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:element>
@@ -51,8 +50,8 @@ Attribute und Restriktionen
 <xs:attribute name="url">
   <xs:simpleType>
     <xs:restriction base="xs:string">
-      <xs:minInclusive value="4"/>
-      <xs:maxInclusive value="150"/>
+      <xs:minLength value="4"/>
+      <xs:maxLength value="150"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:attribute>
@@ -124,7 +123,7 @@ komplexe Elemente
 <xs:element name="root">
   <xs:complexType>
     <xs:sequence>
-      <xs:element ref="Rezept" maxOccurs="unbounded"/>
+      <xs:element ref="rezept" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 </xs:element>
@@ -175,8 +174,8 @@ komplexe Elemente
     <xs:attribute ref="arbeitszeit"/>
     <xs:attribute ref="schwierigkeitsgrad"/>
     <xs:attribute ref="brennwert"/>
-    <xs:attribute ref="kochBackZeit" minOccurs="0" maxOccurs="1"/>
-    <xs:attribute ref="ruheZeit" minOccurs="0" maxOccurs="1"/>
+    <xs:attribute ref="kochBackZeit" />
+    <xs:attribute ref="ruheZeit"/>
   </xs:complexType>
 </xs:element>
 
@@ -197,3 +196,5 @@ komplexe Elemente
     <xs:attribute ref="mengeneinheit" />
   </xs:complexType>
 </xs:element>
+
+</xs:schema>
