@@ -6,12 +6,15 @@ Aufgabe:
 	worin Sie sich unterscheiden.
 	
 Antwort:
-	Gemeinsamkeiten
+
+Gemeinsamkeiten
+
 	-grundsätzlich selbe Gliederung (Rezeptname, Bild, Zutaten, Zubereitung)
 	-Rezeptname, Zutaten, Arbeitszeit, Schwierigkeitsgrad, Brennwert (zur Not:"keine Angaben") 
 	 und Zubereitungstext sind pflichteingaben.
 	
-	Unterschiede
+Unterschiede
+
 	-Nicht immer sind Bilder vorhanden
 	-Manche Rezepte besitzen Untertitel
 	-Manche Zutaten sind kategorisiert ("Für den Belag:","Für den Boden:")
@@ -29,14 +32,15 @@ Ziel ist es, dass das XML-Schema möglichst restriktiv ist, so dass in der XML-D
 sinnvolle Daten bezüglich der Rezepte gespeichert werden können. Ziehen Sie beim Aufstellen der Kriterien 
 u.A. folgende Fragestellungen in Betracht:
 
-	-Welche Daten müssen in simple und welche in complex-types abgebildet werden?
-	-Für welche Daten ist die Abbildung in Attributen sinnvoller?
-	-Welche Datentypen müssen für die Elemente definiert werden?
-	-Welche Restriktionen müssen definiert werden?
+-Welche Daten müssen in simple und welche in complex-types abgebildet werden?
+-Für welche Daten ist die Abbildung in Attributen sinnvoller?
+-Welche Datentypen müssen für die Elemente definiert werden?
+-Welche Restriktionen müssen definiert werden?
 
 Simple-types enthalten keine weiteren Elemente
 	
 simple-types:
+
 	-rezeptname 
   	-url
   	-beschreibung 
@@ -50,7 +54,8 @@ simple-types:
   	
 Complexe-types enthalten weiteren Elemente
   	
-complex-types:	
+complex-types:
+	
 	-rezept (rezeptname,untertitel,bilder,zutaten,zubereitung)
   	-bilder (bild)*
   	-zutaten (portionen,(zutat)+)
@@ -62,6 +67,7 @@ complex-types:
   	-kommentare(user, datum, kommentar)*
   	
 Abbildung in Attribute:
+
 	-bild kann das feste Attribut URL enthalten
 	-Die "menge" kann mit einem Attribut für die Einheit unterteilt werden
 	-schwierigkeitsgrad kann als Attribut festgelegt werden, da dieser nur 
@@ -69,6 +75,7 @@ Abbildung in Attribute:
 	-Einheit für Brennwert als Attribut
 	
 Datentypen:
+
 	-rezeptname(String)
 	-untertitel(String)
 	-url(String)
@@ -81,12 +88,12 @@ Datentypen:
 	-portionen(decimal)
 	
 Restriktionen:
+
 	-rezeptname max. 100 Zeichen
 	-untertitel max. 200 Zeichen
 	-url max. 150 Zeichen	
 	-beschreibung max. 50 Zeichen
-	-zutatname max. 100 Zeichen
-	
+	-zutatname max. 100 Zeichen	
 	-menge, portionen, arbeitszeit und brennwert dürfen nicht negativ sein, deswegen habe ich den 
 	 Datentyp decimal gewählt.	
 	-portionen ist dabei aber auf max. 100 Portionen begrenzt
