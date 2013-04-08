@@ -2,7 +2,7 @@
 	Wohlgeformtheit
 	 Wohlgeformtheit im Zusammenhang mit xml-Dateien bedeutet, dass alle Regeln korrekt eingehalten wurden.
 	 Am Anfang steht die XML-Deklaration. Es sollte mindestens ein Datenelement vorhanden sein und es gibt
-	 ein alles umschließendes Datenelement.
+	 ein alles umschließendes Datenelement. Ein xml-Dokument sollte immer wohlgeformt sein.
 	 
 	Validität
 	 Ein xml-Dokument ist valide, wenn sie der Dokumenttypendefinition (DTD) entspricht, also einer

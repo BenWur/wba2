@@ -10,14 +10,14 @@
 					  "anmerkung" 	: "Unser Motto ist Party Party Party" 
 			},  
 
-			"person":{
-					  "vorname" 	: "Domi"	,
-					  "nachname" 	: "Chilli"	,
-					  "email" 	: "chillidom@hotmail.com"	,
-					  "geburtsdatum": "06.06.1906"	,
-					  "erfahrung" 	: "Profi"	,
-					  "schlagzeug" 	: "vorhanden"
-			}
+			"teilnehmer":[
+						  "vorname" 	: "Domi"	,
+						  "nachname" 	: "Chilli"	,
+						  "email" 	: "chillidom@hotmail.com"	,
+						  "geburtsdatum": "06.06.1906"	,
+						  "erfahrung" 	: "Profi"	,
+						  "schlagzeug" 	: "vorhanden"
+			]
 }
 }
 					  
