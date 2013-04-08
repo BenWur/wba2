@@ -136,7 +136,26 @@ komplexe Elemente
       <xs:element ref="bilder" minOccurs="0"/>
       <xs:element ref="zutaten"/>
       <xs:element ref="zubereitung"/>
+      <xs:element ref="kommentarspalte" minOccurs="0" />
     </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="kommentarspalte">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element ref="kommentare" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="kommentare">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="kommentar" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="user" type="xs:string" />
+    <xs:attribute name="datum" type="xs:date" />
   </xs:complexType>
 </xs:element>
 

@@ -51,6 +51,9 @@
 		Die gewonnene Buttermilch ist auch sehr lecker.
 		</arbeitsschritte>
 	</zubereitung>
+	
+	<kommentarspalte>
+	</kommentarspalte>
     
 </rezept>
 	
@@ -113,6 +116,13 @@
 		Lässt sich wunderbar vorbereiten und bevorraten.
 		</arbeitsschritte>
 	</zubereitung>
+	
+	<kommentarspalte>
+		<kommentare user="Dario" datum="2002-09-24">
+			<kommentar>Hmmm... Das war lecker</kommentar>
+		</kommentare>
+	</kommentarspalte>
+	
     
 </rezept>
 	

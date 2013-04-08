@@ -13,7 +13,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -26,9 +28,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{}beschreibung"/>
+ *         &lt;element name="kommentar" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
- *       &lt;attribute ref="{}url"/>
+ *       &lt;attribute name="user" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="datum" type="{http://www.w3.org/2001/XMLSchema}date" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -38,62 +41,89 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "beschreibung"
+    "kommentar"
 })
-@XmlRootElement(name = "bild")
-public class Bild {
+@XmlRootElement(name = "kommentare")
+public class Kommentare {
 
     @XmlElement(required = true)
-    protected String beschreibung;
+    protected String kommentar;
     @XmlAttribute
-    protected String url;
+    protected String user;
+    @XmlAttribute
+    @XmlSchemaType(name = "date")
+    protected XMLGregorianCalendar datum;
 
     /**
-     * Gets the value of the beschreibung property.
+     * Gets the value of the kommentar property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getBeschreibung() {
-        return beschreibung;
+    public String getKommentar() {
+        return kommentar;
     }
 
     /**
-     * Sets the value of the beschreibung property.
+     * Sets the value of the kommentar property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setBeschreibung(String value) {
-        this.beschreibung = value;
+    public void setKommentar(String value) {
+        this.kommentar = value;
     }
 
     /**
-     * Gets the value of the url property.
+     * Gets the value of the user property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getUrl() {
-        return url;
+    public String getUser() {
+        return user;
     }
 
     /**
-     * Sets the value of the url property.
+     * Sets the value of the user property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setUrl(String value) {
-        this.url = value;
+    public void setUser(String value) {
+        this.user = value;
+    }
+
+    /**
+     * Gets the value of the datum property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public XMLGregorianCalendar getDatum() {
+        return datum;
+    }
+
+    /**
+     * Sets the value of the datum property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public void setDatum(XMLGregorianCalendar value) {
+        this.datum = value;
     }
 
 }

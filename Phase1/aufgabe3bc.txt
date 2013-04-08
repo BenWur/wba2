@@ -57,6 +57,8 @@ complex-types:
   	-zutat (menge,zutatname)
   	-bild (url,beschreibung)
   	-menge(mengeneinheit,anzahl)
+  	-kommentarspalte(kommentare)
+  	-kommentare(user, datum, kommentar)*
   	
 Abbildung in Attribute:
 	-bild kann das feste Attribut URL enthalten

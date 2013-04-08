@@ -8,9 +8,10 @@
 
 package generated;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -26,9 +27,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{}beschreibung"/>
+ *         &lt;element ref="{}kommentare" maxOccurs="unbounded"/>
  *       &lt;/sequence>
- *       &lt;attribute ref="{}url"/>
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -38,62 +38,41 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "beschreibung"
+    "kommentare"
 })
-@XmlRootElement(name = "bild")
-public class Bild {
+@XmlRootElement(name = "kommentarspalte")
+public class Kommentarspalte {
 
     @XmlElement(required = true)
-    protected String beschreibung;
-    @XmlAttribute
-    protected String url;
+    protected List<Kommentare> kommentare;
 
     /**
-     * Gets the value of the beschreibung property.
+     * Gets the value of the kommentare property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getBeschreibung() {
-        return beschreibung;
-    }
-
-    /**
-     * Sets the value of the beschreibung property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the kommentare property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setBeschreibung(String value) {
-        this.beschreibung = value;
-    }
-
-    /**
-     * Gets the value of the url property.
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getKommentare().add(newItem);
+     * </pre>
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getUrl() {
-        return url;
-    }
-
-    /**
-     * Sets the value of the url property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Kommentare }
+     * 
+     * 
      */
-    public void setUrl(String value) {
-        this.url = value;
+    public List<Kommentare> getKommentare() {
+        if (kommentare == null) {
+            kommentare = new ArrayList<Kommentare>();
+        }
+        return this.kommentare;
     }
 
 }
