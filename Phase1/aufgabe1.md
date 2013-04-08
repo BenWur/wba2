@@ -1,4 +1,4 @@
-<!-- 
+
 	Wohlgeformtheit
 	 Wohlgeformtheit im Zusammenhang mit xml-Dateien bedeutet, dass alle Regeln korrekt eingehalten wurden.
 	 Am Anfang steht die XML-Deklaration. Es sollte mindestens ein Datenelement vorhanden sein und es gibt
@@ -14,6 +14,4 @@
 	 Attribute verwendet werden dürfen. Wichtig ist der Namensraum, da ein Name wie z.B "p" für verschiedenes
 	 stehen kann. Er kann zu einem wie bei html als Absatz definiert sein. In einem anderen Namensraum aber
 	 für Person gelten. Der Namensraum definiert diesen aber dann eindeutig.
-
--->
 

@@ -1,5 +1,5 @@
 
-
+b)
 Aufgabe:
 	Betrachten Sie nun andere Rezepte auf der Webseite http://www.chefkoch.de. 
 	Beschreiben Sie welche Gemeinsamkeiten die Rezepte hinsichtlich ihrer Daten haben und 
@@ -21,7 +21,8 @@ Antwort:
 		Ruhezeit: ca. 16 Std
 	
 	
-c) Arbeiten Sie die Kriterien heraus, die für die Entwicklung einer XML-Schema-Datei beachtet werden müssen. 
+c) 
+Arbeiten Sie die Kriterien heraus, die für die Entwicklung einer XML-Schema-Datei beachtet werden müssen. 
 Die Schema-Datei soll die Struktur für eine XML-Datei definieren, in der mehrere unterschiedliche Rezepte 
 gespeichert werden können. 
 Ziel ist es, dass das XML-Schema möglichst restriktiv ist, so dass in der XML-Datei möglichst semantisch 
