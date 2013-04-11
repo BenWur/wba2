@@ -1,27 +1,30 @@
 
 b)
+
 Aufgabe:
-	Betrachten Sie nun andere Rezepte auf der Webseite http://www.chefkoch.de. 
-	Beschreiben Sie welche Gemeinsamkeiten die Rezepte hinsichtlich ihrer Daten haben und 
-	worin Sie sich unterscheiden.
+
+Betrachten Sie nun andere Rezepte auf der Webseite http://www.chefkoch.de. 
+Beschreiben Sie welche Gemeinsamkeiten die Rezepte hinsichtlich ihrer Daten haben und worin Sie sich unterscheiden.
 	
 Antwort:
 
-Gemeinsamkeiten
-
-	-grundsätzlich selbe Gliederung (Rezeptname, Bild, Zutaten, Zubereitung)
-	-Rezeptname, Zutaten, Arbeitszeit, Schwierigkeitsgrad, Brennwert (zur Not:"keine Angaben") 
-	 und Zubereitungstext sind pflichteingaben.
-	
-Unterschiede
-
-	-Nicht immer sind Bilder vorhanden
-	-Manche Rezepte besitzen Untertitel
-	-Manche Zutaten sind kategorisiert ("Für den Belag:","Für den Boden:")
-	-Mengenangaben müssen nicht festgelegt werden
-	-Es gibt weitere Attribute wie z.B.:
-		Koch-/Backzeit: ca. 20 Min.	 
-		Ruhezeit: ca. 16 Std
+    Gemeinsamkeiten
+    
+    	- grundsätzlich selbe Gliederung (Rezeptname, Bild, Zutaten, Zubereitung)
+    	- Rezeptname, Zutaten, Arbeitszeit, Schwierigkeitsgrad,
+          Brennwert (zur Not:"keine Angaben") 
+    	- Zubereitungstext sind pflichteingaben.
+       
+    	
+    Unterschiede
+    
+    	- Nicht immer sind Bilder vorhanden
+    	- Manche Rezepte besitzen Untertitel
+    	- Manche Zutaten sind kategorisiert ("Für den Belag:","Für den Boden:")
+    	- Mengenangaben müssen nicht festgelegt werden
+    	- Es gibt weitere Attribute wie z.B.:
+    		Koch-/Backzeit: ca. 20 Min.	 
+    		Ruhezeit: ca. 16 Std
 	
 	
 c) 
@@ -33,15 +36,23 @@ sinnvolle Daten bezüglich der Rezepte gespeichert werden können. Ziehen Sie be
 u.A. folgende Fragestellungen in Betracht:
 
 -Welche Daten müssen in simple und welche in complex-types abgebildet werden?
+
 -Für welche Daten ist die Abbildung in Attributen sinnvoller?
+
 -Welche Datentypen müssen für die Elemente definiert werden?
+
 -Welche Restriktionen müssen definiert werden?
+
+<br/>
+<br/>
+
+Antwort :
 
 Simple-types enthalten keine weiteren Elemente
 	
 simple-types:
 
-	-rezeptname 
+	  -rezeptname 
   	-url
   	-beschreibung 
   	-zutatname 
@@ -56,10 +67,11 @@ Complexe-types enthalten weiteren Elemente
   	
 complex-types:
 	
-	-rezept (rezeptname,untertitel,bilder,zutaten,zubereitung)
+	  -rezept (rezeptname,untertitel,bilder,zutaten,zubereitung)
   	-bilder (bild)*
   	-zutaten (portionen,(zutat)+)
-  	-zubereitung (arbeitszeit,schwierigkeitsgrad,brennwert,kochBackZeit?,ruheZeit?,arbeitsschritte)
+  	-zubereitung (arbeitszeit,schwierigkeitsgrad,brennwert,kochBackZeit?,
+       ruheZeit?,arbeitsschritte)
   	-zutat (menge,zutatname)
   	-bild (url,beschreibung)
   	-menge(mengeneinheit,anzahl)
@@ -94,9 +106,10 @@ Restriktionen:
 	-url max. 150 Zeichen	
 	-beschreibung max. 50 Zeichen
 	-zutatname max. 100 Zeichen	
-	-menge, portionen, arbeitszeit und brennwert dürfen nicht negativ sein, deswegen habe ich den 
-	 Datentyp decimal gewählt.	
+	-menge, portionen, arbeitszeit und brennwert dürfen nicht negativ sein, 
+     deswegen habe ich den Datentyp decimal gewählt.	
 	-portionen ist dabei aber auf max. 100 Portionen begrenzt
-	-Arbeitsschritte würde ich nicht begrenzen, da manche Rezepte sehr umfangreich sind 
+	-Arbeitsschritte würde ich nicht begrenzen, da manche Rezepte sehr 
+     umfangreich sind 
 	 (siehe http://www.chefkoch.de/rezepte/1426751247563051/Spareribs-NT-im-Bratschlauch.html )
   	

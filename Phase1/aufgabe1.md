@@ -1,17 +1,21 @@
 
-	Wohlgeformtheit
-	 Wohlgeformtheit im Zusammenhang mit xml-Dateien bedeutet, dass alle Regeln korrekt eingehalten wurden.
-	 Am Anfang steht die XML-Deklaration. Es sollte mindestens ein Datenelement vorhanden sein und es gibt
-	 ein alles umschließendes Datenelement. Ein xml-Dokument sollte immer wohlgeformt sein.
-	 
-	Validität
-	 Ein xml-Dokument ist valide, wenn sie der Dokumenttypendefinition (DTD) entspricht, also einer
-	 inhaltlichen Struktur entsprechen.
-	 Ein xml-Dokument kann valide sein, muss aber wohlgeformt sein.
-	 
-	Namespace
-	 Der Namespace bezeichnet alle gültigen Namen eines Bereichs. Also alle Namen die für Elemente oder
-	 Attribute verwendet werden dürfen. Wichtig ist der Namensraum, da ein Name wie z.B "p" für verschiedenes
-	 stehen kann. Er kann zu einem wie bei html als Absatz definiert sein. In einem anderen Namensraum aber
-	 für Person gelten. Der Namensraum definiert diesen aber dann eindeutig.
+Wohlgeformtheit
 
+    Wohlgeformtheit im Zusammenhang mit xml-Dateien bedeutet, dass alle Regeln 
+    korrekt eingehalten wurden. Am Anfang steht die XML-Deklaration. Es sollte 
+    mindestens ein Datenelement vorhanden sein und es gibt ein alles 
+    umschließendes Datenelement. Ein xml-Dokument sollte immer wohlgeformt sein.
+	 
+Validität
+
+    Ein xml-Dokument ist valide, wenn sie der Dokumenttypendefinition (DTD) 
+    entspricht, also einer inhaltlichen Struktur entsprechen. Ein xml-Dokument 
+    kann valide sein, muss aber wohlgeformt sein.
+	 
+Namespace
+
+    Der Namespace bezeichnet alle gültigen Namen eines Bereichs. Also alle Namen 
+    die für Elemente oder Attribute verwendet werden dürfen. Wichtig ist der 
+    Namensraum, da ein Name wie z.B "p" für verschiedenes stehen kann. Er kann zu 
+    einem wie bei html als Absatz definiert sein. In einem anderen Namensraum aber 
+    für Person gelten. Der Namensraum definiert diesen aber dann eindeutig.

@@ -1,46 +1,41 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<root xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="aufgabe3d.xsd">
-	
-
-
-<rezept>
-	<rezeptname>Selbstgemachte Butter</rezeptname>
-	
-	<bilder>
-		<bild url="bild1.jpg"> <beschreibung> 1/2 Foto von Heino </beschreibung> </bild>
-		<bild url="bild2.jpg"> <beschreibung> 1/2 Foto von Heini </beschreibung> </bild>
-	</bilder>
-	
-	<zutaten portionen="1">
-		<zutat>
-			<menge mengeneinheit="ml">
-				<anzahl>250</anzahl>
-			</menge>
-			<zutatname>Sahne, (auch Schlagrahm oder Obers genannt)</zutatname>
-		</zutat>
-		<zutat>
-			<menge mengeneinheit="ml">
-				<anzahl>500</anzahl>
-			</menge>
-			<zutatname>Wasser</zutatname>
-		</zutat>
-		<zutat>
-			<menge mengeneinheit="EL">
-				<anzahl>2</anzahl>
-			</menge>
-			<zutatname>Salz</zutatname>
-		</zutat>
-		<zutat>
-			<menge mengeneinheit=""/>
-			<zutatname>Eis,gewürfelt</zutatname>
-		</zutat>
-	</zutaten>
-	
-	<zubereitung arbeitszeit="20" schwierigkeitsgrad="normal">
-		<arbeitsschritte>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root>
+    <rezept>
+        <rezeptname>Selbstgemachte Butter</rezeptname>
+        <bilder>
+            <bild url="bild1.jpg">
+                <beschreibung> 1/2 Foto von Heino </beschreibung>
+            </bild>
+            <bild url="bild2.jpg">
+                <beschreibung> 1/2 Foto von Heini </beschreibung>
+            </bild>
+        </bilder>
+        <zutaten portionen="1">
+            <zutat>
+                <menge mengeneinheit="ml">
+                    <anzahl>250</anzahl>
+                </menge>
+                <zutatname>Sahne, (auch Schlagrahm oder Obers genannt)</zutatname>
+            </zutat>
+            <zutat>
+                <menge mengeneinheit="ml">
+                    <anzahl>500</anzahl>
+                </menge>
+                <zutatname>Wasser</zutatname>
+            </zutat>
+            <zutat>
+                <menge mengeneinheit="EL">
+                    <anzahl>2</anzahl>
+                </menge>
+                <zutatname>Salz</zutatname>
+            </zutat>
+            <zutat>
+                <menge mengeneinheit=""/>
+                <zutatname>Eis,gewürfelt</zutatname>
+            </zutat>
+        </zutaten>
+        <zubereitung schwierigkeitsgrad="normal" arbeitszeit="20">
+            <arbeitsschritte>
 		Die Sahne so lange mit dem Handrührgerät schlagen, bis sich die Sahne in Butterklumpen und 
 		Buttermilch aufteilt. Die Klumpen so gut es geht auspressen, bis keine Buttermilch mehr austritt. 
 		
@@ -50,60 +45,68 @@
 
 		Die gewonnene Buttermilch ist auch sehr lecker.
 		</arbeitsschritte>
-	</zubereitung>
-	
-	<kommentarspalte>
-	</kommentarspalte>
-    
-</rezept>
-	
-	
-<rezept>
-	<rezeptname>Schokosoufflee medium</rezeptname>
-	
-	<bilder></bilder>
-	
-	<zutaten portionen="4">
-		<zutat>
-			<menge mengeneinheit="g">
-				<anzahl>100</anzahl>
-			</menge>
-			<zutatname>Butter</zutatname>
-		</zutat>
-		<zutat>
-			<menge mengeneinheit="g">
-				<anzahl>80</anzahl>
-			</menge>
-			<zutatname>Zucker</zutatname>
-		</zutat>
-		<zutat>
-			<menge mengeneinheit="">
-				<anzahl>2</anzahl>
-			</menge>
-			<zutatname>Eigelb</zutatname>
-		</zutat>
-		<zutat>
-			<menge mengeneinheit="">
-				<anzahl>2</anzahl>
-			</menge>
-			<zutatname>Eier</zutatname>
-		</zutat>
-		<zutat>
-			<menge mengeneinheit="g">
-				<anzahl>80</anzahl>
-			</menge>
-			<zutatname>Mehl</zutatname>
-		</zutat>
-		<zutat>
-			<menge mengeneinheit="g">
-				<anzahl>90</anzahl>
-			</menge>
-			<zutatname>Konvertüre,zartbitter</zutatname>
-		</zutat>
-	</zutaten>
-	
-	<zubereitung arbeitszeit="30" schwierigkeitsgrad="simpel" brennwert="2000 kcal">
-		<arbeitsschritte>
+        </zubereitung>
+        <kommentarspalte>
+            <kommentare datum="2013-04-11+02:00" user="dari">
+                <kommentar>war das lecker!!!</kommentar>
+            </kommentare>
+            <kommentare datum="2013-04-11+02:00" user="beni">
+                <kommentar>leeeeecker...</kommentar>
+            </kommentare>
+            <kommentare datum="2013-04-11+02:00" user="domi">
+                <kommentar>tolles Rezept</kommentar>
+            </kommentare>
+            <kommentare datum="2013-04-11+02:00" user="Calvin">
+                <kommentar>Fettes Teil!</kommentar>
+            </kommentare>
+            <kommentare datum="2013-04-11+02:00" user="Tommi">
+                <kommentar>Mit Mayo schmeckts besser!! :)</kommentar>
+            </kommentare>
+        </kommentarspalte>
+    </rezept>
+    <rezept>
+        <rezeptname>Schokosoufflee medium</rezeptname>
+        <bilder/>
+        <zutaten portionen="4">
+            <zutat>
+                <menge mengeneinheit="g">
+                    <anzahl>100</anzahl>
+                </menge>
+                <zutatname>Butter</zutatname>
+            </zutat>
+            <zutat>
+                <menge mengeneinheit="g">
+                    <anzahl>80</anzahl>
+                </menge>
+                <zutatname>Zucker</zutatname>
+            </zutat>
+            <zutat>
+                <menge mengeneinheit="">
+                    <anzahl>2</anzahl>
+                </menge>
+                <zutatname>Eigelb</zutatname>
+            </zutat>
+            <zutat>
+                <menge mengeneinheit="">
+                    <anzahl>2</anzahl>
+                </menge>
+                <zutatname>Eier</zutatname>
+            </zutat>
+            <zutat>
+                <menge mengeneinheit="g">
+                    <anzahl>80</anzahl>
+                </menge>
+                <zutatname>Mehl</zutatname>
+            </zutat>
+            <zutat>
+                <menge mengeneinheit="g">
+                    <anzahl>90</anzahl>
+                </menge>
+                <zutatname>Konvertüre,zartbitter</zutatname>
+            </zutat>
+        </zutaten>
+        <zubereitung brennwert="2000 kcal" schwierigkeitsgrad="simpel" arbeitszeit="30">
+            <arbeitsschritte>
 		Die weiche Butter mit dem Zucker schaumig schlagen. Eier und Eigelb nach und nach unterziehen, 
 		Mehl und geschmolzene Kuvertüre zugeben und in gebutterte Auflaufförmchen füllen. 
 		Förmchen schockfrosten (komplett durchfrieren lassen) und im gefroren Zustand im Ofen bei 180 Grad 
@@ -115,18 +118,11 @@
 		
 		Lässt sich wunderbar vorbereiten und bevorraten.
 		</arbeitsschritte>
-	</zubereitung>
-	
-	<kommentarspalte>
-		<kommentare user="Dario" datum="2002-09-24">
-			<kommentar>Hmmm... Das war lecker</kommentar>
-		</kommentare>
-	</kommentarspalte>
-	
-    
-</rezept>
-	
-	
-	
-	
+        </zubereitung>
+        <kommentarspalte>
+            <kommentare datum="2002-09-24" user="Dario">
+                <kommentar>Hmmm... Das war lecker</kommentar>
+            </kommentare>
+        </kommentarspalte>
+    </rezept>
 </root>
