@@ -126,6 +126,9 @@
             <kommentare datum="2002-09-24" user="Dario">
                 <kommentar>Hmmm... Das war lecker</kommentar>
             </kommentare>
+            <kommentare datum="2013-04-14+02:00" user="Wiebke">
+                <kommentar>Ich will das backen!!!</kommentar>
+            </kommentare>
         </kommentarspalte>
     </rezept>
 </root>
