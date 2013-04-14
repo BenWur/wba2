@@ -4,9 +4,7 @@ import generated.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
@@ -26,12 +24,18 @@ public class Aufgabe4 {
 	/**
 	 * @param args
 	 */
+	
 	public static void main(String[] args) throws Exception{
+		//Schleifvariable
 		int i=1;
+		
 		while (i==1){
+			//nötige Kontext 
 			JAXBContext jc = JAXBContext.newInstance(Root.class);
+			//unmarshaller zum lesen 
 		    Unmarshaller um = jc.createUnmarshaller();
 		    datei = (Root) um.unmarshal(new FileInputStream("aufgabe3d.xml"));
+		    //marshaller zum schreiben
 		    marshaller =jc.createMarshaller();
 		    
 		    System.out.println( "Ihre Auswahl: " );
@@ -66,8 +70,10 @@ public class Aufgabe4 {
 		//Marshaller erstellen für Hinzufügen der neuen Kommentare zur XML Datei
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
+		//neuen Kommentar anlegen
 		Kommentare kommentar = new ObjectFactory().createKommentare();
 		
+		//zeit
 		XMLGregorianCalendar date = null;
 		try {
 			date = DatatypeFactory.newInstance().newXMLGregorianCalendar( new GregorianCalendar() );
@@ -93,15 +99,16 @@ public class Aufgabe4 {
 		
 		List<Kommentare> kommentare = datei.getRezept().get(i).getKommentarspalte().getKommentare();
 
-		// Add the new comment to the recipe
+		// Kommentar hinzufügen
 		kommentare.add( kommentar );
 
-		// Save the new recipe
+		// speichern
 		schreiben();
 		
 		
 	}
 	
+	//speichern 
 	public static void schreiben() throws JAXBException, FileNotFoundException{
 		 marshaller.marshal(datei, new File("aufgabe3d.xml"));
 	}
@@ -118,6 +125,7 @@ public class Aufgabe4 {
 		
 		int i = in.nextInt() - 1;
 	    
+		//Ausgabe der Daten
 	    
         System.out.println("Titel: " + datei.getRezept().get(i).getRezeptname() + "\n" );
         System.out.println("Untertitel: " + datei.getRezept().get(i).getUntertitel() + "\n" );
