@@ -36,4 +36,4 @@ Die App bietet eine übersichtliche Listung der Ereignisse und unterstützt die 
 	* Lieblingsmannschaft spielt
 
 ##Kommunikationsabläufe und Interaktion
-![Grafik](http://i.imgur.com/wGMRtdS.png)
+![Grafik](http://i.imgur.com/xcjO0RS.png)
