@@ -35,5 +35,5 @@ Die App bietet eine übersichtliche Listung der Ereignisse und unterstützt die 
 	* Favorit kommentiert ein Spiel
 	* Lieblingsmannschaft spielt
 
-###
-![hallo](http://i.imgur.com/wGMRtdS.png)
+##Kommunikationsabläufe und Interaktion
+![Grafik](http://i.imgur.com/wGMRtdS.png)
