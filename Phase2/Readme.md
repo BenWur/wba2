@@ -15,19 +15,25 @@ Die App bietet eine übersichtliche Listung der Ereignisse und unterstützt die 
 -	Eventliste 
 	* laufenden Events
 	* kommende Events
-	* Events von Favoriten-	Zusatzinfos zu den Spielen 
+	* Events von Favoriten
+-	Zusatzinfos zu den Spielen 
 	* Aufstellung
 	* Spieler
 	* Wetter
-	* Zuschauer-	Bewertungen von Spielern nach dem Spiel-	Userprofiles	
+	* Zuschauer
+-	Bewertungen von Spielern nach dem Spiel
+-	Userprofiles	
 	* Name
 	* Statistiken
 	* Follower
 	
 ###Asynchrone Datenübertragung
--	Ticker-	Kommentare von Nutzern
-	* Kommentare sind "Bewertbar"-	Benachrichtigung 
+-	Ticker
+-	Kommentare von Nutzern
+	* Kommentare sind "Bewertbar"
+-	Benachrichtigung 
 	* Favorit kommentiert ein Spiel
 	* Lieblingsmannschaft spielt
-	
-
+
+###
+[img]http://i.imgur.com/wGMRtdS.png[/img]
