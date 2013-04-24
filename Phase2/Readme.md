@@ -36,4 +36,4 @@ Die App bietet eine übersichtliche Listung der Ereignisse und unterstützt die 
 	* Lieblingsmannschaft spielt
 
 ###
-[[http://i.imgur.com/wGMRtdS.png]]
+![hallo](http://i.imgur.com/wGMRtdS.png)
