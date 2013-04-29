@@ -3,6 +3,7 @@
 ##Phase 2 Projekt "Social Ticker"
 
 ###Projektidee
+[TODO: Nochmal durchlesen und überarbeiten]
 Unsere Vision ist, dass man seinen eigenen Sportticker erstellen kann und dieser von Freunden oder anderen Nutzern verfolgt und kommentiert werden kann.
 
 Als Grundfunktion wird das Erstellen von Events wichtig sein. Ein Nutzer kann für eine beliebige Sportart einen Liveticker ( Event ) erstellen. Er kommentiert dann dieses Event und aktualisiert den Spielstand und die Ereignisse. Nutzer können dem Event dann beitreten, seine Beiträge verfolgen und zu diesen Kommentare verfassen bzw. diskutieren. Der Ticker kann in Echtzeit bewertet werden, damit weitere Nutzer sehen können, ob der Ticker gut ist.
@@ -36,9 +37,11 @@ Die App bietet eine übersichtliche Listung der Ereignisse und unterstützt die 
 	* Lieblingsmannschaft spielt
 
 ##Kommunikationsabläufe und Interaktion
+[TODO: Text mit Erklärung]
 ![Grafik](http://i.imgur.com/xcjO0RS.png)
 
 ##Projektspezifisches XML Schema, Ressourcen und die Semantik der HTTP-Operationen
+[TODO: Erläuterung um was es geht + Semantik der blablabla]
 Für unser Projekt benötigen wir zwei xml Dateien. Eine Datei für die Userprofiles und die andere für die Events, die erstellt werden.
 
 
