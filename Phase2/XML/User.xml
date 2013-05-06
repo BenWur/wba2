@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<user
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../XSD/User.xsd"
+	userID="26">
+	
+	<username>Holly998</username>
+    <forename>Alex</forename>
+    <surname>Hirth</surname>
+    <gender>Male</gender>
+    <birthday>1983-11-21</birthday>
+    <country>Germany</country>
+    <city>Munich</city>
+    <joinedate>2011-12-10</joinedate>
+    <online>yes</online>
+    <live>no</live>
+    <createdEvents>
+    	<eventTitle>Holly's Awsome Football Ticker</eventTitle>
+    	<eventTitle>Holly's Pro ticker chan</eventTitle>
+    </createdEvents>
+    <lastComments>
+    	<postedComment>Great shot of C. Ronaldo, hit the post from 20m!</postedComment>
+    	<postedComment>What a shame, Real has been the better team. But couldnt manage to win.</postedComment>
+    	<postedComment>That's the 3-0!! What a game!</postedComment>
+    </lastComments>
+    <friendlist>
+    	<username>Maxim8</username>
+    	<username>Tonydang</username>
+    	<username>Hellokitty1</username>
+    </friendlist>
+    
+</user>

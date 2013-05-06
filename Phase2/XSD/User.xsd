@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Schema von Benutzerprofil -->
+
+ <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<!--Vollstaendige Userdaten -->
+  <xs:element name="user">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="username"/>
+        <xs:element ref="forename"/>
+        <xs:element ref="surname"/>
+        <xs:element ref="gender"/>
+        <xs:element ref="birthday"/>
+        <xs:element ref="country"/>
+        <xs:element ref="city"/>
+        <xs:element type="xs:date" name="joinedate"/>
+        <xs:element type="xs:string" name="online"/>
+        <xs:element type="xs:string" name="live"/>
+        <xs:element ref="createdEvents"/>
+        <xs:element ref="lastComments"/>
+        
+        <xs:element ref="friendlist"/>
+      </xs:sequence>
+     <!-- Bei Registrierung automatisch generierte einzigartige ID -->
+      <xs:attribute type="xs:byte" name="userID"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <!-- Username -->
+   <xs:element name="username">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="3"/>
+				<xs:maxLength value="15"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	
+   <!-- Vorname -->	
+	<xs:element name="forename">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="2"/>
+				<xs:maxLength value="20"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
+   <!-- Nachname -->	
+	<xs:element name="surname">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="2"/>
+				<xs:maxLength value="20"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	
+   <!-- Geschlecht -->	
+	<xs:element name="gender">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="Male"/>
+					<xs:enumeration value="Female"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	
+	<!-- Alter, max 113 und min 13 Jahre alt -->	
+	<xs:element name="birthday">
+		<xs:simpleType>
+			<xs:restriction base="xs:date">
+				<xs:minInclusive value="1900-01-01"/>
+				<xs:maxInclusive value="2000-01-01"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	
+	<!-- Landauswahl nur aus einer bestimmten Liste, spaeter nach Alphabet geordnet und eventuell mit Geo-Restriktionen -->
+	<xs:element name="country" default="">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value=""/>
+				<xs:enumeration value="Germany"/>
+				<xs:enumeration value="Italy"/>
+				<xs:enumeration value="France"/>
+				<xs:enumeration value="Japan"/>
+				<xs:enumeration value="USA"/>
+				<xs:enumeration value="Brazil"/>
+				<xs:enumeration value="Albania"/>
+				<xs:enumeration value="Spain"/>
+				<xs:enumeration value="Egypt"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	
+	<!-- Stadt-->	
+	<xs:element name="city">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="2"/>
+				<xs:maxLength value="40"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	
+ <!-- ComplexTypes -->
+   <!-- Letzten 5 Kommentare werden im profil angezeigt, min 1 -->
+	<xs:element name="lastComments">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="postedComment" maxOccurs="5" minOccurs="1"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        
+    <!-- max Laenge der Kommentare 300 chars, min 2 -->
+     <xs:element name="postedComment">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="2"/>
+				<xs:maxLength value="300"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element> 
+	
+   <!-- Erstellte Events erden im Profil angezeigt, max 10, min 1 -->
+	<xs:element name="createdEvents">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="eventTitle" maxOccurs="10" minOccurs="1"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        
+    <!-- max Laenge der Titel 30 chars, min 1 -->
+     <xs:element name="eventTitle">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="30"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element> 
+
+   <!-- Freunde gegenseitige "Follower" werden im Profil angezeigt, max 30, min 1 -->
+	<xs:element name="friendlist">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="username" maxOccurs="3" minOccurs="3"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+	
+</xs:schema>
