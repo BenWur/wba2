@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<comment
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../XSD/Comment.xsd"
+	userID="26" eventID="109">
+	
+	<commentAut>
+		<username>Holly998</username>
+	</commentAut>
+	<commentText>Haha, you are right - that was one lucky shot! :D</commentText>
+	<commentText>Maybe you should check another ticker if you don't like mine...</commentText>
+</comment>
