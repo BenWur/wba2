@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Schema von Event -->
+
+ <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+ <!--Vollstaendige Eventdaten -->
+  <xs:element name="event">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="eventName"/>
+        <xs:element ref="eventTitle"/>
+        <xs:element ref="eventDescription"/>
+        <xs:element ref="eventAdmin"/>
+        <xs:element ref="eventType"/>
+       <!-- Start des Events, automatisch übergeben -->
+        <xs:element type="xs:dateTime" name="eventStart"/>
+       <!-- Dauer des Events, automatisch übergeben -->
+        <xs:element type="xs:duration" name="eventDuration"/>
+        <xs:element ref="eventRate"/>
+      </xs:sequence>
+     <!-- Einzigartige userID, automatisch bei Registrierung übergeben -->
+      <xs:attribute type="xs:byte" name="userID"/>
+     <!-- Einzigartige eventID, automatisch bei Eventerstellung (wenn Event verfügbar) übergeben -->
+     <!-- userID + eventID, klare Identifizierung des Events -->
+      <xs:attribute type="xs:byte" name="eventID"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <!-- Username -->
+   <xs:element name="username">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="3"/>
+				<xs:maxLength value="15"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+  
+  <!-- Name des Events, sollte autmotisch übergeben werden -->
+   <xs:element name="eventName">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="5"/>
+				<xs:maxLength value="50"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	
+  <!-- Titel des Events, wird vom Admin übergeben -->
+   <xs:element name="eventTitle">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="3"/>
+				<xs:maxLength value="40"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	
+  <!-- Beschreibung des Events, wird vom Admin übergeben -->
+   <xs:element name="eventDescription">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="3"/>
+				<xs:maxLength value="120"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>	
+	
+  <!-- Admin des Events, sollte automatisch übergeben werden. Max u. min 1 Admin pro Event -->
+   <xs:element name="eventAdmin">
+		<xs:complexType>
+            <xs:sequence>
+              <xs:element ref="username" maxOccurs="1" minOccurs="1"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>	
+        
+   <!-- Typ des Events bestimmen, eventuell durch eventName auto. übergeben -->
+	<xs:element name="eventType" default="Football">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="Football"/>
+				<xs:enumeration value="Basket"/>
+				<xs:enumeration value="Golf"/>
+				<xs:enumeration value="Formula 1"/>
+				<xs:enumeration value="Rugby"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	
+	<!-- Bewertung des Events, max 5 min 1 -->
+     <xs:element name="eventRate">
+		<xs:simpleType>
+			<xs:restriction base="xs:byte">
+				<xs:minInclusive value="1"/>
+				<xs:maxInclusive value="5"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element> 
+  
+</xs:schema>
