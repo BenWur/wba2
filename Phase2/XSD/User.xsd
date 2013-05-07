@@ -20,8 +20,8 @@
         <xs:element type="xs:string" name="live"/>
         <xs:element ref="createdEvents"/>
         <xs:element ref="lastComments"/>
-        
-        <xs:element ref="friendlist"/>
+        <xs:element ref="followerlist"/>
+        <xs:element ref="mefollowlist"/>
       </xs:sequence>
      <!-- Bei Registrierung automatisch generierte einzigartige ID -->
       <xs:attribute type="xs:byte" name="userID"/>
@@ -145,11 +145,20 @@
 		</xs:simpleType>
 	</xs:element> 
 
-   <!-- Freunde gegenseitige "Follower" werden im Profil angezeigt, max 30, min 1 -->
-	<xs:element name="friendlist">
+   <!-- "Follower" werden im Profil angezeigt, max 15, min 1 -->
+	<xs:element name="followerlist">
           <xs:complexType>
             <xs:sequence>
-              <xs:element ref="username" maxOccurs="3" minOccurs="3"/>
+              <xs:element ref="username" maxOccurs="15" minOccurs="1"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        
+    <!-- Personen die von mir "verfolgt" werden, werden im Profil angezeigt, max 15, min 1 -->
+	<xs:element name="mefollowlist">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="username" maxOccurs="15" minOccurs="1"/>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
