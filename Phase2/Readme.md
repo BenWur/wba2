@@ -1,6 +1,6 @@
 #Web-basierte Anwendungen 2: Verteilte Systeme
 
-Fachhochschule Köln Campus Gummersbach</br>
+Fachhochschule Köln Campus Gummersbach<br>
 Fakultät für Informatik und Ingenieurwissenschaften
 
 ##Phase 2 - Projekt "Social Ticker"
