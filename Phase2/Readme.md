@@ -12,6 +12,8 @@ Der Reiz an dem Erstellen eines Tickers ist, dass ein Nutzer seine eigenen Fans 
 
 Die App bietet eine übersichtliche Listung der Ereignisse und unterstützt die Kommunikation zwischen den Usern. Es ist zusätzlich möglich mehrere Ticker gleichzeitig in einem Fenster zu verfolgen. Wenn man z.B. Fan von zwei Teams ist, die an verschiedenen Spielen teilnehmen, will man trotzdem beide gleichzeitig erleben. Auch kann man so mehrere Ticker zum gleichen Spiel folgen und bekommt so mehr Infos und eine vielschichtige Sicht auf Geschehnisse. 
 
+##Meilenstein 1:
+
 ###Synchrone Datenübertragung
 -	Eventliste 
 	* laufenden Events
@@ -36,11 +38,12 @@ Die App bietet eine übersichtliche Listung der Ereignisse und unterstützt die 
 	* Favorit kommentiert ein Spiel
 	* Lieblingsmannschaft spielt
 
-##Kommunikationsabläufe und Interaktion
+###Kommunikationsabläufe und Interaktion
 [TODO: Text mit Erklärung]
 ![Grafik](http://i.imgur.com/xcjO0RS.png)
 
-##Projektspezifisches XML Schema, Ressourcen und die Semantik der HTTP-Operationen
+##Meilenstein 2: 
+##Projektspezifisches XML Schema
 [TODO: Erläuterung um was es geht + Semantik der blablabla]
 Für unser Projekt benötigen wir zwei xml Dateien. Eine Datei für die Userprofiles und die andere für die Events, die erstellt werden.
 
@@ -74,9 +77,7 @@ Die Events sind das Herzstück unseres Dienstes. Es können hier Events (wie zB 
 Zentral bei den Beiträgen des Events ist natürlich das "Soziale". Ein Event kann von anderen Usern bewertet werden. Die Wertung wird abgespeichert und automatisch verrechnet. Andere User können dann zusätzlich noch unter den Beiträgen des Admins Kommentare setzen und diskutieren, ob sie die Geschehnisse genau so interpretieren oder einen anderen Standpunkt besitzen.
  
 ####complexe-types:
-- Event (EventID, Eventname, Eventadmin, Eventtyp, Eventdatum, Eventdauer, Eventbewertung, Post)
-- Post (PostText,Kommentar*)
-- Kommentar(Username,KommentarText)
+- Event (EventID, Eventname, Eventadmin, Eventtyp, Eventdatum, Eventdauer, Eventbewertung)
 - Eventgesamtbewertung (Bewertung*)
 
 ####simple-types:
@@ -85,16 +86,48 @@ Zentral bei den Beiträgen des Events ist natürlich das "Soziale". Ein Event ka
 - Eventadmin (Username)
 - Eventtyp (String)
 - Eventdauer (Date)
-- PostText (String)
-- KommentarText (String)
 - Bewertung (decimal)
 
 ####Restriktionen:
 - Eventname min. 5, max. 75 Zeichen
 - Eventtyp min. 4, max. 40 Zeichen
 - Eventdauer > 20 Minuten
-- PostText min. 3 Zeichen
-- KommentarText min. 3 Zeichen
 - Eventbewertung < 10
+
+###Eventcontent
+####complexe-types:
+- EventContent(TickerBeitrag*)
+- TickerBeitrag (Text,Kommentar*)
+- Kommentar(Username,KommentarText)
+
+####simple-types:
+- TickerBeitrag (String)
+- KommentarText (String)
+
+####Restriktionen:
+- TickerBeitrag min. 3 Zeichen
+- KommentarText min. 3 Zeichen
+
+
+
+##Ressourcen und die Semantik der HTTP-Operationen
+Bei uns entstehen somit 3 Ressourcen - Event, Userprofiles, Eventcontent. Aus diesen Ressourcen ergeben sich folgende Operationen:
+####Admin (Ersteller eines Events):
+| Operation         | Beschreibung |
+| ----------------- | ------------ |
+| `PUT /Event`      | Admin erstellt ein Event. |
+| `POST /Event/EventContent`      | Erstellt einen Beitrag im Ticker. |
+| `DELETE /Event`      | Löscht ein als Admin erstelltes Event. |
+| `DELETE /Event/EventContent`      | Löscht Kommentare in seinem Event. |
+| `GET /Userprofiles`      | Kann sich eigenes oder fremde Userprofiles anzeigen lassen. |
+
+####User:
+| Operation         | Beschreibung |
+| ----------------- | ------------ |
+| `GET /Event`      | Bekommt alle Informationen eines Events. |
+| `POST /Event/EventContent`      | Erstellt einen Kommentar zu einem Beitrag im Ticker. |
+| `DELETE /Event/EventContent`      | Löscht ein als User erstellten Kommentar. |
+| `GET /Userprofiles`      | Kann sich eigenes oder fremde Userprofiles anzeigen lassen. |
+| `POST /Userprofiles`      | Kann sein eigenes Userprofiles bearbeiten. |
 
 
