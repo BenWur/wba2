@@ -11,8 +11,8 @@ Fakultät für Informatik und Ingenieurwissenschaften
 
 ##Inhaltsverzeichnis
 
-* [Projektidee](#Projektidee)
-* [Meilenstein 1](#ms1)
+* [Projektidee](#projektidee)
+* [Meilenstein 1](#meilenstein-1)
  * [Synchrone Datenübertragung](#sdaten)
  * [Asynchrone Datenübertragung](#adaten)
  * [Kommunikationsabläufe und Interaktion](#kui)
