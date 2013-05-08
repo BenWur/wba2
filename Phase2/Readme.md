@@ -22,8 +22,8 @@ Fakultät für Informatik und Ingenieurwissenschaften
  * [Events](#events)
  * [Eventcontent](#eventc)
  * [Ressourcen und die Semantik der HTTP-Operationen](#rushttp)
-                 * [Admin](#admin)
-                 * [User](#user)
+		* [Admin](#admin)
+		* [User](#user)
 
 ###Projektidee
 *[TODO: Nochmal durchlesen und überarbeiten]*
