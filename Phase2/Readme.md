@@ -1,7 +1,7 @@
 #Web-basierte Anwendungen 2: Verteilte Systeme
 
 Fachhochschule Köln Campus Gummersbach</br>
-Fakultät für Informatik und Naturwissenschaften
+Fakultät für Informatik und Ingenieurwissenschaften
 
 ##Phase 2 - Projekt "Social Ticker"
 
@@ -11,7 +11,7 @@ Fakultät für Informatik und Naturwissenschaften
 
 ##Inhaltsverzeichnis
 
-* [Projektidee](#wiki-idee)
+* [Projektidee](#Projektidee)
 * [Meilenstein 1](#ms1)
  * [Synchrone Datenübertragung](#sdaten)
  * [Asynchrone Datenübertragung](#adaten)
@@ -25,7 +25,7 @@ Fakultät für Informatik und Naturwissenschaften
   * [Admin](#admin)
   * [User](#user)
 
-###<a id="wiki-idee"/>Projektidee
+###Projektidee
 *[TODO: Nochmal durchlesen und überarbeiten]*
 Unsere Vision ist, dass man seinen eigenen Sportticker erstellen kann und dieser von Freunden oder anderen Nutzern verfolgt und kommentiert werden kann.
 
@@ -35,9 +35,9 @@ Der Reiz an dem Erstellen eines Tickers ist, dass ein Nutzer seine eigenen Fans 
 
 Die App bietet eine übersichtliche Listung der Ereignisse und unterstützt die Kommunikation zwischen den Usern. Es ist zusätzlich möglich mehrere Ticker gleichzeitig in einem Fenster zu verfolgen. Wenn man z.B. Fan von zwei Teams ist, die an verschiedenen Spielen teilnehmen, will man trotzdem beide gleichzeitig erleben. Auch kann man so mehrere Ticker zum gleichen Spiel folgen und bekommt so mehr Infos und eine vielschichtige Sicht auf Geschehnisse. 
 
-##<a id="ms1"/>Meilenstein 1:
+##Meilenstein 1:
 
-###<a id="sdaten"/>Synchrone Datenübertragung
+###Synchrone Datenübertragung
 -	Eventliste 
 	* laufenden Events
 	* kommende Events
@@ -53,7 +53,7 @@ Die App bietet eine übersichtliche Listung der Ereignisse und unterstützt die 
 	* Statistiken
 	* Follower
 	
-###<a id="adaten"/>Asynchrone Datenübertragung
+###Asynchrone Datenübertragung
 -	Ticker
 -	Kommentare von Nutzern
 	* Kommentare sind "Bewertbar"
@@ -61,18 +61,18 @@ Die App bietet eine übersichtliche Listung der Ereignisse und unterstützt die 
 	* Favorit kommentiert ein Spiel
 	* Lieblingsmannschaft spielt
 
-###<a id="kui"/>Kommunikationsabläufe und Interaktion
+###Kommunikationsabläufe und Interaktion
 *[TODO: Text mit Erklärung]*
 ![Grafik](http://i.imgur.com/xcjO0RS.png)
 
-##<a id="ms2"/>Meilenstein 2:
+##Meilenstein 2:
 
-##<a id="psxml"/>Projektspezifisches XML Schema
+##Projektspezifisches XML Schema
 *[TODO: Erläuterung um was es geht + Semantik der blablabla]*
 Für unser Projekt benötigen wir zwei xml Dateien. Eine Datei für die Userprofiles und die andere für die Events, die erstellt werden.
 
 
-###<a id="userp"/>Userprofiles:
+###Userprofiles:
 Ein Nutzer des Dienstes muss sich durch ein Profile eindeutig identifizieren, falls er Events oder Kommentare veröffentlichen will. Für sein Userprofile wird also eine eindeutige Kennung benötigt. Hierfür dient der Username.
 Der User kann dann noch weitere Angaben machen, um zB von seinen Freunden erkannt zu werden. Vor- , Nachnamen und Geburtstag sind optionale Angaben, falls der User diese nicht veröffentlichen will. Ein User kann Freunde hinzufügen, um auf dem aktuellsten Stand zu bleiben, was seine Freunde so machen.
 die Anzahl erstellter Events und geposteter Beiträge werden automatisch im Profil hinterlegt. Hier kann jeder User sehen, wie aktiv man selbst oder andere im Social Ticker sind.
@@ -96,7 +96,7 @@ die Anzahl erstellter Events und geposteter Beiträge werden automatisch im Prof
 - Nachname min.2, max. 20 Zeichen
 
 
-###<a id="events"/>Events
+###Events
 Die Events sind das Herzstück unseres Dienstes. Es können hier Events (wie zB ein Fußball- oder Handballspiel) erstellt und verwaltet werden. Ein Event benötigt natürlich eine eindeutige Kennung. Der Name wäre hierbei nicht in jedem Fall eindeutig. Deswegen wird eine ID zur einfacheren Verwaltung erstellt. Eventname gibt an um welches Thema der Ticker überhaupt geht. Der Eventadmin ist sofort der User, der das Event erstellt hat. Auch interessant für den User ist es, um welchen Typ es von Event handelt. Also ob es ein Football-, Faustball- oder doch Golfspiel ist. Ein Event kann von anderen Usern bewertet werden. Die Wertung wird abgespeichert und automatisch verrechnet.
 
  
@@ -118,7 +118,7 @@ Die Events sind das Herzstück unseres Dienstes. Es können hier Events (wie zB 
 - Eventdauer > 20 Minuten
 - Eventbewertung < 10
 
-###<a id="eventc"/>Eventcontent
+###Eventcontent
 Zentral bei den Beiträgen des Events ist natürlich das "Soziale". Hierbei sind die Beiträge des Admins der Dreh- und Angelpunkt des Events. Andere User können dann zusätzlich noch unter den Beiträgen des Admins Kommentare setzen und diskutieren, ob sie die Geschehnisse genau so interpretieren oder einen anderen Standpunkt besitzen.
 
 ####complexe-types:
@@ -136,31 +136,32 @@ Zentral bei den Beiträgen des Events ist natürlich das "Soziale". Hierbei sind
 
 
 
-##<a id="rushttp"/>Ressourcen und die Semantik der HTTP-Operationen
+##Ressourcen und die Semantik der HTTP-Operationen
 Wir haben uns dafür entschieden unsere Daten auf drei Typen auszulagern. Jeder Ticker selbst wird in einem Event gespeichert. Der zugehörige "Content" also die Beträge des Admins und die Kommentare anderer User werden dabei in eine zweite Datei gespeichert.
 Die Profile unserer Nutzer werden in einer dritten Datei gespeichert.
 Bei uns entstehen somit drei Ressourcen - Event, Userprofiles, Eventcontent. Aus diesen Ressourcen ergeben sich folgende Operationen:
 
-####<a id="admin"/>Admin (Ersteller eines Events):
+####Admin (Ersteller eines Events):
 Ein Admin hat andere Rechte bzw. andere Funktionen als ein normaler Nutzer, der auf einen Ticker zugreift. Er hat die volle Kontrolle, kann Spielstände aktualisieren, Beiträge löschen und überhaupt den Ticker erst mit wichtigen Informationen - den Beiträgen - füllen.  
 
 | Operation         | Beschreibung |
 | ----------------- | ------------ |
-| `PUT /Event`      | Admin erstellt ein Event. |
-| `POST /Event`      | Admin verändert Daten (zB gefallene Tore) eines Event. |
-| `POST /Event/$eID/EventContent`      | Erstellt einen Beitrag im Ticker. |
-| `DELETE /Event/$eID`      | Löscht ein als Admin erstelltes Event. |
-| `DELETE /Event/$eID/EventContent`      | Löscht Kommentare in seinem Event. |
+| `POST /Events`      | Admin erstellt ein Event. |
+| `PUT /Events/$eID`      | Ändern bzw aktualisieren eines Events. |
+| `POST /Events/$eID/EventContent`      | Erstellt einen Beitrag im Ticker. |
+| `DELETE /Events/$eID`      | Löscht ein als Admin erstelltes Event. |
+| `DELETE /Events/$eID/EventContent/$cID`      | Löscht Kommentare in seinem Event. |
 | `GET /Userprofiles/$uID`      | Kann sich eigenes oder fremde Userprofiles anzeigen lassen. |
 
-####<a id="user"/>User:
+####User:
 | Operation         | Beschreibung |
 | ----------------- | ------------ |
-| `GET /Event`      | Bekommt Events zurück. |
-| `GET /Event/$eID`      | Bekommt alle Informationen eines Events. |
-| `POST /Event/$eID/EventContent`      | Erstellt einen Kommentar zu einem Beitrag im Ticker. |
-| `DELETE /Event/$eID/EventContent`      | Löscht ein als User erstellten Kommentar. |
+| `GET /Events`      | Bekommt Events zurück. |
+| `GET /Events/$eID`      | Bekommt alle Informationen eines Events. |
+| `POST /Events/$eID/EventContent`      | Erstellt einen Kommentar zu einem Beitrag im Ticker. |
+| `DELETE /Events/$eID/EventContent/$cID`      | Löscht ein als User erstellten Kommentar. |
 | `GET /Userprofiles/$uID`      | Kann sich eigenes oder fremde Userprofiles anzeigen lassen. |
-| `POST /Userprofiles/$uID`      | Kann sein eigenes Userprofiles bearbeiten. |
+| `GET /Userprofiles`      | Gibt alle User wieder. |
+| `PUT /Userprofiles/$uID`      | Kann sein eigenes Userprofiles bearbeiten. |
 
 
