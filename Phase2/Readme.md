@@ -11,7 +11,7 @@ Fakultät für Informatik und Naturwissenschaften
 
 ##Inhaltsverzeichnis
 
-* [Projektidee](#idee)
+* [Projektidee](#wiki-idee)
 * [Meilenstein 1](#ms1)
  * [Synchrone Datenübertragung](#sdaten)
  * [Asynchrone Datenübertragung](#adaten)
@@ -25,7 +25,7 @@ Fakultät für Informatik und Naturwissenschaften
   * [Admin](#admin)
   * [User](#user)
 
-###<a id="idee"/>Projektidee
+###<a id="wiki-idee"/>Projektidee
 *[TODO: Nochmal durchlesen und überarbeiten]*
 Unsere Vision ist, dass man seinen eigenen Sportticker erstellen kann und dieser von Freunden oder anderen Nutzern verfolgt und kommentiert werden kann.
 
