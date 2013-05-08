@@ -35,9 +35,9 @@ Der Reiz an dem Erstellen eines Tickers ist, dass ein Nutzer seine eigenen Fans 
 
 Die App bietet eine übersichtliche Listung der Ereignisse und unterstützt die Kommunikation zwischen den Usern. Es ist zusätzlich möglich mehrere Ticker gleichzeitig in einem Fenster zu verfolgen. Wenn man z.B. Fan von zwei Teams ist, die an verschiedenen Spielen teilnehmen, will man trotzdem beide gleichzeitig erleben. Auch kann man so mehrere Ticker zum gleichen Spiel folgen und bekommt so mehr Infos und eine vielschichtige Sicht auf Geschehnisse. 
 
-<a id="ms1"/>##Meilenstein 1:
+##<a id="ms1"/>Meilenstein 1:
 
-<a id="sdaten"/>###Synchrone Datenübertragung
+###<a id="sdaten"/>Synchrone Datenübertragung
 -	Eventliste 
 	* laufenden Events
 	* kommende Events
