@@ -1,14 +1,29 @@
 #Web-basierte Anwendungen 2: Verteilte Systeme
 
-Fachhochschule Köln Campus Gummersbach</br>
-Fakultät für Informatik und Naturwissenschaften
+Fachhochschule Köln Campus Gummersbach<br>
+Fakultät für Informatik und Ingenieurwissenschaften
 
+##Phase 2 - Projekt "Social Ticker"
 
-Dario Vizzacaro 11085033<br>
-Benedikt Wurth  11084022		
+##Autoren
+* [Dario Vizzaccaro](/dvizzacc) 11085033
+* [Benedikt Wurth](/BenWur) 11084022
 
+##Inhaltsverzeichnis
 
-##Phase 2 Projekt "Social Ticker"
+* [Projektidee](#projektidee)
+* [Meilenstein 1](#meilenstein-1)
+ * [Synchrone Datenübertragung](#synchrone-datenbertragung)
+ * [Asynchrone Datenübertragung](#asynchrone-datenbertragung)
+ * [Kommunikationsabläufe und Interaktion](#kommunikationsablufe-und-interaktion)
+* [Meilenstein 2](#meilenstein-2) 
+ * [Projektspezifisches XML Schema](#projektspezifisches-xml-schema)
+ * [Userprofiles](#userprofiles)
+ * [Events](#events)
+ * [Eventcontent](#eventcontent)
+ * [Ressourcen und die Semantik der HTTP-Operationen](#ressourcen-und-die-semantik-der-http-operationen)
+		* [Admin](#admin)
+		* [User](#user)
 
 ###Projektidee
 *[TODO: Nochmal durchlesen und überarbeiten]*
@@ -50,7 +65,8 @@ Die App bietet eine übersichtliche Listung der Ereignisse und unterstützt die 
 *[TODO: Text mit Erklärung]*
 ![Grafik](http://i.imgur.com/xcjO0RS.png)
 
-##Meilenstein 2: 
+##Meilenstein 2:
+
 ##Projektspezifisches XML Schema
 *[TODO: Erläuterung um was es geht + Semantik der blablabla]*
 Für unser Projekt benötigen wir zwei xml Dateien. Eine Datei für die Userprofiles und die andere für die Events, die erstellt werden.
@@ -130,21 +146,22 @@ Ein Admin hat andere Rechte bzw. andere Funktionen als ein normaler Nutzer, der 
 
 | Operation         | Beschreibung |
 | ----------------- | ------------ |
-| `PUT /Event`      | Admin erstellt ein Event. |
-| `POST /Event`      | Admin verändert Daten (zB gefallene Tore) eines Event. |
-| `POST /Event/$eID/EventContent`      | Erstellt einen Beitrag im Ticker. |
-| `DELETE /Event/$eID`      | Löscht ein als Admin erstelltes Event. |
-| `DELETE /Event/$eID/EventContent`      | Löscht Kommentare in seinem Event. |
+| `POST /Events`      | Admin erstellt ein Event. |
+| `PUT /Events/$eID`      | Ändern bzw aktualisieren eines Events. |
+| `POST /Events/$eID/EventContent`      | Erstellt einen Beitrag im Ticker. |
+| `DELETE /Events/$eID`      | Löscht ein als Admin erstelltes Event. |
+| `DELETE /Events/$eID/EventContent/$cID`      | Löscht Kommentare in seinem Event. |
 | `GET /Userprofiles/$uID`      | Kann sich eigenes oder fremde Userprofiles anzeigen lassen. |
 
 ####User:
 | Operation         | Beschreibung |
 | ----------------- | ------------ |
-| `GET /Event`      | Bekommt Events zurück. |
-| `GET /Event/$eID`      | Bekommt alle Informationen eines Events. |
-| `POST /Event/$eID/EventContent`      | Erstellt einen Kommentar zu einem Beitrag im Ticker. |
-| `DELETE /Event/$eID/EventContent`      | Löscht ein als User erstellten Kommentar. |
+| `GET /Events`      | Bekommt Events zurück. |
+| `GET /Events/$eID`      | Bekommt alle Informationen eines Events. |
+| `POST /Events/$eID/EventContent`      | Erstellt einen Kommentar zu einem Beitrag im Ticker. |
+| `DELETE /Events/$eID/EventContent/$cID`      | Löscht ein als User erstellten Kommentar. |
 | `GET /Userprofiles/$uID`      | Kann sich eigenes oder fremde Userprofiles anzeigen lassen. |
-| `POST /Userprofiles/$uID`      | Kann sein eigenes Userprofiles bearbeiten. |
+| `GET /Userprofiles`      | Gibt alle User wieder. |
+| `PUT /Userprofiles/$uID`      | Kann sein eigenes Userprofiles bearbeiten. |
 
 
