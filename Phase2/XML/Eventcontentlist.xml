@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<eventcontentlist 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				xsi:noNamespaceSchemaLocation="../XSD/Post.xsd">
+
+	<eventcontent eventID="1">
+	
+		<aktuellerStand>
+			<heim>2</heim>
+			<gast>0</gast>
+		</aktuellerStand>
+	
+		<tickerBeitrag typ="Tor" zeit="08:45:00">
+		
+			<text>Was für ein HAMMER DING von Thomas Müller</text>
+			
+			<kommentar user="DrDare">
+				<kommentarText>Hast recht :D echt gut gemacht!!! Thomas heart you</kommentarText>
+			</kommentar>
+			<kommentar user="DrDare">
+				<kommentarText>Oh.. wie ist das schön!</kommentarText>
+			</kommentar>
+			
+		</tickerBeitrag>
+		
+		<tickerBeitrag typ="Tor" zeit="08:55:00">
+		
+			<text>Das geht hier ja echt zur Sache! Schon wieder ein Tor 2:0</text>
+			
+			<kommentar user="DrDare">
+				<kommentarText>Ich krieg mich kaum noch ein :D</kommentarText>
+			</kommentar>
+			
+		</tickerBeitrag>
+		
+	</eventcontent>
+
+</eventcontentlist>

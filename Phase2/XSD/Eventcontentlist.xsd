@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Schema für Posts im Event -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+ <xs:element name="eventcontentlist">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="eventcontent"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+ <xs:element name="eventcontent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="aktuellerStand" maxOccurs="1" minOccurs="0"/>
+        <xs:element ref="tickerBeitrag" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+     <!-- eventID, klare Identifizierung des Events -->
+      <xs:attribute type="xs:decimal" name="eventID"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="aktuellerStand">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="heim" type="xs:decimal"/>
+        <xs:element name="gast" type="xs:decimal"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="tickerBeitrag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="text"/>
+        <xs:element ref="kommentar" maxOccurs="unbounded" minOccurs="0" />
+      </xs:sequence>
+     <!-- eventID, klare Identifizierung des Events -->
+      <xs:attribute type="xs:string" name="typ"/>
+      <xs:attribute type="xs:time" name="zeit"/>
+    </xs:complexType>
+  </xs:element>
+
+
+ <xs:element name="kommentar">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="kommentarText"/>
+      </xs:sequence>
+     <!-- eventID, klare Identifizierung des Events -->
+      <xs:attribute type="xs:string" name="user"/>
+    </xs:complexType>
+  </xs:element>
+
+ <xs:element name="text">
+	<xs:simpleType>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+ </xs:element>
+ 
+ <xs:element name="kommentarText">
+	<xs:simpleType>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="3"/>
+			<xs:maxLength value="150"/>
+		</xs:restriction>
+	</xs:simpleType>
+ </xs:element>
+			
+   
+	
+</xs:schema>
+	

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<eventlist  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:noNamespaceSchemaLocation="../XSD/Event.xsd">
+			
+	<event userID="1" eventID="1">
+		
+		<eventname>Bayern München - Barcelone</eventname>
+		<eventbeschreibung>Holly's Awesome Live Ticker. Join the show!</eventbeschreibung>
+		<username>Holly92</username>
+		<eventtyp>Football</eventtyp>
+		<eventstart>2013-05-12T08:45:00+02:00</eventstart>
+		<eventdauer>PT110M</eventdauer>
+		<eventbewertung>4</eventbewertung>
+		
+	</event>
+</eventlist>
+	

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<userlist xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:noNamespaceSchemaLocation="../XSD/User.xsd">
+		
+	<user userID="1">
+		
+		<username>Holly92</username>
+	    <vorname>Alex</vorname>
+	    <name>Meier</name>
+	    <gender>Male</gender>
+	    <geburtsdatum>1983-11-21</geburtsdatum>
+	    <land>Germany</land>
+	    <stadt>Munich</stadt>
+	    <anzEvents>1</anzEvents>
+	    <beitraege>4</beitraege>
+	    <favoriten>
+	    	<userID>2</userID>
+	    </favoriten>
+	    <folger>
+	    	<userID>2</userID>
+	    </folger>
+	    
+	</user>
+	
+	<user userID="2">
+		
+		<username>DrDare</username>
+	    <vorname>Angelo</vorname>
+	    <name>Merte</name>
+	    <gender>Male</gender>
+	    <geburtsdatum>1992-07-11</geburtsdatum>
+	    <land>Germany</land>
+	    <stadt>Gummersbach</stadt>
+	    <anzEvents>0</anzEvents>
+	    <beitraege>0</beitraege>
+	    <favoriten>
+	    	<userID>1</userID>
+	    </favoriten>
+	    <folger>
+	    	<userID>1</userID>
+	    </folger>
+	    
+	</user>
+	
+</userlist>
