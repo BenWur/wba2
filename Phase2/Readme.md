@@ -62,18 +62,23 @@ Die App bietet eine übersichtliche Listung der Ereignisse und unterstützt die 
 	* Lieblingsmannschaft spielt
 
 ###Kommunikationsabläufe und Interaktion
-*[TODO: Text mit Erklärung]*
+Im Grunde genommen ist erst einmal jeder Nutzer gleich und ihm liegen die selben Funktionen vor. Jeder Nutzer kann auf sein eigenes Profil zugreifen und dieses auch verändern. Zusätzlich kann er auch andere Profile aufrufen und sich Freunde aufrufen. 
+Die Interaktion mit dem Server unterscheidet sich erst wenn man ein Event erstellt bzw. ein Event aufruft. Als Administrator (Ersteller eines Events) hat man einen erweiterten Funktionsumfang. Als allererstes sollte man für sein Event Informationen anlegen ("Event verwalten"). Wenn man alles soweit angelegt hat, kann man Beiträge verfassen und diese dann veröffentlichen. Sie werden chronologisch aufgelistet. Andere Nutzer, die das Event aufrufen können dann die erstellten Beiträge kommentieren. Als Admin ist es möglich Kommentare anderer Nutzer zu löschen.
+Als Nutzer (Aufrufer eines Events) kann man sich eine Liste aller Events anzeigen lassen. Dort wählt man dann ein Event auf, welches einen interessiert. In einem Event angekommen, sieht man alle aktuellen Beiträge und Kommentare. Man kann sich nun entscheiden, ob man selbst ein Kommentar verfassen will oder ob man ersteinmal den Ticker verfolgt, bis man seine eigene Meinung veröffentlicht.
 ![Grafik](http://i.imgur.com/xcjO0RS.png)
 
 ##Meilenstein 2:
 
 ##Projektspezifisches XML Schema
-*[TODO: Erläuterung um was es geht + Semantik der blablabla]*
-Für unser Projekt benötigen wir zwei xml Dateien. Eine Datei für die Userprofiles und die andere für die Events, die erstellt werden.
+Um die Informationen zu verwalten benötigen wir xml-Dateien. Diese speichern alle Informationen und gewährleisten die Kommunikation zwischen Client und Server.
+Alle Daten werden in drei xml Dateien ausgelagert. Eine Datei enthält alle Daten der Nutzer. Hier werden die wichtigen Daten wie Username, Vorname, Nachname, Geburtsdatum, Anzahl erstellte Events und Anzahl geposteter Beiträge gespeichert. 
+Die zweite Datei, ist die Events-Datei. Hier werden alles Grund-Informationen eines Events gespeichert. Eventname, Eventdatum, Eventadmin, Eventtyp, Eventdauer und Bewertung werden hier für alle Events abgelegt. Auch hier vergibt das System zusätzlich noch eine EventID zur eindeutigen Zuweisung.
+Die letzte Datei ist für den kompletten Content, also den Beiträgen und Kommentaren zuständig. Man hätte den Content und das Event zwar in ein xml-Dokument zusammenfassen können. Jedoch verändert sich der Content ständig und schnell, wobei die Event-Informationen statisch sind und nach anlegen nicht mehr verändert werden.
+
 
 
 ###Userprofiles:
-Ein Nutzer des Dienstes muss sich durch ein Profile eindeutig identifizieren, falls er Events oder Kommentare veröffentlichen will. Für sein Userprofile wird also eine eindeutige Kennung benötigt. Hierfür dient der Username.
+Ein Nutzer des Dienstes muss sich durch ein Profile eindeutig identifizieren, falls er Events oder Kommentare veröffentlichen will. Der Nutzer identifiziert sich durch seinen Usernamen. Zusätzlich legt das System automatisch eine UserID für den einfacheren Umgang mit den Usern an. Die UserID wird später benötigt, um die Events und Beiträge eindeutig den Nutzern zuzuordnen. 
 Der User kann dann noch weitere Angaben machen, um zB von seinen Freunden erkannt zu werden. Vor- , Nachnamen und Geburtstag sind optionale Angaben, falls der User diese nicht veröffentlichen will. Ein User kann Freunde hinzufügen, um auf dem aktuellsten Stand zu bleiben, was seine Freunde so machen.
 die Anzahl erstellter Events und geposteter Beiträge werden automatisch im Profil hinterlegt. Hier kann jeder User sehen, wie aktiv man selbst oder andere im Social Ticker sind.
 
