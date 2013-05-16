@@ -2,7 +2,7 @@
 
 <eventlist  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-			xsi:noNamespaceSchemaLocation="../XSD/Event.xsd">
+			xsi:noNamespaceSchemaLocation="../XSD/Eventlist.xsd">
 			
 	<event userID="1"  eventID="1">
 		

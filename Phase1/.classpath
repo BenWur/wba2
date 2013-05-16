@@ -2,5 +2,21 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Users/Ben/Downloads/Neuer Ordner/Neuer Ordner/jaxb-xjc-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/Ben/Downloads/Neuer Ordner/Neuer Ordner/jaxb-impl-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/Ben/Downloads/Neuer Ordner/Neuer Ordner/jaxb-xjc.jar"/>
+	<classpathentry kind="lib" path="/Users/Ben/Downloads/Neuer Ordner/Neuer Ordner/jaxb-api.jar"/>
+	<classpathentry kind="lib" path="/Users/Ben/Downloads/Neuer Ordner/Neuer Ordner/jaxb-impl.jar"/>
+	<classpathentry kind="lib" path="/Users/Ben/Downloads/Neuer Ordner/Neuer Ordner/castor-1.3.1-codegen.jar"/>
+	<classpathentry kind="lib" path="/Users/Ben/Downloads/Neuer Ordner/Neuer Ordner/castor-1.3.1-core.jar"/>
+	<classpathentry kind="lib" path="/Users/Ben/Downloads/Neuer Ordner/Neuer Ordner/castor-1.3.1-xml-schema.jar"/>
+	<classpathentry kind="lib" path="/Users/Ben/Downloads/Neuer Ordner/Neuer Ordner/castor-1.3.1-xml.jar"/>
+	<classpathentry kind="lib" path="/Users/Ben/Downloads/Neuer Ordner/Neuer Ordner/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/Ben/Downloads/Neuer Ordner/Neuer Ordner/jaxbbuilder.jar"/>
+	<classpathentry kind="lib" path="/Users/Ben/Downloads/Neuer Ordner/Neuer Ordner/jaxbspice.jar"/>
+	<classpathentry kind="lib" path="/Users/Ben/Downloads/Neuer Ordner/Neuer Ordner/jsr173_1.0_api.jar"/>
+	<classpathentry kind="lib" path="/Users/Ben/Downloads/Neuer Ordner/Neuer Ordner/resolver.jar"/>
+	<classpathentry kind="lib" path="/Users/Ben/Downloads/Neuer Ordner/Neuer Ordner/xbean.jar"/>
+	<classpathentry kind="lib" path="/Users/Ben/Downloads/Neuer Ordner/Neuer Ordner/xmlbeans-qname.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
