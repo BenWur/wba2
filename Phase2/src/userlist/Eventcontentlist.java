@@ -2,7 +2,7 @@
 // Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.2.6 generiert 
 // Siehe <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
-// Generiert: 2013.05.27 um 12:08:49 PM CEST 
+// Generiert: 2013.05.27 um 12:01:42 PM CEST 
 //
 
 
@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="userID" type="{http://www.w3.org/2001/XMLSchema}anyType" maxOccurs="unbounded"/>
+ *         &lt;element ref="{}eventcontent" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,41 +38,41 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "userID"
+    "eventcontent"
 })
-@XmlRootElement(name = "favoriten")
-public class Favoriten {
+@XmlRootElement(name = "eventcontentlist")
+public class Eventcontentlist {
 
     @XmlElement(required = true)
-    protected List<Object> userID;
+    protected List<Eventcontent> eventcontent;
 
     /**
-     * Gets the value of the userID property.
+     * Gets the value of the eventcontent property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the userID property.
+     * This is why there is not a <CODE>set</CODE> method for the eventcontent property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getUserID().add(newItem);
+     *    getEventcontent().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Object }
+     * {@link Eventcontent }
      * 
      * 
      */
-    public List<Object> getUserID() {
-        if (userID == null) {
-            userID = new ArrayList<Object>();
+    public List<Eventcontent> getEventcontent() {
+        if (eventcontent == null) {
+            eventcontent = new ArrayList<Eventcontent>();
         }
-        return this.userID;
+        return this.eventcontent;
     }
 
 }

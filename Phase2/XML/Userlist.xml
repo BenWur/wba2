@@ -4,7 +4,7 @@
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:noNamespaceSchemaLocation="../XSD/Userlist.xsd">
 		
-	<user userID="1">
+	<user userID="0">
 		
 		<username>Holly92</username>
 	    <vorname>Alex</vorname>
@@ -24,7 +24,7 @@
 	    
 	</user>
 	
-	<user userID="2">
+	<user userID="1">
 		
 		<username>DrDare</username>
 	    <vorname>Angelo</vorname>

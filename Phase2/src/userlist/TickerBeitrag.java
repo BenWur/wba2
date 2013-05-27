@@ -2,11 +2,11 @@
 // Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.2.6 generiert 
 // Siehe <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
-// Generiert: 2013.05.27 um 12:54:27 PM CEST 
+// Generiert: 2013.05.27 um 12:01:42 PM CEST 
 //
 
 
-package eventcontentlist;
+package userlist;
 
 import java.util.ArrayList;
 import java.util.List;

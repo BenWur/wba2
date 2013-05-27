@@ -2,20 +2,18 @@
 // Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.2.6 generiert 
 // Siehe <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
-// Generiert: 2013.05.27 um 12:54:27 PM CEST 
+// Generiert: 2013.05.27 um 12:01:42 PM CEST 
 //
 
 
-package eventcontentlist;
+package userlist;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -32,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element ref="{}aktuellerStand" minOccurs="0"/>
  *         &lt;element ref="{}tickerBeitrag" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attribute name="eventID" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" />
+ *       &lt;attribute name="eventID" type="{http://www.w3.org/2001/XMLSchema}int" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -51,8 +49,7 @@ public class Eventcontent {
     protected AktuellerStand aktuellerStand;
     protected List<TickerBeitrag> tickerBeitrag;
     @XmlAttribute(name = "eventID")
-    @XmlSchemaType(name = "positiveInteger")
-    protected BigInteger eventID;
+    protected Integer eventID;
 
     /**
      * Ruft den Wert der aktuellerStand-Eigenschaft ab.
@@ -112,10 +109,10 @@ public class Eventcontent {
      * 
      * @return
      *     possible object is
-     *     {@link BigInteger }
+     *     {@link Integer }
      *     
      */
-    public BigInteger getEventID() {
+    public Integer getEventID() {
         return eventID;
     }
 
@@ -124,10 +121,10 @@ public class Eventcontent {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigInteger }
+     *     {@link Integer }
      *     
      */
-    public void setEventID(BigInteger value) {
+    public void setEventID(Integer value) {
         this.eventID = value;
     }
 

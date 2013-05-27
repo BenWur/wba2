@@ -29,7 +29,7 @@
         <xs:element ref="folger"/>
       </xs:sequence>
      <!-- Bei Registrierung automatisch generierte einzigartige ID -->
-      <xs:attribute type="xs:decimal" name="userID"/>
+      <xs:attribute type="xs:positiveInteger" name="userID"/>
     </xs:complexType>
   </xs:element>
   

@@ -20,7 +20,7 @@
 					minOccurs="0" />
 			</xs:sequence>
 			<!-- eventID, klare Identifizierung des Events -->
-			<xs:attribute type="xs:decimal" name="eventID" />
+			<xs:attribute type="xs:positiveInteger" name="eventID" />
 		</xs:complexType>
 	</xs:element>
 

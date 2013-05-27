@@ -2,15 +2,15 @@
 // Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.2.6 generiert 
 // Siehe <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
-// Generiert: 2013.05.27 um 12:54:27 PM CEST 
+// Generiert: 2013.05.27 um 12:01:42 PM CEST 
 //
 
 
-package eventcontentlist;
+package userlist;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -26,9 +26,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="heim" type="{http://www.w3.org/2001/XMLSchema}decimal"/>
- *         &lt;element name="gast" type="{http://www.w3.org/2001/XMLSchema}decimal"/>
+ *         &lt;element ref="{}kommentarText"/>
  *       &lt;/sequence>
+ *       &lt;attribute name="user" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -38,63 +38,62 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "heim",
-    "gast"
+    "kommentarText"
 })
-@XmlRootElement(name = "aktuellerStand")
-public class AktuellerStand {
+@XmlRootElement(name = "kommentar")
+public class Kommentar {
 
     @XmlElement(required = true)
-    protected BigDecimal heim;
-    @XmlElement(required = true)
-    protected BigDecimal gast;
+    protected String kommentarText;
+    @XmlAttribute(name = "user")
+    protected String user;
 
     /**
-     * Ruft den Wert der heim-Eigenschaft ab.
+     * Ruft den Wert der kommentarText-Eigenschaft ab.
      * 
      * @return
      *     possible object is
-     *     {@link BigDecimal }
+     *     {@link String }
      *     
      */
-    public BigDecimal getHeim() {
-        return heim;
+    public String getKommentarText() {
+        return kommentarText;
     }
 
     /**
-     * Legt den Wert der heim-Eigenschaft fest.
+     * Legt den Wert der kommentarText-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
-     *     {@link BigDecimal }
+     *     {@link String }
      *     
      */
-    public void setHeim(BigDecimal value) {
-        this.heim = value;
+    public void setKommentarText(String value) {
+        this.kommentarText = value;
     }
 
     /**
-     * Ruft den Wert der gast-Eigenschaft ab.
+     * Ruft den Wert der user-Eigenschaft ab.
      * 
      * @return
      *     possible object is
-     *     {@link BigDecimal }
+     *     {@link String }
      *     
      */
-    public BigDecimal getGast() {
-        return gast;
+    public String getUser() {
+        return user;
     }
 
     /**
-     * Legt den Wert der gast-Eigenschaft fest.
+     * Legt den Wert der user-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
-     *     {@link BigDecimal }
+     *     {@link String }
      *     
      */
-    public void setGast(BigDecimal value) {
-        this.gast = value;
+    public void setUser(String value) {
+        this.user = value;
     }
 
 }
