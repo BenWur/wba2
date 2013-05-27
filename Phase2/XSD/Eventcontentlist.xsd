@@ -7,7 +7,7 @@
 	<xs:element name="eventcontentlist">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="eventcontent" />
+				<xs:element ref="eventcontent" maxOccurs="unbounded" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
