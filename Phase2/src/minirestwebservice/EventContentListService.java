@@ -138,7 +138,7 @@ public class EventContentListService
 	   @DELETE
 	   @Path( "/beitrag/{tickerBeitragID}")
 	   public Response deleteTickerBeitrag( 	@PathParam("eventID") int eventID,
-			   							@PathParam("tickerBeitragID") int tickerBeitragID) throws Exception{
+			   									@PathParam("tickerBeitragID") int tickerBeitragID) throws Exception{
 		   
 		    JAXBContext jc = JAXBContext.newInstance(Eventcontentlist.class);
 		    //unmarshaller zum lesen 

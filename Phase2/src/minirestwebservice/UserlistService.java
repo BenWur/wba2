@@ -16,6 +16,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+
 import userlist.ObjectFactory;
 import userlist.User;
 import userlist.Userlist;
@@ -87,11 +88,18 @@ public class UserlistService
 	    
 	    Userlist users = (Userlist) um.unmarshal(new FileInputStream("XML/Userlist.xml"));
 	    
-	    List<User> usersliste = users.getUser();
+	    List<User> userliste = users.getUser();
 	    
-	    user.setUserID( new BigInteger(String.valueOf(usersliste.size() - 1)) );
+	    BigInteger ID = BigInteger.ZERO ;
+		for(User us : userliste ){
+			
+	    	if(us.getUserID().compareTo(ID)==1){
+	    		ID = us.getUserID();
+	    	}
+	    }
+		user.setUserID(ID.add(BigInteger.ONE));
 	    
-	 	usersliste.add( user );
+	 	userliste.add( user );
 	    
 	    marshaller.marshal(users, new File("XML/Userlist.xml"));
 	    
