@@ -47,12 +47,20 @@ public class EventContentListService
 		    Unmarshaller um = jc.createUnmarshaller();
 		    //marshaller zum schreiben
 		    Marshaller marshaller =jc.createMarshaller();
+		    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		    
 		    Eventcontentlist eventcontents = (Eventcontentlist) um.unmarshal(new File("XML/Eventcontentlist.xml"));
 		    
 		    List<Eventcontent> eventcontentliste = eventcontents.getEventcontent();
 		    
-		    eventcontent.setEventID( new BigInteger(String.valueOf(eventcontentliste.size() - 1)) );
+		    BigInteger ID = BigInteger.ZERO ;
+			for(Eventcontent evc : eventcontentliste ){
+				
+		    	if(evc.getEventID().compareTo(ID)==1){
+		    		ID = evc.getEventID();
+		    	}
+		    }
+			eventcontent.setEventID(ID.add(BigInteger.ONE));
 		    
 		 	eventcontentliste.add( eventcontent );
 		    
@@ -74,6 +82,7 @@ public class EventContentListService
 		    Unmarshaller um = jc.createUnmarshaller();
 		    //marshaller zum schreiben
 		    Marshaller marshaller =jc.createMarshaller();
+		    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		    
 		    Eventcontentlist eventcontents = (Eventcontentlist) um.unmarshal(new File("XML/Eventcontentlist.xml"));
 		   
@@ -113,6 +122,7 @@ public class EventContentListService
 		    Unmarshaller um = jc.createUnmarshaller();
 		    //marshaller zum schreiben
 		    Marshaller marshaller =jc.createMarshaller();
+		    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		    
 		    Eventcontentlist eventcontents = (Eventcontentlist) um.unmarshal(new File("XML/Eventcontentlist.xml"));
 		   
@@ -145,6 +155,7 @@ public class EventContentListService
 		    Unmarshaller um = jc.createUnmarshaller();
 		    //marshaller zum schreiben
 		    Marshaller marshaller =jc.createMarshaller();
+		    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		    
 		    Eventcontentlist eventcontents = (Eventcontentlist) um.unmarshal(new File("XML/Eventcontentlist.xml"));
 		    

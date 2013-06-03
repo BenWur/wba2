@@ -85,6 +85,7 @@ public class UserlistService
 	    Unmarshaller um = jc.createUnmarshaller();
 	    //marshaller zum schreiben
 	    Marshaller marshaller =jc.createMarshaller();
+	    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 	    
 	    Userlist users = (Userlist) um.unmarshal(new FileInputStream("XML/Userlist.xml"));
 	    
@@ -119,6 +120,7 @@ public class UserlistService
 	    Unmarshaller um = jc.createUnmarshaller();
 	    //marshaller zum schreiben
 	    Marshaller marshaller =jc.createMarshaller();
+	    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 	    
 	    Userlist users = (Userlist) um.unmarshal(new FileInputStream("XML/userlist.xml"));
 	    
@@ -150,6 +152,7 @@ public class UserlistService
 	    Unmarshaller um = jc.createUnmarshaller();
 	    //marshaller zum schreiben
 	    Marshaller marshaller =jc.createMarshaller();
+	    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 	    
 	    Userlist users = (Userlist) um.unmarshal(new FileInputStream("XML/Userlist.xml"));
 	    

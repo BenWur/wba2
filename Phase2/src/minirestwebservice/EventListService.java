@@ -70,12 +70,20 @@ public class EventListService
 	    Unmarshaller um = jc.createUnmarshaller();
 	    //marshaller zum schreiben
 	    Marshaller marshaller =jc.createMarshaller();
+	    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 	    
 	    Eventlist events = (Eventlist) um.unmarshal(new File("XML/Eventlist.xml"));
 	    
 	    List<Event> eventliste = events.getEvent();
 	    
-	    event.setEventID( new BigInteger(String.valueOf(eventliste.size() - 1)) );
+	    BigInteger ID = BigInteger.ZERO ;
+		for(Event ev : eventliste ){
+			
+	    	if(ev.getEventID().compareTo(ID)==1){
+	    		ID = ev.getEventID();
+	    	}
+	    }
+		event.setEventID(ID.add(BigInteger.ONE));
 	    
 	 	eventliste.add( event );
 	    
@@ -97,6 +105,7 @@ public class EventListService
 	    Unmarshaller um = jc.createUnmarshaller();
 	    //marshaller zum schreiben
 	    Marshaller marshaller =jc.createMarshaller();
+	    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 	    
 	    Eventlist events = (Eventlist) um.unmarshal(new File("XML/Eventlist.xml"));
 	    
@@ -128,6 +137,7 @@ public class EventListService
 	    Unmarshaller um = jc.createUnmarshaller();
 	    //marshaller zum schreiben
 	    Marshaller marshaller =jc.createMarshaller();
+	    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 	    
 	    Eventlist events = (Eventlist) um.unmarshal(new File("XML/Eventlist.xml"));
 	    Eventcontentlist eventcontents = (Eventcontentlist) um.unmarshal(new File("XML/Eventcontentlist.xml"));
