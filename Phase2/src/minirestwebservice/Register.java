@@ -16,7 +16,7 @@ public class Register
        try {
            context = JAXBContext.newInstance(userlist.Userlist.class);
            Unmarshaller um = context.createUnmarshaller();
-           userlist = (userlist.Userlist) um.unmarshal(new FileReader("C:\\Users\\Dario\\Desktop\\Phase2\\XML\\Userlist.xml"));
+           userlist = (userlist.Userlist) um.unmarshal(new FileReader("XML\\Userlist.xml"));
        } catch (Exception e) {
        }
    }

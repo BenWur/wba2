@@ -27,5 +27,6 @@
 	<classpathentry kind="lib" path="libs/jersey/jersey-server-1.1.5.1.jar"/>
 	<classpathentry kind="lib" path="libs/jersey/jettison-1.1.jar"/>
 	<classpathentry kind="lib" path="libs/jersey/jsr311-api-1.1.1.jar"/>
+	<classpathentry kind="lib" path="libs/jfxrt.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

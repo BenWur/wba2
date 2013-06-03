@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.math.BigInteger;
 import java.net.URI;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ws.rs.*;
@@ -25,15 +26,34 @@ public class UserlistService
 	
    @GET 
    @Produces( MediaType.APPLICATION_XML )
-   public Userlist getAllUsers() throws Exception
+   public Userlist getAllUsers(		@QueryParam("name") String name,
+		   							@QueryParam("land") String land ) throws Exception
    {
 	   ObjectFactory ob = new ObjectFactory();
 	   Userlist users=ob.createUserlist();
 	   JAXBContext jc = JAXBContext.newInstance(Userlist.class);
 		//unmarshaller zum lesen 
 	    Unmarshaller um = jc.createUnmarshaller();
-	    users = (Userlist) um.unmarshal(new FileInputStream("XML/Userlist.xml"));
+	    users = (Userlist) um.unmarshal(new File("XML/Userlist.xml"));
+	    List<User> userliste = users.getUser();
 	    
+	    if(name!=null){
+	    	for (Iterator<User> iter = userliste.iterator(); iter.hasNext(); ) {
+		    	User us = iter.next();
+		    	if(!us.getUsername().toLowerCase().startsWith(name.toLowerCase())){
+			    	iter.remove();
+		    	}
+		    }
+	    }
+	    
+	    if(land!=null){
+	    	for (Iterator<User> iter = userliste.iterator(); iter.hasNext(); ) {
+		    	User us = iter.next();
+		    	if(!us.getLand().toLowerCase().startsWith(land.toLowerCase())){
+			    	iter.remove();
+		    	}
+		    }
+	    }
 	    
       return users; 
    }

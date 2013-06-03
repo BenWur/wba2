@@ -11,7 +11,7 @@
 			<gast>0</gast>
 		</aktuellerStand>
 	
-		<tickerBeitrag typ="Tor" zeit="08:45:00">
+		<tickerBeitrag typ="Tor" zeit="08:45:00" tickerBeitragID="1">
 		
 			<text>Was für ein HAMMER DING von Thomas Müller</text>
 			
@@ -24,7 +24,7 @@
 			
 		</tickerBeitrag>
 		
-		<tickerBeitrag typ="Tor" zeit="08:55:00">
+		<tickerBeitrag typ="Tor" zeit="08:55:00" tickerBeitragID="2">
 		
 			<text>Das geht hier ja echt zur Sache! Schon wieder ein Tor 2:0</text>
 			

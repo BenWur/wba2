@@ -2,12 +2,13 @@
 // Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.2.6 generiert 
 // Siehe <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
-// Generiert: 2013.05.27 um 12:54:27 PM CEST 
+// Generiert: 2013.06.03 um 12:34:21 PM CEST 
 //
 
 
 package eventcontentlist;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -35,6 +36,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *       &lt;/sequence>
  *       &lt;attribute name="typ" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="zeit" type="{http://www.w3.org/2001/XMLSchema}time" />
+ *       &lt;attribute name="tickerBeitragID" type="{http://www.w3.org/2001/XMLSchema}integer" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -58,6 +60,8 @@ public class TickerBeitrag {
     @XmlAttribute(name = "zeit")
     @XmlSchemaType(name = "time")
     protected XMLGregorianCalendar zeit;
+    @XmlAttribute(name = "tickerBeitragID")
+    protected BigInteger tickerBeitragID;
 
     /**
      * Ruft den Wert der text-Eigenschaft ab.
@@ -158,6 +162,30 @@ public class TickerBeitrag {
      */
     public void setZeit(XMLGregorianCalendar value) {
         this.zeit = value;
+    }
+
+    /**
+     * Ruft den Wert der tickerBeitragID-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link BigInteger }
+     *     
+     */
+    public BigInteger getTickerBeitragID() {
+        return tickerBeitragID;
+    }
+
+    /**
+     * Legt den Wert der tickerBeitragID-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigInteger }
+     *     
+     */
+    public void setTickerBeitragID(BigInteger value) {
+        this.tickerBeitragID = value;
     }
 
 }

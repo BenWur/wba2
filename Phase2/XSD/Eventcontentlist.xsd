@@ -43,6 +43,7 @@
 			<!-- eventID, klare Identifizierung des Events -->
 			<xs:attribute type="xs:string" name="typ" />
 			<xs:attribute type="xs:time" name="zeit" />
+			<xs:attribute type="xs:integer" name="tickerBeitragID" />
 		</xs:complexType>
 	</xs:element>
 

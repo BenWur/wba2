@@ -2,9 +2,9 @@ package minirestwebservice;
 
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.math.BigInteger;
 import java.net.URI;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ws.rs.*;
@@ -14,6 +14,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import eventcontentlist.Eventcontent;
+import eventcontentlist.Eventcontentlist;
 import eventlist.Event;
 import eventlist.Eventlist;
 
@@ -24,13 +26,22 @@ public class EventListService
 	
    @GET 
    @Produces( MediaType.APPLICATION_XML )
-   public Eventlist getAllEvents() throws Exception
+   public Eventlist getAllEvents( @QueryParam("name") String name ) throws Exception
    {
 	   JAXBContext jc = JAXBContext.newInstance(Eventlist.class);
 		//unmarshaller zum lesen 
 	    Unmarshaller um = jc.createUnmarshaller();
-	    Eventlist events = (Eventlist) um.unmarshal(new FileInputStream("XML/Eventlist.xml"));
+	    Eventlist events = (Eventlist) um.unmarshal(new File("XML/Eventlist.xml"));
+	    List<Event> eventliste = events.getEvent();
 	    
+	    if(name!=null){
+	    	for (Iterator<Event> iter = eventliste.iterator(); iter.hasNext(); ) {
+		    	Event ev = iter.next();
+		    	if(!ev.getEventname().toLowerCase().contains(name.toLowerCase())){
+			    	iter.remove();
+		    	}
+		    }
+	    }
 	    
       return events; 
    }
@@ -44,7 +55,7 @@ public class EventListService
 	    JAXBContext jc = JAXBContext.newInstance(Eventlist.class);
 		//unmarshaller zum lesen 
 	    Unmarshaller um = jc.createUnmarshaller();
-	    Eventlist event = (Eventlist) um.unmarshal(new FileInputStream("XML/Eventlist.xml"));
+	    Eventlist event = (Eventlist) um.unmarshal(new File("XML/Eventlist.xml"));
 	    
       return event.getEvent().get(i-1); 
    }
@@ -60,7 +71,7 @@ public class EventListService
 	    //marshaller zum schreiben
 	    Marshaller marshaller =jc.createMarshaller();
 	    
-	    Eventlist events = (Eventlist) um.unmarshal(new FileInputStream("XML/Eventlist.xml"));
+	    Eventlist events = (Eventlist) um.unmarshal(new File("XML/Eventlist.xml"));
 	    
 	    List<Event> eventliste = events.getEvent();
 	    
@@ -87,12 +98,12 @@ public class EventListService
 	    //marshaller zum schreiben
 	    Marshaller marshaller =jc.createMarshaller();
 	    
-	    Eventlist events = (Eventlist) um.unmarshal(new FileInputStream("XML/Eventlist.xml"));
+	    Eventlist events = (Eventlist) um.unmarshal(new File("XML/Eventlist.xml"));
 	    
 	    
 	    List<Event> eventliste = events.getEvent();
 	    
-	    int i=0;;
+	    int i=0;
 	    for(Event ev : eventliste ){
 	    	if(ev.getEventID().equals(id)){
 	    		eventliste.set(i, event);
@@ -118,21 +129,29 @@ public class EventListService
 	    //marshaller zum schreiben
 	    Marshaller marshaller =jc.createMarshaller();
 	    
-	    Eventlist events = (Eventlist) um.unmarshal(new FileInputStream("XML/Eventlist.xml"));
-	    
+	    Eventlist events = (Eventlist) um.unmarshal(new File("XML/Eventlist.xml"));
+	    Eventcontentlist eventcontents = (Eventcontentlist) um.unmarshal(new File("XML/Eventcontentlist.xml"));
 	    
 	    List<Event> eventliste = events.getEvent();
 	    
-	    int i=0;
-	    for(Event ev : eventliste ){
+	    for (Iterator<Event> it = eventliste.iterator(); it.hasNext(); ) {
+	    	Event ev = it.next();
 	    	if(ev.getEventID().equals(id)){
-	    		eventliste.remove(i);
+		    	it.remove();
 	    	}
-	    	i++;
+	    }
+	    
+	    List<Eventcontent> eventcontentliste = eventcontents.getEventcontent();
+	    
+	    for (Iterator<Eventcontent> iter = eventcontentliste.iterator(); iter.hasNext(); ) {
+	    	Eventcontent evc = iter.next();
+	    	if(evc.getEventID().equals(id)){
+		    	iter.remove();
+	    	}
 	    }
 
 	    marshaller.marshal(events, new File("XML/Eventlist.xml"));
-	    
+	    marshaller.marshal(events, new File("XML/Eventcontentlist.xml"));
 	    
       return Response.noContent().build() ; //Gibt Meldung 204->"ok" zurück
    }
