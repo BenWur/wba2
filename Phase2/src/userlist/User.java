@@ -2,7 +2,7 @@
 // Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.2.6 generiert 
 // Siehe <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
-// Generiert: 2013.05.27 um 12:08:49 PM CEST 
+// Generiert: 2013.06.04 um 01:18:12 PM CEST 
 //
 
 
@@ -77,8 +77,8 @@ public class User {
     protected String gender;
     @XmlElement(required = true)
     protected XMLGregorianCalendar geburtsdatum;
-    @XmlElement(required = true, defaultValue = "")
-    protected String land;
+    @XmlElement(required = true, defaultValue = "Germany")
+    protected LandType land;
     @XmlElement(required = true)
     protected String stadt;
     @XmlElement(required = true)
@@ -218,10 +218,10 @@ public class User {
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link LandType }
      *     
      */
-    public String getLand() {
+    public LandType getLand() {
         return land;
     }
 
@@ -230,10 +230,10 @@ public class User {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link LandType }
      *     
      */
-    public void setLand(String value) {
+    public void setLand(LandType value) {
         this.land = value;
     }
 

@@ -2,7 +2,7 @@
 // Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.2.6 generiert 
 // Siehe <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
-// Generiert: 2013.05.27 um 12:08:49 PM CEST 
+// Generiert: 2013.06.04 um 01:18:12 PM CEST 
 //
 
 
@@ -137,12 +137,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link LandType }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "", name = "land", defaultValue = "")
-    public JAXBElement<String> createLand(String value) {
-        return new JAXBElement<String>(_Land_QNAME, String.class, null, value);
+    @XmlElementDecl(namespace = "", name = "land", defaultValue = "Germany")
+    public JAXBElement<LandType> createLand(LandType value) {
+        return new JAXBElement<LandType>(_Land_QNAME, LandType.class, null, value);
     }
 
     /**

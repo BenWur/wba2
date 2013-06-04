@@ -50,7 +50,7 @@ public class UserlistService
 	    if(land!=null){
 	    	for (Iterator<User> iter = userliste.iterator(); iter.hasNext(); ) {
 		    	User us = iter.next();
-		    	if(!us.getLand().toLowerCase().startsWith(land.toLowerCase())){
+		    	if(!us.getLand().toString().toLowerCase().startsWith(land.toLowerCase())){
 			    	iter.remove();
 		    	}
 		    }

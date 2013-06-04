@@ -84,10 +84,9 @@
 	</xs:element>
 	
 	<!-- Landauswahl nur aus einer bestimmten Liste, spaeter nach Alphabet geordnet und eventuell mit Geo-Restriktionen -->
-	<xs:element name="land" default="">
+	<xs:element name="land" default="Germany">
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
-				<xs:enumeration value=""/>
 				<xs:enumeration value="Germany"/>
 				<xs:enumeration value="Italy"/>
 				<xs:enumeration value="France"/>
