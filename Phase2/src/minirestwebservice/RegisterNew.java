@@ -1,9 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package minirestwebservice;
 
+import java.util.HashMap;
+import java.util.Map;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -18,10 +16,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-/**
- *
- * @author Dario
- */
+
+
 public class RegisterNew extends Application {
 
     @Override
@@ -45,7 +41,7 @@ public class RegisterNew extends Application {
         fname.setLayoutX(50);
         fname.setLayoutY(73);
         
-        TextField fnameField1 = new TextField();
+        final TextField fnameField1 = new TextField();
         fnameField1.setLayoutX(50);
         fnameField1.setLayoutY(89);
         fnameField1.setMinWidth(200);
@@ -54,7 +50,7 @@ public class RegisterNew extends Application {
         lname.setLayoutX(50);
         lname.setLayoutY(115);
         
-        TextField lnameField1 = new TextField();
+        final TextField lnameField1 = new TextField();
         lnameField1.setLayoutX(50);
         lnameField1.setLayoutY(131);
         lnameField1.setMinWidth(200);
@@ -64,13 +60,13 @@ public class RegisterNew extends Application {
         gname.setLayoutY(157);
         
         final ToggleGroup ggroup = new ToggleGroup();
-        RadioButton gbm = new RadioButton("Male");
+        final RadioButton gbm = new RadioButton("Male");
         gbm.setToggleGroup(ggroup);
         gbm.setSelected(true);
         gbm.setLayoutX(70);
         gbm.setLayoutY(173);
 
-        RadioButton gbf = new RadioButton("Female");
+        final RadioButton gbf = new RadioButton("Female");
         gbf.setToggleGroup(ggroup);
         gbf.setLayoutX(155);
         gbf.setLayoutY(173);
@@ -79,7 +75,7 @@ public class RegisterNew extends Application {
         bday.setLayoutX(50);
         bday.setLayoutY(199);
         
-        TextField bdayField = new TextField();
+        final TextField bdayField = new TextField();
         bdayField.setLayoutX(50);
         bdayField.setLayoutY(215);
         bdayField.setMinWidth(200);
@@ -89,7 +85,7 @@ public class RegisterNew extends Application {
         country.setLayoutY(241);
         
         Register register = new Register();
-        ChoiceBox countryc = new ChoiceBox(FXCollections.observableArrayList(register.login()));
+        final ChoiceBox countryc = new ChoiceBox(FXCollections.observableArrayList(register.countrylist()));
         countryc.setLayoutX(122);
         countryc.setLayoutY(257);
         
@@ -97,7 +93,7 @@ public class RegisterNew extends Application {
         city.setLayoutX(50);
         city.setLayoutY(283);
         
-        TextField cityField = new TextField();
+        final TextField cityField = new TextField();
         cityField.setLayoutX(50);
         cityField.setLayoutY(299);
         cityField.setMinWidth(200);
@@ -129,6 +125,19 @@ public class RegisterNew extends Application {
                }else{
                   //errmessage.setText("");
                   System.out.println("Registriert!");
+                  Map<String, String> userdata = new HashMap();
+                  userdata.put("name", textField.getText());
+                  userdata.put("fname", fnameField1.getText());
+                  userdata.put("lname", lnameField1.getText());
+                  userdata.put("city", cityField.getText());
+                  if (gbm.isSelected()){
+                      userdata.put("gender", "Male");
+                  } else {
+                      userdata.put("gender", "Female");
+                  }
+                  userdata.put("bday", bdayField.getText());
+                  userdata.put("country", countryc.getValue().toString());;
+                  register.createUser(userdata);
                }
             }
         });

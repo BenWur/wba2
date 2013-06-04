@@ -1,7 +1,5 @@
 package minirestwebservice;
 
-
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.math.BigInteger;
@@ -15,7 +13,6 @@ import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-
 
 import userlist.ObjectFactory;
 import userlist.User;
