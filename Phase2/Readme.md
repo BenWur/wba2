@@ -141,32 +141,52 @@ Zentral bei den Beiträgen des Events ist natürlich das "Soziale". Hierbei sind
 
 
 
-##Ressourcen und die Semantik der HTTP-Operationen
-Wir haben uns dafür entschieden unsere Daten auf drei Typen auszulagern. Jeder Ticker selbst wird in einem Event gespeichert. Der zugehörige "Content" also die Beträge des Admins und die Kommentare anderer User werden dabei in eine zweite Datei gespeichert.
+##Ressourcen ,die Semantik der HTTP-Operationen
+Die Daten sollten auf drei Typen ausgelagert werden. Jeder Ticker selbst wird in einem Event gespeichert. Der zugehörige "Content" also die Beträge des Admins und die Kommentare anderer User werden dabei in eine zweite Datei gespeichert. Die Aufteilung von Content und Event ist sinnvoll, da der Content dynamische Daten enthält. Diese werden oft verändert, wobei das Event selbst mit den zugehörigen Informationen meist einmal angelegt und nicht mehr verändert wird.
 Die Profile unserer Nutzer werden in einer dritten Datei gespeichert.
 Bei uns entstehen somit drei Ressourcen - Event, Userprofiles, Eventcontent. Aus diesen Ressourcen ergeben sich folgende Operationen:
 
 ####Admin (Ersteller eines Events):
-Ein Admin hat andere Rechte bzw. andere Funktionen als ein normaler Nutzer, der auf einen Ticker zugreift. Er hat die volle Kontrolle, kann Spielstände aktualisieren, Beiträge löschen und überhaupt den Ticker erst mit wichtigen Informationen - den Beiträgen - füllen.  
+Ein Admin hat andere Rechte bzw. andere Funktionen als ein normaler Nutzer, der auf einen Ticker zugreift. Er hat die volle Kontrolle, kann Spielstände aktualisieren, Beiträge löschen und überhaupt den Ticker erst mit wichtigen Informationen - den Beiträgen - füllen. Dem Admin stehen zusätzlich die Funktionen der User zur Verfügung.
 
 | Operation         | Beschreibung |
 | ----------------- | ------------ |
-| `POST /Events`      | Admin erstellt ein Event. |
-| `PUT /Events/$eID`      | Ändern bzw aktualisieren eines Events. |
-| `POST /Events/$eID/EventContent`      | Erstellt einen Beitrag im Ticker. |
-| `DELETE /Events/$eID`      | Löscht ein als Admin erstelltes Event. |
-| `DELETE /Events/$eID/EventContent/$cID`      | Löscht Kommentare in seinem Event. |
-| `GET /Userprofiles/$uID`      | Kann sich eigenes oder fremde Userprofiles anzeigen lassen. |
+| `POST /events`      | Admin erstellt ein Event. |
+| `PUT /events/$eID`      | Ändern bzw aktualisieren eines Events. |
+| `POST /events/$eID/EventContent`      | Erstellt einen Beitrag im Ticker. |
+| `DELETE /events/$eID`      | Löscht ein als Admin erstelltes Event. |
+| `DELETE /events/$eID/EventContent/beitrag/$tBID`      | Löscht Beitrag in seinem Event. |
 
 ####User:
+Als User hat man die Standard Funktionen. Die URIs wurden wie folgt gewählt
 | Operation         | Beschreibung |
 | ----------------- | ------------ |
-| `GET /Events`      | Bekommt Events zurück. |
-| `GET /Events/$eID`      | Bekommt alle Informationen eines Events. |
-| `POST /Events/$eID/EventContent`      | Erstellt einen Kommentar zu einem Beitrag im Ticker. |
-| `DELETE /Events/$eID/EventContent/$cID`      | Löscht ein als User erstellten Kommentar. |
-| `GET /Userprofiles/$uID`      | Kann sich eigenes oder fremde Userprofiles anzeigen lassen. |
-| `GET /Userprofiles`      | Gibt alle User wieder. |
-| `PUT /Userprofiles/$uID`      | Kann sein eigenes Userprofiles bearbeiten. |
+| `GET /events`      | Bekommt Events zurück. |
+| `GET /events/$eID`      | Bekommt alle Informationen eines Events. |
+| `GET /events/$eID/eventcontent`      | Bekommt gesammten Content eines Events. |
+| `POST /events/$eID/eventcontent/beitrag/$tBID`      | Erstellt einen Kommentar zu einem Beitrag im Ticker. |
+| `GET /users/$uID`      | Kann sich eigenes oder fremde Userprofiles anzeigen lassen. |
+| `GET /users`      | Gibt alle User wieder. |
+| `PUT /users/$uID`      | Kann sein eigenes Userprofiles bearbeiten. |
 
+##RESTful Webservice
 
+####Implementierung der Operationen
+Um auf die xml-Daten zuzugreifen wird Marshalling und Unmarshalling verwendet. Marshalling dient dazu aus einer angelegten Datei, xml-Daten auszulesen. Danach können Daten angehängt, verändert oder gelöscht werden und anschließend durchs Unmarshalling wieder abgespeichert werden. 
+
+####PathParams und QueryParams
+Mit PathParams kann man auf einen bestimmten Teil der Daten zugreifen. So ist es möglich ein bestimmtes Event bzw einen bestimmten User aufzurufen. Mit QueryParams lassen sich Ergebnisse filtern. Sinnvolle Filterung wäre z.B. User nach Namen oder Land zu filtern. Genau so macht es Sinn die Events nach Namen des Events zu filtern. Als Beispiel wäre ein Nutzer der alle Spiele von Bayern haben möchte und als Filter den Namen Bayern eingibt.
+
+##Konzeption + XMPP Server einrichten
+####Leafs (Topics)
+Jedes Event ist Abonnierbar. Sobald man das Event joint bekommt man als erstes alle Nachrichten als GET. Wenn es dann aufgerufen ist, werden neue Benachrichtigungen per asynchrone Benachrichtungen verschickt. Ein User kann selbst neue Kommentare schreiben oder von anderen welche zugestellt bekommen.
+####Publisher 
+Im Grunde benommen ist jeder Publisher, der sich in einem Event befindet. Als User kann man Kommentare erstellen und diese werden asynchron an andere gepusht. Der Admnis selbst ist natürlich auch Publisher. Er erstellt Beiträge zu seinem Event welche alle zugestellt bekommen.
+####Subscriber 
+Genauso wie jeder Publisher sein kann, ist auch jeder Subscriber der sich in einem Event befindet. Sobald man einem Event beitritt kriegt man alle neuen Beiträge und Kommentare asynchron.
+####Zu übertragene Daten
+Die übertragbaren Daten sind die Beiträge eines Admins und die Kommentare der User. Im Grunde genommen ist der Ticker nicht viel anders als ein Chat mit besonderer Formatierung und Featuers wie Aktueller Stand und Bewertungen.
+
+##XMPP - Client
+
+##Client - Entwicklung
