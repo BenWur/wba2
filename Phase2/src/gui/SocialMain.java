@@ -1,4 +1,4 @@
-package minirestwebservice;
+package gui;
 
 
 import javafx.application.Application;
@@ -24,22 +24,25 @@ public class SocialMain extends Application {
         AnchorPane root = new AnchorPane();
         primaryStage.setScene(new Scene(root));
         TabPane tabPane = new TabPane();
-        tabPane.setPrefSize(480, 320);
+        tabPane.setPrefSize(450, 380);
         tabPane.setSide(Side.TOP);
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+        
+        
         final Tab tab1 = new Tab();
         tab1.setText("Live Tickers");
+        
+        
         final Tab tab2 = new Tab();
         tab2.setText("My Profile");
-        Button create = new Button("heyhp");
-        create.setMinWidth(50);
-        Button create2 = new Button("heyhp");
-        create2.setMinWidth(50);
-        Button create3 = new Button("heyhp");
+        
+        Button joinTicker = new Button("Join");
+        joinTicker.setMinWidth(50);
+        Button create3 = new Button("Create Ticker");
         create3.setMinWidth(50);
-        Button create4 = new Button("heyhp");
+        Button create4 = new Button("Exit");
         create4.setMinWidth(50);
-        Label ticker = new Label("Choose the ticker you'd like to follow");
+        Label tickertext = new Label("Choose the ticker you'd like to join");
         ListView ticklist = new ListView();
         
         final GridPane geoGrid = new GridPane();
@@ -47,19 +50,14 @@ public class SocialMain extends Application {
         geoGrid.setVgap(5); // Abstand oben/unten
         
         
-        geoGrid.add(ticker, 1, 1);
+        geoGrid.add(tickertext, 1, 1);
         geoGrid.add(ticklist, 1, 2);
-         geoGrid.add(create2, 2, 2);
-          geoGrid.add(create3, 3, 3);
-          geoGrid.add(create4, 4, 4);
+        geoGrid.add(joinTicker, 1, 3);
+        geoGrid.add(create3, 2, 3);
+        geoGrid.add(create4, 12, 3);
         
-        tab2.setContent(geoGrid);
+        tab1.setContent(geoGrid);
 
-        
-        //tab2.setContent(create);
-        
-        
-        
         
         tabPane.getTabs().addAll(tab1, tab2);
         root.getChildren().add(tabPane);
