@@ -1,4 +1,4 @@
-package minirestwebservice;
+package gui;
 
 import java.util.HashMap;
 import java.util.Map;
