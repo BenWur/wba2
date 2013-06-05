@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package minirestwebservice;
 
 import javafx.application.Application;
@@ -15,10 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-/**
- *
- * @author Dario
- */
+
+
 public class Login extends Application {
 
     @Override
@@ -69,7 +63,7 @@ public class Login extends Application {
                Register register = new Register();
                errmessage.setText("");
                passField1.clear();
-               if (register.registered(textField.getText())) {
+               if (register.login(textField.getText())) {
                    System.out.println("Eingeloggt!");
                }else{
                   errmessage.setText("Your username or password is incorrect!");
