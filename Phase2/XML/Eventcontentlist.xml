@@ -35,5 +35,27 @@
 		</tickerBeitrag>
 		
 	</eventcontent>
+	
+	<eventcontent eventID="2">
+	
+		<aktuellerStand>
+			<heim>2</heim>
+			<gast>1</gast>
+		</aktuellerStand>
+	
+		<tickerBeitrag typ="Tor" zeit="08:45:00" tickerBeitragID="1">
+		
+			<text>Eine Granate von Robbinho</text>
+			
+			<kommentar user="Holly92">
+				<kommentarText>lollo</kommentarText>
+			</kommentar>
+			<kommentar user="DrDare">
+				<kommentarText>haha...lollo hast recht!</kommentarText>
+			</kommentar>
+			
+		</tickerBeitrag>
+		
+	</eventcontent>
 
 </eventcontentlist>
