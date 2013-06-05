@@ -15,5 +15,18 @@
 		<eventbewertung>4</eventbewertung>
 		
 	</event>
+	
+	<event userID="2"  eventID="2">
+		
+		<eventname>Bayern - Dortmund</eventname>
+		<eventbeschreibung>DrDare is everywhere, bitches</eventbeschreibung>
+		<username>DrDare</username>
+		<eventtyp>Football</eventtyp>
+		<eventstart>2013-05-28T08:45:00+02:00</eventstart>
+		<eventdauer>PT110M</eventdauer>
+		<eventbewertung>9</eventbewertung>
+		
+	</event>
+	
 </eventlist>
 	
