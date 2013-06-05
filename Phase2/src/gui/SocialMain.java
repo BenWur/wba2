@@ -2,6 +2,8 @@ package gui;
 
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Side;
@@ -42,6 +44,11 @@ public class SocialMain extends Application {
         final Tab tab2 = new Tab();
         tab2.setText("My Profile");
         
+        final ListView<String> ticklist = new ListView<String>();
+        TickerEvents tevents = new TickerEvents();
+        ObservableList<String> items = FXCollections.observableArrayList(tevents.eventList());
+        ticklist.setItems(items);
+        
         Button joinTicker = new Button("Join");
         joinTicker.setMinWidth(50);
         joinTicker.setOnAction(new EventHandler<ActionEvent>() {
@@ -58,11 +65,20 @@ public class SocialMain extends Application {
                  
                  Button sendchat = new Button("Send");
                  sendchat.setMinWidth(50);
+                 sendchat.setOnAction(new EventHandler<ActionEvent>() {
+                 @Override
+                 public void handle(ActionEvent event) {
+                 System.out.println("ahasdhasd");
+                 }
+                 });
                  
                  geoGridk.add(sendchat, 12, 12);
                  k.setContent(geoGridk);
                  
-                 k.setText("Game"+i);
+                 
+                 k.setText(ticklist.getSelectionModel().getSelectedItem());
+                 System.out.println(ticklist.getSelectionModel().getSelectedItem());
+                 System.out.println("hoho");
                i++;
                }
             }
@@ -73,9 +89,8 @@ public class SocialMain extends Application {
         Button exitmain = new Button("Exit");
         exitmain.setMinWidth(50);
         Label tickertext = new Label("Choose the ticker you'd like to join");
-        ListView ticklist = new ListView();
-       
         
+      
         Button test = new Button("Create Ticker");
         create.setMinWidth(50);
         
