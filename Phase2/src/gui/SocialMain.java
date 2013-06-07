@@ -2,6 +2,8 @@ package gui;
 
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,6 +21,9 @@ import javafx.stage.Stage;
 
 
 public class SocialMain extends Application {
+    private Tab tab1;
+    private Tab tab2;
+    private Tab k;
     
     @Override
     public void start(final Stage primaryStage) {
@@ -26,11 +31,20 @@ public class SocialMain extends Application {
         primaryStage.setTitle("SocialTicker");
         
         AnchorPane root = new AnchorPane();
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setScene(new Scene(root, 450, 380));
         final TabPane tabPane = new TabPane();
         tabPane.setPrefSize(460, 380);
         tabPane.setSide(Side.TOP);
-        tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+        tabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+          @Override public void changed(ObservableValue<? extends Tab> tab, Tab oldTab, Tab newTab) {
+           if (newTab.equals(tab1) || newTab.equals(tab2)) {
+                tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+          } else { 
+               tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.SELECTED_TAB);
+          }
+          }
+        });
+
         final GridPane geoGrid = new GridPane();
         geoGrid.setHgap(5); // Abstand links/rechts
         geoGrid.setVgap(5); // Abstand oben/unten
@@ -38,10 +52,10 @@ public class SocialMain extends Application {
         geoGrid2.setHgap(5); // Abstand links/rechts
         geoGrid2.setVgap(5); // Abstand oben/unten
         
-        final Tab tab1 = new Tab();
+        tab1 = new Tab();
         tab1.setText("Live Tickers");
         
-        final Tab tab2 = new Tab();
+        tab2 = new Tab();
         tab2.setText("My Profile");
         
         final ListView<String> ticklist = new ListView<String>();
@@ -54,11 +68,17 @@ public class SocialMain extends Application {
         joinTicker.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-               if(tabPane.getTabs().size() < 6){
+             
+                for (Tab opentab:tabPane.getTabs() ) {
+                   if (opentab.getText().equals(ticklist.getSelectionModel().getSelectedItem())){
+                      return;
+                   }
+                }
+               if (tabPane.getTabs().size() < 6 && !ticklist.getSelectionModel().isEmpty()) {
                  int i = tabPane.getTabs().size();
-                 Tab k = new Tab();
+                 k = new Tab();
+                 k.setText(ticklist.getSelectionModel().getSelectedItem());
                  tabPane.getTabs().add(i, k);
-                 tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.SELECTED_TAB);
                  final GridPane geoGridk = new GridPane();
                  geoGridk.setHgap(5); // Abstand links/rechts
                  geoGridk.setVgap(5); // Abstand oben/unten
@@ -68,17 +88,12 @@ public class SocialMain extends Application {
                  sendchat.setOnAction(new EventHandler<ActionEvent>() {
                  @Override
                  public void handle(ActionEvent event) {
-                 System.out.println("ahasdhasd");
                  }
-                 });
+                });
                  
                  geoGridk.add(sendchat, 12, 12);
                  k.setContent(geoGridk);
                  
-                 
-                 k.setText(ticklist.getSelectionModel().getSelectedItem());
-                 System.out.println(ticklist.getSelectionModel().getSelectedItem());
-                 System.out.println("hoho");
                i++;
                }
             }
@@ -102,7 +117,7 @@ public class SocialMain extends Application {
         geoGrid.add(exitmain, 12, 3);
         geoGrid2.add(test, 1, 1);
         
-        
+   
         tab1.setContent(geoGrid);
         tab2.setContent(geoGrid2);
         
