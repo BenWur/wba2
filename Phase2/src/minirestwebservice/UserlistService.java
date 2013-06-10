@@ -1,20 +1,13 @@
 package minirestwebservice;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.math.BigInteger;
-import java.net.URI;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 
-import userlist.ObjectFactory;
 import userlist.User;
 import userlist.Userlist;
 
@@ -24,19 +17,16 @@ public class UserlistService
 	
    @GET 
    @Produces( MediaType.APPLICATION_XML )
-   public Userlist getAllUsers(		@QueryParam("name") String name,
+   public Response getAllUsers(		@QueryParam("name") String name,
 		   							@QueryParam("land") String land ) throws Exception
    {
-	    ObjectFactory ob = new ObjectFactory();
-	    Userlist users=ob.createUserlist();
-	    JAXBContext jc = JAXBContext.newInstance(Userlist.class);
-		//unmarshaller zum lesen 
-	    Unmarshaller um = jc.createUnmarshaller();
-	    users = (Userlist) um.unmarshal(new File("XML/Userlist.xml"));
-	    List<User> userliste = users.getUser();
+	    
+	    DataHandlerUser handle = new DataHandlerUser();	    
+	    Userlist userliste = (Userlist) handle.getUsers();
+	    List<User> users = userliste.getUser();
 	    
 	    if(name!=null){
-	    	for (Iterator<User> iter = userliste.iterator(); iter.hasNext(); ) {
+	    	for (Iterator<User> iter = users.iterator(); iter.hasNext(); ) {
 		    	User us = iter.next();
 		    	if(!us.getUsername().toLowerCase().startsWith(name.toLowerCase())){
 			    	iter.remove();
@@ -45,7 +35,7 @@ public class UserlistService
 	    }
 	    
 	    if(land!=null){
-	    	for (Iterator<User> iter = userliste.iterator(); iter.hasNext(); ) {
+	    	for (Iterator<User> iter = users.iterator(); iter.hasNext(); ) {
 		    	User us = iter.next();
 		    	if(!us.getLand().toString().toLowerCase().startsWith(land.toLowerCase())){
 			    	iter.remove();
@@ -53,7 +43,7 @@ public class UserlistService
 		    }
 	    }
 	    
-      return users; 
+	   return Response.status(200).entity(userliste).build() ; //Gibt Meldung 200->"ok" zurück
    }
    
    @GET 
@@ -62,48 +52,30 @@ public class UserlistService
    public Response getOneUser(@PathParam("userID") int i) throws Exception
    {
 	   
-	    JAXBContext jc = JAXBContext.newInstance(Userlist.class);
-		//unmarshaller zum lesen 
-	    Unmarshaller um = jc.createUnmarshaller();
-	    
-	    Userlist users = (Userlist) um.unmarshal(new FileInputStream("XML/Userlist.xml"));
-	    
-	    
-      return Response.status(200).entity(users.getUser().get(i-1)).build() ; //Gibt Meldung 200->"ok" zurück
+	    DataHandlerUser handle = new DataHandlerUser();	    
+      return Response.status(200).entity(handle.getUserbyID(i)).build() ; //Gibt Meldung 200->"ok" zurück
    }
    
    @POST 
    @Consumes( MediaType.APPLICATION_XML )
    public Response postNewUser( User user ) throws Exception
    {
-	   
-	    JAXBContext jc = JAXBContext.newInstance(Userlist.class);
-	    //unmarshaller zum lesen 
-	    Unmarshaller um = jc.createUnmarshaller();
-	    //marshaller zum schreiben
-	    Marshaller marshaller =jc.createMarshaller();
-	    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 	    
-	    Userlist users = (Userlist) um.unmarshal(new FileInputStream("XML/Userlist.xml"));
-	    
+	    DataHandlerUser handle = new DataHandlerUser();	    
+	    Userlist users = (Userlist) handle.getUsers();
 	    List<User> userliste = users.getUser();
 	    
-	    BigInteger ID = BigInteger.ZERO ;
+	    
+	    BigInteger id = BigInteger.ZERO ;
 		for(User us : userliste ){
 			
-	    	if(us.getUserID().compareTo(ID)==1){
-	    		ID = us.getUserID();
+	    	if(us.getUserID().compareTo(id)==1){
+	    		id = us.getUserID();
 	    	}
 	    }
-		user.setUserID(ID.add(BigInteger.ONE));
-	    
-	 	userliste.add( user );
-	    
-	    marshaller.marshal(users, new File("XML/Userlist.xml"));
-	    
-	    
-      URI location = URI.create( "http://localhost:4434/users/" + user.getUserID().toString() );
-      return Response.created(location ).build(); 
+		user.setUserID(id.add(BigInteger.ONE));
+		
+	    return Response.created(handle.writeNewUser(user) ).build(); 
    }
    
    @PUT
@@ -111,32 +83,9 @@ public class UserlistService
    @Consumes( MediaType.APPLICATION_XML )
    public Response changeUser( @PathParam("userID") int id, User user  ) throws Exception
    {
-	   
-	    JAXBContext jc = JAXBContext.newInstance(Userlist.class);
-	    //unmarshaller zum lesen 
-	    Unmarshaller um = jc.createUnmarshaller();
-	    //marshaller zum schreiben
-	    Marshaller marshaller =jc.createMarshaller();
-	    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-	    
-	    Userlist users = (Userlist) um.unmarshal(new FileInputStream("XML/userlist.xml"));
-	    
-	    
-	    List<User> usersliste = users.getUser();
-	    
-	    int i=0;;
-	    for(User us : usersliste ){
-	    	if(us.getUserID().equals(id)){
-	    		usersliste.set(i, user);
-	    	}
-	    	i++;
-	    }
-
-	    marshaller.marshal(users, new File("XML/Userlist.xml"));
-	    
-	    
-      URI location = URI.create( "http://localhost:4434/users/" + user.getUserID().toString() );
-      return Response.created(location ).build();  
+	   DataHandlerUser handle = new DataHandlerUser();	    
+      
+	   return Response.created(handle.writeUser(user,id) ).build();  
    }
    
    @DELETE
@@ -144,30 +93,10 @@ public class UserlistService
    public Response deleteUser( @PathParam("userID") int id  ) throws Exception
    {
 	   
-	    JAXBContext jc = JAXBContext.newInstance(Userlist.class);
-	    //unmarshaller zum lesen 
-	    Unmarshaller um = jc.createUnmarshaller();
-	    //marshaller zum schreiben
-	    Marshaller marshaller =jc.createMarshaller();
-	    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+	   DataHandlerUser handle = new DataHandlerUser();	      
+	   handle.delete(id);
 	    
-	    Userlist users = (Userlist) um.unmarshal(new FileInputStream("XML/Userlist.xml"));
-	    
-	    
-	    List<User> usersliste = users.getUser();
-	    
-	    int i=0;
-	    for(User us : usersliste ){
-	    	if(us.getUserID().equals(id)){
-	    		usersliste.remove(i);
-	    	}
-	    	i++;
-	    }
-
-	    marshaller.marshal(users, new File("XML/Userlist.xml"));
-	    
-	    
-      return Response.noContent().build() ; //Gibt Meldung 204->"ok" zurück
+	   return Response.noContent().build() ; //Gibt Meldung 204->"ok" zurück
    }
    
 }

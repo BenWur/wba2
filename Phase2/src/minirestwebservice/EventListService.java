@@ -1,21 +1,12 @@
 package minirestwebservice;
 
-
-import java.io.File;
 import java.math.BigInteger;
-import java.net.URI;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-
-import eventcontentlist.Eventcontent;
-import eventcontentlist.Eventcontentlist;
 import eventlist.Event;
 import eventlist.Eventlist;
 
@@ -26,12 +17,10 @@ public class EventListService
 	
    @GET 
    @Produces( MediaType.APPLICATION_XML )
-   public Eventlist getAllEvents( @QueryParam("name") String name ) throws Exception
+   public Response getAllEvents( @QueryParam("name") String name ) throws Exception
    {
-	   JAXBContext jc = JAXBContext.newInstance(Eventlist.class);
-		//unmarshaller zum lesen 
-	    Unmarshaller um = jc.createUnmarshaller();
-	    Eventlist events = (Eventlist) um.unmarshal(new File("XML/Eventlist.xml"));
+	    DataHandlerEvent handle = new DataHandlerEvent();	    
+	    Eventlist events = (Eventlist) handle.getEvents();
 	    List<Event> eventliste = events.getEvent();
 	    
 	    if(name!=null){
@@ -43,21 +32,16 @@ public class EventListService
 		    }
 	    }
 	    
-      return events; 
+	    return Response.status(200).entity(events).build() ; 
    }
    
    @GET 
    @Path( "/{eventID}" )
    @Produces( MediaType.APPLICATION_XML )
-   public Event getOneEvent(@PathParam("eventID") int i) throws Exception
-   {
-	    
-	    JAXBContext jc = JAXBContext.newInstance(Eventlist.class);
-		//unmarshaller zum lesen 
-	    Unmarshaller um = jc.createUnmarshaller();
-	    Eventlist event = (Eventlist) um.unmarshal(new File("XML/Eventlist.xml"));
-	    
-      return event.getEvent().get(i-1); 
+   public Response getOneEvent(@PathParam("eventID") int i) throws Exception
+   { 
+	   DataHandlerEvent handle = new DataHandlerEvent();	    
+	   return Response.status(200).entity(handle.getEventbyID(i)).build() ; //Gibt Meldung 200->"ok" zurück
    }
    
    @POST 
@@ -65,33 +49,21 @@ public class EventListService
    public Response postNewEvent( Event event ) throws Exception
    {
 	   
-	    JAXBContext jc = JAXBContext.newInstance(Eventlist.class);
-	    //unmarshaller zum lesen 
-	    Unmarshaller um = jc.createUnmarshaller();
-	    //marshaller zum schreiben
-	    Marshaller marshaller =jc.createMarshaller();
-	    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-	    
-	    Eventlist events = (Eventlist) um.unmarshal(new File("XML/Eventlist.xml"));
-	    
+	    DataHandlerEvent handle = new DataHandlerEvent();	    
+	    Eventlist events = (Eventlist) handle.getEvents();
 	    List<Event> eventliste = events.getEvent();
 	    
-	    BigInteger ID = BigInteger.ZERO ;
+	    
+	    BigInteger id = BigInteger.ZERO ;
 		for(Event ev : eventliste ){
 			
-	    	if(ev.getEventID().compareTo(ID)==1){
-	    		ID = ev.getEventID();
+	    	if(ev.getEventID().compareTo(id)==1){
+	    		id = ev.getEventID();
 	    	}
 	    }
-		event.setEventID(ID.add(BigInteger.ONE));
-	    
-	 	eventliste.add( event );
-	    
-	    marshaller.marshal(events, new File("XML/Eventlist.xml"));
-	    
-	    
-      URI location = URI.create( "http://localhost:4434/events/" + event.getEventID().toString() );
-      return Response.created(location ).build(); 
+		event.setEventID(id.add(BigInteger.ONE));
+		
+	    return Response.created(handle.writeNewEvent(event) ).build();
    }
    
    @PUT
@@ -99,71 +71,18 @@ public class EventListService
    @Consumes( MediaType.APPLICATION_XML )
    public Response changeEvent( @PathParam("eventID") int id, Event event  ) throws Exception
    {
-	   
-	    JAXBContext jc = JAXBContext.newInstance(Eventlist.class);
-	    //unmarshaller zum lesen 
-	    Unmarshaller um = jc.createUnmarshaller();
-	    //marshaller zum schreiben
-	    Marshaller marshaller =jc.createMarshaller();
-	    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-	    
-	    Eventlist events = (Eventlist) um.unmarshal(new File("XML/Eventlist.xml"));
-	    
-	    
-	    List<Event> eventliste = events.getEvent();
-	    
-	    int i=0;
-	    for(Event ev : eventliste ){
-	    	if(ev.getEventID().equals(id)){
-	    		eventliste.set(i, event);
-	    	}
-	    	i++;
-	    }
-
-	    marshaller.marshal(events, new File("XML/Eventlist.xml"));
-	    
-	    
-      URI location = URI.create( "http://localhost:4434/events/" + event.getEventID().toString() );
-      return Response.created(location ).build();  
+	   DataHandlerEvent handle = new DataHandlerEvent();	    
+	   return Response.created(handle.writeEvent(event,id) ).build();   
    }
    
    @DELETE
    @Path( "/{eventID}" )
    public Response deleteEvent( @PathParam("eventID") int id  ) throws Exception
    {
-	   
-	    JAXBContext jc = JAXBContext.newInstance(Eventlist.class);
-	    //unmarshaller zum lesen 
-	    Unmarshaller um = jc.createUnmarshaller();
-	    //marshaller zum schreiben
-	    Marshaller marshaller =jc.createMarshaller();
-	    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+	   DataHandlerEvent handle = new DataHandlerEvent();	      
+	   handle.delete(id);
 	    
-	    Eventlist events = (Eventlist) um.unmarshal(new File("XML/Eventlist.xml"));
-	    Eventcontentlist eventcontents = (Eventcontentlist) um.unmarshal(new File("XML/Eventcontentlist.xml"));
-	    
-	    List<Event> eventliste = events.getEvent();
-	    
-	    for (Iterator<Event> it = eventliste.iterator(); it.hasNext(); ) {
-	    	Event ev = it.next();
-	    	if(ev.getEventID().equals(id)){
-		    	it.remove();
-	    	}
-	    }
-	    
-	    List<Eventcontent> eventcontentliste = eventcontents.getEventcontent();
-	    
-	    for (Iterator<Eventcontent> iter = eventcontentliste.iterator(); iter.hasNext(); ) {
-	    	Eventcontent evc = iter.next();
-	    	if(evc.getEventID().equals(id)){
-		    	iter.remove();
-	    	}
-	    }
-
-	    marshaller.marshal(events, new File("XML/Eventlist.xml"));
-	    marshaller.marshal(events, new File("XML/Eventcontentlist.xml"));
-	    
-      return Response.noContent().build() ; //Gibt Meldung 204->"ok" zurück
+	   return Response.noContent().build() ; //Gibt Meldung 204->"ok" zurück
    }
    
 }
