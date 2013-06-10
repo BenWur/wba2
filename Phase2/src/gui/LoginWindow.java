@@ -13,7 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
-public class Login extends Application {
+public class LoginWindow extends Application {
 
     @Override
     public void start(final Stage primaryStage) {
@@ -48,7 +48,7 @@ public class Login extends Application {
         reg.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                RegisterNew newuser = new RegisterNew();
+                RegisterNewWindow newuser = new RegisterNewWindow();
                 newuser.start(primaryStage); //oeffnet neue stage
             }
         });

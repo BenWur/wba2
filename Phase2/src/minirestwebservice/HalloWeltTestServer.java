@@ -12,7 +12,11 @@ public class HalloWeltTestServer
       SelectorThread srv = GrizzlyServerFactory.create( url );
 
       System.out.println( "URL: " + url );
-      Thread.sleep( 1000 * 60 * 10 ); // 10 Minuten
+      
+      System.out.println( "Enter to stop server" );
+      System.in.read();
       srv.stopEndpoint();
+     System.out.println( "Server stopped" );
+
    }
 }

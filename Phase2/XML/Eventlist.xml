@@ -10,8 +10,8 @@
 		<eventbeschreibung>Holly's Awesome Live Ticker. Join the show!</eventbeschreibung>
 		<username>Holly92</username>
 		<eventtyp>Football</eventtyp>
-		<eventstart>2013-05-12T08:45:00+02:00</eventstart>
-		<eventdauer>PT110M</eventdauer>
+		<eventstart>08:45:00+02:00</eventstart>
+		<eventdauer>10:45:00+02:00</eventdauer>
 		<eventbewertung>4</eventbewertung>
 		
 	</event>
@@ -22,8 +22,8 @@
 		<eventbeschreibung>DrDare is everywhere, bitches</eventbeschreibung>
 		<username>DrDare</username>
 		<eventtyp>Football</eventtyp>
-		<eventstart>2013-05-28T08:45:00+02:00</eventstart>
-		<eventdauer>PT110M</eventdauer>
+		<eventstart>08:45:00</eventstart>
+		<eventdauer>22:45:00</eventdauer>
 		<eventbewertung>9</eventbewertung>
 		
 	</event>

@@ -18,7 +18,7 @@ public class Register
        WebResource wrs = Client.create().resource(url);
        
        Userlist cr = wrs.accept("application/xml").get(Userlist.class);
-       String[] array = new String[cr.getUser().size()];
+       //String[] array = new String[cr.getUser().size()];
         for (int i = 0; i < cr.getUser().size(); i++){
               if (cr.getUser().get(i).getUsername().equals(loginuser)) {
                   return true;
@@ -37,7 +37,7 @@ public class Register
        WebResource wrs = Client.create().resource(url);
        
        Userlist cr = wrs.accept("application/xml").get(Userlist.class);
-       String[] array = new String[cr.getUser().size()];
+       //String[] array = new String[cr.getUser().size()];
         for (int i = 0; i < cr.getUser().size(); i++){
               if (cr.getUser().get(i).getUsername().equals(loginuser)) {
                   return true;

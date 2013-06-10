@@ -18,7 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
-public class RegisterNew extends Application {
+public class RegisterNewWindow extends Application {
 
     @Override
     public void start(final Stage primaryStage) {
@@ -105,7 +105,7 @@ public class RegisterNew extends Application {
         backbtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Login backlogin = new Login();
+                LoginWindow backlogin = new LoginWindow();
                 backlogin.start(primaryStage);
             }
         });

@@ -17,14 +17,14 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="eventname"/>
-        <xs:element ref="eventbeschreibung"/>
-        <xs:element ref="username"/>
-        <xs:element ref="eventtyp"/>
+        <xs:element ref="eventbeschreibung" minOccurs="0"/>
+        <xs:element ref="username" minOccurs="0"/>
+        <xs:element ref="eventtyp" minOccurs="0"/>
        <!-- Start des Events, automatisch übergeben -->
-        <xs:element type="xs:dateTime" name="eventstart"/>
+        <xs:element type="xs:time" name="eventstart" minOccurs="0"/>
        <!-- Dauer des Events, automatisch übergeben -->
-        <xs:element type="xs:duration" name="eventdauer"/>
-        <xs:element ref="eventbewertung"/>
+         <xs:element type="xs:time" name="eventdauer" minOccurs="0"/>
+        <xs:element ref="eventbewertung" minOccurs="0"/>
       </xs:sequence>
      <!-- Einzigartige userID, automatisch bei Registrierung übergeben -->
       <xs:attribute type="xs:decimal" name="userID"/>
@@ -49,7 +49,7 @@
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
 				<xs:minLength value="5"/>
-				<xs:maxLength value="50"/>
+				<xs:maxLength value="100"/>
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:element>
@@ -59,7 +59,7 @@
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
 				<xs:minLength value="3"/>
-				<xs:maxLength value="120"/>
+				<xs:maxLength value="250"/>
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:element>		

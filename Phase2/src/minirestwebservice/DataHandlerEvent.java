@@ -104,7 +104,7 @@ public class DataHandlerEvent {
 
 	private void savePersistent() {
 		try {
-			marshaller.marshal(events, new File("XML/Eventlist.xml"));
+			marshaller.marshal(this.events, new File("XML/Eventlist.xml"));
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

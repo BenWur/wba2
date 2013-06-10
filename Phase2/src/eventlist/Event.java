@@ -2,7 +2,7 @@
 // Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.2.6 generiert 
 // Siehe <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
-// Generiert: 2013.05.27 um 12:54:53 PM CEST 
+// Generiert: 2013.06.10 um 02:10:18 PM CEST 
 //
 
 
@@ -17,7 +17,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.Duration;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
@@ -32,12 +31,12 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element ref="{}eventname"/>
- *         &lt;element ref="{}eventbeschreibung"/>
- *         &lt;element ref="{}username"/>
- *         &lt;element ref="{}eventtyp"/>
- *         &lt;element name="eventstart" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
- *         &lt;element name="eventdauer" type="{http://www.w3.org/2001/XMLSchema}duration"/>
- *         &lt;element ref="{}eventbewertung"/>
+ *         &lt;element ref="{}eventbeschreibung" minOccurs="0"/>
+ *         &lt;element ref="{}username" minOccurs="0"/>
+ *         &lt;element ref="{}eventtyp" minOccurs="0"/>
+ *         &lt;element name="eventstart" type="{http://www.w3.org/2001/XMLSchema}time" minOccurs="0"/>
+ *         &lt;element name="eventdauer" type="{http://www.w3.org/2001/XMLSchema}time" minOccurs="0"/>
+ *         &lt;element ref="{}eventbewertung" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="userID" type="{http://www.w3.org/2001/XMLSchema}decimal" />
  *       &lt;attribute name="eventID" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" />
@@ -63,18 +62,15 @@ public class Event {
 
     @XmlElement(required = true)
     protected String eventname;
-    @XmlElement(required = true)
     protected String eventbeschreibung;
-    @XmlElement(required = true)
     protected String username;
-    @XmlElement(required = true, defaultValue = "Football")
+    @XmlElement(defaultValue = "Football")
     protected String eventtyp;
-    @XmlElement(required = true)
-    @XmlSchemaType(name = "dateTime")
+    @XmlSchemaType(name = "time")
     protected XMLGregorianCalendar eventstart;
-    @XmlElement(required = true)
-    protected Duration eventdauer;
-    protected byte eventbewertung;
+    @XmlSchemaType(name = "time")
+    protected XMLGregorianCalendar eventdauer;
+    protected Byte eventbewertung;
     @XmlAttribute(name = "userID")
     protected BigDecimal userID;
     @XmlAttribute(name = "eventID")
@@ -206,10 +202,10 @@ public class Event {
      * 
      * @return
      *     possible object is
-     *     {@link Duration }
+     *     {@link XMLGregorianCalendar }
      *     
      */
-    public Duration getEventdauer() {
+    public XMLGregorianCalendar getEventdauer() {
         return eventdauer;
     }
 
@@ -218,26 +214,34 @@ public class Event {
      * 
      * @param value
      *     allowed object is
-     *     {@link Duration }
+     *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setEventdauer(Duration value) {
+    public void setEventdauer(XMLGregorianCalendar value) {
         this.eventdauer = value;
     }
 
     /**
      * Ruft den Wert der eventbewertung-Eigenschaft ab.
      * 
+     * @return
+     *     possible object is
+     *     {@link Byte }
+     *     
      */
-    public byte getEventbewertung() {
+    public Byte getEventbewertung() {
         return eventbewertung;
     }
 
     /**
      * Legt den Wert der eventbewertung-Eigenschaft fest.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link Byte }
+     *     
      */
-    public void setEventbewertung(byte value) {
+    public void setEventbewertung(Byte value) {
         this.eventbewertung = value;
     }
 
