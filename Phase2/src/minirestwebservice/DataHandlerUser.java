@@ -43,7 +43,8 @@ public class DataHandlerUser {
 
 		List<User> userliste = users.getUser();
 		userliste.add(user);
-
+		
+		this.savePersistent();
 		return URI.create("http://localhost:4434/users/" + user.getUserID().toString());
 
 	}

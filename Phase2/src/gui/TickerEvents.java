@@ -4,7 +4,7 @@
  */
 package gui;
 
-import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Map;
 
 import javax.ws.rs.core.MediaType;
@@ -73,13 +73,14 @@ public class TickerEvents {
 	    event.setEventdauer(ende);
 	    
 	    //TODO bisher noch statisch!
-	    event.setUserID(BigDecimal.ONE);
+	    event.setUserID(BigInteger.ONE);
 	    event.setUsername("DrDare");
+	    event.setEventbewertung(1);
 	
 	    String url = "http://localhost:4434/events";
 	    WebResource wrs = Client.create().resource(url);
 	
-	
+	    
 	   ClientResponse cr = wrs.accept("text/html").type(MediaType.APPLICATION_XML).entity(event).post(ClientResponse.class);
 	
 	   System.out.println(cr.getStatus());

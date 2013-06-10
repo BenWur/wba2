@@ -125,7 +125,7 @@ public class RegisterNewWindow extends Application {
                }else{
                   //errmessage.setText("");
                   System.out.println("Registriert!");
-                  Map<String, String> userdata = new HashMap();
+                  Map<String, String> userdata = new HashMap<String, String>();
                   userdata.put("name", textField.getText());
                   userdata.put("fname", fnameField1.getText());
                   userdata.put("lname", lnameField1.getText());

@@ -17,17 +17,17 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="eventname"/>
-        <xs:element ref="eventbeschreibung" minOccurs="0"/>
-        <xs:element ref="username" minOccurs="0"/>
-        <xs:element ref="eventtyp" minOccurs="0"/>
+        <xs:element ref="eventbeschreibung" minOccurs="0" />
+        <xs:element ref="username" minOccurs="0" />
+        <xs:element ref="eventtyp" minOccurs="0" />
        <!-- Start des Events, automatisch übergeben -->
         <xs:element type="xs:time" name="eventstart" minOccurs="0"/>
        <!-- Dauer des Events, automatisch übergeben -->
-         <xs:element type="xs:time" name="eventdauer" minOccurs="0"/>
-        <xs:element ref="eventbewertung" minOccurs="0"/>
+         <xs:element type="xs:time" name="eventdauer" minOccurs="0" />
+        <xs:element ref="eventbewertung" minOccurs="0" />
       </xs:sequence>
      <!-- Einzigartige userID, automatisch bei Registrierung übergeben -->
-      <xs:attribute type="xs:decimal" name="userID"/>
+      <xs:attribute type="xs:positiveInteger" name="userID"/>
      <!-- Einzigartige eventID, automatisch bei Eventerstellung (wenn Event verfügbar) übergeben -->
      <!-- userID + eventID, klare Identifizierung des Events -->
       <xs:attribute type="xs:positiveInteger" name="eventID"/>
@@ -75,7 +75,7 @@
 	<!-- Bewertung des Events, max 10 min 1 -->
      <xs:element name="eventbewertung">
 		<xs:simpleType>
-			<xs:restriction base="xs:byte">
+			<xs:restriction base="xs:positiveInteger">
 				<xs:minInclusive value="1"/>
 				<xs:maxInclusive value="10"/>
 			</xs:restriction>

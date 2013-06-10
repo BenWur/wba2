@@ -2,13 +2,12 @@
 // Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.2.6 generiert 
 // Siehe <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
-// Generiert: 2013.06.10 um 02:10:18 PM CEST 
+// Generiert: 2013.06.10 um 03:22:35 PM CEST 
 //
 
 
 package eventlist;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -38,7 +37,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="eventdauer" type="{http://www.w3.org/2001/XMLSchema}time" minOccurs="0"/>
  *         &lt;element ref="{}eventbewertung" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attribute name="userID" type="{http://www.w3.org/2001/XMLSchema}decimal" />
+ *       &lt;attribute name="userID" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" />
  *       &lt;attribute name="eventID" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -70,9 +69,10 @@ public class Event {
     protected XMLGregorianCalendar eventstart;
     @XmlSchemaType(name = "time")
     protected XMLGregorianCalendar eventdauer;
-    protected Byte eventbewertung;
+    protected Integer eventbewertung;
     @XmlAttribute(name = "userID")
-    protected BigDecimal userID;
+    @XmlSchemaType(name = "positiveInteger")
+    protected BigInteger userID;
     @XmlAttribute(name = "eventID")
     @XmlSchemaType(name = "positiveInteger")
     protected BigInteger eventID;
@@ -226,10 +226,10 @@ public class Event {
      * 
      * @return
      *     possible object is
-     *     {@link Byte }
+     *     {@link Integer }
      *     
      */
-    public Byte getEventbewertung() {
+    public Integer getEventbewertung() {
         return eventbewertung;
     }
 
@@ -238,10 +238,10 @@ public class Event {
      * 
      * @param value
      *     allowed object is
-     *     {@link Byte }
+     *     {@link Integer }
      *     
      */
-    public void setEventbewertung(Byte value) {
+    public void setEventbewertung(Integer value) {
         this.eventbewertung = value;
     }
 
@@ -250,10 +250,10 @@ public class Event {
      * 
      * @return
      *     possible object is
-     *     {@link BigDecimal }
+     *     {@link BigInteger }
      *     
      */
-    public BigDecimal getUserID() {
+    public BigInteger getUserID() {
         return userID;
     }
 
@@ -262,10 +262,10 @@ public class Event {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigDecimal }
+     *     {@link BigInteger }
      *     
      */
-    public void setUserID(BigDecimal value) {
+    public void setUserID(BigInteger value) {
         this.userID = value;
     }
 

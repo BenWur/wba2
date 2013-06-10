@@ -1,32 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<eventlist  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-			xsi:noNamespaceSchemaLocation="../XSD/Eventlist.xsd">
-			
-	<event userID="1"  eventID="1">
-		
-		<eventname>Bayern München - Barcelone</eventname>
-		<eventbeschreibung>Holly's Awesome Live Ticker. Join the show!</eventbeschreibung>
-		<username>Holly92</username>
-		<eventtyp>Football</eventtyp>
-		<eventstart>08:45:00+02:00</eventstart>
-		<eventdauer>10:45:00+02:00</eventdauer>
-		<eventbewertung>4</eventbewertung>
-		
-	</event>
-	
-	<event userID="2"  eventID="2">
-		
-		<eventname>Bayern - Dortmund</eventname>
-		<eventbeschreibung>DrDare is everywhere, bitches</eventbeschreibung>
-		<username>DrDare</username>
-		<eventtyp>Football</eventtyp>
-		<eventstart>08:45:00</eventstart>
-		<eventdauer>22:45:00</eventdauer>
-		<eventbewertung>9</eventbewertung>
-		
-	</event>
-	
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<eventlist>
+    <event userID="1" eventID="1">
+        <eventname>Bayern München - Barcelone</eventname>
+        <eventbeschreibung>Holly's Awesome Live Ticker. Join the show!</eventbeschreibung>
+        <username>Holly92</username>
+        <eventtyp>Football</eventtyp>
+        <eventstart>08:45:00+02:00</eventstart>
+        <eventdauer>10:45:00+02:00</eventdauer>
+        <eventbewertung>4</eventbewertung>
+    </event>
+    <event userID="2" eventID="2">
+        <eventname>Bayern - Dortmund</eventname>
+        <eventbeschreibung>DrDare is everywhere, bitches</eventbeschreibung>
+        <username>DrDare</username>
+        <eventtyp>Football</eventtyp>
+        <eventstart>08:45:00</eventstart>
+        <eventdauer>22:45:00</eventdauer>
+        <eventbewertung>9</eventbewertung>
+    </event>
+    <event userID="2" eventID="3">
+        <eventname>U21 Deutschland Spanien</eventname>
+        <eventstart>08:45:00</eventstart>
+        <eventdauer>22:45:00</eventdauer>
+    </event>
+    <event userID="1" eventID="4">
+        <eventname>Deutschland - USA</eventname>
+        <eventbeschreibung>kleines Testspiel auf dem Weg zur WM</eventbeschreibung>
+        <username>DrDare</username>
+        <eventtyp>Football</eventtyp>
+        <eventstart>08:30:00</eventstart>
+        <eventdauer>22:30:00</eventdauer>
+        <eventbewertung>1</eventbewertung>
+    </event>
 </eventlist>
-	

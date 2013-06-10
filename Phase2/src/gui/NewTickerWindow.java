@@ -4,18 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class NewTickerWindow extends Application {
@@ -100,16 +95,16 @@ public class NewTickerWindow extends Application {
                
                   //errmessage.setText("");
                  
-                  Map<String, String> eventdata = new HashMap();
+                  Map<String, String> eventdata = new HashMap<String, String>();
                   eventdata.put("name", eventnametextField.getText());
                   eventdata.put("beschr", eventbeschreibungField1.getText());
                   eventdata.put("typ", eventtypField1.getText());
                   eventdata.put("start", startField.getText());
                   eventdata.put("ende", endeField.getText());
                   
-                  System.out.println("Erstellt!");
+                  
                   create.newEvent(eventdata);
-               
+                  System.out.println("Erstellt!");
             }
         });
        

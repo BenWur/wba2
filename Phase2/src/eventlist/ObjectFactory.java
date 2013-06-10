@@ -2,7 +2,7 @@
 // Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.2.6 generiert 
 // Siehe <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
-// Generiert: 2013.06.10 um 02:10:18 PM CEST 
+// Generiert: 2013.06.10 um 03:22:35 PM CEST 
 //
 
 
@@ -88,12 +88,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Byte }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link Integer }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "", name = "eventbewertung")
-    public JAXBElement<Byte> createEventbewertung(Byte value) {
-        return new JAXBElement<Byte>(_Eventbewertung_QNAME, Byte.class, null, value);
+    public JAXBElement<Integer> createEventbewertung(Integer value) {
+        return new JAXBElement<Integer>(_Eventbewertung_QNAME, Integer.class, null, value);
     }
 
     /**
