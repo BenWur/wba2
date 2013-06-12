@@ -15,6 +15,7 @@ import eventlist.Eventlist;
 public class DataHandlerEvent {
 	private Eventlist events = null;
 	private Marshaller marshaller = null;
+	private DataHandlerEventContent content = null;
 
 	public DataHandlerEvent() {
 		JAXBContext jc;
@@ -84,6 +85,8 @@ public class DataHandlerEvent {
 			}
 			i++;
 		}
+		
+		content.delete(id);
 
 	    this.savePersistent();
 
