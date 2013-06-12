@@ -1,5 +1,6 @@
 package gui;
 
+
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -25,6 +26,7 @@ import javafx.stage.Stage;
 public class SocialMain extends Application {
     private Tab tab1;
     private Tab tab2;
+    private Tab createNewEventTab;
     private Tab k;
     
     @Override
@@ -53,9 +55,9 @@ public class SocialMain extends Application {
         ColumnConstraints column2 = new ColumnConstraints();
         column2.setPercentWidth(50);
         geoGrid.getColumnConstraints().addAll(column1, column2);
-        
         geoGrid.setHgap(5); // Abstand links/rechts
         geoGrid.setVgap(5); // Abstand oben/unten
+        
         final GridPane geoGrid2 = new GridPane();
         geoGrid2.setHgap(5); // Abstand links/rechts
         geoGrid2.setVgap(5); // Abstand oben/unten
@@ -67,8 +69,6 @@ public class SocialMain extends Application {
         
         tab2 = new Tab();
         tab2.setText("My Profile");
-        tab2.setContent(root);
-        
         
         final ListView<String> ticklist = new ListView<String>();
         final TickerEvents tevents = new TickerEvents();
@@ -84,7 +84,6 @@ public class SocialMain extends Application {
         final Label beschreibung = new Label();
         final Label eventBeschreibung = new Label();
         eventBeschreibung.setWrapText(true);
-        
         
         
         ticklist.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -106,7 +105,6 @@ public class SocialMain extends Application {
         joinTicker.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-             
                 for (Tab opentab:tabPane.getTabs() ) {
                    if (opentab.getText().equals(ticklist.getSelectionModel().getSelectedItem())){
                       return;
@@ -138,14 +136,40 @@ public class SocialMain extends Application {
             }
         });
         
-        Button create = new Button("Create Ticker");
+       
+        final Button create = new Button("Create Ticker");
         create.setMinWidth(50);
+
         create.setOnAction(new EventHandler<ActionEvent>() {
         	@Override
             public void handle(ActionEvent event) {
-                NewTickerWindow newTicker = new NewTickerWindow();
-                newTicker.start(primaryStage); //oeffnet neue stage
-            }
+                //NewTickerWindow newTicker = new NewTickerWindow();
+                   // selectTab.select(tab3);
+                        createNewEventTab = new Tab();
+                        createNewEventTab.setText("New Ticker");
+                        selectTab.select(createNewEventTab);
+                        create.setDisable(true);
+                        
+                        createNewEventTab.setOnClosed(new EventHandler<javafx.event.Event>() {
+                            
+                            public void handle(javafx.event.Event t) {
+                                 create.setDisable(false);
+                                 selectTab.select(tab1);
+                            }
+                        });
+                                
+                	final GridPane geoGridNew = new GridPane();
+                	geoGridNew.setHgap(5); // Abstand links/rechts
+                	geoGridNew.setVgap(5); // Abstand oben/unten
+                	
+                	Button sendchat = new Button("Send");
+                	sendchat.setMinWidth(50);
+                        
+                        geoGridNew.add(sendchat, 3, 3);
+                	createNewEventTab.setContent(geoGridNew);
+                        tabPane.getTabs().add(createNewEventTab);
+                }
+                
         });
         
         
@@ -153,7 +177,6 @@ public class SocialMain extends Application {
        
       
         Button test = new Button("Create Ticker");
-        create.setMinWidth(50);
         
         
         geoGrid.add(tickertext, 0, 0);
@@ -168,6 +191,7 @@ public class SocialMain extends Application {
    
         tab1.setContent(geoGrid);
         tab2.setContent(geoGrid2);
+        
         
         tabPane.getTabs().addAll(tab1, tab2);
         root.getChildren().add(tabPane);

@@ -1,7 +1,5 @@
 package gui;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -9,12 +7,29 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class NewTickerWindow extends Application {
-	
+    
+    private Tab tab3;
+    
+    final GridPane geoGrid4 = new GridPane();
+    geoGrid4.
+    
+    
+    Button test = new Button("Create Ticker");
+        
+    
+    tab3.
+    
+    
+
+    
+    /*
     @Override
     public void start(final Stage primaryStage) {
         primaryStage.setResizable(false);
@@ -129,7 +144,7 @@ public class NewTickerWindow extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
+*/
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
      * main() serves only as fallback in case the application can not be
@@ -140,6 +155,11 @@ public class NewTickerWindow extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

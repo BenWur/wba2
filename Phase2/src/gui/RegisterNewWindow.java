@@ -121,7 +121,7 @@ public class RegisterNewWindow extends Application {
                errmessage.setText("");
                if (register.registered(textField.getText())) {
                    errmessage.setTextFill(Color.rgb(210, 39, 30));
-                   errmessage.setText("Sorry, username already taken!");
+                   errmessage.setText("Sorry, username already taken or invalid!");
                }else{
                   //errmessage.setText("");
                   System.out.println("Registriert!");
