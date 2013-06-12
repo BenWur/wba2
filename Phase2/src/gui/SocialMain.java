@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseButton;
@@ -35,6 +36,7 @@ public class SocialMain extends Application {
         primaryStage.setScene(new Scene(root, 450, 380));
         final TabPane tabPane = new TabPane();
         tabPane.setPrefSize(460, 380);
+        final SingleSelectionModel<Tab> selectTab = tabPane.getSelectionModel();
         tabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
           @Override public void changed(ObservableValue<? extends Tab> tab, Tab oldTab, Tab newTab) {
            if (newTab.equals(tab1) || newTab.equals(tab2)) {
@@ -65,6 +67,8 @@ public class SocialMain extends Application {
         
         tab2 = new Tab();
         tab2.setText("My Profile");
+        tab2.setContent(root);
+        
         
         final ListView<String> ticklist = new ListView<String>();
         final TickerEvents tevents = new TickerEvents();
@@ -77,8 +81,11 @@ public class SocialMain extends Application {
         final Button joinTicker = new Button("Join");
         joinTicker.setMinWidth(50);
         
-        final Label eventBeschreibung = new Label("selrct");
+        final Label beschreibung = new Label();
+        final Label eventBeschreibung = new Label();
         eventBeschreibung.setWrapText(true);
+        
+        
         
         ticklist.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -88,6 +95,7 @@ public class SocialMain extends Application {
                         joinTicker.fire();
                     }
                     if (mouseEvent.getClickCount() == 1) {
+                            beschreibung.setText("Beschreibung:");
                             int index = ticklist.getSelectionModel().getSelectedIndex();
                          eventBeschreibung.setText(tevents.eventList().get(index).getEventbeschreibung());
                     }
@@ -110,6 +118,7 @@ public class SocialMain extends Application {
                 	k = new Tab();
                 	k.setText(ticklist.getSelectionModel().getSelectedItem());
                 	tabPane.getTabs().add(i, k);
+                        selectTab.select(k);
                 	final GridPane geoGridk = new GridPane();
                 	geoGridk.setHgap(5); // Abstand links/rechts
                 	geoGridk.setVgap(5); // Abstand oben/unten
@@ -151,7 +160,8 @@ public class SocialMain extends Application {
         geoGrid.add(ticklist, 0, 1);
         geoGrid.add(joinTicker, 0, 2);
         geoGrid.add(create, 1, 2);
-        geoGrid3.add(eventBeschreibung, 0, 0);
+        geoGrid3.add(beschreibung, 0, 0);
+        geoGrid3.add(eventBeschreibung, 0, 1);
         geoGrid.add(geoGrid3, 1, 1);
         geoGrid2.add(test, 0, 0);
         
