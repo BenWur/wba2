@@ -1,18 +1,12 @@
 package minirestwebservice;
 
 
-import java.io.File;
 import java.math.BigInteger;
-import java.net.URI;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 
 import eventcontentlist.Eventcontent;
 import eventcontentlist.Eventcontentlist;
@@ -25,15 +19,10 @@ public class EventContentListService
 	   
 	   @GET 
 	   @Produces( MediaType.APPLICATION_XML )
-	   public Eventcontent getEventContent(@PathParam("eventID") int i) throws Exception
+	   public Response getEventContent(@PathParam("eventID") int i) throws Exception
 	   {
-		    
-		    JAXBContext jc = JAXBContext.newInstance(Eventcontentlist.class);
-			//unmarshaller zum lesen 
-		    Unmarshaller um = jc.createUnmarshaller();
-		    Eventcontentlist eventcontent = (Eventcontentlist) um.unmarshal(new File("XML/Eventcontentlist.xml"));
-		    
-	      return eventcontent.getEventcontent().get(i-1); 
+		   DataHandlerEventContent handle = new DataHandlerEventContent();	    
+		   return Response.status(200).entity(handle.getEventcontentbyID(i)).build() ;
 	   }
 	   
 	   
@@ -41,34 +30,21 @@ public class EventContentListService
 	   @Consumes( MediaType.APPLICATION_XML )
 	   public Response postNewEventcontent( Eventcontent eventcontent ,@PathParam("eventID") int i ) throws Exception
 	   {
-		   
-		    JAXBContext jc = JAXBContext.newInstance(Eventcontentlist.class);
-		    //unmarshaller zum lesen 
-		    Unmarshaller um = jc.createUnmarshaller();
-		    //marshaller zum schreiben
-		    Marshaller marshaller =jc.createMarshaller();
-		    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		   	DataHandlerEventContent handle = new DataHandlerEventContent();	    
+		    Eventcontentlist events = (Eventcontentlist) handle.getEventcontents();
+		    List<Eventcontent> eventliste = events.getEventcontent();
 		    
-		    Eventcontentlist eventcontents = (Eventcontentlist) um.unmarshal(new File("XML/Eventcontentlist.xml"));
 		    
-		    List<Eventcontent> eventcontentliste = eventcontents.getEventcontent();
-		    
-		    BigInteger ID = BigInteger.ZERO ;
-			for(Eventcontent evc : eventcontentliste ){
+		    BigInteger id = BigInteger.ZERO ;
+			for(Eventcontent ev : eventliste ){
 				
-		    	if(evc.getEventID().compareTo(ID)==1){
-		    		ID = evc.getEventID();
+		    	if(ev.getEventID().compareTo(id)==1){
+		    		id = ev.getEventID();
 		    	}
 		    }
-			eventcontent.setEventID(ID.add(BigInteger.ONE));
-		    
-		 	eventcontentliste.add( eventcontent );
-		    
-		    marshaller.marshal(eventcontents, new File("XML/Eventcontentlist.xml"));
-		    
-		    
-	      URI location = URI.create( "http://localhost:4434/events/" + i +"/eventcontents" );
-	      return Response.created(location ).build(); 
+			eventcontent.setEventID(id.add(BigInteger.ONE));
+			
+		    return Response.created(handle.writeNewEventcontent(eventcontent) ).build();
 	   }
 	   
 	   @POST 
@@ -76,37 +52,8 @@ public class EventContentListService
 	   @Consumes( MediaType.APPLICATION_XML )
 	   public Response postNewBeitrag( @PathParam("eventID") int eventID, TickerBeitrag beitrag ) throws Exception
 	   {
-		   
-		    JAXBContext jc = JAXBContext.newInstance(Eventcontentlist.class);
-		    //unmarshaller zum lesen 
-		    Unmarshaller um = jc.createUnmarshaller();
-		    //marshaller zum schreiben
-		    Marshaller marshaller =jc.createMarshaller();
-		    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-		    
-		    Eventcontentlist eventcontents = (Eventcontentlist) um.unmarshal(new File("XML/Eventcontentlist.xml"));
-		   
-		    List<Eventcontent> eventcontentliste = eventcontents.getEventcontent();
-		    BigInteger ID = BigInteger.ZERO ;
-		    
-		    for(Eventcontent evc : eventcontentliste ){
-		    	if(evc.getEventID().equals(eventID)){
-		    		evc.getTickerBeitrag().add(beitrag);
-		    		
-		    		List<TickerBeitrag> beitragliste = evc.getTickerBeitrag();
-		    		for(TickerBeitrag tickerc : beitragliste ){
-		    			
-				    	if(tickerc.getTickerBeitragID().compareTo(ID)==1){
-				    		ID = tickerc.getTickerBeitragID();
-				    	}
-				    }
-		    		evc.setEventID(ID.add(BigInteger.ONE));
-		    	}
-		    }
-		    
-		    marshaller.marshal(eventcontents, new File("XML/Eventcontentlist.xml"));
-		    
-	      return Response.noContent().build(); 
+		   DataHandlerEventContent handle = new DataHandlerEventContent();	
+	       return handle.postNewBeitrag(eventID,beitrag); 
 	   }
 	   
 	   @POST 
@@ -116,69 +63,17 @@ public class EventContentListService
 			   								@PathParam("tickerBeitragID") int tickerBeitragID, 
 			   								Kommentar kommentar ) throws Exception
 	   {
-		   
-		    JAXBContext jc = JAXBContext.newInstance(Eventcontentlist.class);
-		    //unmarshaller zum lesen 
-		    Unmarshaller um = jc.createUnmarshaller();
-		    //marshaller zum schreiben
-		    Marshaller marshaller =jc.createMarshaller();
-		    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-		    
-		    Eventcontentlist eventcontents = (Eventcontentlist) um.unmarshal(new File("XML/Eventcontentlist.xml"));
-		   
-		    List<Eventcontent> eventcontentliste = eventcontents.getEventcontent();
-		    
-		    
-		    for(Eventcontent evc : eventcontentliste ){
-		    	if(evc.getEventID().equals(eventID)){
-		    		List<TickerBeitrag> beitragliste = evc.getTickerBeitrag();
-		    		for(TickerBeitrag tickerc : beitragliste ){
-				    	if(tickerc.getTickerBeitragID().equals(tickerBeitragID)){
-				    		tickerc.getKommentar().add(kommentar);
-				    	}
-				    }
-		    	}
-		    }
-		    
-		    marshaller.marshal(eventcontents, new File("XML/Eventcontentlist.xml"));
-		    
-	      return Response.noContent().build(); 
+		   DataHandlerEventContent handle = new DataHandlerEventContent();	 
+	       return handle.postNewKommentar(eventID,tickerBeitragID,kommentar) ; 
 	   }
 	   
 	   @DELETE
 	   @Path( "/beitrag/{tickerBeitragID}")
 	   public Response deleteTickerBeitrag( 	@PathParam("eventID") int eventID,
-			   									@PathParam("tickerBeitragID") int tickerBeitragID) throws Exception{
-		   
-		    JAXBContext jc = JAXBContext.newInstance(Eventcontentlist.class);
-		    //unmarshaller zum lesen 
-		    Unmarshaller um = jc.createUnmarshaller();
-		    //marshaller zum schreiben
-		    Marshaller marshaller =jc.createMarshaller();
-		    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-		    
-		    Eventcontentlist eventcontents = (Eventcontentlist) um.unmarshal(new File("XML/Eventcontentlist.xml"));
-		    
-		    
-		    List<Eventcontent> eventcontentliste = eventcontents.getEventcontent();
-		    
-		    for (Iterator<Eventcontent> it = eventcontentliste.iterator(); it.hasNext(); ) {
-		    	Eventcontent evc = it.next();
-		    	if(evc.getEventID().equals(eventID)){
-		    		List<TickerBeitrag> beitraege = evc.getTickerBeitrag();
-		    		for (Iterator<TickerBeitrag> iter = beitraege.iterator(); iter.hasNext(); ) {
-				    	TickerBeitrag bei = iter.next();
-				    	if(bei.getTickerBeitragID().equals(tickerBeitragID)){
-					    	iter.remove();
-				    	}
-				    }
-		    	}
-		    }
-
-		    marshaller.marshal(eventcontents, new File("XML/Eventlist.xml"));
-		    
-		    
-	      return Response.noContent().build() ; //Gibt Meldung 204->"ok" zurück
+			   									@PathParam("tickerBeitragID") int tickerBeitragID) throws Exception
+	   {
+		    DataHandlerEventContent handle = new DataHandlerEventContent();	    
+	        return handle.deleteTickerBeitrag(eventID,tickerBeitragID); //Gibt Meldung 204->"ok" zurück
 	   }
 	   
 }
