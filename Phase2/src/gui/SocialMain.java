@@ -1,9 +1,5 @@
 package gui;
 
-
-import java.util.HashMap;
-import java.util.Map;
-
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -11,16 +7,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Side;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -38,7 +35,6 @@ public class SocialMain extends Application {
         primaryStage.setScene(new Scene(root, 450, 380));
         final TabPane tabPane = new TabPane();
         tabPane.setPrefSize(460, 380);
-        tabPane.setSide(Side.TOP);
         tabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
           @Override public void changed(ObservableValue<? extends Tab> tab, Tab oldTab, Tab newTab) {
            if (newTab.equals(tab1) || newTab.equals(tab2)) {
@@ -50,11 +46,19 @@ public class SocialMain extends Application {
         });
 
         final GridPane geoGrid = new GridPane();
+        ColumnConstraints column1 = new ColumnConstraints();
+        column1.setPercentWidth(50);
+        ColumnConstraints column2 = new ColumnConstraints();
+        column2.setPercentWidth(50);
+        geoGrid.getColumnConstraints().addAll(column1, column2);
+        
         geoGrid.setHgap(5); // Abstand links/rechts
         geoGrid.setVgap(5); // Abstand oben/unten
         final GridPane geoGrid2 = new GridPane();
         geoGrid2.setHgap(5); // Abstand links/rechts
         geoGrid2.setVgap(5); // Abstand oben/unten
+        
+        final GridPane geoGrid3 = new GridPane();
         
         tab1 = new Tab();
         tab1.setText("Live Tickers");
@@ -63,12 +67,34 @@ public class SocialMain extends Application {
         tab2.setText("My Profile");
         
         final ListView<String> ticklist = new ListView<String>();
-        TickerEvents tevents = new TickerEvents();
-        ObservableList<String> items = FXCollections.observableArrayList(tevents.eventList());
-        ticklist.setItems(items);
-        
-        Button joinTicker = new Button("Join");
+        final TickerEvents tevents = new TickerEvents();
+        ObservableList<String> items = FXCollections.observableArrayList();
+         for (int i = 0; i < tevents.eventList().size(); i++)
+	    {
+         items.add(tevents.eventList().get(i).getEventname());
+            }
+         ticklist.setItems(items);
+        final Button joinTicker = new Button("Join");
         joinTicker.setMinWidth(50);
+        
+        final Label eventBeschreibung = new Label("selrct");
+        eventBeschreibung.setWrapText(true);
+        
+        ticklist.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    if (mouseEvent.getClickCount() == 2) {
+                        joinTicker.fire();
+                    }
+                    if (mouseEvent.getClickCount() == 1) {
+                            int index = ticklist.getSelectionModel().getSelectedIndex();
+                         eventBeschreibung.setText(tevents.eventList().get(index).getEventbeschreibung());
+                    }
+                }
+            }
+        });
+        
         joinTicker.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -98,7 +124,6 @@ public class SocialMain extends Application {
                  
                 	geoGridk.add(sendchat, 12, 12);
                 	k.setContent(geoGridk);
-                 
                 	i++;
                }
             }
@@ -114,21 +139,21 @@ public class SocialMain extends Application {
             }
         });
         
-        Button exitmain = new Button("Exit");
-        exitmain.setMinWidth(50);
-        Label tickertext = new Label("Choose the ticker you'd like to join");
         
+        Label tickertext = new Label("Choose the ticker you'd like to join");
+       
       
         Button test = new Button("Create Ticker");
         create.setMinWidth(50);
         
         
-        geoGrid.add(tickertext, 1, 1);
-        geoGrid.add(ticklist, 1, 2);
-        geoGrid.add(joinTicker, 1, 3);
-        geoGrid.add(create, 2, 3);
-        geoGrid.add(exitmain, 12, 3);
-        geoGrid2.add(test, 1, 1);
+        geoGrid.add(tickertext, 0, 0);
+        geoGrid.add(ticklist, 0, 1);
+        geoGrid.add(joinTicker, 0, 2);
+        geoGrid.add(create, 1, 2);
+        geoGrid3.add(eventBeschreibung, 0, 0);
+        geoGrid.add(geoGrid3, 1, 1);
+        geoGrid2.add(test, 0, 0);
         
    
         tab1.setContent(geoGrid);

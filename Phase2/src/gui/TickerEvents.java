@@ -19,6 +19,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import eventlist.Event;
 import eventlist.Eventlist;
+import java.util.List;
 
 /**
  *
@@ -26,20 +27,31 @@ import eventlist.Eventlist;
  */
 public class TickerEvents {
     
-	public String[] eventList()
+	public List<Event> eventList()
 	   {   
 	       String url = "http://localhost:4434/events";
 	       WebResource wrs = Client.create().resource(url);
 	       
 	       Eventlist ev = wrs.accept("application/xml").get(Eventlist.class);
-	        String[] array = new String[ev.getEvent().size()];
-	    for (int i = 0; i < ev.getEvent().size(); i++)
-	    {
-	     array[i] = ev.getEvent().get(i).getEventname();
+	        
+	     return ev.getEvent();
 	    }  
-	        return array;
-	   }
-	 
+	        
+        
+        public int eventInfo(String EventName) {
+                    
+             List<Event> events = eventList();
+             BigInteger eventId = null;
+             
+             for(int i=0; i<events.size();i++){
+                 if(events.get(i).getEventname().equals(EventName)){
+                     eventId = events.get(i).getEventID();
+                 }
+             }
+	        return eventId.intValue()-1;
+        }
+        
+
 	public Event getEventContent(int EventID)
 	   {   
 	       String url = "http://localhost:4434/events/"+EventID;
