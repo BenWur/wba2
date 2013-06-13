@@ -35,7 +35,7 @@ public NewEvent(Map<String, String> eventdata) {
         XMLGregorianCalendar ende = null;
         try {
             start = DatatypeFactory.newInstance().newXMLGregorianCalendar(eventdata.get("start"));
-            //start.setTime(hour, min, 0);
+            start.setSecond(0);
             ende = DatatypeFactory.newInstance().newXMLGregorianCalendar(eventdata.get("ende"));
         } catch (DatatypeConfigurationException ex) {
             Logger.getLogger(NewEvent.class.getName()).log(Level.SEVERE, null, ex);

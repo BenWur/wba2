@@ -240,8 +240,8 @@ public class SocialMain extends Application {
                   eventdata.put("name", eventnametextField.getText());
                   eventdata.put("beschr", eventbeschreibungField1.getText());
                  eventdata.put("typ", typchoice.getSelectionModel().getSelectedItem().toString());
-                eventdata.put("start", startField.getText());
-                 eventdata.put("ende", endeField.getText());
+                eventdata.put("start", startField.getText()+":00");
+                 eventdata.put("ende", endeField.getText()+":00");
                   
                   
                   create.createEvent(eventdata);

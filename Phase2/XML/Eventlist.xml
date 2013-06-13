@@ -39,4 +39,11 @@
         <eventstart>11:21:00</eventstart>
         <eventdauer>13:20:00</eventdauer>
     </event>
+    <event eventID="6">
+        <eventname>dsfsdfdssdf sddsfdfssfdssdf sddsfsdfsdf</eventname>
+        <eventbeschreibung>sdfdsdfsdfsdf dsfdsfdsfsdfsdf dsdfsdsfdsfdfssfdfdsdsf dsfdsfdfssdfdsf dsfdsfdfsdfdsfsdf sdsdffdsdfdsfsdf</eventbeschreibung>
+        <eventtyp>Baseball</eventtyp>
+        <eventstart>11:23:00</eventstart>
+        <eventdauer>22:46:00</eventdauer>
+    </event>
 </eventlist>
