@@ -17,9 +17,9 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="eventname"/>
-        <xs:element ref="eventbeschreibung"  />
-        <xs:element ref="username"  />
-        <xs:element ref="eventtyp"  />
+        <xs:element ref="eventbeschreibung" minOccurs="0"  />
+        <xs:element ref="username" minOccurs="0" />
+        <xs:element ref="eventtyp" minOccurs="0" />
        <!-- Start des Events, automatisch übergeben -->
         <xs:element type="xs:time" name="eventstart" minOccurs="0"/>
        <!-- Dauer des Events, automatisch übergeben -->
