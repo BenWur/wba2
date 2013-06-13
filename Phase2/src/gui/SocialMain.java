@@ -220,10 +220,7 @@ public class SocialMain extends Application {
                         typchoice.getSelectionModel().selectFirst();
                         
                         Label start = new Label("Event start:");
-                        final ChoiceBox hourbox = new ChoiceBox(FXCollections.observableArrayList("05", "06", "07", "08"));
-                        final ChoiceBox minbox = new ChoiceBox(FXCollections.observableArrayList("00", "15", "30", "45"));
-                        hourbox.getSelectionModel().selectFirst();
-                        minbox.getSelectionModel().selectFirst();
+                        final TextField startField = new TextField();
                         
                         Label ende = new Label("Duration:");
                         final TextField endeField = new TextField();
@@ -242,10 +239,10 @@ public class SocialMain extends Application {
                   Map<String, String> eventdata = new HashMap<String, String>();
                   eventdata.put("name", eventnametextField.getText());
                   eventdata.put("beschr", eventbeschreibungField1.getText());
-//                  eventdata.put("typ", typchoice.getConverter().toString());
-                eventdata.put("hour", hourbox.getConverter().toString());
-                 eventdata.put("min", minbox.getConverter().toString());
-                  //eventdata.put("dauer", endeField.getText());
+                 eventdata.put("typ", typchoice.getSelectionModel().getSelectedItem().toString());
+                eventdata.put("start", startField.getText());
+                 eventdata.put("ende", endeField.getText());
+                  
                   
                   create.createEvent(eventdata);
             }
@@ -258,11 +255,10 @@ public class SocialMain extends Application {
                         geoGridNew.add(eventtyp, 1, 4);
                         geoGridNew.add(typchoice, 1, 5);
                         geoGridNew.add(start, 1, 6);
-                        geoGridNew.add(hourbox, 1, 7);
-                        geoGridNew.add(minbox, 1, 8);
-                        geoGridNew.add(ende, 1, 9);
-                        geoGridNew.add(endeField, 1, 10);
-                        geoGridNew.add(createbtn, 1, 11);
+                        geoGridNew.add(startField, 1, 7);
+                        geoGridNew.add(ende, 1, 8);
+                        geoGridNew.add(endeField, 1, 9);
+                        geoGridNew.add(createbtn, 1, 10);
                         
                 	createNewEventTab.setContent(geoGridNew);
                         tabPane.getTabs().add(createNewEventTab);

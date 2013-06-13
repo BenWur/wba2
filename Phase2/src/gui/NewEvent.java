@@ -31,25 +31,21 @@ public NewEvent(Map<String, String> eventdata) {
         Event event = new ObjectFactory().createEvent();
         
     
-        
-        int hour = Integer.parseInt(eventdata.get("hour"));
-        int min = Integer.parseInt(eventdata.get("min"));
-        
         XMLGregorianCalendar start = null;
-        XMLGregorianCalendar dauer = null;
+        XMLGregorianCalendar ende = null;
         try {
-            start = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar() );
-            start.setTime(hour, min, 00);
-            dauer = DatatypeFactory.newInstance().newXMLGregorianCalendar(eventdata.get("dauer"));
+            start = DatatypeFactory.newInstance().newXMLGregorianCalendar(eventdata.get("start"));
+            //start.setTime(hour, min, 0);
+            ende = DatatypeFactory.newInstance().newXMLGregorianCalendar(eventdata.get("ende"));
         } catch (DatatypeConfigurationException ex) {
             Logger.getLogger(NewEvent.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         event.setEventname(eventdata.get("name"));
         event.setEventbeschreibung(eventdata.get("beschr"));
-        //event.setEventtyp(eventdata.get("typ"));
+        event.setEventtyp(eventdata.get("typ"));
         event.setEventstart(start);
-        //event.setEventdauer(dauer);
+        event.setEventdauer(ende);
 
         String url = "http://localhost:4434/events";
         WebResource wrs = Client.create().resource(url);

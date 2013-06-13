@@ -32,4 +32,11 @@
         <eventdauer>22:30:00</eventdauer>
         <eventbewertung>1</eventbewertung>
     </event>
+    <event eventID="5">
+        <eventname>sadasd asdasdasd</eventname>
+        <eventbeschreibung>asdasda asd asdsa </eventbeschreibung>
+        <eventtyp>Football</eventtyp>
+        <eventstart>11:21:00</eventstart>
+        <eventdauer>13:20:00</eventdauer>
+    </event>
 </eventlist>
