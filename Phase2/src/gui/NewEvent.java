@@ -16,6 +16,8 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import eventlist.ObjectFactory;
 import eventlist.Event;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -28,10 +30,16 @@ public NewEvent(Map<String, String> eventdata) {
         //neuen User anlegen
         Event event = new ObjectFactory().createEvent();
         
+    
+        
+        int hour = Integer.parseInt(eventdata.get("hour"));
+        int min = Integer.parseInt(eventdata.get("min"));
+        
         XMLGregorianCalendar start = null;
         XMLGregorianCalendar dauer = null;
         try {
-            start = DatatypeFactory.newInstance().newXMLGregorianCalendar(eventdata.get("start"));
+            start = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar() );
+            start.setTime(hour, min, 00);
             dauer = DatatypeFactory.newInstance().newXMLGregorianCalendar(eventdata.get("dauer"));
         } catch (DatatypeConfigurationException ex) {
             Logger.getLogger(NewEvent.class.getName()).log(Level.SEVERE, null, ex);
@@ -41,7 +49,7 @@ public NewEvent(Map<String, String> eventdata) {
         event.setEventbeschreibung(eventdata.get("beschr"));
         //event.setEventtyp(eventdata.get("typ"));
         event.setEventstart(start);
-        event.setEventdauer(dauer);
+        //event.setEventdauer(dauer);
 
         String url = "http://localhost:4434/events";
         WebResource wrs = Client.create().resource(url);
