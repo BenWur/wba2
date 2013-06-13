@@ -1,6 +1,8 @@
 package gui;
 
 
+import java.util.HashMap;
+import java.util.Map;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -8,18 +10,26 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 
@@ -35,9 +45,9 @@ public class SocialMain extends Application {
         primaryStage.setTitle("SocialTicker");
         
         AnchorPane root = new AnchorPane();
-        primaryStage.setScene(new Scene(root, 450, 380));
+        primaryStage.setScene(new Scene(root, 480, 380));
         final TabPane tabPane = new TabPane();
-        tabPane.setPrefSize(460, 380);
+        tabPane.setPrefSize(490, 380);
         final SingleSelectionModel<Tab> selectTab = tabPane.getSelectionModel();
         tabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
           @Override public void changed(ObservableValue<? extends Tab> tab, Tab oldTab, Tab newTab) {
@@ -57,6 +67,9 @@ public class SocialMain extends Application {
         geoGrid.getColumnConstraints().addAll(column1, column2);
         geoGrid.setHgap(5); // Abstand links/rechts
         geoGrid.setVgap(5); // Abstand oben/unten
+        
+        HBox hbox = new HBox(); //hbox für horizontal aligment
+        hbox.setSpacing(10);
         
         final GridPane geoGrid2 = new GridPane();
         geoGrid2.setHgap(5); // Abstand links/rechts
@@ -121,15 +134,37 @@ public class SocialMain extends Application {
                 	geoGridk.setHgap(5); // Abstand links/rechts
                 	geoGridk.setVgap(5); // Abstand oben/unten
                 	
-                	Button sendchat = new Button("Send");
+                	ColumnConstraints column1 = new ColumnConstraints();
+                        column1.setPercentWidth(85);
+                        ColumnConstraints column2 = new ColumnConstraints();
+                        column2.setPercentWidth(15);
+                        RowConstraints row1 = new RowConstraints();
+                        row1.setPercentHeight(92);
+                        RowConstraints row2 = new RowConstraints();
+                        row2.setPercentHeight(8);
+                        geoGridk.getColumnConstraints().addAll(column1, column2);
+                        geoGridk.getRowConstraints().addAll(row1, row2);
+                	
+                        SplitPane sp = new SplitPane();
+                        final StackPane sp1 = new StackPane();
+                        final ListView<String> liveticks = new ListView<String>();
+                        sp1.getChildren().add(liveticks);
+                        final StackPane sp2 = new StackPane();
+                        TextArea comments = new TextArea();
+                        sp2.getChildren().add(comments);
+                        sp.getItems().addAll(sp1, sp2);
+                        
+                        
+                        TextField chatText = new TextField();
+                        
+                        Button sendchat = new Button("Send");
                 	sendchat.setMinWidth(50);
-                	sendchat.setOnAction(new EventHandler<ActionEvent>() {
-                		@Override
-                		public void handle(ActionEvent event) {
-                		}
-                	});
-                 
-                	geoGridk.add(sendchat, 12, 12);
+                        
+                        geoGridk.add(sendchat, 1, 1);
+                        geoGridk.add(chatText, 0, 1);
+                        
+                        geoGridk.add(sp, 0, 0);
+                	
                 	k.setContent(geoGridk);
                 	i++;
                }
@@ -139,12 +174,14 @@ public class SocialMain extends Application {
        
         final Button create = new Button("Create Ticker");
         create.setMinWidth(50);
-
+        
+        Button refresh = new Button("Refresh");
+        refresh.setMinWidth(50);
+        refresh.setAlignment(Pos.BOTTOM_RIGHT);
+        
         create.setOnAction(new EventHandler<ActionEvent>() {
         	@Override
             public void handle(ActionEvent event) {
-                //NewTickerWindow newTicker = new NewTickerWindow();
-                   // selectTab.select(tab3);
                         createNewEventTab = new Tab();
                         createNewEventTab.setText("New Ticker");
                         selectTab.select(createNewEventTab);
@@ -158,14 +195,70 @@ public class SocialMain extends Application {
                             }
                         });
                                 
-                	final GridPane geoGridNew = new GridPane();
+                	final GridPane geoGridNew = new GridPane(); //Grid fuer new ticker
                 	geoGridNew.setHgap(5); // Abstand links/rechts
                 	geoGridNew.setVgap(5); // Abstand oben/unten
                 	
-                	Button sendchat = new Button("Send");
-                	sendchat.setMinWidth(50);
+                        ColumnConstraints column1 = new ColumnConstraints();
+                        column1.setPercentWidth(30);
+                        ColumnConstraints column2 = new ColumnConstraints();
+                        column2.setPercentWidth(40);
+                        ColumnConstraints column3 = new ColumnConstraints();
+                        column3.setPercentWidth(30);
+                        geoGridNew.getColumnConstraints().addAll(column1, column2, column3);
+                	
+                        final Label errmessage = new Label();
                         
-                        geoGridNew.add(sendchat, 3, 3);
+                        Label eventname = new Label("Eventname:");
+                        final TextField eventnametextField = new TextField();
+                        
+                        Label eventbeschreibung = new Label("Eventbeschreibung:");
+                        final TextField eventbeschreibungField1 = new TextField();
+                        
+                        Label eventtyp = new Label("Eventtyp:");
+                        final ChoiceBox typchoice = new ChoiceBox(FXCollections.observableArrayList("Football", "Baseball", "Basketball", "Formula 1"));
+                        typchoice.getSelectionModel().selectFirst();
+                        
+                        Label start = new Label("Startuhrzeit:");
+                        final TextField startField = new TextField();
+                        
+                        Label ende = new Label("Enduhrzeit:");
+                        final TextField endeField = new TextField();
+                        
+                        
+        
+        Button createbtn = new Button();
+        createbtn.setText("Create");
+        createbtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+               TickerEvents create = new TickerEvents();
+               errmessage.setText("");
+               
+                 
+                  Map<String, String> eventdata = new HashMap<String, String>();
+                  eventdata.put("name", eventnametextField.getText());
+                  eventdata.put("beschr", eventbeschreibungField1.getText());
+//                  eventdata.put("typ", typchoice.getConverter().toString());
+                  eventdata.put("start", startField.getText());
+                  eventdata.put("dauer", endeField.getText());
+                  
+                  create.createEvent(eventdata);
+            }
+        });
+                        
+                        geoGridNew.add(eventname, 1, 0);
+                        geoGridNew.add(eventnametextField, 1, 1);
+                        geoGridNew.add(eventbeschreibung, 1, 2);
+                        geoGridNew.add(eventbeschreibungField1, 1, 3);
+                        geoGridNew.add(eventtyp, 1, 4);
+                        geoGridNew.add(typchoice, 1, 5);
+                        geoGridNew.add(start, 1, 6);
+                        geoGridNew.add(startField, 1, 7);
+                        geoGridNew.add(ende, 1, 8);
+                        geoGridNew.add(endeField, 1, 9);
+                        geoGridNew.add(createbtn, 1, 10);
+                        
                 	createNewEventTab.setContent(geoGridNew);
                         tabPane.getTabs().add(createNewEventTab);
                 }
@@ -179,10 +272,11 @@ public class SocialMain extends Application {
         Button test = new Button("Create Ticker");
         
         
+        hbox.getChildren().addAll(joinTicker, refresh);
         geoGrid.add(tickertext, 0, 0);
         geoGrid.add(ticklist, 0, 1);
-        geoGrid.add(joinTicker, 0, 2);
         geoGrid.add(create, 1, 2);
+        geoGrid.add(hbox, 0, 2);
         geoGrid3.add(beschreibung, 0, 0);
         geoGrid3.add(eventBeschreibung, 0, 1);
         geoGrid.add(geoGrid3, 1, 1);

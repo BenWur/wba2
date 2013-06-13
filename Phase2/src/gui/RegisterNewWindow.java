@@ -86,6 +86,7 @@ public class RegisterNewWindow extends Application {
         
         Register register = new Register();
         final ChoiceBox countryc = new ChoiceBox(FXCollections.observableArrayList(register.countrylist()));
+        countryc.getSelectionModel().selectFirst();
         countryc.setLayoutX(122);
         countryc.setLayoutY(257);
         
@@ -123,8 +124,8 @@ public class RegisterNewWindow extends Application {
                    errmessage.setTextFill(Color.rgb(210, 39, 30));
                    errmessage.setText("Sorry, username already taken or invalid!");
                }else{
-                  //errmessage.setText("");
                   System.out.println("Registriert!");
+                  
                   Map<String, String> userdata = new HashMap<String, String>();
                   userdata.put("name", textField.getText());
                   userdata.put("fname", fnameField1.getText());
