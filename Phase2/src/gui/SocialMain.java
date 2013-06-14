@@ -173,7 +173,7 @@ public class SocialMain extends Application {
                         comments.clear();
                         for (int h = 0; h < cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().size(); h++) {
                    
-                   comments.appendText(cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarUser()+"\n");
+                   comments.appendText(cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarUser()+" wrote:\n");
                    comments.appendText(cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarText()+"\n");
                    
                         }
@@ -185,10 +185,25 @@ public class SocialMain extends Application {
                 sp1.getChildren().add(liveticks);
 
                     
-                        TextField chatText = new TextField();
-                        
-                        Button sendchat = new Button("Send");
+                        final TextField chatText = new TextField();
+                       
+                        final Button sendchat = new Button("Send");
                 	sendchat.setMinWidth(50);
+                        sendchat.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                       public void handle(ActionEvent event) {
+                       TickerEvents newcontent = new TickerEvents();
+                       
+                       Map<String, String> contentdata = new HashMap<String, String>();
+                       String contentindex = Integer.toString(liveticks.getSelectionModel().getSelectedIndex());
+                       contentdata.put("contentindex", contentindex);
+                       String eventnr = Integer.toString(ticklist.getSelectionModel().getSelectedIndex() + 1);
+                       contentdata.put("eventnr", eventnr);
+                       contentdata.put("komment", chatText.getText());
+                       
+                       newcontent.createContent(contentdata);
+                                    }
+                                });
                         
                         geoGridk.add(sendchat, 1, 1);
                         geoGridk.add(chatText, 0, 1);

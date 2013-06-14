@@ -5,12 +5,18 @@
 package gui;
 
 import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import eventcontentlist.Eventcontent;
-import eventcontentlist.TickerBeitrag;
-import eventlist.Event;
-import eventlist.Eventlist;
-import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ws.rs.core.MediaType;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+import eventcontentlist.ObjectFactory;
+import eventcontentlist.Eventcontent;
 
 /**
  *

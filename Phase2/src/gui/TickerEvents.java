@@ -57,4 +57,7 @@ public class TickerEvents {
         public void createEvent(Map<String, String> eventdata) {
        new NewEvent(eventdata);
    }
+        public void createContent(Map<String, String> contentdata) {
+       new NewContent(contentdata);
+   }
 }

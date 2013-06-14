@@ -124,8 +124,6 @@ public class RegisterNewWindow extends Application {
                    errmessage.setTextFill(Color.rgb(210, 39, 30));
                    errmessage.setText("Sorry, username already taken or invalid!");
                }else{
-                  System.out.println("Registriert!");
-                  
                   Map<String, String> userdata = new HashMap<String, String>();
                   userdata.put("name", textField.getText());
                   userdata.put("fname", fnameField1.getText());
@@ -139,6 +137,9 @@ public class RegisterNewWindow extends Application {
                   userdata.put("bday", bdayField.getText());
                   userdata.put("country", countryc.getValue().toString());;
                   register.createUser(userdata);
+                  
+                  SocialMain loggedin = new SocialMain();
+                  loggedin.start(primaryStage);
                }
             }
         });
