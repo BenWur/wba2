@@ -147,7 +147,20 @@ public class SocialMain extends Application {
                 	
                         SplitPane sp = new SplitPane();
                         final StackPane sp1 = new StackPane();
-                        final ListView<String> liveticks = new ListView<String>();
+                        
+                        
+                    final ListView<String> liveticks = new ListView<String>();
+                    TickerContent cevents = new TickerContent();
+                    ObservableList<String> items = FXCollections.observableArrayList();
+                    int index2 = ticklist.getSelectionModel().getSelectedIndex() + 1;
+
+                    for (int f = 0; f < cevents.contentList(index2).getTickerBeitrag().size(); f++) {
+
+                        items.add(cevents.contentList(index2).getTickerBeitrag().get(f).getText());
+                    }
+                    liveticks.setItems(items);
+                     
+         
                         sp1.getChildren().add(liveticks);
                         final StackPane sp2 = new StackPane();
                         TextArea comments = new TextArea();

@@ -53,6 +53,7 @@ public class TickerEvents {
 	        
 	        return evnt;
 	   }
+        
         public void createEvent(Map<String, String> eventdata) {
        new NewEvent(eventdata);
    }

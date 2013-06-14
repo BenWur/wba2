@@ -16,8 +16,6 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import eventlist.ObjectFactory;
 import eventlist.Event;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 /**
  *
