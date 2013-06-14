@@ -2,7 +2,7 @@
 // Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.2.6 generiert 
 // Siehe <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
-// Generiert: 2013.06.10 um 03:22:35 PM CEST 
+// Generiert: 2013.06.14 um 02:04:55 PM CEST 
 //
 
 
@@ -73,7 +73,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "", name = "eventtyp", defaultValue = "Football")
+    @XmlElementDecl(namespace = "", name = "eventtyp")
     public JAXBElement<String> createEventtyp(String value) {
         return new JAXBElement<String>(_Eventtyp_QNAME, String.class, null, value);
     }

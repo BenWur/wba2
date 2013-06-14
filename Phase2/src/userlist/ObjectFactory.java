@@ -2,7 +2,7 @@
 // Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.2.6 generiert 
 // Siehe <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
-// Generiert: 2013.06.04 um 01:18:12 PM CEST 
+// Generiert: 2013.06.14 um 02:05:42 PM CEST 
 //
 
 
@@ -37,8 +37,8 @@ public class ObjectFactory {
     private final static QName _Geburtsdatum_QNAME = new QName("", "geburtsdatum");
     private final static QName _Vorname_QNAME = new QName("", "vorname");
     private final static QName _AnzEvents_QNAME = new QName("", "anzEvents");
-    private final static QName _Name_QNAME = new QName("", "name");
     private final static QName _Stadt_QNAME = new QName("", "stadt");
+    private final static QName _Name_QNAME = new QName("", "name");
     private final static QName _Land_QNAME = new QName("", "land");
     private final static QName _Gender_QNAME = new QName("", "gender");
     private final static QName _Beitraege_QNAME = new QName("", "beitraege");
@@ -48,22 +48,6 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
-    }
-
-    /**
-     * Create an instance of {@link Folger }
-     * 
-     */
-    public Folger createFolger() {
-        return new Folger();
-    }
-
-    /**
-     * Create an instance of {@link Favoriten }
-     * 
-     */
-    public Favoriten createFavoriten() {
-        return new Favoriten();
     }
 
     /**
@@ -80,6 +64,22 @@ public class ObjectFactory {
      */
     public User createUser() {
         return new User();
+    }
+
+    /**
+     * Create an instance of {@link Favoriten }
+     * 
+     */
+    public Favoriten createFavoriten() {
+        return new Favoriten();
+    }
+
+    /**
+     * Create an instance of {@link Folger }
+     * 
+     */
+    public Folger createFolger() {
+        return new Folger();
     }
 
     /**
@@ -122,6 +122,15 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
+    @XmlElementDecl(namespace = "", name = "stadt")
+    public JAXBElement<String> createStadt(String value) {
+        return new JAXBElement<String>(_Stadt_QNAME, String.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
     @XmlElementDecl(namespace = "", name = "name")
     public JAXBElement<String> createName(String value) {
         return new JAXBElement<String>(_Name_QNAME, String.class, null, value);
@@ -131,18 +140,9 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "", name = "stadt")
-    public JAXBElement<String> createStadt(String value) {
-        return new JAXBElement<String>(_Stadt_QNAME, String.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link LandType }{@code >}}
-     * 
-     */
     @XmlElementDecl(namespace = "", name = "land", defaultValue = "Germany")
-    public JAXBElement<LandType> createLand(LandType value) {
-        return new JAXBElement<LandType>(_Land_QNAME, LandType.class, null, value);
+    public JAXBElement<String> createLand(String value) {
+        return new JAXBElement<String>(_Land_QNAME, String.class, null, value);
     }
 
     /**

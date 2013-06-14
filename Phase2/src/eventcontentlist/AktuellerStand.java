@@ -2,13 +2,12 @@
 // Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.2.6 generiert 
 // Siehe <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
-// Generiert: 2013.06.10 um 02:55:53 PM CEST 
+// Generiert: 2013.06.14 um 02:04:13 PM CEST 
 //
 
 
 package eventcontentlist;
 
-import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -26,8 +25,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="heim" type="{http://www.w3.org/2001/XMLSchema}decimal"/>
- *         &lt;element name="gast" type="{http://www.w3.org/2001/XMLSchema}decimal"/>
+ *         &lt;element name="heim" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="gast" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -45,19 +44,19 @@ import javax.xml.bind.annotation.XmlType;
 public class AktuellerStand {
 
     @XmlElement(required = true)
-    protected BigDecimal heim;
+    protected String heim;
     @XmlElement(required = true)
-    protected BigDecimal gast;
+    protected String gast;
 
     /**
      * Ruft den Wert der heim-Eigenschaft ab.
      * 
      * @return
      *     possible object is
-     *     {@link BigDecimal }
+     *     {@link String }
      *     
      */
-    public BigDecimal getHeim() {
+    public String getHeim() {
         return heim;
     }
 
@@ -66,10 +65,10 @@ public class AktuellerStand {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigDecimal }
+     *     {@link String }
      *     
      */
-    public void setHeim(BigDecimal value) {
+    public void setHeim(String value) {
         this.heim = value;
     }
 
@@ -78,10 +77,10 @@ public class AktuellerStand {
      * 
      * @return
      *     possible object is
-     *     {@link BigDecimal }
+     *     {@link String }
      *     
      */
-    public BigDecimal getGast() {
+    public String getGast() {
         return gast;
     }
 
@@ -90,10 +89,10 @@ public class AktuellerStand {
      * 
      * @param value
      *     allowed object is
-     *     {@link BigDecimal }
+     *     {@link String }
      *     
      */
-    public void setGast(BigDecimal value) {
+    public void setGast(String value) {
         this.gast = value;
     }
 
