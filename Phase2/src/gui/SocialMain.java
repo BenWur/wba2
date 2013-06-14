@@ -1,7 +1,6 @@
 package gui;
 
 
-import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.application.Application;
@@ -162,7 +161,7 @@ public class SocialMain extends Application {
                     final int index2 = ticklist.getSelectionModel().getSelectedIndex() + 1;
                     for (int f = 0; f < cevents.contentList(index2).getTickerBeitrag().size(); f++) {
                         
-                        items.add(cevents.contentList(index2).getTickerBeitrag().get(f).getText());
+                        items.add(cevents.contentList(index2).getTickerBeitrag().get(f).getZeit()+": "+cevents.contentList(index2).getTickerBeitrag().get(f).getText());
                         liveticks.setItems(items);
                     
                     liveticks.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -171,15 +170,16 @@ public class SocialMain extends Application {
                 if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
                     if (mouseEvent.getClickCount() == 1) {
                         final int index3 = liveticks.getSelectionModel().getSelectedIndex();
+                        comments.clear();
                         for (int h = 0; h < cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().size(); h++) {
+                   
                    comments.appendText(cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarUser()+"\n");
                    comments.appendText(cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarText()+"\n");
+                   
                         }
                     }
                     }
                   }
-                
-              
               });
             }      
                 sp1.getChildren().add(liveticks);
@@ -313,7 +313,7 @@ public class SocialMain extends Application {
                         
                         geoGridk.add(sp, 0, 0);
                 	
-                	createNewEventTab.setContent(geoGridk);;
+                	createNewEventTab.setContent(geoGridk);
                 
             }
         });
