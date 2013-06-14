@@ -15,10 +15,12 @@
 		
 			<text>Was für ein HAMMER DING von Thomas Müller</text>
 			
-			<kommentar user="DrDare">
+			<kommentar >
+				<kommentarUser>DrDare</kommentarUser>
 				<kommentarText>Hast recht :D echt gut gemacht!!! Thomas heart you</kommentarText>
 			</kommentar>
-			<kommentar user="DrDare">
+			<kommentar >
+				<kommentarUser>DrDare</kommentarUser>
 				<kommentarText>Oh.. wie ist das schön!</kommentarText>
 			</kommentar>
 			
@@ -28,7 +30,8 @@
 		
 			<text>Das geht hier ja echt zur Sache! Schon wieder ein Tor 2:0</text>
 			
-			<kommentar user="DrDare">
+			<kommentar>
+				<kommentarUser>DrDare</kommentarUser>
 				<kommentarText>Ich krieg mich kaum noch ein :D</kommentarText>
 			</kommentar>
 			
@@ -45,12 +48,14 @@
 	
 		<tickerBeitrag typ="Tor" zeit="08:45:00" tickerBeitragID="1">
 		
-			<text>Eine Granate von Robbinho</text>
+			<text>Eine Granate von Robbenho</text>
 			
-			<kommentar user="Holly92">
+			<kommentar>
+				<kommentarUser>Holly92</kommentarUser>
 				<kommentarText>lollo</kommentarText>
 			</kommentar>
-			<kommentar user="DrDare">
+			<kommentar>
+				<kommentarUser>Holly92</kommentarUser>
 				<kommentarText>haha...lollo hast recht!</kommentarText>
 			</kommentar>
 			
