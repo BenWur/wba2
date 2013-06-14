@@ -33,17 +33,10 @@
         <eventbewertung>1</eventbewertung>
     </event>
     <event eventID="5">
-        <eventname>sadasd asdasdasd</eventname>
-        <eventbeschreibung>asdasda asd asdsa </eventbeschreibung>
+        <eventname>Portugal vs Monaco</eventname>
+        <eventbeschreibung>Best game ever, don't miss it!! yeah</eventbeschreibung>
         <eventtyp>Football</eventtyp>
-        <eventstart>11:21:00</eventstart>
-        <eventdauer>13:20:00</eventdauer>
-    </event>
-    <event eventID="6">
-        <eventname>dsfsdfdssdf sddsfdfssfdssdf sddsfsdfsdf</eventname>
-        <eventbeschreibung>sdfdsdfsdfsdf dsfdsfdsfsdfsdf dsdfsdsfdsfdfssfdfdsdsf dsfdsfdfssdfdsf dsfdsfdfsdfdsfsdf sdsdffdsdfdsfsdf</eventbeschreibung>
-        <eventtyp>Baseball</eventtyp>
-        <eventstart>11:23:00</eventstart>
-        <eventdauer>22:46:00</eventdauer>
+        <eventstart>12:45:00</eventstart>
+        <eventdauer>13:55:00</eventdauer>
     </event>
 </eventlist>

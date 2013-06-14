@@ -10,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -38,6 +37,7 @@ public class SocialMain extends Application {
     private Tab tab2;
     private Tab createNewEventTab;
     private Tab k;
+    private Tab newEvent;
     
     @Override
     public void start(final Stage primaryStage) {
@@ -177,7 +177,6 @@ public class SocialMain extends Application {
         
         Button refresh = new Button("Refresh");
         refresh.setMinWidth(50);
-        refresh.setAlignment(Pos.BOTTOM_RIGHT);
         
         create.setOnAction(new EventHandler<ActionEvent>() {
         	@Override
@@ -232,19 +231,60 @@ public class SocialMain extends Application {
         createbtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-               TickerEvents create = new TickerEvents();
+               TickerEvents make = new TickerEvents();
                errmessage.setText("");
                
                  
                   Map<String, String> eventdata = new HashMap<String, String>();
-                  eventdata.put("name", eventnametextField.getText());
-                  eventdata.put("beschr", eventbeschreibungField1.getText());
-                 eventdata.put("typ", typchoice.getSelectionModel().getSelectedItem().toString());
-                eventdata.put("start", startField.getText()+":00");
-                 eventdata.put("ende", endeField.getText()+":00");
-                  
-                  
-                  create.createEvent(eventdata);
+                eventdata.put("name", eventnametextField.getText());
+                eventdata.put("beschr", eventbeschreibungField1.getText());
+                eventdata.put("typ", typchoice.getSelectionModel().getSelectedItem().toString());
+                eventdata.put("start", startField.getText() + ":00");
+                eventdata.put("ende", endeField.getText() + ":00");
+
+
+                make.createEvent(eventdata);
+                
+                	createNewEventTab.setText(eventnametextField.getText());
+                	//tabPane.getTabs().add(newEvent);
+                        //selectTab.select(newEvent);
+                	final GridPane geoGridk = new GridPane();
+                	geoGridk.setHgap(5); // Abstand links/rechts
+                	geoGridk.setVgap(5); // Abstand oben/unten
+                	
+                	ColumnConstraints column1 = new ColumnConstraints();
+                        column1.setPercentWidth(85);
+                        ColumnConstraints column2 = new ColumnConstraints();
+                        column2.setPercentWidth(15);
+                        RowConstraints row1 = new RowConstraints();
+                        row1.setPercentHeight(92);
+                        RowConstraints row2 = new RowConstraints();
+                        row2.setPercentHeight(8);
+                        geoGridk.getColumnConstraints().addAll(column1, column2);
+                        geoGridk.getRowConstraints().addAll(row1, row2);
+                	
+                        SplitPane sp = new SplitPane();
+                        final StackPane sp1 = new StackPane();
+                        final ListView<String> liveticks = new ListView<String>();
+                        sp1.getChildren().add(liveticks);
+                        final StackPane sp2 = new StackPane();
+                        TextArea comments = new TextArea();
+                        sp2.getChildren().add(comments);
+                        sp.getItems().addAll(sp1, sp2);
+                        
+                        
+                        TextField chatText = new TextField();
+                        
+                        Button sendchat = new Button("Send");
+                	sendchat.setMinWidth(50);
+                        
+                        geoGridk.add(sendchat, 1, 1);
+                        geoGridk.add(chatText, 0, 1);
+                        
+                        geoGridk.add(sp, 0, 0);
+                	
+                	createNewEventTab.setContent(geoGridk);;
+                
             }
         });
                         
