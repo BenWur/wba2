@@ -5,8 +5,8 @@
         <eventbeschreibung>Holly's Awesome Live Ticker. Join the show!</eventbeschreibung>
         <username>Holly92</username>
         <eventtyp>Football</eventtyp>
-        <eventstart>08:45:00+02:00</eventstart>
-        <eventdauer>10:45:00+02:00</eventdauer>
+        <eventstart>08:45:00</eventstart>
+        <eventdauer>10:45:00</eventdauer>
         <eventbewertung>4</eventbewertung>
     </event>
     <event userID="2" eventID="2">
@@ -21,7 +21,7 @@
     <event userID="2" eventID="3">
         <eventname>U21 Deutschland Spanien</eventname>
         <eventstart>08:45:00</eventstart>
-        <eventdauer>22:45:00</eventdauer>
+        <eventdauer>21:55:00</eventdauer>
     </event>
     <event userID="1" eventID="4">
         <eventname>Deutschland - USA</eventname>
@@ -29,7 +29,7 @@
         <username>DrDare</username>
         <eventtyp>Football</eventtyp>
         <eventstart>08:30:00</eventstart>
-        <eventdauer>22:30:00</eventdauer>
+        <eventdauer>21:50:00</eventdauer>
         <eventbewertung>1</eventbewertung>
     </event>
     <event eventID="5">
