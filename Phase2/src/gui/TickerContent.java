@@ -25,5 +25,5 @@ public class TickerContent {
 	       Eventcontent ev = wrs.accept("application/xml").get(Eventcontent.class);
 	        
 	     return ev;
-	    } 
+	    }
 }

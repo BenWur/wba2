@@ -1,6 +1,7 @@
 package gui;
 
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.application.Application;
@@ -159,35 +160,31 @@ public class SocialMain extends Application {
                     final TickerContent cevents = new TickerContent();
                     ObservableList<String> items = FXCollections.observableArrayList();
                     final int index2 = ticklist.getSelectionModel().getSelectedIndex() + 1;
-
                     for (int f = 0; f < cevents.contentList(index2).getTickerBeitrag().size(); f++) {
-
+                        
                         items.add(cevents.contentList(index2).getTickerBeitrag().get(f).getText());
-                    }
-                    liveticks.setItems(items);
-                     
-                sp1.getChildren().add(liveticks);
-                
-                
+                        liveticks.setItems(items);
+                    
                     liveticks.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
                     if (mouseEvent.getClickCount() == 1) {
-                            beschreibung.setText("Beschreibung:");
-                            for (int f = 0; f < cevents.contentList(index2).getTickerBeitrag().get(f).getKommentar().size(); f++) 
-                            {
-                         comments.setText(cevents.contentList(index2).getTickerBeitrag().get(f).getKommentar().get(index2).getUser(???).getKommentarText());
-                            }
+                        final int index3 = liveticks.getSelectionModel().getSelectedIndex();
+                        for (int h = 0; h < cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().size(); h++) {
+                   comments.appendText(cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarUser()+"\n");
+                   comments.appendText(cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarText()+"\n");
+                        }
                     }
-                }
-            }
-        });
+                    }
+                  }
+                
+              
+              });
+            }      
+                sp1.getChildren().add(liveticks);
+
                     
-                    
-                        
-                        
-                        
                         TextField chatText = new TextField();
                         
                         Button sendchat = new Button("Send");
@@ -254,7 +251,7 @@ public class SocialMain extends Application {
                         Label start = new Label("Event start:");
                         final TextField startField = new TextField();
                         
-                        Label ende = new Label("Duration:");
+                        Label ende = new Label("Event end:");
                         final TextField endeField = new TextField();
                         
                         
