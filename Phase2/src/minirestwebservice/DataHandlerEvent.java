@@ -44,13 +44,7 @@ public class DataHandlerEvent {
 
 		List<Event> eventliste = events.getEvent();
 		eventliste.add(event);
-		
-		System.out.println("added");
-
 		this.savePersistent();
-		
-		System.out.println("nur noch return");
-		
 		return URI.create("http://localhost:4434/events/" + event.getEventID().toString());
 
 	}
@@ -60,7 +54,6 @@ public class DataHandlerEvent {
 		List<Event> eventliste = events.getEvent();
 
 		int i = 0;
-		;
 		for (Event ev : eventliste) {
 			if (ev.getEventID().equals(id)) {
 				eventliste.set(i, event);
@@ -94,7 +87,6 @@ public class DataHandlerEvent {
 
 	private void savePersistent() {
 		try {
-			System.out.println("save");
 			marshaller.marshal(events, new File("XML/Eventlist.xml"));
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
