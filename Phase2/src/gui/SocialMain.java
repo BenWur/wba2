@@ -149,10 +149,16 @@ public class SocialMain extends Application {
                         final StackPane sp1 = new StackPane();
                         
                         
+                        final StackPane sp2 = new StackPane();
+                        final TextArea comments = new TextArea();
+                        sp2.getChildren().add(comments);
+                        sp.getItems().addAll(sp1, sp2);
+                        
+                        
                     final ListView<String> liveticks = new ListView<String>();
-                    TickerContent cevents = new TickerContent();
+                    final TickerContent cevents = new TickerContent();
                     ObservableList<String> items = FXCollections.observableArrayList();
-                    int index2 = ticklist.getSelectionModel().getSelectedIndex() + 1;
+                    final int index2 = ticklist.getSelectionModel().getSelectedIndex() + 1;
 
                     for (int f = 0; f < cevents.contentList(index2).getTickerBeitrag().size(); f++) {
 
@@ -160,12 +166,26 @@ public class SocialMain extends Application {
                     }
                     liveticks.setItems(items);
                      
-         
-                        sp1.getChildren().add(liveticks);
-                        final StackPane sp2 = new StackPane();
-                        TextArea comments = new TextArea();
-                        sp2.getChildren().add(comments);
-                        sp.getItems().addAll(sp1, sp2);
+                sp1.getChildren().add(liveticks);
+                
+                
+                    liveticks.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    if (mouseEvent.getClickCount() == 1) {
+                            beschreibung.setText("Beschreibung:");
+                            for (int f = 0; f < cevents.contentList(index2).getTickerBeitrag().get(f).getKommentar().size(); f++) 
+                            {
+                         comments.setText(cevents.contentList(index2).getTickerBeitrag().get(f).getKommentar().get(index2).getUser(???).getKommentarText());
+                            }
+                    }
+                }
+            }
+        });
+                    
+                    
+                        
                         
                         
                         TextField chatText = new TextField();

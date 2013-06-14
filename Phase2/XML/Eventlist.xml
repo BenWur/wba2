@@ -39,4 +39,11 @@
         <eventstart>12:45:00</eventstart>
         <eventdauer>13:55:00</eventdauer>
     </event>
+    <event eventID="6">
+        <eventname>xczcZcz ZZZxzxxa</eventname>
+        <eventbeschreibung>sadssad saaaaaaaaa assadsadds</eventbeschreibung>
+        <eventtyp>Formula 1</eventtyp>
+        <eventstart>12:33:00</eventstart>
+        <eventdauer>23:10:00</eventdauer>
+    </event>
 </eventlist>
