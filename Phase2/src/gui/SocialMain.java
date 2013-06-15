@@ -37,7 +37,7 @@ public class SocialMain extends Application {
     private Tab tab2;
     private Tab createNewEventTab;
     private Tab k;
-    private Tab newEvent;
+    public String user;
     
     @Override
     public void start(final Stage primaryStage) {
@@ -93,6 +93,9 @@ public class SocialMain extends Application {
          ticklist.setItems(items);
         final Button joinTicker = new Button("Join");
         joinTicker.setMinWidth(50);
+        
+        Label welcome = new Label();
+        welcome.setText("Hello, "+user+"!");
         
         final Label beschreibung = new Label();
         final Label eventBeschreibung = new Label();
@@ -265,10 +268,11 @@ public class SocialMain extends Application {
                         
                         Label start = new Label("Event start:");
                         final TextField startField = new TextField();
+                        startField.setPromptText("HH:MM");
                         
                         Label ende = new Label("Event end:");
                         final TextField endeField = new TextField();
-                        
+                        endeField.setPromptText("HH:MM");
                         
         
         Button createbtn = new Button();
@@ -361,6 +365,7 @@ public class SocialMain extends Application {
         hbox.getChildren().addAll(joinTicker, refresh);
         geoGrid.add(tickertext, 0, 0);
         geoGrid.add(ticklist, 0, 1);
+        geoGrid.add(welcome, 1, 0);
         geoGrid.add(create, 1, 2);
         geoGrid.add(hbox, 0, 2);
         geoGrid3.add(beschreibung, 0, 0);

@@ -79,6 +79,7 @@ public class RegisterNewWindow extends Application {
         bdayField.setLayoutX(50);
         bdayField.setLayoutY(215);
         bdayField.setMinWidth(200);
+        bdayField.setPromptText("YYYY-MM-DD");
         
         Label country = new Label("Country:");
         country.setLayoutX(50);
@@ -139,6 +140,7 @@ public class RegisterNewWindow extends Application {
                   register.createUser(userdata);
                   
                   SocialMain loggedin = new SocialMain();
+                  loggedin.user = textField.getText();
                   loggedin.start(primaryStage);
                }
             }

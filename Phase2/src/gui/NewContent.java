@@ -40,7 +40,7 @@ public class NewContent {
         } */
         Eventcontent event = new ObjectFactory().createEventcontent();
         
-        event.getTickerBeitrag().get(contentindex).getKommentar().get(eventindex).setKommentarText(contentdata.get("komment"));
+        event.getTickerBeitrag().get(eventindex).getKommentar().get(contentindex).setKommentarText(contentdata.get("komment"));
         
         
        

@@ -65,7 +65,9 @@ public class LoginWindow extends Application {
                passField1.clear();
                if (register.login(textField.getText())) {
                    SocialMain loggedin = new SocialMain();
+                   loggedin.user = register.loggedInUser;
                    loggedin.start(primaryStage);
+                   
                }else{
                   errmessage.setText("Your username or password is incorrect!");
                   errmessage.setTextFill(Color.rgb(210, 39, 30));

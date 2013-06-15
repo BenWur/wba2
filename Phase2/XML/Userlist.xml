@@ -43,4 +43,22 @@
         <land>Italy</land>
         <stadt>Romana</stadt>
     </user>
+    <user userID="4">
+        <username>holyshit</username>
+        <vorname>hohoohoh</vorname>
+        <name>hoohohsdas</name>
+        <gender>Male</gender>
+        <geburtsdatum>1987-11-11</geburtsdatum>
+        <land>Germany</land>
+        <stadt>Köln</stadt>
+    </user>
+    <user userID="5">
+        <username>heymarie</username>
+        <vorname>asdasdasd</vorname>
+        <name>asdsadd</name>
+        <gender>Male</gender>
+        <geburtsdatum>1988-11-11</geburtsdatum>
+        <land>Germany</land>
+        <stadt>saadsdas</stadt>
+    </user>
 </userlist>
