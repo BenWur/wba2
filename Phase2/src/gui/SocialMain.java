@@ -75,6 +75,32 @@ public class SocialMain extends Application {
         geoGrid2.setHgap(5); // Abstand links/rechts
         geoGrid2.setVgap(5); // Abstand oben/unten
         
+        ColumnConstraints column12 = new ColumnConstraints();
+                        column12.setPercentWidth(30);
+                        ColumnConstraints column22 = new ColumnConstraints();
+                        column22.setPercentWidth(40);
+                        ColumnConstraints column32 = new ColumnConstraints();
+                        column32.setPercentWidth(30);
+                        geoGrid2.getColumnConstraints().addAll(column12, column22, column32);
+                	
+                        
+                        
+                        UserContent info = new UserContent();
+                        Label userinfo = new Label("Username:");
+                        Label username = new Label(info.userInfo(user).getUsername());
+                        Label userfnamet = new Label("Name:");
+                        Label userfname = new Label(info.userInfo(user).getVorname());
+                        
+                        
+                        
+                        geoGrid2.add(userinfo, 1, 0);
+                        geoGrid2.add(username, 1, 1);
+                        geoGrid2.add(userfnamet, 1, 2);
+                        geoGrid2.add(userfname, 1, 3);
+                        
+                        
+                        
+        
         final GridPane geoGrid3 = new GridPane();
         
         tab1 = new Tab();
@@ -419,7 +445,7 @@ public class SocialMain extends Application {
         geoGrid3.add(eventscore, 0, 12);
         geoGrid3.add(eventscoretext, 0, 13);
         geoGrid.add(geoGrid3, 1, 1);
-        geoGrid2.add(test, 0, 0);
+        
         
    
         tab1.setContent(geoGrid);
