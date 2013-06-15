@@ -8,18 +8,10 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import eventcontentlist.Eventcontent;
-import eventcontentlist.Eventcontentlist;
 import eventcontentlist.Kommentar;
-import eventcontentlist.TickerBeitrag;
 import eventcontentlist.ObjectFactory;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ws.rs.core.MediaType;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
-
 /**
  *
  * @author Dario
@@ -60,6 +52,19 @@ public class NewContent {
        ClientResponse cr = wrs.accept("text/html").type(MediaType.APPLICATION_XML).entity(event).post(ClientResponse.class);
 
        System.out.println(cr.getStatus());
+    }
+    
+    public void newBeitrag(int eventID, String beitrag){
+    	Kommentar kommi = new ObjectFactory().createKommentar();
+    	kommi.setKommentarText(beitrag);
+    	
+    	String url = "http://localhost:4434/events/"+eventID+"/beitrag";
+        WebResource wrs = Client.create().resource(url);
+        
+        
+        ClientResponse cr = wrs.accept("text/html").type(MediaType.APPLICATION_XML).entity(kommi).post(ClientResponse.class);
+
+        System.out.println(cr.getStatus());
     }
     
 }
