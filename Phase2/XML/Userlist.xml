@@ -61,4 +61,22 @@
         <land>Germany</land>
         <stadt>saadsdas</stadt>
     </user>
+    <user userID="6">
+        <username>DrDare1</username>
+        <vorname>masdsdaads</vorname>
+        <name>asdassaddsa</name>
+        <gender>Male</gender>
+        <geburtsdatum>1988-12-12</geburtsdatum>
+        <land>Germany</land>
+        <stadt>adsadsad</stadt>
+    </user>
+    <user userID="7">
+        <username>DrDar</username>
+        <vorname>asdasdas</vorname>
+        <name>sasadsaddas</name>
+        <gender>Male</gender>
+        <geburtsdatum>1977-01-01</geburtsdatum>
+        <land>Germany</land>
+        <stadt>asdasasd</stadt>
+    </user>
 </userlist>
