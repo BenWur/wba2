@@ -17,11 +17,17 @@ public class UserContent {
     
     public User userInfo(String username)
 	   {   
-	       String url = "http://localhost:4434/users?name="+username;
+	       String url = "http://localhost:4434/users/";
 	       WebResource wrs = Client.create().resource(url);
 	       
 	       Userlist ev = wrs.accept("application/xml").get(Userlist.class);
-	        
-	     return ev.getUser().get(0);
-	    }
+	       
+               for (int i = 0; i < ev.getUser().size(); i++)
+               {
+              if (ev.getUser().get(i).getUsername().equals(username)){
+              return ev.getUser().get(i);
+               }
+              }
+        return null;
+           }
 }

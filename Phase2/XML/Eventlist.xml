@@ -46,4 +46,11 @@
         <eventstart>12:33:00</eventstart>
         <eventdauer>23:10:00</eventdauer>
     </event>
+    <event eventID="7">
+        <eventname>Heyhey</eventname>
+        <eventbeschreibung>saddasdas</eventbeschreibung>
+        <eventtyp>Football</eventtyp>
+        <eventstart>12:31:00</eventstart>
+        <eventdauer>13:21:00</eventdauer>
+    </event>
 </eventlist>

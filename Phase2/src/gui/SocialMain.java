@@ -149,7 +149,6 @@ public class SocialMain extends Application {
         
         final Label eventscore = new Label();
         final Label eventscoretext = new Label();
-        eventscoretext.setWrapText(true);
         
         ticklist.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -174,7 +173,6 @@ public class SocialMain extends Application {
                          eventstarttext.setText(tevents.eventList().get(index).getEventstart().toXMLFormat());
                          eventendtext.setText(tevents.eventList().get(index).getEventdauer().toXMLFormat());
                          eventscoretext.setText(tevents.eventList().get(index).getEventbewertung().toString());
-                         
                     }
                 }
             }
