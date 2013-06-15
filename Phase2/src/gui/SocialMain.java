@@ -255,10 +255,18 @@ public class SocialMain extends Application {
                         sendchat.setOnAction(new EventHandler<ActionEvent>() {
                         	@Override
                         	public void handle(ActionEvent event) {
-                       
-                        	String beitrag = chatText.getText();
-                        	int eventnr = ticklist.getSelectionModel().getSelectedIndex() + 1;
-                        	new TickerEvents().createContent(eventnr, beitrag);
+                        		 if( liveticks.getSelectionModel().isEmpty() ){
+                        			String beitrag = chatText.getText();
+                                 	int eventnr = ticklist.getSelectionModel().getSelectedIndex() + 1;
+                                 	new TickerEvents().createBeitrag(eventnr, beitrag);
+                                 }
+                        		 else if (!liveticks.getSelectionModel().isEmpty()){
+                        			 
+                        			String beitrag = chatText.getText();
+                                  	int eventnr = ticklist.getSelectionModel().getSelectedIndex() + 1;
+                                  	int ticknr = liveticks.getSelectionModel().getSelectedIndex() + 1;
+                                  	new TickerEvents().createKommentar(eventnr,ticknr,user,beitrag);
+                        		 }
                        
                             }
                         });

@@ -32,6 +32,9 @@
         <tickerBeitrag zeit="19:56:25" tickerBeitragID="5">
             <text>auf gehts ab gehts</text>
         </tickerBeitrag>
+        <tickerBeitrag zeit="20:25:45" tickerBeitragID="6">
+            <text>drei tage wach</text>
+        </tickerBeitrag>
     </eventcontent>
     <eventcontent eventID="2">
         <aktuellerStand>
@@ -48,6 +51,16 @@
                 <kommentarUser>Holly92</kommentarUser>
                 <kommentarText>haha...lollo hast recht!</kommentarText>
             </kommentar>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="20:03:51" tickerBeitragID="2">
+            <text>Da ist der Anschlusstreffer! Das wird nochmal eng!</text>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>wasn hier los</kommentarText>
+            </kommentar>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="20:29:06" tickerBeitragID="3">
+            <text>ooouuuuh das tut weh</text>
         </tickerBeitrag>
     </eventcontent>
 </eventcontentlist>

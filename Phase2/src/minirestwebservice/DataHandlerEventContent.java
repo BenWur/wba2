@@ -65,7 +65,7 @@ public class DataHandlerEventContent {
 	    	if(evc.getEventID().intValue()==eventID){
 	    		List<TickerBeitrag> beitragliste = evc.getTickerBeitrag();
 	    		for(TickerBeitrag tickerc : beitragliste ){
-			    	if(tickerc.getTickerBeitragID().equals(tickerBeitragID)){
+			    	if(tickerc.getTickerBeitragID().intValue()==tickerBeitragID){
 			    		eventcontentliste.get(i).getTickerBeitrag().get(n).getKommentar().add(kommentar);
 			    	}
 			    	n++;

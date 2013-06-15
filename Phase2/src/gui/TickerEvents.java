@@ -57,7 +57,11 @@ public class TickerEvents {
         public void createEvent(Map<String, String> eventdata) {
        new NewEvent(eventdata);
    }
-        public void createContent(int ID, String beitrag) {
-       new NewBeitrag(ID, beitrag);
+   public void createBeitrag(int ID, String beitrag) {
+    	new NewBeitrag(ID, beitrag);
    }
+        
+    public void createKommentar(int eventID, int tickerID, String username, String beitrag) {
+        new NewKommentar(eventID, tickerID, username, beitrag);
+    }
 }
