@@ -61,12 +61,12 @@ public class EventContentListService
 	   @POST 
 	   @Path( "/beitrag/{tickerBeitragID}")
 	   @Consumes( MediaType.APPLICATION_XML )
-	   public URI postNewKommentar( 	@PathParam("eventID") int eventID,
+	   public Response postNewKommentar( 	@PathParam("eventID") int eventID,
 			   								@PathParam("tickerBeitragID") int tickerBeitragID, 
 			   								Kommentar kommentar ) throws Exception
 	   {
 		   DataHandlerEventContent handle = new DataHandlerEventContent();	 
-	       return handle.postNewKommentar(eventID,tickerBeitragID,kommentar) ; 
+	       return Response.created(handle.postNewKommentar(eventID,tickerBeitragID,kommentar)).build() ; 
 	   }
 	   
 	   @DELETE

@@ -21,9 +21,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *
  * @author Dario
  */
-public class NewContent {
+public class NewBeitrag {
     
-    public NewContent(int eventID, String beitrag) {
+    public NewBeitrag(int eventID, String beitrag) {
     	TickerBeitrag kommi = new ObjectFactory().createTickerBeitrag();
     	kommi.setText(beitrag);
     	SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");

@@ -55,7 +55,7 @@ public class DataHandlerEvent {
 
 		int i = 0;
 		for (Event ev : eventliste) {
-			if (ev.getEventID().equals(id)) {
+			if (ev.getEventID().intValue()==id) {
 				eventliste.set(i, event);
 			}
 			i++;
@@ -73,7 +73,7 @@ public class DataHandlerEvent {
 
 		int i = 0;
 		for (Event ev : eventliste) {
-			if (ev.getEventID().equals(id)) {
+			if (ev.getEventID().intValue()==id) {
 				eventliste.remove(i);
 			}
 			i++;

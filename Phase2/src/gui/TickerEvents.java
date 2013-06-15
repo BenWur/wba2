@@ -58,6 +58,6 @@ public class TickerEvents {
        new NewEvent(eventdata);
    }
         public void createContent(int ID, String beitrag) {
-       new NewContent(ID, beitrag);
+       new NewBeitrag(ID, beitrag);
    }
 }

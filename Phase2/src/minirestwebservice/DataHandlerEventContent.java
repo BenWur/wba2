@@ -48,12 +48,8 @@ public class DataHandlerEventContent {
 
 		List<Eventcontent> Eventcontentliste = eventcontents.getEventcontent();
 		Eventcontentliste.add(event);
-		
-		System.out.println("added");
 
 		this.savePersistent();
-		
-		System.out.println("nur noch return");
 		
 		return URI.create("http://localhost:4434/events/"+event.getEventID().toString()+"/eventcontent");
 
@@ -63,20 +59,23 @@ public class DataHandlerEventContent {
 	   
 	    List<Eventcontent> eventcontentliste = eventcontents.getEventcontent();
 	    
-	    
+	    int i = 0;
+	    int n=0;
 	    for(Eventcontent evc : eventcontentliste ){
-	    	if(evc.getEventID().equals(eventID)){
+	    	if(evc.getEventID().intValue()==eventID){
 	    		List<TickerBeitrag> beitragliste = evc.getTickerBeitrag();
 	    		for(TickerBeitrag tickerc : beitragliste ){
 			    	if(tickerc.getTickerBeitragID().equals(tickerBeitragID)){
-			    		tickerc.getKommentar().add(kommentar);
+			    		eventcontentliste.get(i).getTickerBeitrag().get(n).getKommentar().add(kommentar);
 			    	}
+			    	n++;
 			    }
 	    	}
+	    	i++;
 	    }
 	    this.savePersistent();
 	    
-	    return URI.create("http://localhost:4434/events/"+eventID+"/eventcontent/beitrag/"); 
+	    return URI.create("http://localhost:4434/events/"+eventID+"/eventcontent/beitrag/"+tickerBeitragID); 
 	}
 	
 	public URI postNewBeitrag(int eventID, TickerBeitrag beitrag){
@@ -113,7 +112,7 @@ public class DataHandlerEventContent {
 	    
 	    for (Iterator<Eventcontent> it = eventcontentliste.iterator(); it.hasNext(); ) {
 	    	Eventcontent evc = it.next();
-	    	if(evc.getEventID().equals(eventID)){
+	    	if(evc.getEventID().intValue()==eventID){
 	    		List<TickerBeitrag> beitraege = evc.getTickerBeitrag();
 	    		for (Iterator<TickerBeitrag> iter = beitraege.iterator(); iter.hasNext(); ) {
 			    	TickerBeitrag bei = iter.next();
@@ -135,7 +134,7 @@ public class DataHandlerEventContent {
 
 		int i = 0;
 		for (Eventcontent ev : Eventcontentliste) {
-			if (ev.getEventID().equals(id)) {
+			if (ev.getEventID().intValue()==id) {
 				Eventcontentliste.remove(i);
 			}
 			i++;

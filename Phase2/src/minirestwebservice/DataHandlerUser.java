@@ -56,7 +56,7 @@ public class DataHandlerUser {
 		int i = 0;
 		
 		for (User us : userliste) {
-			if (us.getUserID().equals(id)) {
+			if (us.getUserID().intValue()==id) {
 				userliste.set(i, user);
 			}
 			i++;
@@ -74,7 +74,7 @@ public class DataHandlerUser {
 
 		int i = 0;
 		for (User us : userliste) {
-			if (us.getUserID().equals(id)) {
+			if (us.getUserID().intValue()==id) {
 				userliste.remove(i);
 			}
 			i++;
