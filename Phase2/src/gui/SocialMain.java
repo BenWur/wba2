@@ -101,6 +101,29 @@ public class SocialMain extends Application {
         final Label eventBeschreibung = new Label();
         eventBeschreibung.setWrapText(true);
         
+        final Label eventname = new Label();
+        final Label eventnametext = new Label();
+        eventnametext.setWrapText(true);
+        
+        final Label eventtyp = new Label();
+        final Label eventtyptext = new Label();
+        eventtyptext.setWrapText(true);
+        
+        final Label eventadmin = new Label();
+        final Label eventadmintext = new Label();
+        eventadmintext.setWrapText(true);
+        
+        final Label eventstart = new Label();
+        final Label eventstarttext = new Label();
+        eventstarttext.setWrapText(true);
+        
+        final Label eventend = new Label();
+        final Label eventendtext = new Label();
+        eventendtext.setWrapText(true);
+        
+        final Label eventscore = new Label();
+        final Label eventscoretext = new Label();
+        eventscoretext.setWrapText(true);
         
         ticklist.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -110,9 +133,22 @@ public class SocialMain extends Application {
                         joinTicker.fire();
                     }
                     if (mouseEvent.getClickCount() == 1) {
-                            beschreibung.setText("Beschreibung:");
+                            eventname.setText("Name:");
+                            beschreibung.setText("Description:");
+                            eventtyp.setText("Type:");
+                            eventadmin.setText("Admin:");
+                            eventstart.setText("Start:");
+                            eventend.setText("End:");
+                            eventscore.setText("Score:");
                             int index = ticklist.getSelectionModel().getSelectedIndex();
                          eventBeschreibung.setText(tevents.eventList().get(index).getEventbeschreibung());
+                         eventnametext.setText(tevents.eventList().get(index).getEventname());
+                         eventtyptext.setText(tevents.eventList().get(index).getEventtyp());
+                         eventadmintext.setText(tevents.eventList().get(index).getUsername());
+                         eventstarttext.setText(tevents.eventList().get(index).getEventstart().toXMLFormat());
+                         eventendtext.setText(tevents.eventList().get(index).getEventdauer().toXMLFormat());
+                         eventscoretext.setText(tevents.eventList().get(index).getEventbewertung().toString());
+                         
                     }
                 }
             }
@@ -368,8 +404,20 @@ public class SocialMain extends Application {
         geoGrid.add(welcome, 1, 0);
         geoGrid.add(create, 1, 2);
         geoGrid.add(hbox, 0, 2);
-        geoGrid3.add(beschreibung, 0, 0);
-        geoGrid3.add(eventBeschreibung, 0, 1);
+        geoGrid3.add(eventname, 0, 0);
+        geoGrid3.add(eventnametext, 0, 1);
+        geoGrid3.add(beschreibung, 0, 2);
+        geoGrid3.add(eventBeschreibung, 0, 3);
+        geoGrid3.add(eventtyp, 0, 4);
+        geoGrid3.add(eventtyptext, 0, 5);
+        geoGrid3.add(eventadmin, 0, 6);
+        geoGrid3.add(eventadmintext, 0, 7);
+        geoGrid3.add(eventstart, 0, 8);
+        geoGrid3.add(eventstarttext, 0, 9);
+        geoGrid3.add(eventend, 0, 10);
+        geoGrid3.add(eventendtext, 0, 11);
+        geoGrid3.add(eventscore, 0, 12);
+        geoGrid3.add(eventscoretext, 0, 13);
         geoGrid.add(geoGrid3, 1, 1);
         geoGrid2.add(test, 0, 0);
         
