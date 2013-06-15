@@ -1,66 +1,50 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<eventcontentlist 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-				xsi:noNamespaceSchemaLocation="../XSD/Eventcontentlist.xsd">
-
-	<eventcontent eventID="1">
-	
-		<aktuellerStand>
-			<heim>2</heim>
-			<gast>0</gast>
-		</aktuellerStand>
-	
-		<tickerBeitrag typ="Tor" zeit="08:45:00" tickerBeitragID="1">
-		
-			<text>Was für ein HAMMER DING von Thomas Müller</text>
-			
-			<kommentar>
-				<kommentarUser>DrDare</kommentarUser>
-				<kommentarText>Has!!!!t recht :D echt gut gemacht!!! Thomas heart you</kommentarText>
-			</kommentar>
-			<kommentar >
-				<kommentarUser>DrDare</kommentarUser>
-				<kommentarText>Oh.. wie ist das schön!</kommentarText>
-			</kommentar>
-			
-		</tickerBeitrag>
-		
-		<tickerBeitrag typ="Tor" zeit="08:55:00" tickerBeitragID="2">
-		
-			<text>Das geht hier ja echt zur Sache! Schon wieder ein Tor 2:0</text>
-			
-			<kommentar>
-				<kommentarUser>DrDare</kommentarUser>
-				<kommentarText>Ich krieg mich kaum noch ein :D</kommentarText>
-			</kommentar>
-			
-		</tickerBeitrag>
-		
-	</eventcontent>
-	
-	<eventcontent eventID="2">
-	
-		<aktuellerStand>
-			<heim>2</heim>
-			<gast>1</gast>
-		</aktuellerStand>
-	
-		<tickerBeitrag typ="Tor" zeit="08:45:00" tickerBeitragID="1">
-		
-			<text>Eine Granate von Robbenho</text>
-			
-			<kommentar>
-				<kommentarUser>Holly92</kommentarUser>
-				<kommentarText>lollo</kommentarText>
-			</kommentar>
-			<kommentar>
-				<kommentarUser>Holly92</kommentarUser>
-				<kommentarText>haha...lollo hast recht!</kommentarText>
-			</kommentar>
-			
-		</tickerBeitrag>
-		
-	</eventcontent>
-
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<eventcontentlist>
+    <eventcontent eventID="1">
+        <aktuellerStand>
+            <heim>2</heim>
+            <gast>0</gast>
+        </aktuellerStand>
+        <tickerBeitrag typ="Tor" zeit="08:45:00" tickerBeitragID="1">
+            <text>Was für ein HAMMER DING von Thomas Müller</text>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>Has!!!!t recht :D echt gut gemacht!!! Thomas heart you</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>Oh.. wie ist das schön!</kommentarText>
+            </kommentar>
+        </tickerBeitrag>
+        <tickerBeitrag typ="Tor" zeit="08:55:00" tickerBeitragID="2">
+            <text>Das geht hier ja echt zur Sache! Schon wieder ein Tor 2:0</text>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>Ich krieg mich kaum noch ein :D</kommentarText>
+            </kommentar>
+        </tickerBeitrag>
+        <tickerBeitrag typ="Tor" zeit="20:00:00" tickerBeitragID="3">
+            <text>Und er geeeeeht ueber links</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="19:06:48" tickerBeitragID="4">
+            <text>und er laeuft und laeuft</text>
+        </tickerBeitrag>
+    </eventcontent>
+    <eventcontent eventID="2">
+        <aktuellerStand>
+            <heim>2</heim>
+            <gast>1</gast>
+        </aktuellerStand>
+        <tickerBeitrag typ="Tor" zeit="08:45:00" tickerBeitragID="1">
+            <text>Eine Granate von Robbenho</text>
+            <kommentar>
+                <kommentarUser>Holly92</kommentarUser>
+                <kommentarText>lollo</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>Holly92</kommentarUser>
+                <kommentarText>haha...lollo hast recht!</kommentarText>
+            </kommentar>
+        </tickerBeitrag>
+    </eventcontent>
 </eventcontentlist>

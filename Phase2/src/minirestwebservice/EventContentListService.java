@@ -2,6 +2,7 @@ package minirestwebservice;
 
 
 import java.math.BigInteger;
+import java.net.URI;
 import java.util.List;
 
 import javax.ws.rs.*;
@@ -28,7 +29,7 @@ public class EventContentListService
 	   
 	   @POST 
 	   @Consumes( MediaType.APPLICATION_XML )
-	   public Response postNewEventcontent( Eventcontent eventcontent ,@PathParam("eventID") int i ) throws Exception
+	   public URI postNewEventcontent( Eventcontent eventcontent ,@PathParam("eventID") int i ) throws Exception
 	   {
 		   	DataHandlerEventContent handle = new DataHandlerEventContent();	    
 		    Eventcontentlist events = (Eventcontentlist) handle.getEventcontents();
@@ -44,7 +45,7 @@ public class EventContentListService
 		    }
 			eventcontent.setEventID(id.add(BigInteger.ONE));
 			
-		    return Response.created(handle.writeNewEventcontent(eventcontent) ).build();
+		    return handle.writeNewEventcontent(eventcontent);
 	   }
 	   
 	   @POST 
@@ -52,14 +53,15 @@ public class EventContentListService
 	   @Consumes( MediaType.APPLICATION_XML )
 	   public Response postNewBeitrag( @PathParam("eventID") int eventID, TickerBeitrag beitrag ) throws Exception
 	   {
-		   DataHandlerEventContent handle = new DataHandlerEventContent();	
-	       return handle.postNewBeitrag(eventID,beitrag); 
+		   DataHandlerEventContent handle = new DataHandlerEventContent();
+		   System.out.println("4");
+	       return Response.created(handle.postNewBeitrag(eventID,beitrag)).build(); 
 	   }
 	   
 	   @POST 
 	   @Path( "/beitrag/{tickerBeitragID}")
 	   @Consumes( MediaType.APPLICATION_XML )
-	   public Response postNewKommentar( 	@PathParam("eventID") int eventID,
+	   public URI postNewKommentar( 	@PathParam("eventID") int eventID,
 			   								@PathParam("tickerBeitragID") int tickerBeitragID, 
 			   								Kommentar kommentar ) throws Exception
 	   {

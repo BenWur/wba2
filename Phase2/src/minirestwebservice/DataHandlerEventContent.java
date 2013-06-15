@@ -59,7 +59,7 @@ public class DataHandlerEventContent {
 
 	}
 	
-	public Response postNewKommentar(int eventID, int tickerBeitragID, Kommentar kommentar){
+	public URI postNewKommentar(int eventID, int tickerBeitragID, Kommentar kommentar){
 	   
 	    List<Eventcontent> eventcontentliste = eventcontents.getEventcontent();
 	    
@@ -74,36 +74,36 @@ public class DataHandlerEventContent {
 			    }
 	    	}
 	    }
-	    
 	    this.savePersistent();
 	    
-	    return Response.noContent().build(); 
+	    return URI.create("http://localhost:4434/events/"+eventID+"/eventcontent/beitrag/"); 
 	}
 	
-	public Response postNewBeitrag(int eventID, TickerBeitrag beitrag){
+	public URI postNewBeitrag(int eventID, TickerBeitrag beitrag){
 		   
 	    List<Eventcontent> eventcontentliste = eventcontents.getEventcontent();
-	    
 	    BigInteger ID = BigInteger.ZERO ;
-	    
+	    int i = 0;
 	    for(Eventcontent evc : eventcontentliste ){
-	    	if(evc.getEventID().equals(eventID)){
-	    		evc.getTickerBeitrag().add(beitrag);
-	    		
+	    	System.out.println("for"+evc.getEventID());
+	    	if(evc.getEventID().intValue()==eventID){
 	    		List<TickerBeitrag> beitragliste = evc.getTickerBeitrag();
 	    		for(TickerBeitrag tickerc : beitragliste ){
 	    			
 			    	if(tickerc.getTickerBeitragID().compareTo(ID)==1){
 			    		ID = tickerc.getTickerBeitragID();
+			    		System.out.println(ID);
 			    	}
 			    }
-	    		evc.setEventID(ID.add(BigInteger.ONE));
+	    		beitrag.setTickerBeitragID(ID.add(BigInteger.ONE));
+	    		eventcontentliste.get(i).getTickerBeitrag().add(beitrag);
 	    	}
+	    	i++;
 	    }
 	    
 	    this.savePersistent();
 	    
-	    return Response.noContent().build(); 
+	    return URI.create("http://localhost:4434/events/"+eventID+"/eventcontent/beitrag/"+ID.add(BigInteger.ONE)); 
 	}
 	
 	public Response deleteTickerBeitrag(int eventID, int tickerBeitragID){

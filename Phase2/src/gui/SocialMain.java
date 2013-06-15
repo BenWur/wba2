@@ -253,22 +253,17 @@ public class SocialMain extends Application {
                         final TextField chatText = new TextField();
                        
                         final Button sendchat = new Button("Send");
-                	sendchat.setMinWidth(50);
+                        sendchat.setMinWidth(50);
                         sendchat.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                       public void handle(ActionEvent event) {
-                       TickerEvents newcontent = new TickerEvents();
+                        	@Override
+                        	public void handle(ActionEvent event) {
                        
-                       Map<String, String> contentdata = new HashMap<String, String>();
-                       String contentindex = Integer.toString(liveticks.getSelectionModel().getSelectedIndex());
-                       contentdata.put("contentindex", contentindex);
-                       String eventnr = Integer.toString(ticklist.getSelectionModel().getSelectedIndex() + 1);
-                       contentdata.put("eventnr", eventnr);
-                       contentdata.put("komment", chatText.getText());
+                        	String beitrag = chatText.getText();
+                        	int eventnr = ticklist.getSelectionModel().getSelectedIndex() + 1;
+                        	new TickerEvents().createContent(eventnr, beitrag);
                        
-                       newcontent.createContent(contentdata);
-                                    }
-                                });
+                            }
+                        });
                         
                         geoGridk.add(sendchat, 1, 1);
                         geoGridk.add(chatText, 0, 1);

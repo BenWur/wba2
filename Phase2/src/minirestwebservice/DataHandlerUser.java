@@ -54,7 +54,7 @@ public class DataHandlerUser {
 		List<User> userliste = users.getUser();
 
 		int i = 0;
-		;
+		
 		for (User us : userliste) {
 			if (us.getUserID().equals(id)) {
 				userliste.set(i, user);
