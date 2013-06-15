@@ -36,15 +36,12 @@ public class NewBeitrag {
 			e.printStackTrace();
 		}
     	kommi.setZeit(aktuell);
-    	System.out.println(beitrag+aktuell+eventID);
     	
     	String url = "http://localhost:4434/events/"+eventID+"/eventcontent/beitrag";
-    	System.out.println(url);
         WebResource wrs = Client.create().resource(url);
         
         
         ClientResponse cr = wrs.accept("text/html").type(MediaType.APPLICATION_XML).entity(kommi).post(ClientResponse.class);
-        System.out.println("3");
         System.out.println(cr.getStatus());
 	}
     

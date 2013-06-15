@@ -29,6 +29,9 @@
         <tickerBeitrag zeit="19:06:48" tickerBeitragID="4">
             <text>und er laeuft und laeuft</text>
         </tickerBeitrag>
+        <tickerBeitrag zeit="19:56:25" tickerBeitragID="5">
+            <text>auf gehts ab gehts</text>
+        </tickerBeitrag>
     </eventcontent>
     <eventcontent eventID="2">
         <aktuellerStand>
