@@ -74,4 +74,9 @@
             <text>ooouuuuh das tut weh</text>
         </tickerBeitrag>
     </eventcontent>
+    <eventcontent eventID="3">
+        <tickerBeitrag zeit="14:48:35" tickerBeitragID="1">
+            <text>wird hoffenltich ein geiles Match</text>
+        </tickerBeitrag>
+    </eventcontent>
 </eventcontentlist>

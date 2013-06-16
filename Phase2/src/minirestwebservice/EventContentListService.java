@@ -2,7 +2,6 @@ package minirestwebservice;
 
 
 import java.math.BigInteger;
-import java.net.URI;
 import java.util.List;
 
 import javax.ws.rs.*;
@@ -34,23 +33,22 @@ public class EventContentListService
 	   // POST für neuen Eventcontent
 	   @POST 
 	   @Consumes( MediaType.APPLICATION_XML )
-	   public URI postNewEventcontent( Eventcontent eventcontent ,@PathParam("eventID") int i ) throws Exception
+	   public Response postNewEventcontent( @PathParam("eventID") int i, Eventcontent eventcontent ) throws Exception
 	   {
 		   	DataHandlerEventContent handle = new DataHandlerEventContent();	    
 		    Eventcontentlist events = (Eventcontentlist) handle.getEventcontents();
 		    List<Eventcontent> eventliste = events.getEventcontent();
-		    
+		    System.out.println("ICH KOMME! "+i);
 		    
 		    BigInteger id = BigInteger.ZERO ;
 			for(Eventcontent ev : eventliste ){
-				
 		    	if(ev.getEventID().compareTo(id)==1){
 		    		id = ev.getEventID();
 		    	}
 		    }
 			eventcontent.setEventID(id.add(BigInteger.ONE));
 			
-		    return handle.writeNewEventcontent(eventcontent);
+		    return Response.created(handle.writeNewEventcontent(eventcontent)).build();
 	   }
 	   
 	   // POST für neuen Beitrag in einem Eventcontent

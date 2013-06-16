@@ -24,7 +24,7 @@ public class Register
        String url = "http://localhost:4434/users";
        WebResource wrs = Client.create().resource(url);
        Userlist cr = wrs.accept("application/xml").get(Userlist.class);
-       
+       loggedInUser = loginuser;
        for (int i = 0; i < cr.getUser().size(); i++){
               if (cr.getUser().get(i).getUsername().equals(loginuser)) {
                   return true;

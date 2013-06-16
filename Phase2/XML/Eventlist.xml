@@ -18,63 +18,13 @@
         <eventdauer>22:45:00</eventdauer>
         <eventbewertung>9</eventbewertung>
     </event>
-    <event userID="2" eventID="3">
-        <eventname>U21 Deutschland Spanien</eventname>
-        <eventstart>08:45:00</eventstart>
-        <eventdauer>21:55:00</eventdauer>
-    </event>
-    <event userID="1" eventID="4">
-        <eventname>Deutschland - USA</eventname>
-        <eventbeschreibung>kleines Testspiel auf dem Weg zur WM</eventbeschreibung>
+    <event eventID="3">
+        <eventname>Italie - Spain</eventname>
+        <eventbeschreibung>U21 EM Final in Israel</eventbeschreibung>
         <username>DrDare</username>
         <eventtyp>Football</eventtyp>
-        <eventstart>08:30:00</eventstart>
-        <eventdauer>21:50:00</eventdauer>
-        <eventbewertung>1</eventbewertung>
-    </event>
-    <event eventID="5">
-        <eventname>Portugal vs Monaco</eventname>
-        <eventbeschreibung>Best game ever, don't miss it!! yeah</eventbeschreibung>
-        <eventtyp>Football</eventtyp>
-        <eventstart>12:45:00</eventstart>
-        <eventdauer>13:55:00</eventdauer>
-    </event>
-    <event eventID="6">
-        <eventname>xczcZcz ZZZxzxxa</eventname>
-        <eventbeschreibung>sadssad saaaaaaaaa assadsadds</eventbeschreibung>
-        <eventtyp>Formula 1</eventtyp>
-        <eventstart>12:33:00</eventstart>
-        <eventdauer>23:10:00</eventdauer>
-    </event>
-    <event eventID="7">
-        <eventname>Heyhey</eventname>
-        <eventbeschreibung>saddasdas</eventbeschreibung>
-        <eventtyp>Football</eventtyp>
-        <eventstart>12:31:00</eventstart>
-        <eventdauer>13:21:00</eventdauer>
-    </event>
-    <event eventID="8">
-        <eventname>neue ticker als test</eventname>
-        <eventbeschreibung>test test test</eventbeschreibung>
-        <eventtyp>Baseball</eventtyp>
-        <eventstart>13:22:00</eventstart>
-        <eventdauer>15:20:00</eventdauer>
-    </event>
-    <event eventID="9">
-        <eventname>test event test2</eventname>
-        <eventbeschreibung>sdasdasasd</eventbeschreibung>
-        <username>DrDare</username>
-        <eventtyp>Basketball</eventtyp>
-        <eventstart>12:33:00</eventstart>
-        <eventdauer>14:22:00</eventdauer>
-    </event>
-    <event eventID="10">
-        <eventname>besic testing with all data</eventname>
-        <eventbeschreibung>test test test</eventbeschreibung>
-        <username>DrDare</username>
-        <eventtyp>Basketball</eventtyp>
-        <eventstart>12:33:00</eventstart>
-        <eventdauer>16:40:00</eventdauer>
+        <eventstart>20:30:00</eventstart>
+        <eventdauer>22:30:00</eventdauer>
         <eventbewertung>5</eventbewertung>
     </event>
 </eventlist>

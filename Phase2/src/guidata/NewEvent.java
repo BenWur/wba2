@@ -3,6 +3,9 @@ package guidata;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+
+import java.math.BigInteger;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,6 +13,8 @@ import javax.ws.rs.core.MediaType;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+
+import eventcontentlist.Eventcontent;
 import eventlist.ObjectFactory;
 import eventlist.Event;
 
@@ -46,10 +51,33 @@ public NewEvent(Map<String, String> eventdata) {
 
         String url = "http://localhost:4434/events";
         WebResource wrs = Client.create().resource(url);//erstellt neues Event
-
+        
+        
         //erstellt Event und gibt einen Response zurück. Server übernimmt die genaue Verwaltung
         ClientResponse cr = wrs.accept("text/html").type(MediaType.APPLICATION_XML).entity(event).post(ClientResponse.class);
-
         System.out.println(cr.getStatus());
+        
+        TickerEvents tickev = new TickerEvents();
+        List<Event> liste = tickev.eventList();
+        BigInteger id = null;
+        for(Event ev:liste){
+        	if(ev.getEventname().equals(event.getEventname())){
+        		id = ev.getEventID();
+        	}
+        }
+        
+        Eventcontent newContent = new Eventcontent();
+		newContent.setAktuellerStand(null);
+		newContent.setEventID(id);
+		
+		String urlcontent = "http://localhost:4434/events/"+id+"/eventcontent";
+        WebResource wrscontent = Client.create().resource(urlcontent);//erstellt neues Event
+        //erstellt Event und gibt einen Response zurück. Server übernimmt die genaue Verwaltung
+        ClientResponse crcontent = wrscontent.accept("text/html").type(MediaType.APPLICATION_XML).entity(newContent).post(ClientResponse.class);
+        System.out.println(crcontent.getStatus());
+        
+        
+        
+		
     }
 }
