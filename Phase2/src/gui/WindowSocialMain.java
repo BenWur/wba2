@@ -115,7 +115,7 @@ public class WindowSocialMain extends Application {
         
         final ListView<String> ticklist = new ListView<String>();
         final TickerEvents tevents = new TickerEvents();
-        ObservableList<String> items = FXCollections.observableArrayList();
+        final ObservableList<String> items = FXCollections.observableArrayList();
          for (int i = 0; i < tevents.eventList().size(); i++)
 	    {
          items.add(tevents.eventList().get(i).getEventname());
@@ -292,11 +292,15 @@ public class WindowSocialMain extends Application {
         Button refresh = new Button("Refresh");
         refresh.setMinWidth(50);
         refresh.setOnAction(new EventHandler<ActionEvent>() {
-        	@Override
+            @Override
             public void handle(ActionEvent event) {
-        System.out.println(ticklist.getItems().size());
-        }
-                        });
+                ticklist.getItems().setAll(items);
+                for (int i = 0; i < tevents.eventList().size(); i++) {
+                    items.add(tevents.eventList().get(i).getEventname());
+                }
+                ticklist.setItems(items);
+            }
+        });
         
         create.setOnAction(new EventHandler<ActionEvent>() {
         	@Override
