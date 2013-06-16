@@ -87,8 +87,7 @@ public class PubSubController {
 
 	    
 	    
-	    node.publish(
-	    		new PayloadItem<SimplePayload>(null,new SimplePayload("", "" ,xml)));
+	    node.publish( new PayloadItem<SimplePayload>(null,new SimplePayload("", "" ,xml)));
 	    
 	    try {
 			Thread.sleep(10000);
