@@ -351,12 +351,14 @@ public class WindowSocialMain extends Application {
                errmessage.setText("");
                
                  
-                  Map<String, String> eventdata = new HashMap<String, String>();
+                Map<String, String> eventdata = new HashMap<String, String>();
+                eventdata.put("admin", user);
                 eventdata.put("name", eventnametextField.getText());
                 eventdata.put("beschr", eventbeschreibungField1.getText());
                 eventdata.put("typ", typchoice.getSelectionModel().getSelectedItem().toString());
                 eventdata.put("start", startField.getText() + ":00");
                 eventdata.put("ende", endeField.getText() + ":00");
+                eventdata.put("bewertung", new Integer(5).toString());
 
 
                 make.createEvent(eventdata);

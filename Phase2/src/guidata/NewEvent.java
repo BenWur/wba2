@@ -35,11 +35,13 @@ public NewEvent(Map<String, String> eventdata) {
             Logger.getLogger(NewEvent.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        event.setUsername(eventdata.get("admin"));
         event.setEventname(eventdata.get("name"));
         event.setEventbeschreibung(eventdata.get("beschr"));
         event.setEventtyp(eventdata.get("typ"));
         event.setEventstart(start);
         event.setEventdauer(ende);
+        event.setEventbewertung(Integer.parseInt(eventdata.get("bewertung")));
 
         String url = "http://localhost:4434/events";
         WebResource wrs = Client.create().resource(url);
