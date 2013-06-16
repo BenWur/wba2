@@ -1,5 +1,7 @@
 package gui;
 
+import guidata.Register;
+
 import java.util.HashMap;
 import java.util.Map;
 import javafx.application.Application;
@@ -18,7 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
-public class RegisterNewWindow extends Application {
+public class WindowRegister extends Application {
 
     @Override
     public void start(final Stage primaryStage) {
@@ -107,7 +109,7 @@ public class RegisterNewWindow extends Application {
         backbtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                LoginWindow backlogin = new LoginWindow();
+                WindowLogin backlogin = new WindowLogin();
                 backlogin.start(primaryStage);
             }
         });
@@ -139,7 +141,7 @@ public class RegisterNewWindow extends Application {
                   userdata.put("country", countryc.getValue().toString());;
                   register.createUser(userdata);
                   
-                  SocialMain loggedin = new SocialMain();
+                  WindowSocialMain loggedin = new WindowSocialMain();
                   loggedin.user = textField.getText();
                   loggedin.start(primaryStage);
                }

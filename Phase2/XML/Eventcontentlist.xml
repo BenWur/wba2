@@ -35,6 +35,9 @@
         <tickerBeitrag zeit="20:25:45" tickerBeitragID="6">
             <text>drei tage wach</text>
         </tickerBeitrag>
+        <tickerBeitrag zeit="11:38:19" tickerBeitragID="7">
+            <text>Aus aus aus... das spiel ist aus</text>
+        </tickerBeitrag>
     </eventcontent>
     <eventcontent eventID="2">
         <aktuellerStand>
@@ -57,6 +60,10 @@
             <kommentar>
                 <kommentarUser>DrDare</kommentarUser>
                 <kommentarText>wasn hier los</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>Wird ja immer besser!</kommentarText>
             </kommentar>
         </tickerBeitrag>
         <tickerBeitrag zeit="20:29:06" tickerBeitragID="3">

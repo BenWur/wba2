@@ -1,4 +1,4 @@
-package gui;
+package guidata;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;

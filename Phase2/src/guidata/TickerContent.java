@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package guidata;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
@@ -22,4 +22,11 @@ public class TickerContent {
 	        
 	     return ev;
 	    }
+    public void createBeitrag(int ID, String beitrag) {
+    	new NewBeitrag(ID, beitrag);
+   }
+        
+    public void createKommentar(int eventID, int tickerID, String username, String beitrag) {
+        new NewKommentar(eventID, tickerID, username, beitrag);
+    }
 }

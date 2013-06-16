@@ -1,5 +1,6 @@
 package gui;
 
+import guidata.Register;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,7 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
-public class LoginWindow extends Application {
+public class WindowLogin extends Application {
 
     @Override
     public void start(final Stage primaryStage) {
@@ -48,7 +49,7 @@ public class LoginWindow extends Application {
         reg.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                RegisterNewWindow newuser = new RegisterNewWindow();
+                WindowRegister newuser = new WindowRegister();
                 newuser.start(primaryStage); //oeffnet neue stage
             }
         });
@@ -64,7 +65,7 @@ public class LoginWindow extends Application {
                errmessage.setText("");
                passField1.clear();
                if (register.login(textField.getText())) {
-                   SocialMain loggedin = new SocialMain();
+                   WindowSocialMain loggedin = new WindowSocialMain();
                    loggedin.user = register.loggedInUser;
                    loggedin.start(primaryStage);
                    

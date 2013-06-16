@@ -1,6 +1,10 @@
 package gui;
 
 
+import guidata.TickerContent;
+import guidata.TickerEvents;
+import guidata.UserContent;
+
 import java.util.HashMap;
 import java.util.Map;
 import javafx.application.Application;
@@ -32,7 +36,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 
-public class SocialMain extends Application {
+public class WindowSocialMain extends Application {
     private Tab tab1;
     private Tab tab2;
     private Tab createNewEventTab;
@@ -258,14 +262,14 @@ public class SocialMain extends Application {
                         		 if( liveticks.getSelectionModel().isEmpty() ){
                         			String beitrag = chatText.getText();
                                  	int eventnr = ticklist.getSelectionModel().getSelectedIndex() + 1;
-                                 	new TickerEvents().createBeitrag(eventnr, beitrag);
+                                 	new TickerContent().createBeitrag(eventnr, beitrag);
                                  }
                         		 else if (!liveticks.getSelectionModel().isEmpty()){
                         			 
                         			String beitrag = chatText.getText();
                                   	int eventnr = ticklist.getSelectionModel().getSelectedIndex() + 1;
                                   	int ticknr = liveticks.getSelectionModel().getSelectedIndex() + 1;
-                                  	new TickerEvents().createKommentar(eventnr,ticknr,user,beitrag);
+                                  	new TickerContent().createKommentar(eventnr,ticknr,user,beitrag);
                         		 }
                        
                             }
