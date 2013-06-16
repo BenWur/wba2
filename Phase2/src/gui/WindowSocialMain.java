@@ -224,7 +224,7 @@ public class WindowSocialMain extends Application {
                         
                     final ListView<String> liveticks = new ListView<String>();
                     final TickerContent cevents = new TickerContent();
-                    ObservableList<String> items = FXCollections.observableArrayList();
+                    final ObservableList<String> items = FXCollections.observableArrayList();
                     final int index2 = ticklist.getSelectionModel().getSelectedIndex() + 1;
                     for (int f = 0; f < cevents.contentList(index2).getTickerBeitrag().size(); f++) {
                         
@@ -271,6 +271,13 @@ public class WindowSocialMain extends Application {
                                   	int ticknr = liveticks.getSelectionModel().getSelectedIndex() + 1;
                                   	new TickerContent().createKommentar(eventnr,ticknr,user,beitrag);
                         		 }
+                                         final ObservableList<String> items = FXCollections.observableArrayList();
+                                         liveticks.getItems().setAll(items);
+                                         for (int f = 0; f < cevents.contentList(index2).getTickerBeitrag().size(); f++) {
+
+                                        items.add(cevents.contentList(index2).getTickerBeitrag().get(f).getZeit() + ": " + cevents.contentList(index2).getTickerBeitrag().get(f).getText());
+                                        liveticks.setItems(items);
+                                }  
                             }
                         });
                         
@@ -405,6 +412,9 @@ public class WindowSocialMain extends Application {
                         sendchat.setOnAction(new EventHandler<ActionEvent>() {
                         	@Override
                         	public void handle(ActionEvent event) {
+                                    
+                                    
+                                   // liveticks.setItems(items);
                         		 if( liveticks.getSelectionModel().isEmpty() ){
                         			String beitrag = chatText.getText();
                                  	int eventnr = ticklist.getItems().size() + 1;
@@ -417,7 +427,15 @@ public class WindowSocialMain extends Application {
                                   	int ticknr = liveticks.getItems().size() + 1;
                                   	new TickerContent().createKommentar(eventnr,ticknr,user,beitrag);
                         		 }
-                       
+                                final ObservableList<String> items = FXCollections.observableArrayList();
+                                liveticks.getItems().setAll(items);
+                                final TickerContent cevents = new TickerContent();
+                                final int index2 = ticklist.getItems().size() + 1;
+                                for (int f = 0; f < cevents.contentList(index2).getTickerBeitrag().size(); f++) {
+
+                                    items.add(cevents.contentList(index2).getTickerBeitrag().get(f).getZeit() + ": " + cevents.contentList(index2).getTickerBeitrag().get(f).getText());
+                                    liveticks.setItems(items);
+                                }
                             }
                         });
                         
