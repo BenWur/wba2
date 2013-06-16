@@ -9,6 +9,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import eventcontentlist.Eventcontent;
 import eventlist.Event;
 import eventlist.Eventlist;
 
@@ -51,6 +52,12 @@ public class DataHandlerEvent {
 
 		List<Event> eventliste = events.getEvent();
 		eventliste.add(event);	//fügt neues Event hinzu
+	
+		Eventcontent newContent = new Eventcontent();
+		newContent.setAktuellerStand(null);
+		newContent.setEventID(event.getEventID());
+		content.writeNewEventcontent(newContent);
+		
 		this.savePersistent();	//speichert aktuelle Daten
 		return URI.create("http://localhost:4434/events/" + event.getEventID().toString());	//erstellt URI
 

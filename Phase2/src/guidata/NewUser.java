@@ -14,6 +14,10 @@ import userlist.LandType;
 import userlist.ObjectFactory;
 import userlist.User;
 
+/**
+ * Erstellt neuen User
+ * @author Dario & Ben
+ */
 
 public class NewUser {
 
@@ -22,6 +26,7 @@ public class NewUser {
         //neuen User anlegen
         User user = new ObjectFactory().createUser();
         
+        //Userdaten gemäß der xsd füllen
         XMLGregorianCalendar xbday = null;
         try {
             xbday = DatatypeFactory.newInstance().newXMLGregorianCalendar(userdata.get("bday"));
@@ -37,12 +42,13 @@ public class NewUser {
         user.setGeburtsdatum(xbday);
         user.setLand(LandType.fromValue(userdata.get("country")));
 
-        String url = "http://localhost:4434/users";
-        WebResource wrs = Client.create().resource(url);
+        
+        String url = "http://localhost:4434/users";			//url der Ressource
+        WebResource wrs = Client.create().resource(url);	//erstellt neuen User
 
+        //erstellt user und gibt einen Response zurück. Server übernimmt die genaue Verwaltung
+        ClientResponse cr = wrs.accept("text/html").type(MediaType.APPLICATION_XML).entity(user).post(ClientResponse.class);
 
-       ClientResponse cr = wrs.accept("text/html").type(MediaType.APPLICATION_XML).entity(user).post(ClientResponse.class);
-
-       System.out.println(cr.getStatus());
+        System.out.println(cr.getStatus());
     }
 }

@@ -14,17 +14,18 @@ import eventlist.ObjectFactory;
 import eventlist.Event;
 
 /**
- *
- * @author Dario
+ * Erstellt neues Event
+ * @author Dario & Ben
  */
+
 public class NewEvent {
 
 public NewEvent(Map<String, String> eventdata) {
 
-        //neuen User anlegen
+        //neues Event anlegen
         Event event = new ObjectFactory().createEvent();
         
-    
+        //Befüllung gemäß der xsd
         XMLGregorianCalendar start = null;
         XMLGregorianCalendar ende = null;
         try {
@@ -42,11 +43,11 @@ public NewEvent(Map<String, String> eventdata) {
         event.setEventdauer(ende);
 
         String url = "http://localhost:4434/events";
-        WebResource wrs = Client.create().resource(url);
+        WebResource wrs = Client.create().resource(url);//erstellt neues Event
 
+        //erstellt Event und gibt einen Response zurück. Server übernimmt die genaue Verwaltung
+        ClientResponse cr = wrs.accept("text/html").type(MediaType.APPLICATION_XML).entity(event).post(ClientResponse.class);
 
-       ClientResponse cr = wrs.accept("text/html").type(MediaType.APPLICATION_XML).entity(event).post(ClientResponse.class);
-
-       System.out.println(cr.getStatus());
+        System.out.println(cr.getStatus());
     }
 }

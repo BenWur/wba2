@@ -123,7 +123,7 @@ public class WindowRegister extends Application {
             public void handle(ActionEvent event) {
                Register register = new Register();
                errmessage.setText("");
-               if (register.registered(textField.getText())) {
+               if (register.login(textField.getText())) {
                    errmessage.setTextFill(Color.rgb(210, 39, 30));
                    errmessage.setText("Sorry, username already taken or invalid!");
                }else{

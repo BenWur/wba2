@@ -13,22 +13,25 @@ import eventcontentlist.Kommentar;
 import eventcontentlist.ObjectFactory;
 
 import javax.ws.rs.core.MediaType;
+
 /**
- *
- * @author Dario
+ * Erstellt neuen Kommentar
+ * @author Dario & Ben
  */
+
 public class NewKommentar {
     
     public NewKommentar(int eventID,int beitragID,String username, String kommentar) {
+    	//neuen Kommentar anlegen
     	Kommentar kommi = new ObjectFactory().createKommentar();
+    	//Kommentar gemäß der xsd füllen
     	kommi.setKommentarText(kommentar);
     	kommi.setKommentarUser(username);
     	
     	String url = "http://localhost:4434/events/"+eventID+"/eventcontent/beitrag/"+beitragID;
-    	System.out.println(url);
-        WebResource wrs = Client.create().resource(url);
-        
-        
+        WebResource wrs = Client.create().resource(url);//erstellt neuen Kommentar unter der URI
+
+        //erstellt Kommentar und gibt einen Response zurück. Server übernimmt die genaue Verwaltung
         ClientResponse cr = wrs.accept("text/html").type(MediaType.APPLICATION_XML).entity(kommi).post(ClientResponse.class);
         System.out.println(cr.getStatus());
 	}

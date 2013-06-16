@@ -79,4 +79,13 @@
         <land>Germany</land>
         <stadt>asdasasd</stadt>
     </user>
+    <user userID="8">
+        <username>DrDare</username>
+        <vorname>Dario</vorname>
+        <name>Witzig</name>
+        <gender>Male</gender>
+        <geburtsdatum>1990-02-12</geburtsdatum>
+        <land>Germany</land>
+        <stadt>Cologne</stadt>
+    </user>
 </userlist>
