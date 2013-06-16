@@ -14,10 +14,15 @@ import eventcontentlist.Eventcontentlist;
 import eventcontentlist.Kommentar;
 import eventcontentlist.TickerBeitrag;
 
-@Path( "/events/{eventID}/eventcontent" )
+/**
+ * Service für Eventcontent
+ * @author Ben
+ */
+
+@Path( "/events/{eventID}/eventcontent" )		//Path für die Entity
 public class EventContentListService
 {
-	   
+	   // GET für alle Events 
 	   @GET 
 	   @Produces( MediaType.APPLICATION_XML )
 	   public Response getEventContent(@PathParam("eventID") int i) throws Exception
@@ -26,7 +31,7 @@ public class EventContentListService
 		   return Response.status(200).entity(handle.getEventcontentbyID(i)).build() ;
 	   }
 	   
-	   
+	   // POST für neuen Eventcontent
 	   @POST 
 	   @Consumes( MediaType.APPLICATION_XML )
 	   public URI postNewEventcontent( Eventcontent eventcontent ,@PathParam("eventID") int i ) throws Exception
@@ -48,6 +53,7 @@ public class EventContentListService
 		    return handle.writeNewEventcontent(eventcontent);
 	   }
 	   
+	   // POST für neuen Beitrag in einem Eventcontent
 	   @POST 
 	   @Path( "/beitrag" )
 	   @Consumes( MediaType.APPLICATION_XML )
@@ -57,7 +63,8 @@ public class EventContentListService
 		   System.out.println("4");
 	       return Response.created(handle.postNewBeitrag(eventID,beitrag)).build(); 
 	   }
-	   
+
+	   // POST für neuen Kommentar in einem Beitrag eines Eventcontents
 	   @POST 
 	   @Path( "/beitrag/{tickerBeitragID}")
 	   @Consumes( MediaType.APPLICATION_XML )
@@ -69,6 +76,7 @@ public class EventContentListService
 	       return Response.created(handle.postNewKommentar(eventID,tickerBeitragID,kommentar)).build() ; 
 	   }
 	   
+	   // DELETE für neuen Beitrag in einem Eventcontent
 	   @DELETE
 	   @Path( "/beitrag/{tickerBeitragID}")
 	   public Response deleteTickerBeitrag( 	@PathParam("eventID") int eventID,
