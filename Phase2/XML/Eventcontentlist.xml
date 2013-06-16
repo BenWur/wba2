@@ -73,10 +73,55 @@
         <tickerBeitrag zeit="20:29:06" tickerBeitragID="3">
             <text>ooouuuuh das tut weh</text>
         </tickerBeitrag>
+        <tickerBeitrag zeit="15:17:30" tickerBeitragID="4">
+            <text>asdasd</text>
+        </tickerBeitrag>
     </eventcontent>
     <eventcontent eventID="3">
         <tickerBeitrag zeit="14:48:35" tickerBeitragID="1">
             <text>wird hoffenltich ein geiles Match</text>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>wirds bestimmt!!! :)</kommentarText>
+            </kommentar>
+        </tickerBeitrag>
+    </eventcontent>
+    <eventcontent eventID="4">
+        <tickerBeitrag zeit="15:06:08" tickerBeitragID="1">
+            <text>sadasd</text>
+        </tickerBeitrag>
+    </eventcontent>
+    <eventcontent eventID="5">
+        <tickerBeitrag zeit="15:15:02" tickerBeitragID="1">
+            <text>heyho</text>
+        </tickerBeitrag>
+    </eventcontent>
+    <eventcontent eventID="6">
+        <tickerBeitrag zeit="15:16:46" tickerBeitragID="1">
+            <text>sadsasd</text>
+        </tickerBeitrag>
+    </eventcontent>
+    <eventcontent eventID="7"/>
+    <eventcontent eventID="8"/>
+    <eventcontent eventID="9"/>
+    <eventcontent eventID="10"/>
+    <eventcontent eventID="11"/>
+    <eventcontent eventID="12">
+        <tickerBeitrag zeit="16:10:56" tickerBeitragID="1">
+            <text>testibg</text>
+        </tickerBeitrag>
+    </eventcontent>
+    <eventcontent eventID="13">
+        <tickerBeitrag zeit="16:13:47" tickerBeitragID="1">
+            <text>hoho</text>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>hihi</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>Holly92</kommentarUser>
+                <kommentarText>huhu</kommentarText>
+            </kommentar>
         </tickerBeitrag>
     </eventcontent>
 </eventcontentlist>

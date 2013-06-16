@@ -271,7 +271,6 @@ public class WindowSocialMain extends Application {
                                   	int ticknr = liveticks.getSelectionModel().getSelectedIndex() + 1;
                                   	new TickerContent().createKommentar(eventnr,ticknr,user,beitrag);
                         		 }
-                       
                             }
                         });
                         
@@ -292,6 +291,12 @@ public class WindowSocialMain extends Application {
         
         Button refresh = new Button("Refresh");
         refresh.setMinWidth(50);
+        refresh.setOnAction(new EventHandler<ActionEvent>() {
+        	@Override
+            public void handle(ActionEvent event) {
+        System.out.println(ticklist.getItems().size());
+        }
+                        });
         
         create.setOnAction(new EventHandler<ActionEvent>() {
         	@Override
@@ -364,8 +369,7 @@ public class WindowSocialMain extends Application {
                 make.createEvent(eventdata);
                 
                 	createNewEventTab.setText(eventnametextField.getText());
-                	//tabPane.getTabs().add(newEvent);
-                        //selectTab.select(newEvent);
+                        
                 	final GridPane geoGridk = new GridPane();
                 	geoGridk.setHgap(5); // Abstand links/rechts
                 	geoGridk.setVgap(5); // Abstand oben/unten
@@ -390,11 +394,28 @@ public class WindowSocialMain extends Application {
                         sp2.getChildren().add(comments);
                         sp.getItems().addAll(sp1, sp2);
                         
-                        
-                        TextField chatText = new TextField();
+                        final TextField chatText = new TextField();
                         
                         Button sendchat = new Button("Send");
                 	sendchat.setMinWidth(50);
+                        sendchat.setOnAction(new EventHandler<ActionEvent>() {
+                        	@Override
+                        	public void handle(ActionEvent event) {
+                        		 if( liveticks.getSelectionModel().isEmpty() ){
+                        			String beitrag = chatText.getText();
+                                 	int eventnr = ticklist.getItems().size() + 1;
+                                 	new TickerContent().createBeitrag(eventnr, beitrag);
+                                 }
+                        		 else if (!liveticks.getSelectionModel().isEmpty()){
+                        			 
+                        			String beitrag = chatText.getText();
+                                  	int eventnr = ticklist.getItems().size() + 1;
+                                  	int ticknr = liveticks.getItems().size() + 1;
+                                  	new TickerContent().createKommentar(eventnr,ticknr,user,beitrag);
+                        		 }
+                       
+                            }
+                        });
                         
                         geoGridk.add(sendchat, 1, 1);
                         geoGridk.add(chatText, 0, 1);
