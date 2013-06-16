@@ -22,6 +22,10 @@
                 <kommentarUser>DrDare</kommentarUser>
                 <kommentarText>Ich krieg mich kaum noch ein :D</kommentarText>
             </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>geile sache man :D</kommentarText>
+            </kommentar>
         </tickerBeitrag>
         <tickerBeitrag typ="Tor" zeit="20:00:00" tickerBeitragID="3">
             <text>Und er geeeeeht ueber links</text>
