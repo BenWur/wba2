@@ -38,7 +38,6 @@ public class EventContentListService
 		   	DataHandlerEventContent handle = new DataHandlerEventContent();	    
 		    Eventcontentlist events = (Eventcontentlist) handle.getEventcontents();
 		    List<Eventcontent> eventliste = events.getEventcontent();
-		    System.out.println("ICH KOMME! "+i);
 		    
 		    BigInteger id = BigInteger.ZERO ;
 			for(Eventcontent ev : eventliste ){
@@ -58,7 +57,6 @@ public class EventContentListService
 	   public Response postNewBeitrag( @PathParam("eventID") int eventID, TickerBeitrag beitrag ) throws Exception
 	   {
 		   DataHandlerEventContent handle = new DataHandlerEventContent();
-		   System.out.println("4");
 	       return Response.created(handle.postNewBeitrag(eventID,beitrag)).build(); 
 	   }
 

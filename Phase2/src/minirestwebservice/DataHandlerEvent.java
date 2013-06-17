@@ -4,17 +4,11 @@ import java.io.File;
 import java.net.URI;
 import java.util.List;
 
-import javax.ws.rs.core.MediaType;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-
-import eventcontentlist.Eventcontent;
 import eventlist.Event;
 import eventlist.Eventlist;
 

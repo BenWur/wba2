@@ -8,6 +8,9 @@ public class ItemEventCoordinator implements ItemEventListener<Item>{
     @Override
     public void handlePublishedItems(ItemPublishEvent<Item> items)
     {
+/*   DIES GIBT DEN ANSTOSS ZUM REFRESHEN TODO
+    	tickerliste.update();
+   */ 	
         System.out.println("Item count: " + items.getItems().size());
 
     	for ( Item item : items.getItems() ) {

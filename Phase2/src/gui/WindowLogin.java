@@ -1,5 +1,6 @@
 package gui;
 
+import nodepackage.XMPPConnect;
 import guidata.Register;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -63,12 +64,17 @@ public class WindowLogin extends Application {
             public void handle(ActionEvent event) {
                Register register = new Register();
                errmessage.setText("");
-               passField1.clear();
                if (register.login(textField.getText())) {
                    WindowSocialMain loggedin = new WindowSocialMain();
                    loggedin.user = register.loggedInUser;
-                   loggedin.start(primaryStage);
-                   
+                   XMPPConnect connection =  XMPPConnect.getInstance();
+                   if (connection.login(loggedin.user, passField1.getText() )){
+                	   loggedin.start(primaryStage);		//Zum Einloggen auf dem XMPP Server
+                   }
+                   else{
+                       errmessage.setText("Your username or password is incorrect!");
+                       errmessage.setTextFill(Color.rgb(210, 39, 30));
+                    } 
                }else{
                   errmessage.setText("Your username or password is incorrect!");
                   errmessage.setTextFill(Color.rgb(210, 39, 30));

@@ -20,33 +20,18 @@ public class PubSubController {
 	private XMPPConnect verbindung;
 	// Create a pubsub manager using an existing Connection
     private PubSubManager mgr;
-    
-    public static void main (String[] args){
-    	new PubSubController();
-    }
+    private ItemEventCoordinator listener = new ItemEventCoordinator();
     
     public PubSubController(){
     	// Create a Connection
-    	verbindung=new XMPPConnect();
+    	verbindung= XMPPConnect.getInstance();
     	// Create a pubsub manager using an existing Connection
         mgr = new PubSubManager(verbindung.conn);
     	
-        nodeErstellen("testNode");
-    	nodeAbonnieren(verbindung.conn.getUser(), "testNode");
-    	nodeVeroeffentlichen("testNode","<test>TESTIIII</test>");
-    	nodesAuslesen();
     }
 
     // Create the node
 	public void nodeErstellen( String nodeName ){
-
-/*		try {
-			mgr.deleteNode("testNode");
-		} catch (XMPPException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}*/
-		
 		
 		ConfigureForm form = new ConfigureForm(FormType.submit);
 
@@ -63,7 +48,8 @@ public class PubSubController {
 
 		    try {
 				LeafNode leaf = (LeafNode) mgr.createNode(nodeName, form);
-				System.out.println("Node angelegt");
+				
+				System.out.println("Node angelegt: "+nodeName);
 
 			} catch (XMPPException e) {
 				// TODO Auto-generated catch block
@@ -74,10 +60,9 @@ public class PubSubController {
 	}
 	
 	public void nodeVeroeffentlichen(String nodeName, String xml){
-
+		LeafNode node = null;
 	    // Get the node
-	    LeafNode node = null;
-		
+	    System.out.println("Node veröffentlichen: "+nodeName);
 	    try {
 			node = mgr.getNode(nodeName);
 		} catch (XMPPException e) {
@@ -85,33 +70,49 @@ public class PubSubController {
 			e.printStackTrace();
 		}
 
-	    
-	    
 	    node.publish( new PayloadItem<SimplePayload>(null,new SimplePayload("", "" ,xml)));
 	    
-	    try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	    
 
 	}
 	
-	public void nodeAbonnieren(String myJid, String nodeName){
+	public void nodeAbonnieren(String nodeName){
 		// Get the node
-	      LeafNode node = null;
+		LeafNode node = null;
+	      System.out.println("Node gejoint: "+nodeName);
+	      
 		try {
 			node = mgr.getNode(nodeName);
+			node.addItemEventListener(listener);
 		} catch (XMPPException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	      
-	    node.addItemEventListener(new ItemEventCoordinator());
+	    
 		try {
-			node.subscribe(myJid);
+			node.subscribe(verbindung.conn.getUser());	//greift direkt auf persistenten User zu
+		} catch (XMPPException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void nodeKuendigen(String nodeName){
+		// Get the node
+		LeafNode node = null;
+	    System.out.println("Node gekündigt: "+nodeName);
+	    
+		try {
+			node = mgr.getNode(nodeName);
+			node.removeItemEventListener(listener);
+		} catch (XMPPException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	      
+		try {
+			node.unsubscribe(verbindung.conn.getUser());	//greift direkt auf persistenten User zu
 		} catch (XMPPException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <userlist>
     <user userID="1">
-        <username>Holly92</username>
+        <username>holly92</username>
         <vorname>Alex</vorname>
         <name>Meier</name>
         <gender>Male</gender>
@@ -18,7 +18,24 @@
         </folger>
     </user>
     <user userID="2">
-        <username>DrDare</username>
+        <username>drdare</username>
+        <vorname>Angelo</vorname>
+        <name>Merte</name>
+        <gender>Male</gender>
+        <geburtsdatum>1992-07-11</geburtsdatum>
+        <land>Germany</land>
+        <stadt>Gummersbach</stadt>
+        <anzEvents>0</anzEvents>
+        <beitraege>0</beitraege>
+        <favoriten>
+            <userID xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">1</userID>
+        </favoriten>
+        <folger>
+            <userID xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">1</userID>
+        </folger>
+    </user>
+    <user userID="3">
+        <username>admin</username>
         <vorname>Angelo</vorname>
         <name>Merte</name>
         <gender>Male</gender>
