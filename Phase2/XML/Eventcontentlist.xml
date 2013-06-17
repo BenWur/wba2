@@ -15,6 +15,46 @@
                 <kommentarUser>DrDare</kommentarUser>
                 <kommentarText>Oh.. wie ist das schön!</kommentarText>
             </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>dsfdssfdfds</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>ssadsad</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>okok</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>okok1</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>sasadads</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>sadsadsaddsadas</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>sadsadsaddsadass</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>sadasads</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>sadadsds</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>mama</kommentarText>
+            </kommentar>
         </tickerBeitrag>
         <tickerBeitrag typ="Tor" zeit="08:55:00" tickerBeitragID="2">
             <text>Das geht hier ja echt zur Sache! Schon wieder ein Tor 2:0</text>
@@ -25,6 +65,34 @@
             <kommentar>
                 <kommentarUser>DrDare</kommentarUser>
                 <kommentarText>geile sache man :D</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>hhhh</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>huhu</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>huhuhuhu</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>ffdff</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>huhu</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>huhu</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>huhu</kommentarText>
             </kommentar>
         </tickerBeitrag>
         <tickerBeitrag typ="Tor" zeit="20:00:00" tickerBeitragID="3">
@@ -51,6 +119,9 @@
         <tickerBeitrag zeit="19:08:07" tickerBeitragID="10">
             <text>very good</text>
         </tickerBeitrag>
+        <tickerBeitrag zeit="19:37:19" tickerBeitragID="11">
+            <text>sadsaddsaas</text>
+        </tickerBeitrag>
     </eventcontent>
     <eventcontent eventID="2">
         <aktuellerStand>
@@ -67,6 +138,38 @@
                 <kommentarUser>Holly92</kommentarUser>
                 <kommentarText>haha...lollo hast recht!</kommentarText>
             </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>sadsddsa</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>sdasdas</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>fsfdfsdf</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>okok</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>huhu</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>hyy</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>weweew</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>hey</kommentarText>
+            </kommentar>
         </tickerBeitrag>
         <tickerBeitrag zeit="20:03:51" tickerBeitragID="2">
             <text>Da ist der Anschlusstreffer! Das wird nochmal eng!</text>
@@ -78,18 +181,120 @@
                 <kommentarUser>DrDare</kommentarUser>
                 <kommentarText>Wird ja immer besser!</kommentarText>
             </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>huhu</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>okok</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>huhu</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>hry</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>hyy</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>huhui</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>weweew</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>heyho</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>haha</kommentarText>
+            </kommentar>
         </tickerBeitrag>
         <tickerBeitrag zeit="20:29:06" tickerBeitragID="3">
             <text>ooouuuuh das tut weh</text>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>weweew2</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>wewew22311</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>dsfsdfsdf</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>dssdsdf332</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>Holly92</kommentarUser>
+                <kommentarText>ssaasasadsdaa</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>12121212</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>zxzxcxzczczxc</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>xzcxzcxzcczxczxwq222</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>hyhyh</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>bitvhes</kommentarText>
+            </kommentar>
         </tickerBeitrag>
         <tickerBeitrag zeit="15:17:30" tickerBeitragID="4">
             <text>asdasd</text>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>weweew2</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>hyhy</kommentarText>
+            </kommentar>
         </tickerBeitrag>
         <tickerBeitrag zeit="18:36:17" tickerBeitragID="5">
             <text>saasasas</text>
         </tickerBeitrag>
         <tickerBeitrag zeit="18:36:24" tickerBeitragID="6">
             <text>saasasas</text>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>tooooor</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>tooooor</kommentarText>
+            </kommentar>
+            <kommentar>
+                <kommentarUser>DrDare</kommentarUser>
+                <kommentarText>hey</kommentarText>
+            </kommentar>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="21:51:19" tickerBeitragID="7">
+            <text>tooooor</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="21:56:52" tickerBeitragID="8">
+            <text>hola</text>
         </tickerBeitrag>
     </eventcontent>
     <eventcontent eventID="3">
