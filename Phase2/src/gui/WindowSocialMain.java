@@ -271,28 +271,6 @@ public class WindowSocialMain extends Application {
                                         int ticknr = liveticks.getSelectionModel().getSelectedIndex() + 1;
                                   	new TickerContent().createKommentar(eventnr,ticknr,user,beitrag);
                         		 }
-                                         final ObservableList<String> items = FXCollections.observableArrayList();
-                                         liveticks.getItems().setAll(items);
-                                         
-                                         for (int f = 0; f < cevents.contentList(index2).getTickerBeitrag().size(); f++) {
-
-                                        items.add(cevents.contentList(index2).getTickerBeitrag().get(f).getZeit() + ": " + cevents.contentList(index2).getTickerBeitrag().get(f).getText());
-                                        liveticks.setItems(items);
-                                         }
-                                         
-                                         //Das sollte eig funktionieren, tut es aber nicht?!
-                                         int eventnr = ticklist.getSelectionModel().getSelectedIndex() + 1;
-                                         int ticknr = liveticks.getSelectionModel().getSelectedIndex() + 1;
-                                         
-                                        comments.clear();
-                                        for (int h = 0; h < cevents.contentList(eventnr).getTickerBeitrag().get(ticknr).getKommentar().size(); h++) {
-                   
-                   comments.appendText(cevents.contentList(eventnr).getTickerBeitrag().get(ticknr).getKommentar().get(h).getKommentarUser()+" wrote:\n");
-                   comments.appendText(cevents.contentList(eventnr).getTickerBeitrag().get(ticknr).getKommentar().get(h).getKommentarText()+"\n");
-                                        }
-                                //Bis hier
-                                
-                                
                             }
                         });
                         
@@ -442,15 +420,6 @@ public class WindowSocialMain extends Application {
                                   	int ticknr = liveticks.getItems().size() + 1;
                                   	new TickerContent().createKommentar(eventnr,ticknr,user,beitrag);
                         		 }
-                                final ObservableList<String> items = FXCollections.observableArrayList();
-                                liveticks.getItems().setAll(items);
-                                final TickerContent cevents = new TickerContent();
-                                final int index2 = ticklist.getItems().size() + 1;
-                                for (int f = 0; f < cevents.contentList(index2).getTickerBeitrag().size(); f++) {
-
-                                    items.add(cevents.contentList(index2).getTickerBeitrag().get(f).getZeit() + ": " + cevents.contentList(index2).getTickerBeitrag().get(f).getText());
-                                    liveticks.setItems(items);
-                                }
                             }
                         });
                         
