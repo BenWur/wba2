@@ -100,5 +100,11 @@
         <tickerBeitrag zeit="12:16:27" tickerBeitragID="6">
             <text>refresh</text>
         </tickerBeitrag>
+        <tickerBeitrag zeit="12:28:15" tickerBeitragID="7">
+            <text>ordentlich</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="12:28:43" tickerBeitragID="8">
+            <text>mcBack</text>
+        </tickerBeitrag>
     </eventcontent>
 </eventcontentlist>

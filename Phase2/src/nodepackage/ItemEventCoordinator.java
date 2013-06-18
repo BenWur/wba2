@@ -18,7 +18,7 @@ public class ItemEventCoordinator implements ItemEventListener<Item>{
     	for ( Item item : items.getItems() ) {
             System.out.println(item.getId());
             System.out.println(item.toXML());
-            //update();
+            WindowSocialMain.getInstance().update();
     	}
 	}
 }

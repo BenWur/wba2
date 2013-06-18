@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import nodepackage.PubSubController;
+import nodepackage.XMPPConnect;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -53,6 +54,16 @@ public class WindowSocialMain extends Application {
 	public TextArea comments;
 	public ListView<String> liveticks;
 	public TickerContent cevents;
+	
+	private static WindowSocialMain instance;
+
+	//dient zur persistenten Speicherung
+	public static WindowSocialMain getInstance(){
+		if(instance==null){
+			instance=new WindowSocialMain();
+		}
+		return instance;
+	}
 	
 /*  HIER KOMMT DIE HYPER REFRESH METHODE REIN TODO
 	public void update() {
