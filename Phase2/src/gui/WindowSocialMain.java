@@ -46,11 +46,37 @@ public class WindowSocialMain extends Application {
 																	// User das
 																	// Event
 																	// abonniert
+	public int index2;
+	public ListView<String> ticklist;
+	public TickerEvents tevents;
+	public ObservableList<String> items;
+	public TextArea comments;
+	public ListView<String> liveticks;
+	public TickerContent cevents;
+	
 /*  HIER KOMMT DIE HYPER REFRESH METHODE REIN TODO
 	public void update() {
 		list.load();
 	}
 */
+	public void update(){
+		items = FXCollections
+				.observableArrayList();
+		liveticks.getItems().setAll(items);
+
+		for (int f = 0; f < cevents.contentList(index2)
+				.getTickerBeitrag().size(); f++) {
+
+			items.add(cevents.contentList(index2)
+					.getTickerBeitrag().get(f).getZeit()
+					+ ": "
+					+ cevents.contentList(index2)
+							.getTickerBeitrag().get(f)
+							.getText());
+			liveticks.setItems(items);
+		}
+	}
+	
 	@Override
 	public void start(final Stage primaryStage) {
 		primaryStage.setResizable(false);
@@ -132,9 +158,9 @@ public class WindowSocialMain extends Application {
 		tab2 = new Tab();
 		tab2.setText("My Profile");
 
-		final ListView<String> ticklist = new ListView<String>();
-		final TickerEvents tevents = new TickerEvents();
-		final ObservableList<String> items = FXCollections
+		ticklist = new ListView<String>();
+		tevents = new TickerEvents();
+		items = FXCollections
 				.observableArrayList();
 		for (int i = 0; i < tevents.eventList().size(); i++) {
 			items.add(tevents.eventList().get(i).getEventname());
@@ -249,15 +275,15 @@ public class WindowSocialMain extends Application {
 					final StackPane sp1 = new StackPane();
 
 					final StackPane sp2 = new StackPane();
-					final TextArea comments = new TextArea();
+					comments = new TextArea();
 					sp2.getChildren().add(comments);
 					sp.getItems().addAll(sp1, sp2);
 
-					final ListView<String> liveticks = new ListView<String>();
-					final TickerContent cevents = new TickerContent();
-					final ObservableList<String> items = FXCollections
+					liveticks = new ListView<String>();
+					cevents = new TickerContent();
+					items = FXCollections
 							.observableArrayList();
-					final int index2 = ticklist.getSelectionModel()
+					index2 = ticklist.getSelectionModel()
 							.getSelectedIndex() + 1;
 					for (int f = 0; f < cevents.contentList(index2)
 							.getTickerBeitrag().size(); f++) {
@@ -337,21 +363,7 @@ public class WindowSocialMain extends Application {
 								new TickerContent().createKommentar(eventnr,
 										ticknr, user, beitrag);
 							}
-							final ObservableList<String> items = FXCollections
-									.observableArrayList();
-							liveticks.getItems().setAll(items);
-
-							for (int f = 0; f < cevents.contentList(index2)
-									.getTickerBeitrag().size(); f++) {
-
-								items.add(cevents.contentList(index2)
-										.getTickerBeitrag().get(f).getZeit()
-										+ ": "
-										+ cevents.contentList(index2)
-												.getTickerBeitrag().get(f)
-												.getText());
-								liveticks.setItems(items);
-							}
+							update();
 
 							// Das sollte eig funktionieren, tut es aber nicht?!
 							int eventnr = ticklist.getSelectionModel()
@@ -571,6 +583,7 @@ public class WindowSocialMain extends Application {
 								liveticks.getItems().setAll(items);
 								final TickerContent cevents = new TickerContent();
 								final int index2 = ticklist.getItems().size();
+								
 								for (int f = 0; f < cevents.contentList(index2)
 										.getTickerBeitrag().size(); f++) {
 

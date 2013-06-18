@@ -1,3 +1,104 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <eventcontentlist>
+    <eventcontent eventID="1">
+        <tickerBeitrag zeit="11:19:31" tickerBeitragID="1">
+            <text>ich bin ein admin</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="11:20:00" tickerBeitragID="2">
+            <text>ich bin ein admin2</text>
+        </tickerBeitrag>
+    </eventcontent>
+    <eventcontent eventID="2">
+        <tickerBeitrag zeit="11:21:46" tickerBeitragID="1">
+            <text>publish</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="11:22:04" tickerBeitragID="2">
+            <text>publishadmin</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="11:22:17" tickerBeitragID="3">
+            <text>publish2</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="11:23:37" tickerBeitragID="4">
+            <text>new thing</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="11:23:52" tickerBeitragID="5">
+            <text>publishadmin</text>
+        </tickerBeitrag>
+    </eventcontent>
+    <eventcontent eventID="3">
+        <tickerBeitrag zeit="11:34:41" tickerBeitragID="1">
+            <text>bitte bitte bitte</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="11:35:00" tickerBeitragID="2">
+            <text>doch auch wenn andre</text>
+        </tickerBeitrag>
+    </eventcontent>
+    <eventcontent eventID="4">
+        <tickerBeitrag zeit="11:37:54" tickerBeitragID="1">
+            <text>post</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="11:38:17" tickerBeitragID="2">
+            <text>anderer post</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="11:38:41" tickerBeitragID="3">
+            <text>post2</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="11:49:43" tickerBeitragID="4">
+            <text>lololllll</text>
+        </tickerBeitrag>
+    </eventcontent>
+    <eventcontent eventID="5">
+        <tickerBeitrag zeit="12:04:52" tickerBeitragID="1">
+            <text>bliblablub</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="12:09:29" tickerBeitragID="2">
+            <text>ohoooooo</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="12:09:40" tickerBeitragID="3">
+            <text>klappt eh nicht</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="12:10:05" tickerBeitragID="4">
+            <text>ohoo</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="12:12:53" tickerBeitragID="5">
+            <text>leicht lösen</text>
+        </tickerBeitrag>
+    </eventcontent>
+    <eventcontent eventID="6">
+        <tickerBeitrag zeit="12:03:17" tickerBeitragID="1">
+            <text>klappt noch</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="12:03:30" tickerBeitragID="2">
+            <text>klappt auch noch</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="12:03:48" tickerBeitragID="3">
+            <text>self refresh</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="12:09:15" tickerBeitragID="4">
+            <text>klappt doch noch oder?</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="12:12:34" tickerBeitragID="5">
+            <text>doch klar man</text>
+        </tickerBeitrag>
+    </eventcontent>
+    <eventcontent eventID="7">
+        <tickerBeitrag zeit="12:12:09" tickerBeitragID="1">
+            <text>eh nicht</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="12:12:13" tickerBeitragID="2">
+            <text>eh nicht2</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="12:12:17" tickerBeitragID="3">
+            <text>eh nicht3</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="12:14:26" tickerBeitragID="4">
+            <text>pups</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="12:15:52" tickerBeitragID="5">
+            <text>pupsbacke</text>
+        </tickerBeitrag>
+        <tickerBeitrag zeit="12:16:27" tickerBeitragID="6">
+            <text>refresh</text>
+        </tickerBeitrag>
+    </eventcontent>
 </eventcontentlist>
