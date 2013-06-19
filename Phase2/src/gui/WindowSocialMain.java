@@ -37,10 +37,10 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class WindowSocialMain extends Application {
-	private Tab tab1;
-	private Tab tab2;
-	private Tab createNewEventTab;
-	private Tab k;
+	public Tab tab1;
+	public Tab tab2;
+	public Tab createNewEventTab;
+	public Tab k;
 	public String user;
 	public PubSubController pubSubControl = new PubSubController(); // damit
 																	// User das
@@ -53,7 +53,8 @@ public class WindowSocialMain extends Application {
 	public TextArea comments;
 	public ListView<String> liveticks;
 	public TickerContent cevents;
-        ;
+	public SingleSelectionModel<Tab> selectTab;
+	public TabPane tabPane = new TabPane();
 	
 	private static WindowSocialMain instance;
 
@@ -95,9 +96,9 @@ public class WindowSocialMain extends Application {
 
 		AnchorPane root = new AnchorPane();
 		primaryStage.setScene(new Scene(root, 480, 380));
-		final TabPane tabPane = new TabPane();
+		
 		tabPane.setPrefSize(490, 380);
-		final SingleSelectionModel<Tab> selectTab = tabPane.getSelectionModel();
+		selectTab = tabPane.getSelectionModel();
 		tabPane.getSelectionModel().selectedItemProperty()
 				.addListener(new ChangeListener<Tab>() {
 					@Override
@@ -400,7 +401,6 @@ public class WindowSocialMain extends Application {
 				createNewEventTab = new Tab();
 				createNewEventTab.setText("New Ticker");
 				selectTab.select(createNewEventTab);
-				create.setDisable(true);
                         
                                 
                                 
@@ -460,7 +460,19 @@ public class WindowSocialMain extends Application {
 						eventdata.put("bewertung", new Integer(5).toString());
 
 						make.createEvent(eventdata);
-						pubSubControl.nodeErstellen(eventnametextField
+						
+						ticklist.getItems().setAll(items); // damit nach erstellen, automatisch die Liste aktualisiert wird
+						for (int i = 0; i < tevents.eventList().size(); i++) {
+							items.add(tevents.eventList().get(i).getEventname());
+						}
+						ticklist.setItems(items);
+						
+						selectTab.select(tab1);
+						
+						/////////////////!!!!! TODO schließen!!!!!!////////////////////
+						
+						
+						/*pubSubControl.nodeErstellen(eventnametextField
 								.getText()); // erstellt neue Node
 						pubSubControl.nodeAbonnieren(eventnametextField
 								.getText());
@@ -560,8 +572,9 @@ public class WindowSocialMain extends Application {
 						createNewEventTab.setContent(geoGridk);
 
 					}
-				});
-
+				});*/
+				}});
+				
 				geoGridNew.add(eventname, 1, 0);
 				geoGridNew.add(eventnametextField, 1, 1);
 				geoGridNew.add(eventbeschreibung, 1, 2);
