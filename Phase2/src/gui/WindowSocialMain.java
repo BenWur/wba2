@@ -237,7 +237,7 @@ public class WindowSocialMain extends Application {
 				}
 			}
 		});
-
+/////////////////////////////////////
 		joinTicker.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -324,8 +324,7 @@ public class WindowSocialMain extends Application {
 								String beitrag = chatText.getText();
 								int eventnr = cevents.contentList(index2).getEventID().intValue();
 								new TickerContent().createBeitrag(eventnr, beitrag);
-								//pubSubControl.nodeVeroeffentlichen(???.getText(),
-								//			"<beitrag>" + beitrag + "</beitrag>");
+								pubSubControl.nodeVeroeffentlichen(ticklist.getSelectionModel().getSelectedItem(),"<beitrag>" + beitrag + "</beitrag>");
 							} else if (!liveticks.getSelectionModel().isEmpty()) {
                                                                         String kommentar = chatText.getText();
 									int eventnr = cevents.contentList(index2).getEventID().intValue();
@@ -370,8 +369,7 @@ public class WindowSocialMain extends Application {
 					k.setOnClosed(new EventHandler<javafx.event.Event>() {
 
 						public void handle(javafx.event.Event t) {
-							pubSubControl.nodeKuendigen(ticklist.getSelectionModel().getSelectedItem()); // erstellt
-																				// Node
+							pubSubControl.nodeKuendigen(ticklist.getSelectionModel().getSelectedItem()); //Kündigt die Node
 						}
 					});
 
@@ -395,7 +393,7 @@ public class WindowSocialMain extends Application {
 				ticklist.setItems(items);
 			}
 		});
-
+/////////////////
 		create.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -526,9 +524,7 @@ public class WindowSocialMain extends Application {
 									int eventnr = ticklist.getItems().size() + 1;
 									new TickerContent().createBeitrag(eventnr,
 											beitrag);
-								//	pubSubControl.nodeVeroeffentlichen(
-										//	eventnametextField.getText(),
-										//	"<beitrag>" + beitrag + "</beitrag>");
+									pubSubControl.nodeVeroeffentlichen(eventnametextField.getText(),"<beitrag>" + beitrag + "</beitrag>");
 								} else if (!liveticks.getSelectionModel()
 										.isEmpty()) {
 
@@ -583,10 +579,9 @@ public class WindowSocialMain extends Application {
 			}
 
 		});
-
+////////////////////
 		Label tickertext = new Label("Choose the ticker you'd like to join");
 
-		Button test = new Button("Create Ticker");
 
 		hbox.getChildren().addAll(joinTicker, refresh);
 		geoGrid.add(tickertext, 0, 0);
