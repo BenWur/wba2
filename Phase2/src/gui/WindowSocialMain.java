@@ -3,8 +3,10 @@ package gui;
 import guidata.TickerContent;
 import guidata.TickerEvents;
 import guidata.UserContent;
+import java.util.ArrayList;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import nodepackage.PubSubController;
@@ -40,13 +42,13 @@ public class WindowSocialMain extends Application {
 	public Tab tab1;
 	public Tab tab2;
 	public Tab createNewEventTab;
-	public Tab k;
+	public Tab createNewEvent;
 	public String user;
 	public PubSubController pubSubControl; // damit
 																	// User das
 																	// Event
 	public ListView<String> ticklist;																// abonniert
-	public int index2;
+	public int index2 = 0;
 	
 	public TickerEvents tevents;
 	public ObservableList<String> items;
@@ -244,40 +246,58 @@ public class WindowSocialMain extends Application {
 				}
 			}
 		});
-/////////////////////////////////////
+///////////////////////////////////// hier wird join gedrueckt
 		joinTicker.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
+                        //Prueft ob der tab bereits offen ist
 			public void handle(ActionEvent event) {
 				for (Tab opentab : tabPane.getTabs()) {
-					if (opentab.getText().equals(
-							ticklist.getSelectionModel().getSelectedItem())) {
+					if (opentab.getText().equals(ticklist.getSelectionModel().getSelectedItem())) {
 						return;
 					}
 				}
-
-				if (tabPane.getTabs().size() < 6
-						&& !ticklist.getSelectionModel().isEmpty()) {
-					int i = tabPane.getTabs().size();
-					k = new Tab();
-					k.setText(ticklist.getSelectionModel().getSelectedItem());
-					tabPane.getTabs().add(i, k);
-					selectTab.select(k);
-
-					
-
-					final GridPane geoGridk = new GridPane();
+                                
+				if (tabPane.getTabs().size() < 6 && !ticklist.getSelectionModel().isEmpty()) {
+					final int eventNr = ticklist.getSelectionModel().getSelectedIndex() + 1;
+                                        final int tabPos = tabPane.getTabs().size();
+                                        
+                                        createNewEvent = new Tab();
+                                        createNewEvent.setText(ticklist.getSelectionModel().getSelectedItem());
+                                        createNewEvent.setId(Integer.toString(eventNr));
+                                        
+					tabPane.getTabs().add(tabPos, createNewEvent);
+                                        selectTab.select(createNewEvent);
+                                        
+                                        liveticks = new ListView<String>();
+					cevents = new TickerContent();
+					items = FXCollections.observableArrayList();
+                                        
+                                        tabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+					@Override
+					public void changed(ObservableValue<? extends Tab> tab, Tab oldTab, Tab newTab) {
+					if (newTab.equals(tab1) || newTab.equals(tab2)) {
+                                        index2 = 0;
+                                        } else {
+                                        index2 = Integer.parseInt(newTab.getId());
+                                        System.out.println(Integer.parseInt(newTab.getId()));
+                                        
+                                        }
+                                     }
+                                  });
+                
+                                        final GridPane geoGridk = new GridPane();
 					geoGridk.setHgap(5); // Abstand links/rechts
 					geoGridk.setVgap(5); // Abstand oben/unten
 
-					ColumnConstraints column1 = new ColumnConstraints();
-					column1.setPercentWidth(85);
-					ColumnConstraints column2 = new ColumnConstraints();
-					column2.setPercentWidth(15);
+					ColumnConstraints column31 = new ColumnConstraints();
+					column31.setPercentWidth(85);
+					ColumnConstraints column42 = new ColumnConstraints();
+					column42.setPercentWidth(15);
 					RowConstraints row1 = new RowConstraints();
 					row1.setPercentHeight(92);
 					RowConstraints row2 = new RowConstraints();
 					row2.setPercentHeight(8);
-					geoGridk.getColumnConstraints().addAll(column1, column2);
+					geoGridk.getColumnConstraints().addAll(column31, column42);
 					geoGridk.getRowConstraints().addAll(row1, row2);
 
 					SplitPane sp = new SplitPane();
@@ -287,11 +307,7 @@ public class WindowSocialMain extends Application {
 					comments = new TextArea();
 					sp2.getChildren().add(comments);
 					sp.getItems().addAll(sp1, sp2);
-
-					liveticks = new ListView<String>();
-					cevents = new TickerContent();
-					items = FXCollections.observableArrayList();
-					index2 = ticklist.getSelectionModel().getSelectedIndex() + 1;
+                                        
                                         if (pubSubControl.nodesAuslesen().contains(ticklist.getSelectionModel().getSelectedItem())) {
                                                 pubSubControl.nodeAbonnieren(ticklist.getSelectionModel().getSelectedItem());
                                         } else {
@@ -327,12 +343,18 @@ public class WindowSocialMain extends Application {
 					sendchat.setOnAction(new EventHandler<ActionEvent>() {
 						@Override
 						public void handle(ActionEvent event) {
-                                                   // cevents = new TickerContent();
 							if (liveticks.getSelectionModel().isEmpty()) {
 								String beitrag = chatText.getText();
-								int eventnr = cevents.contentList(index2).getEventID().intValue();
-								new TickerContent().createBeitrag(eventnr, beitrag);
+                                                                if (index2 == 0) {
+                                                                int eventnr = ticklist.getSelectionModel().getSelectedIndex() + 1;
+                                                                new TickerContent().createBeitrag(eventnr, beitrag);
 								pubSubControl.nodeVeroeffentlichen(ticklist.getSelectionModel().getSelectedItem(),"<beitrag>" + beitrag + "</beitrag>");
+                                                                } else {
+								int eventnr = cevents.contentList(index2).getEventID().intValue();
+                                                                new TickerContent().createBeitrag(eventnr, beitrag);
+								pubSubControl.nodeVeroeffentlichen(ticklist.getSelectionModel().getSelectedItem(),"<beitrag>" + beitrag + "</beitrag>");
+                                                                }
+								
 							} else if (!liveticks.getSelectionModel().isEmpty()) {
                                                                         String kommentar = chatText.getText();
 									int eventnr = cevents.contentList(index2).getEventID().intValue();
@@ -374,15 +396,15 @@ public class WindowSocialMain extends Application {
 
 					geoGridk.add(sp, 0, 0);
 
-					k.setContent(geoGridk);
-					k.setOnClosed(new EventHandler<javafx.event.Event>() {
+					createNewEvent.setContent(geoGridk);
+					createNewEvent.setOnClosed(new EventHandler<javafx.event.Event>() {
 
 						public void handle(javafx.event.Event t) {
 							pubSubControl.nodeKuendigen(ticklist.getSelectionModel().getSelectedItem()); //Kündigt die Node
 						}
 					});
 
-					i++;
+					//i++;
 				}
 			}
 		});
