@@ -68,21 +68,16 @@ public class WindowSocialMain extends Application {
 	}
 	
 	public void update(){
+            
+		items = FXCollections.observableArrayList();
+		int ticksize = cevents.contentList(index2).getTickerBeitrag().size();
 		
-		items = FXCollections
-				.observableArrayList();
-		liveticks.getItems().setAll(items);
-		
-		for(int i=0;i<6;i++){
-			System.out.println(index2);
-		}
-		
-		for (int f = 0; f < cevents.contentList(index2).getTickerBeitrag().size(); f++) {
+		for (int f = 0; f < ticksize; f++) {
 			System.out.println("update:"+cevents.contentList(index2).getTickerBeitrag().get(f).getZeit());
-			items.add(cevents.contentList(index2).getTickerBeitrag().get(f).getZeit()+ ": "
-					+ cevents.contentList(index2).getTickerBeitrag().get(f).getText());
-			liveticks.setItems(items);
+			
+                        items.add(cevents.contentList(index2).getTickerBeitrag().get(f).getZeit()+": "+ cevents.contentList(index2).getTickerBeitrag().get(f).getText());
 		}
+                liveticks.setItems(items);
 	}
 	
 	@Override
@@ -259,7 +254,7 @@ public class WindowSocialMain extends Application {
 					tabPane.getTabs().add(i, k);
 					selectTab.select(k);
 
-					pubSubControl.nodeAbonnieren(ticklist.getSelectionModel().getSelectedItem());
+					
 
 					final GridPane geoGridk = new GridPane();
 					geoGridk.setHgap(5); // Abstand links/rechts
@@ -288,10 +283,14 @@ public class WindowSocialMain extends Application {
 					cevents = new TickerContent();
 					items = FXCollections.observableArrayList();
 					index2 = ticklist.getSelectionModel().getSelectedIndex() + 1;
+                                        if (pubSubControl.nodesAuslesen().contains(ticklist.getSelectionModel().getSelectedItem())) {
+                                                pubSubControl.nodeAbonnieren(ticklist.getSelectionModel().getSelectedItem());
+                                        } else {
 					for (int f = 0; f < cevents.contentList(index2).getTickerBeitrag().size(); f++) {
 						items.add(cevents.contentList(index2).getTickerBeitrag().get(f).getZeit()+ ": " + cevents.contentList(index2).getTickerBeitrag().get(f).getText());
 						liveticks.setItems(items);
-                               
+                               }
+                                        }
 						liveticks.setOnMouseClicked(new EventHandler<MouseEvent>() {
 						   @Override
 						   public void handle(MouseEvent mouseEvent) {
@@ -309,7 +308,7 @@ public class WindowSocialMain extends Application {
 						       }
 						   }
 						});
-					}
+					
 					sp1.getChildren().add(liveticks);
 
 					final TextField chatText = new TextField();
