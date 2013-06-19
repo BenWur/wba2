@@ -42,7 +42,7 @@ public class WindowSocialMain extends Application {
 	public Tab createNewEventTab;
 	public Tab k;
 	public String user;
-	public PubSubController pubSubControl = new PubSubController(); // damit
+	public PubSubController pubSubControl; // damit
 																	// User das
 																	// Event
 	public ListView<String> ticklist;																// abonniert
@@ -61,36 +61,38 @@ public class WindowSocialMain extends Application {
 	//dient zur persistenten Speicherung
 	public static WindowSocialMain getInstance(){
 		if(instance==null){
-			instance=new WindowSocialMain();
+			System.out.println( "Fehler, das geht nicht." );
+			return null;
 		}
 		return instance;
 	}
 	
-/*  HIER KOMMT DIE HYPER REFRESH METHODE REIN TODO
-	public void update() {
-		list.load();
-	}
-*/
 	public void update(){
+		
 		items = FXCollections
 				.observableArrayList();
 		liveticks.getItems().setAll(items);
-
-		for (int f = 0; f < cevents.contentList(index2)
-				.getTickerBeitrag().size(); f++) {
-
-			items.add(cevents.contentList(index2)
-					.getTickerBeitrag().get(f).getZeit()
-					+ ": "
-					+ cevents.contentList(index2)
-							.getTickerBeitrag().get(f)
-							.getText());
+		
+		for(int i=0;i<6;i++){
+			System.out.println(index2);
+		}
+		
+		for (int f = 0; f < cevents.contentList(index2).getTickerBeitrag().size(); f++) {
+			System.out.println("update:"+cevents.contentList(index2).getTickerBeitrag().get(f).getZeit());
+			items.add(cevents.contentList(index2).getTickerBeitrag().get(f).getZeit()+ ": "
+					+ cevents.contentList(index2).getTickerBeitrag().get(f).getText());
 			liveticks.setItems(items);
 		}
 	}
 	
 	@Override
 	public void start(final Stage primaryStage) {
+		
+		if(instance==null){
+    		instance=this;
+    	}
+		
+		pubSubControl = new PubSubController();
 		primaryStage.setResizable(false);
 		primaryStage.setTitle("SocialTicker");
 
@@ -286,31 +288,28 @@ public class WindowSocialMain extends Application {
 					cevents = new TickerContent();
 					items = FXCollections.observableArrayList();
 					index2 = ticklist.getSelectionModel().getSelectedIndex() + 1;
-					for (int f = 0; f < cevents.contentList(index2)
-							.getTickerBeitrag().size(); f++) {
-
+					for (int f = 0; f < cevents.contentList(index2).getTickerBeitrag().size(); f++) {
 						items.add(cevents.contentList(index2).getTickerBeitrag().get(f).getZeit()+ ": " + cevents.contentList(index2).getTickerBeitrag().get(f).getText());
 						liveticks.setItems(items);
-
-						                                
-    liveticks.setOnMouseClicked(new EventHandler<MouseEvent>() {
-   @Override
-   public void handle(MouseEvent mouseEvent) {
-       if (mouseEvent.getButton().equals(
-               MouseButton.PRIMARY)) {
-           if (mouseEvent.getClickCount() == 1) {
-               final int index3 = liveticks.getSelectionModel().getSelectedIndex();
-               comments.clear();
-               for (int h = 0; h < cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().size(); h++) {
-                   comments.appendText(cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarUser() + " wrote:\n");
-                   comments.appendText(cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarText() + "\n");
-
-               }
-           }
-       }
-   }
-});
-}
+                               
+						liveticks.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						   @Override
+						   public void handle(MouseEvent mouseEvent) {
+						       if (mouseEvent.getButton().equals(
+						               MouseButton.PRIMARY)) {
+						           if (mouseEvent.getClickCount() == 1) {
+						               final int index3 = liveticks.getSelectionModel().getSelectedIndex();
+						               comments.clear();
+						               for (int h = 0; h < cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().size(); h++) {
+						                   comments.appendText(cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarUser() + " wrote:\n");
+						                   comments.appendText(cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarText() + "\n");
+						
+						               }
+						           }
+						       }
+						   }
+						});
+					}
 					sp1.getChildren().add(liveticks);
 
 					final TextField chatText = new TextField();
@@ -333,7 +332,8 @@ public class WindowSocialMain extends Application {
 									new TickerContent().createKommentar(
 											eventnr, ticknr, user, kommentar);
 							}
-							update();
+							
+							//update(); //Dies sollte XMPP übernehmen
 
 							// Das sollte eig funktionieren, tut es aber nicht?!
 							/*
@@ -466,7 +466,8 @@ public class WindowSocialMain extends Application {
 							items.add(tevents.eventList().get(i).getEventname());
 						}
 						ticklist.setItems(items);
-						
+						pubSubControl.nodeErstellen(eventnametextField.getText()); // erstellt neue Node
+						tabPane.getTabs().remove(createNewEventTab);
 						selectTab.select(tab1);
 						
 						/////////////////!!!!! TODO schließen!!!!!!////////////////////

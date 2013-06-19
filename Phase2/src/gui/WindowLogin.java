@@ -19,6 +19,7 @@ public class WindowLogin extends Application {
 
     @Override
     public void start(final Stage primaryStage) {
+    	
         primaryStage.setResizable(false);
         
         final Label errmessage = new Label();
