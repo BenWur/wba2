@@ -79,6 +79,15 @@ public class WindowSocialMain extends Application {
 		}
                 liveticks.setItems(items);
 	}
+        
+        public void refresh() {
+                            items = FXCollections.observableArrayList();
+				ticklist.getItems().setAll(items);
+				for (int i = 0; i < tevents.eventList().size(); i++) {
+					items.add(tevents.eventList().get(i).getEventname());
+				}
+				ticklist.setItems(items);
+			}
 	
 	@Override
 	public void start(final Stage primaryStage) {
@@ -386,11 +395,7 @@ public class WindowSocialMain extends Application {
 		refresh.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				ticklist.getItems().setAll(items);
-				for (int i = 0; i < tevents.eventList().size(); i++) {
-					items.add(tevents.eventList().get(i).getEventname());
-				}
-				ticklist.setItems(items);
+                            refresh();
 			}
 		});
 /////////////////
@@ -460,11 +465,7 @@ public class WindowSocialMain extends Application {
 
 						make.createEvent(eventdata);
 						
-						ticklist.getItems().setAll(items); // damit nach erstellen, automatisch die Liste aktualisiert wird
-						for (int i = 0; i < tevents.eventList().size(); i++) {
-							items.add(tevents.eventList().get(i).getEventname());
-						}
-						ticklist.setItems(items);
+						refresh();
 						pubSubControl.nodeErstellen(eventnametextField.getText()); // erstellt neue Node
 						tabPane.getTabs().remove(createNewEventTab);
 						selectTab.select(tab1);
