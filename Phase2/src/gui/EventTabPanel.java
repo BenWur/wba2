@@ -18,13 +18,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 
-
-
 /**
  *
  * @author Dario
  */
 public class EventTabPanel extends GridPane {
+
     public Tab joinTab;
     public ListView<String> liveticks;
     public TickerContent cevents;
@@ -32,66 +31,66 @@ public class EventTabPanel extends GridPane {
     public int index2;
     public ListView<String> ticklist;
     public Button joinTicker;
-    
+
     public EventTabPanel() {
-            
-            this.setHgap(5); // Abstand links/rechts
-            this.setVgap(5); // Abstand oben/unten
 
-            ColumnConstraints column1 = new ColumnConstraints();
-            column1.setPercentWidth(85);
-            ColumnConstraints column2 = new ColumnConstraints();
-            column2.setPercentWidth(15);
-            RowConstraints row1 = new RowConstraints();
-            row1.setPercentHeight(92);
-            RowConstraints row2 = new RowConstraints();
-            row2.setPercentHeight(8);
-            this.getColumnConstraints().addAll(column1, column2);
-            this.getRowConstraints().addAll(row1, row2);
+        this.setHgap(5); // Abstand links/rechts
+        this.setVgap(5); // Abstand oben/unten
 
-            SplitPane sp = new SplitPane();
-            final StackPane sp1 = new StackPane();
+        ColumnConstraints column1 = new ColumnConstraints();
+        column1.setPercentWidth(85);
+        ColumnConstraints column2 = new ColumnConstraints();
+        column2.setPercentWidth(15);
+        RowConstraints row1 = new RowConstraints();
+        row1.setPercentHeight(92);
+        RowConstraints row2 = new RowConstraints();
+        row2.setPercentHeight(8);
+        this.getColumnConstraints().addAll(column1, column2);
+        this.getRowConstraints().addAll(row1, row2);
 
-            final StackPane sp2 = new StackPane();
-            TextArea comments = new TextArea();
-            
-            final TextField chatText = new TextField();
-            
-            joinTicker = new Button("Join");
-            
-            
-					
+        SplitPane sp = new SplitPane();
+        final StackPane sp1 = new StackPane();
 
-            liveticks = new ListView<String>();
-            cevents = new TickerContent();
-            items = FXCollections.observableArrayList();
-            index2 = ticklist.getSelectionModel().getSelectedIndex() + 1;
+        final StackPane sp2 = new StackPane();
+        TextArea comments = new TextArea();
 
-            sp2.getChildren().add(comments);
-            sp.getItems().addAll(sp1, sp2);
+        final TextField chatText = new TextField();
 
-            sp1.getChildren().add(liveticks);
-
-
-
-            final Button sendchat = new Button("Send");
-            sendchat.setMinWidth(50);
+        joinTicker = new Button("Join");
 
 
 
 
+        liveticks = new ListView<String>();
+        cevents = new TickerContent();
+        items = FXCollections.observableArrayList();
+        index2 = ticklist.getSelectionModel().getSelectedIndex() + 1;
+
+        sp2.getChildren().add(comments);
+        sp.getItems().addAll(sp1, sp2);
+
+        sp1.getChildren().add(liveticks);
 
 
-            this.add(sendchat, 1, 1);
-            this.add(chatText, 0, 1);
 
-            this.add(sp, 0, 0);
+        final Button sendchat = new Button("Send");
+        sendchat.setMinWidth(50);
 
-            joinTab.setContent(this);
-					
 
-					
-            }
+
+
+
+
+        this.add(sendchat, 1, 1);
+        this.add(chatText, 0, 1);
+
+        this.add(sp, 0, 0);
+
+        joinTab.setContent(this);
+
+
+
     }
+}
 		
 
