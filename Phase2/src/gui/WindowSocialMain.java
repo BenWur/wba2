@@ -1,5 +1,6 @@
 package gui;
 
+import eventlist.Event;
 import guidata.TickerContent;
 import guidata.TickerEvents;
 import guidata.UserContent;
@@ -176,8 +177,7 @@ public class WindowSocialMain extends Application {
 
         ticklist = new ListView<String>();
         tevents = new TickerEvents();
-        items = FXCollections
-                .observableArrayList();
+        items = FXCollections.observableArrayList();
         for (int i = 0; i < tevents.eventList().size(); i++) {
             items.add(tevents.eventList().get(i).getEventname());
         }
@@ -249,33 +249,33 @@ public class WindowSocialMain extends Application {
         });
 /////////////////////////////////////
         
+        final Event events = tevents.eventList().get(ticklist.getSelectionModel().getSelectedIndex() + 1);
         
         joinTicker.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 for (Tab opentab : tabPane.getTabs()) {
-                    if (opentab.getText().equals(
-                            ticklist.getSelectionModel().getSelectedItem())) {
+                    if (opentab.getText().equals(events.getEventname())) {
                         return;
                     }
                 }
 
                 if (tabPane.getTabs().size() < 6
                         && !ticklist.getSelectionModel().isEmpty()) {
-                    int eventID = ticklist.getSelectionModel().getSelectedIndex() + 1;
-                    EventTabPanel gejointerTab = new EventTabPanel(eventID);
+                    System.out.println(events.getEventID());
+                    EventTabPanel gejointerTab = new EventTabPanel(events);
                     Tab tab = new Tab();
-                    tab.setText(ticklist.getSelectionModel().getSelectedItem());
+                    tab.setText(events.getEventname());
                     tab.setContent(gejointerTab);
                     tabPane.getTabs().add(tab);
 
                 }
 
-                if (pubSubControl.nodesAuslesen().contains(ticklist.getSelectionModel().getSelectedItem())) {
-                    pubSubControl.nodeAbonnieren(ticklist.getSelectionModel().getSelectedItem());
+                if (pubSubControl.nodesAuslesen().contains(events.getEventname())) {
+                    pubSubControl.nodeAbonnieren(events.getEventname());
                 } else {
-                    for (int f = 0; f < cevents.contentList(index2).getTickerBeitrag().size(); f++) {
-                        items.add(cevents.contentList(index2).getTickerBeitrag().get(f).getZeit() + ": " + cevents.contentList(index2).getTickerBeitrag().get(f).getText());
+                    for (int f = 0; f < cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().size(); f++) {
+                        items.add(cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getZeit() + ": " + cevents.contentList(index2).getTickerBeitrag().get(f).getText());
                         liveticks.setItems(items);
                     }
                 }

@@ -4,6 +4,8 @@
  */
 package gui;
 
+import eventlist.Event;
+
 import guidata.TickerContent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -38,8 +40,8 @@ public class EventTabPanel extends GridPane {
     private PubSubController pubSubControl;
     private String user;
 
-    public EventTabPanel(final int eventID) {
-
+    public EventTabPanel(final Event events) {
+        
         this.setHgap(5); // Abstand links/rechts
         this.setVgap(5); // Abstand oben/unten
 
@@ -61,7 +63,8 @@ public class EventTabPanel extends GridPane {
         final TextArea comments = new TextArea();
 
         final TextField chatText = new TextField();
-
+        
+       
 
 
         liveticks = new ListView<String>();
@@ -102,9 +105,9 @@ public class EventTabPanel extends GridPane {
                     if (mouseEvent.getClickCount() == 1) {
                         final int index3 = liveticks.getSelectionModel().getSelectedIndex();
                         comments.clear();
-                        for (int h = 0; h < cevents.contentList(eventID).getTickerBeitrag().get(index3).getKommentar().size(); h++) {
-                            comments.appendText(cevents.contentList(eventID).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarUser() + " wrote:\n");
-                            comments.appendText(cevents.contentList(eventID).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarText() + "\n");
+                        for (int h = 0; h < cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(index3).getKommentar().size(); h++) {
+                            comments.appendText(cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarUser() + " wrote:\n");
+                            comments.appendText(cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarText() + "\n");
 
                         }
                     }
@@ -118,12 +121,12 @@ public class EventTabPanel extends GridPane {
                 // cevents = new TickerContent();
                 if (liveticks.getSelectionModel().isEmpty()) {
                     String beitrag = chatText.getText();
-                    int eventnr = cevents.contentList(eventID).getEventID().intValue();
+                    int eventnr = events.getEventID().intValue();
                     new TickerContent().createBeitrag(eventnr, beitrag);
-                    pubSubControl.nodeVeroeffentlichen(ticklist.getSelectionModel().getSelectedItem(), "<beitrag>" + beitrag + "</beitrag>");
+                    //pubSubControl.nodeVeroeffentlichen(events.getEventname(), "<beitrag>" + beitrag + "</beitrag>");
                 } else if (!liveticks.getSelectionModel().isEmpty()) {
                     String kommentar = chatText.getText();
-                    int eventnr = cevents.contentList(eventID).getEventID().intValue();
+                    int eventnr =  events.getEventID().intValue();
                     int ticknr = liveticks.getSelectionModel().getSelectedIndex() + 1;
                     new TickerContent().createKommentar(
                             eventnr, ticknr, user, kommentar);
