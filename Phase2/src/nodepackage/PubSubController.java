@@ -138,4 +138,24 @@ public class PubSubController {
 		return nodes;
 	}
 	
+	public void ereaseAllNodes(){
+		List<String> nodes=new ArrayList<String>();
+		
+		try {
+			DiscoverItems item=this.mgr.discoverNodes(null);
+			
+			Iterator<DiscoverItems.Item> items = item.getItems();
+			
+			while( items.hasNext()){
+				nodes.remove(items.next().getNode());
+				System.out.println("geloescht!");
+			}
+			
+		} catch (XMPPException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 }
