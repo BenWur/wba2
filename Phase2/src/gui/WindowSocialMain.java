@@ -38,23 +38,20 @@ import javafx.stage.Stage;
 
 public class WindowSocialMain extends Application {
 
-    public Tab tab1;
-    public Tab tab2;
-    public Tab createNewEventTab;
+    private Tab tab1;
+    private Tab tab2;
+    private Tab createNewEventTab;
     public String user;
-    public PubSubController pubSubControl;
-    public Button sendchat;
-    public TextField chatText;
+    private PubSubController pubSubControl;
     // Event
-    public ListView<String> ticklist;																// abonniert
-    public int index2;
-    public TickerEvents tevents;
-    public ObservableList<String> items;
-    public TextArea comments;
-    public ListView<String> liveticks;
-    public TickerContent cevents;
-    public SingleSelectionModel<Tab> selectTab;
-    public TabPane tabPane = new TabPane();
+    private ListView<String> ticklist;																// abonniert
+    private int index2;
+    private TickerEvents tevents;
+    private ObservableList<String> items;
+    private ListView<String> liveticks;
+    private TickerContent cevents;
+    private SingleSelectionModel<Tab> selectTab;
+    private TabPane tabPane = new TabPane();
     private static WindowSocialMain instance;
 
     //dient zur persistenten Speicherung
@@ -116,7 +113,7 @@ public class WindowSocialMain extends Application {
                 }
             }
         });
-        
+
         //final joinTicker = new Button("Join");
 
         final GridPane geoGrid = new GridPane();
@@ -185,13 +182,13 @@ public class WindowSocialMain extends Application {
             items.add(tevents.eventList().get(i).getEventname());
         }
         ticklist.setItems(items);
-        
-      
-        
+
+
+
         final Button joinTicker = new Button("Join");
         joinTicker.setMinWidth(50);
-        
-        
+
+
 
         final Label welcome = new Label();
         welcome.setText("Hello, " + user + "!");
@@ -264,6 +261,12 @@ public class WindowSocialMain extends Application {
 
                 if (tabPane.getTabs().size() < 6
                         && !ticklist.getSelectionModel().isEmpty()) {
+                    EventTabPanel gejointerTab = new EventTabPanel();
+                    Tab tab = new Tab();
+                    tab.setText(ticklist.getSelectionModel().getSelectedItem());
+                    tab.setContent(gejointerTab);
+                    tabPane.getTabs().add(tab);
+
                 }
 
                 if (pubSubControl.nodesAuslesen().contains(ticklist.getSelectionModel().getSelectedItem())) {
@@ -275,184 +278,181 @@ public class WindowSocialMain extends Application {
                     }
                 }
             }
-         });
-            
-
-
-                
-
-
-                
-
-
-/*
-                int i = tabPane.getTabs().size();
-                joinTab = new Tab();
-                joinTab.setText(ticklist.getSelectionModel().getSelectedItem());
-                tabPane.getTabs().add(i, joinTab);
-                selectTab.select(joinTab);
-
-*/
-                   
+        });
 
 
 
 
-                final Button create = new Button("Create Ticker");
-                create.setMinWidth(50);
 
-                final Button refresh = new Button("Refresh");
-                refresh.setMinWidth(50);
-                refresh.setOnAction(new EventHandler<ActionEvent>() {
+
+
+
+
+        /*
+         int i = tabPane.getTabs().size();
+         joinTab = new Tab();
+         joinTab.setText(ticklist.getSelectionModel().getSelectedItem());
+         tabPane.getTabs().add(i, joinTab);
+         selectTab.select(joinTab);
+
+         */
+
+
+
+
+
+        final Button create = new Button("Create Ticker");
+        create.setMinWidth(50);
+
+        final Button refresh = new Button("Refresh");
+        refresh.setMinWidth(50);
+        refresh.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                refresh();
+            }
+        });
+
+
+/////////////////
+        create.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                createNewEventTab = new Tab();
+                createNewEventTab.setText("New Ticker");
+                selectTab.select(createNewEventTab);
+
+
+
+
+                final GridPane geoGridNew = new GridPane(); // Grid fuer new// ticker
+                geoGridNew.setHgap(5); // Abstand links/rechts
+                geoGridNew.setVgap(5); // Abstand oben/unten
+
+                ColumnConstraints column1 = new ColumnConstraints();
+                column1.setPercentWidth(30);
+                ColumnConstraints column2 = new ColumnConstraints();
+                column2.setPercentWidth(40);
+                ColumnConstraints column3 = new ColumnConstraints();
+                column3.setPercentWidth(30);
+                geoGridNew.getColumnConstraints().addAll(column1, column2,
+                        column3);
+
+                final Label errmessage = new Label();
+
+                final Label eventname = new Label("Event name:");
+                final TextField eventnametextField = new TextField();
+
+                final Label eventbeschreibung = new Label("Event description:");
+                final TextField eventbeschreibungField1 = new TextField();
+
+                final Label eventtyp = new Label("Event type:");
+                final ChoiceBox typchoice = new ChoiceBox(FXCollections
+                        .observableArrayList("Football", "Baseball",
+                        "Basketball", "Formula 1"));
+                typchoice.getSelectionModel().selectFirst();
+
+                final Label start = new Label("Event start:");
+                final TextField startField = new TextField();
+                startField.setPromptText("HH:MM");
+
+                final Label ende = new Label("Event end:");
+                final TextField endeField = new TextField();
+                endeField.setPromptText("HH:MM");
+
+
+
+                final Button createbtn = new Button();
+                createbtn.setText("Create");
+                createbtn.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
+                        TickerEvents make = new TickerEvents();
+                        errmessage.setText("");
+
+                        Map<String, String> eventdata = new HashMap<String, String>();
+                        eventdata.put("admin", user);
+                        eventdata.put("name", eventnametextField.getText());
+                        eventdata.put("beschr",
+                                eventbeschreibungField1.getText());
+                        eventdata.put("typ", typchoice.getSelectionModel()
+                                .getSelectedItem().toString());
+                        eventdata.put("start", startField.getText() + ":00");
+                        eventdata.put("ende", endeField.getText() + ":00");
+                        eventdata.put("bewertung", new Integer(5).toString());
+
+                        make.createEvent(eventdata);
+
                         refresh();
+                        pubSubControl.nodeErstellen(eventnametextField.getText()); // erstellt neue Node
+                        tabPane.getTabs().remove(createNewEventTab);
+                        selectTab.select(tab1);
+
                     }
                 });
 
 
-/////////////////
-                create.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        createNewEventTab = new Tab();
-                        createNewEventTab.setText("New Ticker");
-                        selectTab.select(createNewEventTab);
+                geoGridNew.add(eventname, 1, 0);
+                geoGridNew.add(eventnametextField, 1, 1);
+                geoGridNew.add(eventbeschreibung, 1, 2);
+                geoGridNew.add(eventbeschreibungField1, 1, 3);
+                geoGridNew.add(eventtyp, 1, 4);
+                geoGridNew.add(typchoice, 1, 5);
+                geoGridNew.add(start, 1, 6);
+                geoGridNew.add(startField, 1, 7);
+                geoGridNew.add(ende, 1, 8);
+                geoGridNew.add(endeField, 1, 9);
+                geoGridNew.add(createbtn, 1, 10);
 
-                       
+
+                createNewEventTab.setContent(geoGridNew);
+                tabPane.getTabs().add(createNewEventTab);
 
 
-                        final GridPane geoGridNew = new GridPane(); // Grid fuer new// ticker
-                        geoGridNew.setHgap(5); // Abstand links/rechts
-                        geoGridNew.setVgap(5); // Abstand oben/unten
 
-                        ColumnConstraints column1 = new ColumnConstraints();
-                        column1.setPercentWidth(30);
-                        ColumnConstraints column2 = new ColumnConstraints();
-                        column2.setPercentWidth(40);
-                        ColumnConstraints column3 = new ColumnConstraints();
-                        column3.setPercentWidth(30);
-                        geoGridNew.getColumnConstraints().addAll(column1, column2,
-                                column3);
 
-                        final Label errmessage = new Label();
-
-                        final Label eventname = new Label("Event name:");
-                        final TextField eventnametextField = new TextField();
-
-                        final Label eventbeschreibung = new Label("Event description:");
-                        final TextField eventbeschreibungField1 = new TextField();
-
-                        final Label eventtyp = new Label("Event type:");
-                        final ChoiceBox typchoice = new ChoiceBox(FXCollections
-                                .observableArrayList("Football", "Baseball",
-                                "Basketball", "Formula 1"));
-                        typchoice.getSelectionModel().selectFirst();
-
-                        final Label start = new Label("Event start:");
-                        final TextField startField = new TextField();
-                        startField.setPromptText("HH:MM");
-
-                        final Label ende = new Label("Event end:");
-                        final TextField endeField = new TextField();
-                        endeField.setPromptText("HH:MM");
-                         
-            
-                       
-                        final Button createbtn = new Button();
-                        createbtn.setText("Create");
-                        createbtn.setOnAction(new EventHandler<ActionEvent>() {
-                            @Override
-                            public void handle(ActionEvent event) {
-                                TickerEvents make = new TickerEvents();
-                                errmessage.setText("");
-
-                                Map<String, String> eventdata = new HashMap<String, String>();
-                                eventdata.put("admin", user);
-                                eventdata.put("name", eventnametextField.getText());
-                                eventdata.put("beschr",
-                                        eventbeschreibungField1.getText());
-                                eventdata.put("typ", typchoice.getSelectionModel()
-                                        .getSelectedItem().toString());
-                                eventdata.put("start", startField.getText() + ":00");
-                                eventdata.put("ende", endeField.getText() + ":00");
-                                eventdata.put("bewertung", new Integer(5).toString());
-
-                                make.createEvent(eventdata);
-
-                                refresh();
-                                pubSubControl.nodeErstellen(eventnametextField.getText()); // erstellt neue Node
-                                tabPane.getTabs().remove(createNewEventTab);
-                                selectTab.select(tab1);
-                                
-                                }
-                        });
-                            
-
-                        geoGridNew.add(eventname, 1, 0);
-                        geoGridNew.add(eventnametextField, 1, 1);
-                        geoGridNew.add(eventbeschreibung, 1, 2);
-                        geoGridNew.add(eventbeschreibungField1, 1, 3);
-                        geoGridNew.add(eventtyp, 1, 4);
-                        geoGridNew.add(typchoice, 1, 5);
-                        geoGridNew.add(start, 1, 6);
-                        geoGridNew.add(startField, 1, 7);
-                        geoGridNew.add(ende, 1, 8);
-                        geoGridNew.add(endeField, 1, 9);
-                        geoGridNew.add(createbtn, 1, 10);
-                            
-
-                        createNewEventTab.setContent(geoGridNew);
-                        tabPane.getTabs().add(createNewEventTab);
-                            
-                        
-                       
-                    
 ////////////////////
-                        
-                    
-                        }
-                });
-                
-                
-                
-                Label tickertext = new Label("Choose the ticker you'd like to join");
 
 
-                        hbox.getChildren().addAll(joinTicker, refresh);
-                        geoGrid.add(tickertext, 0, 0);
-                        geoGrid.add(ticklist, 0, 1);
-                        geoGrid.add(welcome, 1, 0);
-                        geoGrid.add(create, 1, 2);
-                        geoGrid.add(hbox, 0, 2);
-                        geoGrid3.add(eventname, 0, 0);
-                        geoGrid3.add(eventnametext, 0, 1);
-                        geoGrid3.add(beschreibung, 0, 2);
-                        geoGrid3.add(eventBeschreibung, 0, 3);
-                        geoGrid3.add(eventtyp, 0, 4);
-                        geoGrid3.add(eventtyptext, 0, 5);
-                        geoGrid3.add(eventadmin, 0, 6);
-                        geoGrid3.add(eventadmintext, 0, 7);
-                        geoGrid3.add(eventstart, 0, 8);
-                        geoGrid3.add(eventstarttext, 0, 9);
-                        geoGrid3.add(eventend, 0, 10);
-                        geoGrid3.add(eventendtext, 0, 11);
-                        geoGrid3.add(eventscore, 0, 12);
-                        geoGrid3.add(eventscoretext, 0, 13);
-                        geoGrid.add(geoGrid3, 1, 1);
-
-                        tab1.setContent(geoGrid);
-                        tab2.setContent(geoGrid2);
-
-                        tabPane.getTabs().addAll(tab1, tab2);
-                        root.getChildren().add(tabPane);
-
-                        primaryStage.show();
             }
-        
-    
-               
-                       
+        });
+
+
+
+        Label tickertext = new Label("Choose the ticker you'd like to join");
+
+
+        hbox.getChildren().addAll(joinTicker, refresh);
+        geoGrid.add(tickertext, 0, 0);
+        geoGrid.add(ticklist, 0, 1);
+        geoGrid.add(welcome, 1, 0);
+        geoGrid.add(create, 1, 2);
+        geoGrid.add(hbox, 0, 2);
+        geoGrid3.add(eventname, 0, 0);
+        geoGrid3.add(eventnametext, 0, 1);
+        geoGrid3.add(beschreibung, 0, 2);
+        geoGrid3.add(eventBeschreibung, 0, 3);
+        geoGrid3.add(eventtyp, 0, 4);
+        geoGrid3.add(eventtyptext, 0, 5);
+        geoGrid3.add(eventadmin, 0, 6);
+        geoGrid3.add(eventadmintext, 0, 7);
+        geoGrid3.add(eventstart, 0, 8);
+        geoGrid3.add(eventstarttext, 0, 9);
+        geoGrid3.add(eventend, 0, 10);
+        geoGrid3.add(eventendtext, 0, 11);
+        geoGrid3.add(eventscore, 0, 12);
+        geoGrid3.add(eventscoretext, 0, 13);
+        geoGrid.add(geoGrid3, 1, 1);
+
+        tab1.setContent(geoGrid);
+        tab2.setContent(geoGrid2);
+
+        tabPane.getTabs().addAll(tab1, tab2);
+        root.getChildren().add(tabPane);
+
+        primaryStage.show();
+    }
+
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
      * main() serves only as fallback in case the application can not be

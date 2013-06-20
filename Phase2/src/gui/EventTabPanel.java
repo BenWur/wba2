@@ -29,15 +29,14 @@ import nodepackage.PubSubController;
  */
 public class EventTabPanel extends GridPane {
 
-    public Tab joinTab;
-    public ListView<String> liveticks;
-    public TickerContent cevents;
-    public ObservableList<String> items;
-    public int index2;
-    public ListView<String> ticklist;
-    public Button joinTicker;
-    public PubSubController pubSubControl;
-    public String user;
+    private Tab joinTab;
+    private ListView<String> liveticks;
+    private TickerContent cevents;
+    private ObservableList<String> items;
+    private int index2;
+    private ListView<String> ticklist;
+    private PubSubController pubSubControl;
+    private String user;
 
     public EventTabPanel() {
 
@@ -63,7 +62,7 @@ public class EventTabPanel extends GridPane {
 
         final TextField chatText = new TextField();
 
-        
+
 
         liveticks = new ListView<String>();
         cevents = new TickerContent();
@@ -81,10 +80,10 @@ public class EventTabPanel extends GridPane {
 
 
         joinTab.setOnClosed(new EventHandler<javafx.event.Event>() {
-                    public void handle(javafx.event.Event t) {
-                        pubSubControl.nodeKuendigen(ticklist.getSelectionModel().getSelectedItem()); //Kündigt die Node
-                    }
-                });
+            public void handle(javafx.event.Event t) {
+                pubSubControl.nodeKuendigen(ticklist.getSelectionModel().getSelectedItem()); //Kündigt die Node
+            }
+        });
 
 
 
@@ -94,24 +93,24 @@ public class EventTabPanel extends GridPane {
         this.add(sp, 0, 0);
 
         joinTab.setContent(this);
-        
-        liveticks.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
-                        if (mouseEvent.getButton().equals(
-                                MouseButton.PRIMARY)) {
-                            if (mouseEvent.getClickCount() == 1) {
-                                final int index3 = liveticks.getSelectionModel().getSelectedIndex();
-                                comments.clear();
-                                for (int h = 0; h < cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().size(); h++) {
-                                    comments.appendText(cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarUser() + " wrote:\n");
-                                    comments.appendText(cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarText() + "\n");
 
-                                }
-                            }
+        liveticks.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (mouseEvent.getButton().equals(
+                        MouseButton.PRIMARY)) {
+                    if (mouseEvent.getClickCount() == 1) {
+                        final int index3 = liveticks.getSelectionModel().getSelectedIndex();
+                        comments.clear();
+                        for (int h = 0; h < cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().size(); h++) {
+                            comments.appendText(cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarUser() + " wrote:\n");
+                            comments.appendText(cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarText() + "\n");
+
                         }
                     }
-                });
+                }
+            }
+        });
 
         sendchat.setOnAction(new EventHandler<ActionEvent>() {
             @Override
