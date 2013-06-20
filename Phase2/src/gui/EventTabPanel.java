@@ -7,6 +7,8 @@ package gui;
 import guidata.TickerContent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
@@ -17,6 +19,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
+import nodepackage.PubSubController;
 
 /**
  *
@@ -31,6 +34,8 @@ public class EventTabPanel extends GridPane {
     public int index2;
     public ListView<String> ticklist;
     public Button joinTicker;
+    public PubSubController pubSubControl;
+    public String user;
 
     public EventTabPanel() {
 
@@ -88,8 +93,24 @@ public class EventTabPanel extends GridPane {
 
         joinTab.setContent(this);
 
-
-
+        sendchat.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                // cevents = new TickerContent();
+                if (liveticks.getSelectionModel().isEmpty()) {
+                    String beitrag = chatText.getText();
+                    int eventnr = cevents.contentList(index2).getEventID().intValue();
+                    new TickerContent().createBeitrag(eventnr, beitrag);
+                    pubSubControl.nodeVeroeffentlichen(ticklist.getSelectionModel().getSelectedItem(), "<beitrag>" + beitrag + "</beitrag>");
+                } else if (!liveticks.getSelectionModel().isEmpty()) {
+                    String kommentar = chatText.getText();
+                    int eventnr = cevents.contentList(index2).getEventID().intValue();
+                    int ticknr = liveticks.getSelectionModel().getSelectedIndex() + 1;
+                    new TickerContent().createKommentar(
+                            eventnr, ticknr, user, kommentar);
+                }
+            }
+        });
     }
 }
 		
