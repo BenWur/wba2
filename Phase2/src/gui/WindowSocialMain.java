@@ -258,35 +258,15 @@ public class WindowSocialMain extends Application {
 				if (tabPane.getTabs().size() < 6
 						&& !ticklist.getSelectionModel().isEmpty()) {
 					int i = tabPane.getTabs().size();
-					k = new Tab();
-					k.setText(ticklist.getSelectionModel().getSelectedItem());
-					tabPane.getTabs().add(i, k);
-					selectTab.select(k);
+					joinTab = new Tab();
+					joinTab.setText(ticklist.getSelectionModel().getSelectedItem());
+					tabPane.getTabs().add(i, joinTab);
+					selectTab.select(joinTab);
 
 					
 
-					final GridPane geoGridk = new GridPane();
-					geoGridk.setHgap(5); // Abstand links/rechts
-					geoGridk.setVgap(5); // Abstand oben/unten
-
-					ColumnConstraints column1 = new ColumnConstraints();
-					column1.setPercentWidth(85);
-					ColumnConstraints column2 = new ColumnConstraints();
-					column2.setPercentWidth(15);
-					RowConstraints row1 = new RowConstraints();
-					row1.setPercentHeight(92);
-					RowConstraints row2 = new RowConstraints();
-					row2.setPercentHeight(8);
-					geoGridk.getColumnConstraints().addAll(column1, column2);
-					geoGridk.getRowConstraints().addAll(row1, row2);
-
-					SplitPane sp = new SplitPane();
-					final StackPane sp1 = new StackPane();
-
-					final StackPane sp2 = new StackPane();
-					comments = new TextArea();
 					sp2.getChildren().add(comments);
-					sp.getItems().addAll(sp1, sp2);
+                                        sp.getItems().addAll(sp1, sp2);
 
 					liveticks = new ListView<String>();
 					cevents = new TickerContent();
@@ -320,7 +300,7 @@ public class WindowSocialMain extends Application {
 					
 					sp1.getChildren().add(liveticks);
 
-					final TextField chatText = new TextField();
+					
 
 					final Button sendchat = new Button("Send");
 					sendchat.setMinWidth(50);

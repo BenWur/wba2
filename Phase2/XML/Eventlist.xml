@@ -1,66 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <eventlist>
     <event eventID="1">
-        <eventname>Munich - Dortmund</eventname>
-        <eventbeschreibung>lkdhfsakjhdf</eventbeschreibung>
+        <eventname>dasdassadsad</eventname>
+        <eventbeschreibung>aasddssadsd</eventbeschreibung>
         <username>drdare</username>
         <eventtyp>Football</eventtyp>
-        <eventstart>20:00:00</eventstart>
-        <eventdauer>22:00:00</eventdauer>
+        <eventstart>11:22:00</eventstart>
+        <eventdauer>12:33:00</eventdauer>
         <eventbewertung>5</eventbewertung>
     </event>
     <event eventID="2">
-        <eventname>neuejnsjdkfh</eventname>
-        <eventbeschreibung>asldkhfkasdf</eventbeschreibung>
-        <username>drdare</username>
+        <eventname>sadasasdsad</eventname>
+        <eventbeschreibung>assadasdsad</eventbeschreibung>
+        <username>admin</username>
         <eventtyp>Football</eventtyp>
-        <eventstart>20:00:00</eventstart>
-        <eventdauer>22:00:00</eventdauer>
-        <eventbewertung>5</eventbewertung>
-    </event>
-    <event eventID="3">
-        <eventname>kljhfdsabcnxp</eventname>
-        <eventbeschreibung>sdkjfhsadf</eventbeschreibung>
-        <username>drdare</username>
-        <eventtyp>Football</eventtyp>
-        <eventstart>20:00:00</eventstart>
-        <eventdauer>22:00:00</eventdauer>
-        <eventbewertung>5</eventbewertung>
-    </event>
-    <event eventID="4">
-        <eventname>erstellen</eventname>
-        <eventbeschreibung>ldkfjkasjdhf</eventbeschreibung>
-        <username>drdare</username>
-        <eventtyp>Football</eventtyp>
-        <eventstart>20:00:00</eventstart>
-        <eventdauer>22:00:00</eventdauer>
-        <eventbewertung>5</eventbewertung>
-    </event>
-    <event eventID="5">
-        <eventname>erstellen2</eventname>
-        <eventbeschreibung>sdjkfhkjsdfh</eventbeschreibung>
-        <username>drdare</username>
-        <eventtyp>Football</eventtyp>
-        <eventstart>22:00:00</eventstart>
-        <eventdauer>23:00:00</eventdauer>
-        <eventbewertung>5</eventbewertung>
-    </event>
-    <event eventID="6">
-        <eventname>erstellen3</eventname>
-        <eventbeschreibung>kljsdhfknjsd</eventbeschreibung>
-        <username>drdare</username>
-        <eventtyp>Football</eventtyp>
-        <eventstart>20:00:00</eventstart>
-        <eventdauer>22:00:00</eventdauer>
-        <eventbewertung>5</eventbewertung>
-    </event>
-    <event eventID="7">
-        <eventname>erstellen4</eventname>
-        <eventbeschreibung>lkdjfljnsdfsdf</eventbeschreibung>
-        <username>drdare</username>
-        <eventtyp>Football</eventtyp>
-        <eventstart>20:00:00</eventstart>
-        <eventdauer>22:00:00</eventdauer>
+        <eventstart>11:22:00</eventstart>
+        <eventdauer>12:43:00</eventdauer>
         <eventbewertung>5</eventbewertung>
     </event>
 </eventlist>
