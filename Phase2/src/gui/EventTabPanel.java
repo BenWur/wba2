@@ -15,6 +15,8 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -57,14 +59,11 @@ public class EventTabPanel extends GridPane {
         final StackPane sp1 = new StackPane();
 
         final StackPane sp2 = new StackPane();
-        TextArea comments = new TextArea();
+        final TextArea comments = new TextArea();
 
         final TextField chatText = new TextField();
 
-        joinTicker = new Button("Join");
-
-
-
+        
 
         liveticks = new ListView<String>();
         cevents = new TickerContent();
@@ -77,12 +76,15 @@ public class EventTabPanel extends GridPane {
         sp1.getChildren().add(liveticks);
 
 
-
         final Button sendchat = new Button("Send");
         sendchat.setMinWidth(50);
 
 
-
+        joinTab.setOnClosed(new EventHandler<javafx.event.Event>() {
+                    public void handle(javafx.event.Event t) {
+                        pubSubControl.nodeKuendigen(ticklist.getSelectionModel().getSelectedItem()); //Kündigt die Node
+                    }
+                });
 
 
 
@@ -92,6 +94,24 @@ public class EventTabPanel extends GridPane {
         this.add(sp, 0, 0);
 
         joinTab.setContent(this);
+        
+        liveticks.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        if (mouseEvent.getButton().equals(
+                                MouseButton.PRIMARY)) {
+                            if (mouseEvent.getClickCount() == 1) {
+                                final int index3 = liveticks.getSelectionModel().getSelectedIndex();
+                                comments.clear();
+                                for (int h = 0; h < cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().size(); h++) {
+                                    comments.appendText(cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarUser() + " wrote:\n");
+                                    comments.appendText(cevents.contentList(index2).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarText() + "\n");
+
+                                }
+                            }
+                        }
+                    }
+                });
 
         sendchat.setOnAction(new EventHandler<ActionEvent>() {
             @Override
