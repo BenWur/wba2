@@ -43,8 +43,7 @@ public class WindowSocialMain extends Application {
     private Tab tab2;
     private Tab createNewEventTab;
     public String user;
-    private PubSubController pubSubControl;
-    // Event
+    private PubSubController pubSubControl; //Event
     private ListView<String> ticklist;																// abonniert
     private int index2;
     private TickerEvents tevents;
@@ -54,6 +53,7 @@ public class WindowSocialMain extends Application {
     private SingleSelectionModel<Tab> selectTab;
     private TabPane tabPane = new TabPane();
     private static WindowSocialMain instance;
+    private Event events = null;
 
     //dient zur persistenten Speicherung
     public static WindowSocialMain getInstance() {
@@ -249,11 +249,12 @@ public class WindowSocialMain extends Application {
         });
 /////////////////////////////////////
         
-        final Event events = tevents.eventList().get(ticklist.getSelectionModel().getSelectedIndex() + 1);
+        
         
         joinTicker.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+            	events = tevents.eventList().get(ticklist.getSelectionModel().getSelectedIndex());
                 for (Tab opentab : tabPane.getTabs()) {
                     if (opentab.getText().equals(events.getEventname())) {
                         return;
