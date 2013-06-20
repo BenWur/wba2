@@ -262,7 +262,7 @@ public class WindowSocialMain extends Application {
 
                 if (tabPane.getTabs().size() < 6
                         && !ticklist.getSelectionModel().isEmpty()) {
-                    System.out.println(events.getEventID());
+                    System.out.println(events.getEventname());
                     EventTabPanel gejointerTab = new EventTabPanel(events);
                     Tab tab = new Tab();
                     tab.setText(events.getEventname());
