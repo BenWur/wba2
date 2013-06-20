@@ -248,7 +248,8 @@ public class WindowSocialMain extends Application {
             }
         });
 /////////////////////////////////////
-
+        
+        
         joinTicker.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -261,7 +262,8 @@ public class WindowSocialMain extends Application {
 
                 if (tabPane.getTabs().size() < 6
                         && !ticklist.getSelectionModel().isEmpty()) {
-                    EventTabPanel gejointerTab = new EventTabPanel();
+                    int eventID = ticklist.getSelectionModel().getSelectedIndex() + 1;
+                    EventTabPanel gejointerTab = new EventTabPanel(eventID);
                     Tab tab = new Tab();
                     tab.setText(ticklist.getSelectionModel().getSelectedItem());
                     tab.setContent(gejointerTab);

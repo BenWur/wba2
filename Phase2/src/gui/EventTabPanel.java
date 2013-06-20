@@ -38,7 +38,7 @@ public class EventTabPanel extends GridPane {
     private PubSubController pubSubControl;
     private String user;
 
-    public EventTabPanel() {
+    public EventTabPanel(int eventID) {
 
         this.setHgap(5); // Abstand links/rechts
         this.setVgap(5); // Abstand oben/unten
@@ -67,7 +67,7 @@ public class EventTabPanel extends GridPane {
         liveticks = new ListView<String>();
         cevents = new TickerContent();
         items = FXCollections.observableArrayList();
-        index2 = ticklist.getSelectionModel().getSelectedIndex() + 1;
+        
 
         sp2.getChildren().add(comments);
         sp.getItems().addAll(sp1, sp2);
