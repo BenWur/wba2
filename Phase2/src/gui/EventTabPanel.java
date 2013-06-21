@@ -1,5 +1,6 @@
 package gui;
 
+import eventcontentlist.Kommentar;
 import eventcontentlist.TickerBeitrag;
 import eventlist.Event;
 
@@ -28,16 +29,22 @@ import org.jivesoftware.smackx.pubsub.listener.ItemEventListener;
 /**
  *
  * @author Dario & Ben
+ * 
  */
+
 public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
 
     private ListView<String> liveticks;
     private TickerContent cevents;
     private ObservableList<String> items;
-    private ListView<String> ticklist;
     private PubSubController pubSubControl;
     public String user;
     private Event events;
+    
+    final StackPane sp1 = new StackPane();
+        final StackPane sp2 = new StackPane();
+        final TextArea comments = new TextArea();
+        final TextField chatText = new TextField();
 
     public void handlePublishedItems(ItemPublishEvent<Item> items) {
         System.out.println("Item count: " + items.getItems().size());
@@ -48,16 +55,27 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
         }
         update();
     }
-
+    
     public void update() {
         List<TickerBeitrag> tickerBeitrag = cevents.contentList(events.getEventID().intValue()).getTickerBeitrag();
-
+        
         for (int f = items.size(); f < tickerBeitrag.size(); f++) {
             System.out.println("update:" + tickerBeitrag.get(f).getZeit());
 
             items.add(tickerBeitrag.get(f).getZeit() + ": " + tickerBeitrag.get(f).getText());
         }
         liveticks.setItems(items);
+        updateComment();
+    }
+    
+    public void updateComment() {
+        int index3 = liveticks.getSelectionModel().getSelectedIndex();
+        List<Kommentar> kommentare = cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(index3).getKommentar();
+        comments.clear();
+        for (int f = 0; f < kommentare.size(); f++) {
+            comments.appendText(cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(index3).getKommentar().get(f).getKommentarUser() + " wrote:\n");
+            comments.appendText(cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(index3).getKommentar().get(f).getKommentarText() + "\n");
+        }
     }
 
     public EventTabPanel(final Event events) {
@@ -78,10 +96,7 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
         this.getRowConstraints().addAll(row1, row2);
 
         SplitPane sp = new SplitPane();
-        final StackPane sp1 = new StackPane();
-        final StackPane sp2 = new StackPane();
-        final TextArea comments = new TextArea();
-        final TextField chatText = new TextField();
+        
 
         pubSubControl = new PubSubController();
         liveticks = new ListView<String>();
@@ -95,43 +110,21 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
         final Button sendchat = new Button("Send");
         sendchat.setMinWidth(50);
 
-        /*
-         joinTab.setOnClosed(new EventHandler<javafx.event.Event>() {
-         public void handle(javafx.event.Event t) {
-         pubSubControl.nodeKuendigen(ticklist.getSelectionModel().getSelectedItem()); //Kündigt die Node
-         }
-         });
-
-         */
-
         this.add(sendchat, 1, 1);
         this.add(chatText, 0, 1);
         this.add(sp, 0, 0);
-
-        //joinTab.setContent(this);
-
-        //hier benmagic!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //if (pubSubControl.nodesAuslesen().contains(events.getEventname())) {
-        //pubSubControl.nodeAbonnieren(events.getEventname());
-        //   } else {
 
         for (int f = 0; f < cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().size(); f++) {
             items.add(cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getZeit() + ": " + cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getText());
             liveticks.setItems(items);
         }
-        //    }
-
+        
         liveticks.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
                     if (mouseEvent.getClickCount() == 1) {
-                        final int index3 = liveticks.getSelectionModel().getSelectedIndex();
-                        comments.clear();
-                        for (int h = 0; h < cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(index3).getKommentar().size(); h++) {
-                            comments.appendText(cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarUser() + " wrote:\n");
-                            comments.appendText(cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarText() + "\n");
-                        }
+                       updateComment();
                     }
                 }
             }
@@ -147,17 +140,14 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
                     chatText.clear();
                     int eventnr = events.getEventID().intValue();
                     new TickerContent().createBeitrag(eventnr, beitrag);
-                    
-                    //hier benmagic!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
                     pubSubControl.nodeVeroeffentlichen(events.getEventname(), "<beitrag>" + beitrag + "</beitrag>");
-                    //update();
                 } else if (!liveticks.getSelectionModel().isEmpty()) {
                     String kommentar = chatText.getText();
                     chatText.clear();
                     int eventnr = events.getEventID().intValue();
                     int ticknr = liveticks.getSelectionModel().getSelectedIndex() + 1;
                     new TickerContent().createKommentar(eventnr, ticknr, user, kommentar);
+                    pubSubControl.nodeVeroeffentlichen(events.getEventname(), "<kommentar>" + kommentar + "</kommentar>");
                 }
             }
         });

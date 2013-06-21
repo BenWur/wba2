@@ -1,7 +1,6 @@
 package gui;
 
 import eventlist.Event;
-import guidata.TickerContent;
 import guidata.TickerEvents;
 import guidata.UserContent;
 

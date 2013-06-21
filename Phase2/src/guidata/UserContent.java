@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package guidata;
 
 import com.sun.jersey.api.client.Client;
@@ -11,8 +7,9 @@ import userlist.Userlist;
 
 /**
  *
- * @author Dario
+ * @author Dario & Ben
  */
+
 public class UserContent {
     
     public User userInfo(String username)

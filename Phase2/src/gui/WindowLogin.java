@@ -56,6 +56,7 @@ public class WindowLogin extends Application {
         });
 
         Button btn = new Button();
+        btn.setDefaultButton(true);
         btn.setLayoutX(122);
         btn.setLayoutY(132);
         btn.setText("Login");
