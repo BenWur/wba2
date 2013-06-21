@@ -4,9 +4,11 @@
  */
 package gui;
 
+import eventcontentlist.TickerBeitrag;
 import eventlist.Event;
 
 import guidata.TickerContent;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -49,13 +51,12 @@ public class EventTabPanel extends GridPane {
     }
 
     public void update() {
-        int ticksize = cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().size();
-        int newticksize = cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().size()+1;
+         List<TickerBeitrag> tickerBeitrag = cevents.contentList(events.getEventID().intValue()).getTickerBeitrag();
         
-        for (int f = ticksize; f < newticksize; f++) {
-            System.out.println("update:" + cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getZeit());
+        for (int f = items.size(); f < tickerBeitrag.size(); f++) {
+            System.out.println("update:" + tickerBeitrag.get(f).getZeit());
 
-            items.add(cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getZeit() + ": " + cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getText());
+            items.add(tickerBeitrag.get(f).getZeit() + ": " + tickerBeitrag.get(f).getText());
         }
         liveticks.setItems(items);
     }
@@ -168,6 +169,7 @@ public class EventTabPanel extends GridPane {
                     int eventnr = events.getEventID().intValue();
                     new TickerContent().createBeitrag(eventnr, beitrag);
                     //hier benmagic!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    
                     pubSubControl.nodeVeroeffentlichen(events.getEventname(), "<beitrag>" + beitrag + "</beitrag>");
                     update();
                 } else if (!liveticks.getSelectionModel().isEmpty()) {
