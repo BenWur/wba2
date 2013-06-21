@@ -1,6 +1,7 @@
 package nodepackage;
 
 import gui.EventTabPanel;
+import gui.WindowSocialMain;
 
 import org.jivesoftware.smackx.pubsub.Item;
 import org.jivesoftware.smackx.pubsub.ItemPublishEvent;
@@ -18,6 +19,6 @@ public class ItemEventCoordinator implements ItemEventListener<Item> {
             
         }
         EventTabPanel.getInstance().update();
-        
+        //WindowSocialMain.getInstance().update();
     }
 }

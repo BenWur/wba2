@@ -31,14 +31,12 @@ import nodepackage.PubSubController;
  */
 public class EventTabPanel extends GridPane {
 
-    private Tab joinTab;
     private ListView<String> liveticks;
     private TickerContent cevents;
     private ObservableList<String> items;
-    private int eventID;
     private ListView<String> ticklist;
     private PubSubController pubSubControl;
-    private String user;
+    public String user;
     private Event events;
     private static EventTabPanel instance;
 
@@ -51,12 +49,10 @@ public class EventTabPanel extends GridPane {
     }
 
     public void update() {
-
-
-        items = FXCollections.observableArrayList();
         int ticksize = cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().size();
-
-        for (int f = 0; f < ticksize; f++) {
+        int newticksize = cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().size()+1;
+        
+        for (int f = ticksize; f < newticksize; f++) {
             System.out.println("update:" + cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getZeit());
 
             items.add(cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getZeit() + ": " + cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getText());
@@ -131,15 +127,15 @@ public class EventTabPanel extends GridPane {
         //joinTab.setContent(this);
 
         //hier benmagic!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      /* if (pubSubControl.nodesAuslesen().contains(events.getEventname())) {
-         pubSubControl.nodeAbonnieren(events.getEventname());
-         } else {
-         */
+       //if (pubSubControl.nodesAuslesen().contains(events.getEventname())) {
+         //pubSubControl.nodeAbonnieren(events.getEventname());
+      //   } else {
+        
         for (int f = 0; f < cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().size(); f++) {
             items.add(cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getZeit() + ": " + cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getText());
             liveticks.setItems(items);
         }
-        //  }
+   //    }
 
 
 
@@ -172,7 +168,7 @@ public class EventTabPanel extends GridPane {
                     int eventnr = events.getEventID().intValue();
                     new TickerContent().createBeitrag(eventnr, beitrag);
                     //hier benmagic!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    //     pubSubControl.nodeVeroeffentlichen(events.getEventname(), "<beitrag>" + beitrag + "</beitrag>");
+                    pubSubControl.nodeVeroeffentlichen(events.getEventname(), "<beitrag>" + beitrag + "</beitrag>");
                     update();
                 } else if (!liveticks.getSelectionModel().isEmpty()) {
                     String kommentar = chatText.getText();
