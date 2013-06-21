@@ -22,10 +22,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SingleSelectionModel;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -33,8 +31,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class WindowSocialMain extends Application {
@@ -64,18 +60,7 @@ public class WindowSocialMain extends Application {
         return instance;
     }
 
-    public void update() {
-
-        items = FXCollections.observableArrayList();
-        int ticksize = cevents.contentList(index2).getTickerBeitrag().size();
-
-        for (int f = 0; f < ticksize; f++) {
-            System.out.println("update:" + cevents.contentList(index2).getTickerBeitrag().get(f).getZeit());
-
-            items.add(cevents.contentList(index2).getTickerBeitrag().get(f).getZeit() + ": " + cevents.contentList(index2).getTickerBeitrag().get(f).getText());
-        }
-        liveticks.setItems(items);
-    }
+    
 
     public void refresh() {
         items = FXCollections.observableArrayList();
@@ -186,10 +171,7 @@ public class WindowSocialMain extends Application {
 
 
         final Button joinTicker = new Button("Join");
-        joinTicker.setMinWidth(50);
-
-
-
+        
         final Label welcome = new Label();
         welcome.setText("Hello, " + user + "!");
 
@@ -255,6 +237,7 @@ public class WindowSocialMain extends Application {
             @Override
             public void handle(ActionEvent event) {
             	events = tevents.eventList().get(ticklist.getSelectionModel().getSelectedIndex());
+                System.out.println(ticklist.getSelectionModel().getSelectedIndex());
                 for (Tab opentab : tabPane.getTabs()) {
                     if (opentab.getText().equals(events.getEventname())) {
                         return;
@@ -269,17 +252,7 @@ public class WindowSocialMain extends Application {
                     tab.setText(events.getEventname());
                     tab.setContent(gejointerTab);
                     tabPane.getTabs().add(tab);
-
-                }
-
-                if (pubSubControl.nodesAuslesen().contains(events.getEventname())) {
-                    pubSubControl.nodeAbonnieren(events.getEventname());
-                } else {
-                    for (int f = 0; f < cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().size(); f++) {
-                        items.add(cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getZeit() + ": " + cevents.contentList(index2).getTickerBeitrag().get(f).getText());
-                        liveticks.setItems(items);
-                    }
-                }
+            }
             }
         });
 
@@ -299,9 +272,6 @@ public class WindowSocialMain extends Application {
          selectTab.select(joinTab);
 
          */
-
-
-
 
 
         final Button create = new Button("Create Ticker");
@@ -410,13 +380,6 @@ public class WindowSocialMain extends Application {
 
                 createNewEventTab.setContent(geoGridNew);
                 tabPane.getTabs().add(createNewEventTab);
-
-
-
-
-////////////////////
-
-
             }
         });
 
