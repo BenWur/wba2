@@ -14,36 +14,35 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-
 public class WindowLogin extends Application {
 
     @Override
     public void start(final Stage primaryStage) {
-    	
+
         primaryStage.setResizable(false);
-        
+
         final Label errmessage = new Label();
         errmessage.setLayoutX(50);
         errmessage.setLayoutY(110);
-        
+
         Label name = new Label("Username:");
         name.setLayoutX(50);
         name.setLayoutY(31);
-        
+
         final TextField textField = new TextField();
         textField.setLayoutX(50);
         textField.setLayoutY(47);
         textField.setMinWidth(200);
-        
+
         Label pass = new Label("Password:");
         pass.setLayoutX(50);
         pass.setLayoutY(73);
-        
+
         final PasswordField passField1 = new PasswordField();
         passField1.setLayoutX(50);
         passField1.setLayoutY(89);
         passField1.setMinWidth(200);
-        
+
         Button reg = new Button();
         reg.setLayoutX(122);
         reg.setLayoutY(162);
@@ -55,7 +54,7 @@ public class WindowLogin extends Application {
                 newuser.start(primaryStage); //oeffnet neue stage
             }
         });
-        
+
         Button btn = new Button();
         btn.setLayoutX(122);
         btn.setLayoutY(132);
@@ -63,26 +62,25 @@ public class WindowLogin extends Application {
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-               Register register = new Register();
-               errmessage.setText("");
-               if (register.login(textField.getText())) {
-                   WindowSocialMain loggedin = new WindowSocialMain();
-                   loggedin.user = register.loggedInUser;
-                   XMPPConnect connection =  XMPPConnect.getInstance();
-                   if (connection.login(loggedin.user, passField1.getText() )){
-                	   loggedin.start(primaryStage);		//Zum Einloggen auf dem XMPP Server
-                   }
-                   else{
-                       errmessage.setText("Your username or password is incorrect!");
-                       errmessage.setTextFill(Color.rgb(210, 39, 30));
-                    } 
-               }else{
-                  errmessage.setText("Your username or password is incorrect!");
-                  errmessage.setTextFill(Color.rgb(210, 39, 30));
-               }
+                Register register = new Register();
+                errmessage.setText("");
+                if (register.login(textField.getText())) {
+                    WindowSocialMain loggedin = new WindowSocialMain();
+                    loggedin.user = register.loggedInUser;
+                    XMPPConnect connection = XMPPConnect.getInstance();
+                    if (connection.login(loggedin.user, passField1.getText())) {
+                        loggedin.start(primaryStage);		//Zum Einloggen auf dem XMPP Server
+                    } else {
+                        errmessage.setText("Your username or password is incorrect!");
+                        errmessage.setTextFill(Color.rgb(210, 39, 30));
+                    }
+                } else {
+                    errmessage.setText("Your username or password is incorrect!");
+                    errmessage.setTextFill(Color.rgb(210, 39, 30));
+                }
             }
         });
-       
+
         AnchorPane root = new AnchorPane();
         root.getChildren().add(btn);
         root.getChildren().add(reg);
@@ -91,9 +89,9 @@ public class WindowLogin extends Application {
         root.getChildren().add(textField);
         root.getChildren().add(passField1);
         root.getChildren().add(errmessage);
-        
+
         Scene scene = new Scene(root, 300, 200);
-        
+
         primaryStage.setTitle("SocialTicker | Login");
         primaryStage.setScene(scene);
         primaryStage.show();

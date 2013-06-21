@@ -60,8 +60,6 @@ public class WindowSocialMain extends Application {
         return instance;
     }
 
-    
-
     public void refresh() {
         items = FXCollections.observableArrayList();
         ticklist.getItems().setAll(items);
@@ -74,11 +72,7 @@ public class WindowSocialMain extends Application {
     @Override
     public void start(final Stage primaryStage) {
 
-        if (instance == null) {
-            instance = this;
-        }
 
-        pubSubControl = new PubSubController();
         primaryStage.setResizable(false);
         primaryStage.setTitle("SocialTicker");
 
@@ -171,7 +165,7 @@ public class WindowSocialMain extends Application {
 
 
         final Button joinTicker = new Button("Join");
-        
+
         final Label welcome = new Label();
         welcome.setText("Hello, " + user + "!");
 
@@ -230,13 +224,13 @@ public class WindowSocialMain extends Application {
             }
         });
 /////////////////////////////////////
-        
-        
-        
+
+
+
         joinTicker.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	events = tevents.eventList().get(ticklist.getSelectionModel().getSelectedIndex());
+                events = tevents.eventList().get(ticklist.getSelectionModel().getSelectedIndex());
                 System.out.println(ticklist.getSelectionModel().getSelectedIndex());
                 for (Tab opentab : tabPane.getTabs()) {
                     if (opentab.getText().equals(events.getEventname())) {
@@ -252,7 +246,7 @@ public class WindowSocialMain extends Application {
                     tab.setText(events.getEventname());
                     tab.setContent(gejointerTab);
                     tabPane.getTabs().add(tab);
-            }
+                }
             }
         });
 

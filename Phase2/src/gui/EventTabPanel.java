@@ -30,8 +30,6 @@ import nodepackage.PubSubController;
  * @author Dario
  */
 public class EventTabPanel extends GridPane {
-    
-    
 
     private Tab joinTab;
     private ListView<String> liveticks;
@@ -41,9 +39,19 @@ public class EventTabPanel extends GridPane {
     private ListView<String> ticklist;
     private PubSubController pubSubControl;
     private String user;
-    
-    
-    public void update(final Event events) {
+    private Event events;
+    private static EventTabPanel instance;
+
+    public static EventTabPanel getInstance() {
+        if (instance == null) {
+            System.out.println("Fehler, das geht nicht.");
+            return null;
+        }
+        return instance;
+    }
+
+    public void update() {
+
 
         items = FXCollections.observableArrayList();
         int ticksize = cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().size();
@@ -55,11 +63,10 @@ public class EventTabPanel extends GridPane {
         }
         liveticks.setItems(items);
     }
-    
 
     public EventTabPanel(final Event events) {
-        
-        
+        this.events = events;
+
         this.setHgap(5); // Abstand links/rechts
         this.setVgap(5); // Abstand oben/unten
 
@@ -81,18 +88,22 @@ public class EventTabPanel extends GridPane {
         final TextArea comments = new TextArea();
 
         final TextField chatText = new TextField();
-        
-        
-        
-       
+
+
+        if (instance == null) {
+            instance = this;
+        }
+
+        pubSubControl = new PubSubController();
+
 
 
         liveticks = new ListView<String>();
         cevents = new TickerContent();
         items = FXCollections.observableArrayList();
-        
-        
-        
+
+
+
 
         sp2.getChildren().add(comments);
         sp.getItems().addAll(sp1, sp2);
@@ -103,14 +114,14 @@ public class EventTabPanel extends GridPane {
         final Button sendchat = new Button("Send");
         sendchat.setMinWidth(50);
 
-/*
-        joinTab.setOnClosed(new EventHandler<javafx.event.Event>() {
-            public void handle(javafx.event.Event t) {
-                pubSubControl.nodeKuendigen(ticklist.getSelectionModel().getSelectedItem()); //Kündigt die Node
-            }
-        });
+        /*
+         joinTab.setOnClosed(new EventHandler<javafx.event.Event>() {
+         public void handle(javafx.event.Event t) {
+         pubSubControl.nodeKuendigen(ticklist.getSelectionModel().getSelectedItem()); //Kündigt die Node
+         }
+         });
 
-*/
+         */
 
         this.add(sendchat, 1, 1);
         this.add(chatText, 0, 1);
@@ -118,19 +129,21 @@ public class EventTabPanel extends GridPane {
         this.add(sp, 0, 0);
 
         //joinTab.setContent(this);
-        
-//        if (pubSubControl.nodesAuslesen().contains(events.getEventname())) {
-        //            pubSubControl.nodeAbonnieren(events.getEventname());
-         //       } else {
-                    for (int f = 0; f < cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().size(); f++) {
-                        items.add(cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getZeit() + ": " + cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getText());
-                        liveticks.setItems(items);
-                    }
-           //     }
-        
-                    
-        
-        
+
+        //hier benmagic!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      /* if (pubSubControl.nodesAuslesen().contains(events.getEventname())) {
+         pubSubControl.nodeAbonnieren(events.getEventname());
+         } else {
+         */
+        for (int f = 0; f < cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().size(); f++) {
+            items.add(cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getZeit() + ": " + cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getText());
+            liveticks.setItems(items);
+        }
+        //  }
+
+
+
+
 
         liveticks.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -153,16 +166,17 @@ public class EventTabPanel extends GridPane {
         sendchat.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                
+
                 if (liveticks.getSelectionModel().isEmpty()) {
                     String beitrag = chatText.getText();
                     int eventnr = events.getEventID().intValue();
                     new TickerContent().createBeitrag(eventnr, beitrag);
-                    //pubSubControl.nodeVeroeffentlichen(events.getEventname(), "<beitrag>" + beitrag + "</beitrag>");
-                    update(events);
+                    //hier benmagic!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    //     pubSubControl.nodeVeroeffentlichen(events.getEventname(), "<beitrag>" + beitrag + "</beitrag>");
+                    update();
                 } else if (!liveticks.getSelectionModel().isEmpty()) {
                     String kommentar = chatText.getText();
-                    int eventnr =  events.getEventID().intValue();
+                    int eventnr = events.getEventID().intValue();
                     int ticknr = liveticks.getSelectionModel().getSelectedIndex() + 1;
                     new TickerContent().createKommentar(
                             eventnr, ticknr, user, kommentar);
@@ -171,5 +185,3 @@ public class EventTabPanel extends GridPane {
         });
     }
 }
-		
-
