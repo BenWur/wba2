@@ -1,6 +1,7 @@
 package gui;
 
 import eventlist.Event;
+import guidata.Register;
 import guidata.TickerEvents;
 import guidata.UserContent;
 
@@ -46,6 +47,7 @@ public class WindowSocialMain extends Application {
     private TabPane tabPane = new TabPane();
     private static WindowSocialMain instance;
     private Event events = null;
+    private UserContent info;
 
     //dient zur persistenten Speicherung
     public static WindowSocialMain getInstance() {
@@ -109,8 +111,8 @@ public class WindowSocialMain extends Application {
         hbox.setSpacing(10);
 
         final GridPane geoGrid2 = new GridPane();
-        geoGrid2.setHgap(5); // Abstand links/rechts
-        geoGrid2.setVgap(5); // Abstand oben/unten
+        geoGrid2.setHgap(10); // Abstand links/rechts
+        geoGrid2.setVgap(10); // Abstand oben/unten
 
         ColumnConstraints column12 = new ColumnConstraints();
         column12.setPercentWidth(30);
@@ -120,18 +122,33 @@ public class WindowSocialMain extends Application {
         column32.setPercentWidth(30);
         geoGrid2.getColumnConstraints().addAll(column12, column22, column32);
 
-        UserContent info = new UserContent();
+        info = new UserContent();
         Label profildata = new Label("Ihre Profildaten:");
+        
         Label userinfo = new Label("Username:");
         Label username = new Label(info.userInfo(user).getUsername());
-        Label userfnamet = new Label("Name:");
+        
+        Label userfnamet = new Label("Vorname:");
         Label userfname = new Label(info.userInfo(user).getVorname());
+        
+        Label nameText = new Label("Nachname:");
+        Label nameTextField = new Label(info.userInfo(user).getName());
+        
         Label geschlechtText = new Label("Geschlecht:");
         Label geschlecht = new Label(info.userInfo(user).getGender());
+         
         Label gebText = new Label("Geburtsdatum:");
         Label geb = new Label(info.userInfo(user).getGeburtsdatum().toString());
+        
         Label landText = new Label("Land:");
-        Label land = new Label(info.userInfo(user).getLand().toString());
+        Register register= new Register();
+        final ChoiceBox land = new ChoiceBox(FXCollections.observableArrayList(register.countrylist()));
+        land.getSelectionModel().select(info.userInfo(user).getLand().value());
+        
+        Label stadtText = new Label("Stadt:");
+        final TextField stadt = new TextField(info.userInfo(user).getStadt());
+        
+        Button userBearbeiten = new Button("Bearbeiten");
 
         geoGrid2.setMaxWidth(350);
         geoGrid2.add(profildata, 1, 1);
@@ -139,12 +156,26 @@ public class WindowSocialMain extends Application {
         geoGrid2.add(username, 2, 2);
         geoGrid2.add(userfnamet, 1, 3);
         geoGrid2.add(userfname, 2, 3);
-        geoGrid2.add(geschlechtText, 1, 4);
-        geoGrid2.add(geschlecht, 2, 4);
-        geoGrid2.add(gebText, 1, 5);
-        geoGrid2.add(geb, 2, 5);
-        geoGrid2.add(landText, 1, 6);
-        geoGrid2.add(land, 2, 6);
+        geoGrid2.add(nameText, 1, 4);
+        geoGrid2.add(nameTextField, 2, 4);
+        geoGrid2.add(geschlechtText, 1, 5);
+        geoGrid2.add(geschlecht, 2, 5);
+        geoGrid2.add(gebText, 1, 6);
+        geoGrid2.add(geb, 2, 6);
+        geoGrid2.add(landText, 1, 7);
+        geoGrid2.add(land, 2, 7);
+        geoGrid2.add(stadtText, 1, 8);
+        geoGrid2.add(stadt, 2, 8);
+        geoGrid2.add(userBearbeiten, 1, 9);
+        
+        userBearbeiten.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	UserContent userChange = new UserContent();
+            	userChange.userChange(info.userInfo(user), land.getSelectionModel().getSelectedItem().toString(), stadt.getText());
+            	info = new UserContent();
+            }
+        });
 
         final GridPane geoGrid3 = new GridPane();
 
