@@ -9,18 +9,20 @@ import org.jivesoftware.smackx.packet.DiscoverItems;
 import org.jivesoftware.smackx.pubsub.AccessModel;
 import org.jivesoftware.smackx.pubsub.ConfigureForm;
 import org.jivesoftware.smackx.pubsub.FormType;
+import org.jivesoftware.smackx.pubsub.Item;
 import org.jivesoftware.smackx.pubsub.LeafNode;
 import org.jivesoftware.smackx.pubsub.PayloadItem;
 import org.jivesoftware.smackx.pubsub.PubSubManager;
 import org.jivesoftware.smackx.pubsub.PublishModel;
 import org.jivesoftware.smackx.pubsub.SimplePayload;
+import org.jivesoftware.smackx.pubsub.listener.ItemEventListener;
 
 public class PubSubController {
 	
 	private XMPPConnect verbindung;
 	// Create a pubsub manager using an existing Connection
     private PubSubManager mgr;
-    private ItemEventCoordinator listener = new ItemEventCoordinator();
+    
     
     public PubSubController(){
     	// Create a Connection
@@ -76,7 +78,7 @@ public class PubSubController {
 
 	}
 	
-	public void nodeAbonnieren(String nodeName){
+	public void nodeAbonnieren(String nodeName, ItemEventListener<Item> listener){
 		// Get the node
 		LeafNode node = null;
 	      System.out.println("Node gejoint: "+nodeName);
@@ -98,7 +100,7 @@ public class PubSubController {
 		}
 	}
 	
-	public void nodeKuendigen(String nodeName){
+	public void nodeKuendigen(String nodeName, ItemEventListener<Item> listener){
 		// Get the node
 		LeafNode node = null;
 	    System.out.println("Node gekündigt: "+nodeName);
