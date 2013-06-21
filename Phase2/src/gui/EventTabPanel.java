@@ -136,7 +136,8 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
                 }
             }
         });
-
+        
+        sendchat.setDefaultButton(true);
         sendchat.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
