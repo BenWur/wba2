@@ -1,5 +1,6 @@
 package gui;
 
+
 import nodepackage.XMPPConnect;
 import guidata.Register;
 import javafx.application.Application;
@@ -10,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -19,6 +22,11 @@ public class WindowLogin extends Application {
     @Override
     public void start(final Stage primaryStage) {
 
+    	Image image1 = new Image("/Logo/Logo.png");
+    	// simple displays ImageView the image as is
+        ImageView iv1 = new ImageView();
+        iv1.setImage(image1);
+        
         primaryStage.setResizable(false);
 
         final Label errmessage = new Label();
@@ -81,8 +89,9 @@ public class WindowLogin extends Application {
                 }
             }
         });
-
+        
         AnchorPane root = new AnchorPane();
+        root.getChildren().add(iv1);
         root.getChildren().add(btn);
         root.getChildren().add(reg);
         root.getChildren().add(name);
