@@ -273,6 +273,7 @@ public class WindowSocialMain extends Application {
                         && !ticklist.getSelectionModel().isEmpty()) {
 
                     final EventTabPanel gejointerTab = new EventTabPanel(events);
+                    gejointerTab.user = user;
                     Tab tab = new Tab();
                     tab.setText(events.getEventname());
 
