@@ -1,6 +1,9 @@
 package gui;
 
 
+
+import java.net.MalformedURLException;
+
 import nodepackage.XMPPConnect;
 import guidata.Register;
 import javafx.application.Application;
@@ -20,11 +23,14 @@ import javafx.stage.Stage;
 public class WindowLogin extends Application {
 
     @Override
-    public void start(final Stage primaryStage) {
+    public void start(final Stage primaryStage) throws MalformedURLException {
 
-    	Image image1 = new Image("/Logo/Logo.png");
+    	Image image1 = new Image("file:Logo/Logo.png");
     	// simple displays ImageView the image as is
         ImageView iv1 = new ImageView();
+        iv1.setLayoutX(5);
+        iv1.setLayoutY(5);
+        iv1.setFitWidth(290);
         iv1.setImage(image1);
         
         primaryStage.setResizable(false);
@@ -35,25 +41,25 @@ public class WindowLogin extends Application {
 
         Label name = new Label("Username:");
         name.setLayoutX(50);
-        name.setLayoutY(31);
+        name.setLayoutY(61);
 
         final TextField textField = new TextField();
         textField.setLayoutX(50);
-        textField.setLayoutY(47);
+        textField.setLayoutY(77);
         textField.setMinWidth(200);
 
         Label pass = new Label("Password:");
         pass.setLayoutX(50);
-        pass.setLayoutY(73);
+        pass.setLayoutY(103);
 
         final PasswordField passField1 = new PasswordField();
         passField1.setLayoutX(50);
-        passField1.setLayoutY(89);
+        passField1.setLayoutY(119);
         passField1.setMinWidth(200);
 
         Button reg = new Button();
         reg.setLayoutX(122);
-        reg.setLayoutY(162);
+        reg.setLayoutY(192);
         reg.setText("Register");
         reg.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -66,7 +72,7 @@ public class WindowLogin extends Application {
         Button btn = new Button();
         btn.setDefaultButton(true);
         btn.setLayoutX(122);
-        btn.setLayoutY(132);
+        btn.setLayoutY(162);
         btn.setText("Login");
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -100,7 +106,7 @@ public class WindowLogin extends Application {
         root.getChildren().add(passField1);
         root.getChildren().add(errmessage);
 
-        Scene scene = new Scene(root, 300, 200);
+        Scene scene = new Scene(root, 300, 230);
 
         primaryStage.setTitle("SocialTicker | Login");
         primaryStage.setScene(scene);

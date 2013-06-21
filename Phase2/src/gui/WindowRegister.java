@@ -2,6 +2,7 @@ package gui;
 
 import guidata.Register;
 
+import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.application.Application;
@@ -109,7 +110,12 @@ public class WindowRegister extends Application {
             @Override
             public void handle(ActionEvent event) {
                 WindowLogin backlogin = new WindowLogin();
-                backlogin.start(primaryStage);
+                try {
+					backlogin.start(primaryStage);
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
