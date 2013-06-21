@@ -13,7 +13,6 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -44,9 +43,8 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
     private Event events;
     
     final StackPane sp1 = new StackPane();
-        final StackPane sp2 = new StackPane();
-        //final TextArea comments = new TextArea();
-        final TextField chatText = new TextField();
+    final StackPane sp2 = new StackPane();
+    final TextField chatText = new TextField();
 
     public void handlePublishedItems(ItemPublishEvent<Item> items) {
         System.out.println("Item count: " + items.getItems().size());
@@ -71,8 +69,6 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
     }
     
     public void updateComment() {
-        
-        
         int index3 = liveticks.getSelectionModel().getSelectedIndex();
         List<Kommentar> kommentare = cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(index3).getKommentar();
         //comments.clear();
@@ -102,7 +98,6 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
 
         SplitPane sp = new SplitPane();
         
-
         pubSubControl = new PubSubController();
         liveticks = new ListView<String>();
         comments = new ListView<String>();
@@ -110,7 +105,6 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
         items = FXCollections.observableArrayList();
         comitems = FXCollections.observableArrayList();
 
-        
         sp1.getChildren().add(liveticks);
         sp2.getChildren().add(comments);
         sp.getItems().addAll(sp1, sp2);
@@ -123,7 +117,8 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
         this.add(sp, 0, 0);
 
         for (int f = 0; f < cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().size(); f++) {
-            items.add(cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getZeit() + ": " + cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getText());
+            items.add(cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getZeit() + ": " 
+                    + cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getText());
             liveticks.setItems(items);
         }
         
@@ -143,7 +138,6 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
         sendchat.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                //final List<TickerBeitrag> tickerBeitrag = cevents.contentList(events.getEventID().intValue()).getTickerBeitrag();
                 if (liveticks.getSelectionModel().isEmpty()) {
                     String beitrag = chatText.getText();
                     chatText.clear();
