@@ -24,8 +24,10 @@ public class WindowLogin extends Application {
 
     @Override
     public void start(final Stage primaryStage) throws MalformedURLException {
+        
+        primaryStage.getIcons().add(new Image("file:logo/icon.png"));
 
-    	Image image1 = new Image("file:Logo/Logo.png");
+    	Image image1 = new Image("file:logo/logo.png");
     	// simple displays ImageView the image as is
         ImageView iv1 = new ImageView();
         iv1.setLayoutX(5);
@@ -105,7 +107,7 @@ public class WindowLogin extends Application {
         root.getChildren().add(textField);
         root.getChildren().add(passField1);
         root.getChildren().add(errmessage);
-
+        
         Scene scene = new Scene(root, 300, 230);
 
         primaryStage.setTitle("SocialTicker | Login");
