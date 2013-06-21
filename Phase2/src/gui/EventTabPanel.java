@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import eventcontentlist.TickerBeitrag;
@@ -16,7 +12,6 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
@@ -26,12 +21,15 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import nodepackage.PubSubController;
+import org.jivesoftware.smackx.pubsub.Item;
+import org.jivesoftware.smackx.pubsub.ItemPublishEvent;
+import org.jivesoftware.smackx.pubsub.listener.ItemEventListener;
 
 /**
  *
- * @author Dario
+ * @author Dario & Ben
  */
-public class EventTabPanel extends GridPane {
+public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
 
     private ListView<String> liveticks;
     private TickerContent cevents;
@@ -40,19 +38,20 @@ public class EventTabPanel extends GridPane {
     private PubSubController pubSubControl;
     public String user;
     private Event events;
-    private static EventTabPanel instance;
 
-    public static EventTabPanel getInstance() {
-        if (instance == null) {
-            System.out.println("Fehler, das geht nicht.");
-            return null;
+    public void handlePublishedItems(ItemPublishEvent<Item> items) {
+        System.out.println("Item count: " + items.getItems().size());
+
+        for (Item item : items.getItems()) {
+            System.out.println(item.getId());
+            System.out.println(item.toXML());
         }
-        return instance;
+        update();
     }
 
     public void update() {
-         List<TickerBeitrag> tickerBeitrag = cevents.contentList(events.getEventID().intValue()).getTickerBeitrag();
-        
+        List<TickerBeitrag> tickerBeitrag = cevents.contentList(events.getEventID().intValue()).getTickerBeitrag();
+
         for (int f = items.size(); f < tickerBeitrag.size(); f++) {
             System.out.println("update:" + tickerBeitrag.get(f).getZeit());
 
@@ -80,33 +79,18 @@ public class EventTabPanel extends GridPane {
 
         SplitPane sp = new SplitPane();
         final StackPane sp1 = new StackPane();
-
         final StackPane sp2 = new StackPane();
         final TextArea comments = new TextArea();
-
         final TextField chatText = new TextField();
 
-
-        if (instance == null) {
-            instance = this;
-        }
-
         pubSubControl = new PubSubController();
-
-
-
         liveticks = new ListView<String>();
         cevents = new TickerContent();
         items = FXCollections.observableArrayList();
 
-
-
-
         sp2.getChildren().add(comments);
         sp.getItems().addAll(sp1, sp2);
-
         sp1.getChildren().add(liveticks);
-
 
         final Button sendchat = new Button("Send");
         sendchat.setMinWidth(50);
@@ -122,25 +106,20 @@ public class EventTabPanel extends GridPane {
 
         this.add(sendchat, 1, 1);
         this.add(chatText, 0, 1);
-
         this.add(sp, 0, 0);
 
         //joinTab.setContent(this);
 
         //hier benmagic!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-       //if (pubSubControl.nodesAuslesen().contains(events.getEventname())) {
-         //pubSubControl.nodeAbonnieren(events.getEventname());
-      //   } else {
-        
+        //if (pubSubControl.nodesAuslesen().contains(events.getEventname())) {
+        //pubSubControl.nodeAbonnieren(events.getEventname());
+        //   } else {
+
         for (int f = 0; f < cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().size(); f++) {
             items.add(cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getZeit() + ": " + cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getText());
             liveticks.setItems(items);
         }
-   //    }
-
-
-
-
+        //    }
 
         liveticks.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -153,7 +132,6 @@ public class EventTabPanel extends GridPane {
                         for (int h = 0; h < cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(index3).getKommentar().size(); h++) {
                             comments.appendText(cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarUser() + " wrote:\n");
                             comments.appendText(cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(index3).getKommentar().get(h).getKommentarText() + "\n");
-
                         }
                     }
                 }
@@ -163,13 +141,13 @@ public class EventTabPanel extends GridPane {
         sendchat.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                final List<TickerBeitrag> tickerBeitrag = cevents.contentList(events.getEventID().intValue()).getTickerBeitrag();
                 if (liveticks.getSelectionModel().isEmpty()) {
                     String beitrag = chatText.getText();
                     int eventnr = events.getEventID().intValue();
                     new TickerContent().createBeitrag(eventnr, beitrag);
                     //hier benmagic!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    
+
                     pubSubControl.nodeVeroeffentlichen(events.getEventname(), "<beitrag>" + beitrag + "</beitrag>");
                     update();
                 } else if (!liveticks.getSelectionModel().isEmpty()) {

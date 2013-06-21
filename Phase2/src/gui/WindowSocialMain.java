@@ -40,12 +40,9 @@ public class WindowSocialMain extends Application {
     private Tab createNewEventTab;
     public String user;
     private PubSubController pubSubControl; //Event
-    private ListView<String> ticklist;																// abonniert
-    private int index2;
+    private ListView<String> ticklist;
     private TickerEvents tevents;
     private ObservableList<String> items;
-    private ListView<String> liveticks;
-    private TickerContent cevents;
     private SingleSelectionModel<Tab> selectTab;
     private TabPane tabPane = new TabPane();
     private static WindowSocialMain instance;
@@ -59,8 +56,6 @@ public class WindowSocialMain extends Application {
         }
         return instance;
     }
-
-    
 
     public void refresh() {
         items = FXCollections.observableArrayList();
@@ -171,7 +166,7 @@ public class WindowSocialMain extends Application {
 
 
         final Button joinTicker = new Button("Join");
-        
+
         final Label welcome = new Label();
         welcome.setText("Hello, " + user + "!");
 
@@ -230,13 +225,13 @@ public class WindowSocialMain extends Application {
             }
         });
 /////////////////////////////////////
-        
-        
-        
+
+
+
         joinTicker.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	events = tevents.eventList().get(ticklist.getSelectionModel().getSelectedIndex());
+                events = tevents.eventList().get(ticklist.getSelectionModel().getSelectedIndex());
                 System.out.println(ticklist.getSelectionModel().getSelectedIndex());
                 for (Tab opentab : tabPane.getTabs()) {
                     if (opentab.getText().equals(events.getEventname())) {
@@ -246,17 +241,25 @@ public class WindowSocialMain extends Application {
 
                 if (tabPane.getTabs().size() < 6
                         && !ticklist.getSelectionModel().isEmpty()) {
-                    
-                    EventTabPanel gejointerTab = new EventTabPanel(events);
+
+                    final EventTabPanel gejointerTab = new EventTabPanel(events);
                     Tab tab = new Tab();
                     tab.setText(events.getEventname());
-                    
+
                     tab.setContent(gejointerTab);
                     tabPane.getTabs().add(tab);
-            }
-                
-                    pubSubControl.nodeAbonnieren(events.getEventname());
+
+                    pubSubControl.nodeAbonnieren(events.getEventname(), gejointerTab);
                     System.out.println(events.getEventname());
+
+                    tab.setOnClosed(new EventHandler<javafx.event.Event>() {
+                        @Override
+                        public void handle(javafx.event.Event e) {
+                            Tab alt = (Tab) e.getSource();
+                            pubSubControl.nodeKuendigen(alt.getText(), gejointerTab);
+                        }
+                    });
+                }
             }
         });
 
