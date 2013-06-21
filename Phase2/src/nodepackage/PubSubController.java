@@ -81,7 +81,7 @@ public class PubSubController {
 	public void nodeAbonnieren(String nodeName, ItemEventListener<Item> listener){
 		// Get the node
 		LeafNode node = null;
-	      System.out.println("Node gejoint: "+nodeName);
+	    System.out.println("Node gejoint: "+nodeName);
 	      
 		try {
 			node = mgr.getNode(nodeName);

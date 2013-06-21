@@ -124,8 +124,7 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
         liveticks.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if (mouseEvent.getButton().equals(
-                        MouseButton.PRIMARY)) {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
                     if (mouseEvent.getClickCount() == 1) {
                         final int index3 = liveticks.getSelectionModel().getSelectedIndex();
                         comments.clear();
@@ -144,18 +143,20 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
                 final List<TickerBeitrag> tickerBeitrag = cevents.contentList(events.getEventID().intValue()).getTickerBeitrag();
                 if (liveticks.getSelectionModel().isEmpty()) {
                     String beitrag = chatText.getText();
+                    chatText.clear();
                     int eventnr = events.getEventID().intValue();
                     new TickerContent().createBeitrag(eventnr, beitrag);
+                    
                     //hier benmagic!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
                     pubSubControl.nodeVeroeffentlichen(events.getEventname(), "<beitrag>" + beitrag + "</beitrag>");
-                    update();
+                    //update();
                 } else if (!liveticks.getSelectionModel().isEmpty()) {
                     String kommentar = chatText.getText();
+                    chatText.clear();
                     int eventnr = events.getEventID().intValue();
                     int ticknr = liveticks.getSelectionModel().getSelectedIndex() + 1;
-                    new TickerContent().createKommentar(
-                            eventnr, ticknr, user, kommentar);
+                    new TickerContent().createKommentar(eventnr, ticknr, user, kommentar);
                 }
             }
         });

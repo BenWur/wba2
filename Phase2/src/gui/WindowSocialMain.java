@@ -248,6 +248,7 @@ public class WindowSocialMain extends Application {
 
                     tab.setContent(gejointerTab);
                     tabPane.getTabs().add(tab);
+                    selectTab.select(tab);
 
                     pubSubControl.nodeAbonnieren(events.getEventname(), gejointerTab);
                     System.out.println(events.getEventname());
@@ -257,6 +258,7 @@ public class WindowSocialMain extends Application {
                         public void handle(javafx.event.Event e) {
                             Tab alt = (Tab) e.getSource();
                             pubSubControl.nodeKuendigen(alt.getText(), gejointerTab);
+                            selectTab.select(0);
                         }
                     });
                 }
