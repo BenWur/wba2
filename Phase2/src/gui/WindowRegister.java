@@ -177,7 +177,7 @@ public class WindowRegister extends Application {
                     connection.register(textField.getText(), passwd.getText());
                     if(connection.login(textField.getText(), passwd.getText())){
                     	WindowSocialMain loggedin = new WindowSocialMain();
-                        loggedin.user = textField.getText();
+                        loggedin.userName = textField.getText();
                         loggedin.start(primaryStage);
                     }
                 }

@@ -36,20 +36,19 @@ import javafx.stage.Stage;
 
 public class WindowSocialMain extends Application {
     
-    public String user;
+    public String userName;					// aktueller Nutzer
     private Tab tab1;
     private Tab tab2;
-    private Tab createNewEventTab;
-    private PubSubController pubSubControl; //Event
-    private ListView<String> ticklist;
-    private TickerEvents tevents;
-    private ObservableList<String> items;
+    private Tab createNewEventTab;			//Tab zum erstellen neuer Events
+    private PubSubController pubSubControl; //zum Verwalten der Nodes
+    private ListView<String> tickerListe;	//Liste für alle Events in angezeigten Liste
+    private TickerEvents tickerEvents;		//Zum verwalten der Events
+    private ObservableList<String> items;	// items zum füllen der Liste
     private SingleSelectionModel<Tab> selectTab;
     private TabPane tabPane = new TabPane();
-    private static WindowSocialMain instance;
-    private Event events = null;
-    private UserContent info;
-    private TextField searchEvent;
+    private static WindowSocialMain instance; //TODO WE NEED?!
+    private Event events = null;			// Ein Event
+    private UserContent userInfo;			//Info eines Users
 
     //dient zur persistenten Speicherung
     public static WindowSocialMain getInstance() {
@@ -63,28 +62,28 @@ public class WindowSocialMain extends Application {
     public void refresh() {
     	
 	        items = FXCollections.observableArrayList();
-	        ticklist.getItems().removeAll(items);
-	        for (int i = 0; i < tevents.eventList().size(); i++) {
-	            items.add(tevents.eventList().get(i).getEventname());
+	        tickerListe.getItems().removeAll(items);
+	        for (int i = 0; i < tickerEvents.eventList().size(); i++) {
+	            items.add(tickerEvents.eventList().get(i).getEventname());
 	        }
-	        ticklist.setItems(items);
+	        tickerListe.setItems(items);
     	
     }
     
-    public void search(){
+    public void search(String searchText){
     	items = FXCollections.observableArrayList();
-        ticklist.getItems().removeAll(items);
-        for (int i = 0; i < tevents.searchEvent(searchEvent.getText()).size(); i++) {
-        	items.add(tevents.searchEvent(searchEvent.getText()).get(i).getEventname());
+        tickerListe.getItems().removeAll(items);
+        for (int i = 0; i < tickerEvents.searchEvent(searchText).size(); i++) {
+        	items.add(tickerEvents.searchEvent(searchText).get(i).getEventname());
         }
-        ticklist.setItems(items);
+        tickerListe.setItems(items);
     }
     
-    public int auswahl(String auswahl){
+    public int auswahl(String auswahlText){
     	int id=0;
-    	for(int i = 0; i < tevents.eventList().size(); i++){
-    		if(tevents.eventList().get(i).getEventname().equals(auswahl)){
-    			id = tevents.eventList().get(i).getEventID().intValue();
+    	for(int i = 0; i < tickerEvents.eventList().size(); i++){
+    		if(tickerEvents.eventList().get(i).getEventname().equals(auswahlText)){
+    			id = tickerEvents.eventList().get(i).getEventID().intValue();
     		}
     	}
     	return id-1;
@@ -97,11 +96,10 @@ public class WindowSocialMain extends Application {
                     }
                 }
                  
-                if (tabPane.getTabs().size() < 6
-                        ) {
+                if (tabPane.getTabs().size() < 6) {
                     //&& !ticklist.getSelectionModel().isEmpty()
                     final EventTabPanel gejointerTab = new EventTabPanel(events);
-                    gejointerTab.user = user;
+                    gejointerTab.user = userName;
                     Tab tab = new Tab();
                     tab.setText(events.getEventname());
 
@@ -182,31 +180,31 @@ public class WindowSocialMain extends Application {
         column32.setPercentWidth(30);
         geoGrid2.getColumnConstraints().addAll(column12, column22, column32);
 
-        info = new UserContent();
+        userInfo = new UserContent();
         Label profildata = new Label("Ihre Profildaten:");
         
         Label userinfo = new Label("Username:");
-        Label username = new Label(info.userInfo(user).getUsername());
+        Label username = new Label(userInfo.userInfo(userName).getUsername());
         
         Label userfnamet = new Label("Vorname:");
-        Label userfname = new Label(info.userInfo(user).getVorname());
+        Label userfname = new Label(userInfo.userInfo(userName).getVorname());
         
         Label nameText = new Label("Nachname:");
-        Label nameTextField = new Label(info.userInfo(user).getName());
+        Label nameTextField = new Label(userInfo.userInfo(userName).getName());
         
         Label geschlechtText = new Label("Geschlecht:");
-        Label geschlecht = new Label(info.userInfo(user).getGender());
+        Label geschlecht = new Label(userInfo.userInfo(userName).getGender());
          
         Label gebText = new Label("Geburtsdatum:");
-        Label geb = new Label(info.userInfo(user).getGeburtsdatum().toString());
+        Label geb = new Label(userInfo.userInfo(userName).getGeburtsdatum().toString());
         
         Label landText = new Label("Land:");
         Register register= new Register();
         final ChoiceBox land = new ChoiceBox(FXCollections.observableArrayList(register.countrylist()));
-        land.getSelectionModel().select(info.userInfo(user).getLand().value());
+        land.getSelectionModel().select(userInfo.userInfo(userName).getLand().value());
         
         Label stadtText = new Label("Stadt:");
-        final TextField stadt = new TextField(info.userInfo(user).getStadt());
+        final TextField stadt = new TextField(userInfo.userInfo(userName).getStadt());
         
         Button userBearbeiten = new Button("Bearbeiten");
 
@@ -232,8 +230,8 @@ public class WindowSocialMain extends Application {
             @Override
             public void handle(ActionEvent event) {
             	UserContent userChange = new UserContent();
-            	userChange.userChange(info.userInfo(user), land.getSelectionModel().getSelectedItem().toString(), stadt.getText());
-            	info = new UserContent();
+            	userChange.userChange(userInfo.userInfo(userName), land.getSelectionModel().getSelectedItem().toString(), stadt.getText());
+            	userInfo = new UserContent();
             }
         });
 
@@ -245,33 +243,33 @@ public class WindowSocialMain extends Application {
         tab2 = new Tab();
         tab2.setText("My Profile");
 
-        ticklist = new ListView<String>();
-        tevents = new TickerEvents();
+        tickerListe = new ListView<String>();
+        tickerEvents = new TickerEvents();
         items = FXCollections.observableArrayList();
         
-        for (int i = 0; i < tevents.eventList().size(); i++) {
-            items.add(tevents.eventList().get(i).getEventname());
+        for (int i = 0; i < tickerEvents.eventList().size(); i++) {
+            items.add(tickerEvents.eventList().get(i).getEventname());
         }
-        ticklist.setItems(items);
+        tickerListe.setItems(items);
 
 
 
         final Button joinTicker = new Button("Join");
 
         final Label welcome = new Label();
-        welcome.setText("Hello, " + user + "!");
+        welcome.setText("Hello, " + userName + "!");
         
-        searchEvent = new TextField();
+        final TextField searchEvent = new TextField();
         
         Button searchbtn = new Button("Search");
-        // ab heir meister ben
+        searchbtn.setDefaultButton(true);
          searchbtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                search();
+            	String searchText = searchEvent.getText();
+                search(searchText);
             }
         });
-         //hier ende
          
          
          
@@ -303,7 +301,7 @@ public class WindowSocialMain extends Application {
         final Label eventscore = new Label();
         final Label eventscoretext = new Label();
 
-        ticklist.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        tickerListe.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
@@ -319,15 +317,15 @@ public class WindowSocialMain extends Application {
                         eventend.setText("End:");
                         eventscore.setText("Score:");
                         
-                        String itemName = ticklist.getSelectionModel().getSelectedItem();
+                        String itemName = tickerListe.getSelectionModel().getSelectedItem();
                         int id = auswahl(itemName);
-                        eventBeschreibung.setText(tevents.eventList().get(id).getEventbeschreibung());
-                        eventnametext.setText(tevents.eventList().get(id).getEventname());
-                        eventtyptext.setText(tevents.eventList().get(id).getEventtyp());
-                        eventadmintext.setText(tevents.eventList().get(id).getUsername());
-                        eventstarttext.setText(tevents.eventList().get(id).getEventstart().toXMLFormat());
-                        eventendtext.setText(tevents.eventList().get(id).getEventdauer().toXMLFormat());
-                        eventscoretext.setText(tevents.eventList().get(id).getEventbewertung().toString());
+                        eventBeschreibung.setText(tickerEvents.eventList().get(id).getEventbeschreibung());
+                        eventnametext.setText(tickerEvents.eventList().get(id).getEventname());
+                        eventtyptext.setText(tickerEvents.eventList().get(id).getEventtyp());
+                        eventadmintext.setText(tickerEvents.eventList().get(id).getUsername());
+                        eventstarttext.setText(tickerEvents.eventList().get(id).getEventstart().toXMLFormat());
+                        eventendtext.setText(tickerEvents.eventList().get(id).getEventdauer().toXMLFormat());
+                        eventscoretext.setText(tickerEvents.eventList().get(id).getEventbewertung().toString());
                     }
                 }
             }
@@ -338,12 +336,12 @@ public class WindowSocialMain extends Application {
         joinTicker.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	String itemName = ticklist.getSelectionModel().getSelectedItem();
+            	String itemName = tickerListe.getSelectionModel().getSelectedItem();
                 int id = auswahl(itemName);
-                if (ticklist.getSelectionModel().isEmpty()) {
-                events = tevents.eventList().get(0);
+                if (tickerListe.getSelectionModel().isEmpty()) {
+                events = tickerEvents.eventList().get(0);
                 } else {
-                events = tevents.eventList().get(id);
+                events = tickerEvents.eventList().get(id);
                 }
                 neuerTicker(events);
             }
@@ -416,7 +414,7 @@ public class WindowSocialMain extends Application {
                         errmessage.setText("");
 
                         Map<String, String> eventdata = new HashMap<String, String>();
-                        eventdata.put("admin", user);
+                        eventdata.put("admin", userName);
                         eventdata.put("name", eventnametextField.getText());
                         eventdata.put("beschr",
                                 eventbeschreibungField1.getText());
@@ -432,7 +430,7 @@ public class WindowSocialMain extends Application {
                         pubSubControl.nodeErstellen(eventnametextField.getText()); // erstellt neue Node
                         tabPane.getTabs().remove(createNewEventTab);
                         create.setDisable(false);
-                        events = tevents.eventList().get(ticklist.getItems().size()-1);
+                        events = tickerEvents.eventList().get(tickerListe.getItems().size()-1);
                         neuerTicker(events);
                     }
                 });
@@ -470,7 +468,7 @@ public class WindowSocialMain extends Application {
 
         hbox.getChildren().addAll(joinTicker, refresh);
         geoGrid.add(tickertext, 0, 0);
-        geoGrid.add(ticklist, 0, 1);
+        geoGrid.add(tickerListe, 0, 1);
         geoGrid.add(welcome, 1, 0);
         geoGrid.add(create, 1, 2);
         geoGrid.add(hbox, 0, 2);

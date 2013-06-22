@@ -85,9 +85,9 @@ public class WindowLogin extends Application {
                 errmessage.setText("");
                 if (register.login(textField.getText())) {
                     WindowSocialMain loggedin = new WindowSocialMain();
-                    loggedin.user = register.loggedInUser;
+                    loggedin.userName = register.loggedInUser;
                     XMPPConnect connection = XMPPConnect.getInstance();
-                    if (connection.login(loggedin.user, passField1.getText())) {
+                    if (connection.login(loggedin.userName, passField1.getText())) {
                         loggedin.start(primaryStage);		//Zum Einloggen auf dem XMPP Server
                     } else {
                         errmessage.setText("Your username or password is incorrect!");
