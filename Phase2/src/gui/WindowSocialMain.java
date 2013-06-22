@@ -34,11 +34,11 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class WindowSocialMain extends Application {
-
+    
+    public String user;
     private Tab tab1;
     private Tab tab2;
     private Tab createNewEventTab;
-    public String user;
     private PubSubController pubSubControl; //Event
     private ListView<String> ticklist;
     private TickerEvents tevents;
@@ -65,6 +65,40 @@ public class WindowSocialMain extends Application {
             items.add(tevents.eventList().get(i).getEventname());
         }
         ticklist.setItems(items);
+    }
+    
+    public void neuerTicker(Event events) {
+                for (Tab opentab : tabPane.getTabs()) {
+                    if (opentab.getText().equals(events.getEventname())) {
+                        return;
+                    }
+                }
+                 
+                if (tabPane.getTabs().size() < 6
+                        ) {
+                    //&& !ticklist.getSelectionModel().isEmpty()
+                    final EventTabPanel gejointerTab = new EventTabPanel(events);
+                    gejointerTab.user = user;
+                    Tab tab = new Tab();
+                    tab.setText(events.getEventname());
+
+                    tab.setContent(gejointerTab);
+                    tabPane.getTabs().add(tab);
+                    selectTab.select(tab);
+
+                    pubSubControl.nodeAbonnieren(events.getEventname(), gejointerTab);
+                    System.out.println(events.getEventname());
+                
+
+                    tab.setOnClosed(new EventHandler<javafx.event.Event>() {
+                        @Override
+                        public void handle(javafx.event.Event e) {
+                            Tab alt = (Tab) e.getSource();
+                            pubSubControl.nodeKuendigen(alt.getText(), gejointerTab);
+                            selectTab.select(0);
+                        }
+                    });
+                }
     }
 
     @Override
@@ -254,66 +288,21 @@ public class WindowSocialMain extends Application {
                 }
             }
         });
+        
 /////////////////////////////////////
-
-
 
         joinTicker.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                if (ticklist.getSelectionModel().isEmpty()) {
+                events = tevents.eventList().get(0);
+                } else {
                 events = tevents.eventList().get(ticklist.getSelectionModel().getSelectedIndex());
-                System.out.println(ticklist.getSelectionModel().getSelectedIndex());
-                for (Tab opentab : tabPane.getTabs()) {
-                    if (opentab.getText().equals(events.getEventname())) {
-                        return;
-                    }
                 }
-
-                if (tabPane.getTabs().size() < 6
-                        && !ticklist.getSelectionModel().isEmpty()) {
-
-                    final EventTabPanel gejointerTab = new EventTabPanel(events);
-                    gejointerTab.user = user;
-                    Tab tab = new Tab();
-                    tab.setText(events.getEventname());
-
-                    tab.setContent(gejointerTab);
-                    tabPane.getTabs().add(tab);
-                    selectTab.select(tab);
-
-                    pubSubControl.nodeAbonnieren(events.getEventname(), gejointerTab);
-                    System.out.println(events.getEventname());
-
-                    tab.setOnClosed(new EventHandler<javafx.event.Event>() {
-                        @Override
-                        public void handle(javafx.event.Event e) {
-                            Tab alt = (Tab) e.getSource();
-                            pubSubControl.nodeKuendigen(alt.getText(), gejointerTab);
-                            selectTab.select(0);
-                        }
-                    });
-                }
+                neuerTicker(events);
             }
         });
-
-
-
-
-
-
-
-
-
-        /*
-         int i = tabPane.getTabs().size();
-         joinTab = new Tab();
-         joinTab.setText(ticklist.getSelectionModel().getSelectedItem());
-         tabPane.getTabs().add(i, joinTab);
-         selectTab.select(joinTab);
-
-         */
-
-
+        
         final Button create = new Button("Create Ticker");
         create.setMinWidth(50);
 
@@ -326,19 +315,13 @@ public class WindowSocialMain extends Application {
             }
         });
 
-
 /////////////////
+        
         create.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                createNewEventTab = new Tab();
-                createNewEventTab.setText("New Ticker");
-                selectTab.select(createNewEventTab);
-
-
-
-
-                final GridPane geoGridNew = new GridPane(); // Grid fuer new// ticker
+                
+                final GridPane geoGridNew = new GridPane(); // Grid fuer new ticker
                 geoGridNew.setHgap(5); // Abstand links/rechts
                 geoGridNew.setVgap(5); // Abstand oben/unten
 
@@ -348,8 +331,7 @@ public class WindowSocialMain extends Application {
                 column2.setPercentWidth(40);
                 ColumnConstraints column3 = new ColumnConstraints();
                 column3.setPercentWidth(30);
-                geoGridNew.getColumnConstraints().addAll(column1, column2,
-                        column3);
+                geoGridNew.getColumnConstraints().addAll(column1, column2, column3);
 
                 final Label errmessage = new Label();
 
@@ -373,10 +355,14 @@ public class WindowSocialMain extends Application {
                 final TextField endeField = new TextField();
                 endeField.setPromptText("HH:MM");
 
-
-
-                final Button createbtn = new Button();
+                Button createbtn = new Button();
                 createbtn.setText("Create");
+                
+                createNewEventTab = new Tab();
+                create.setDisable(true);
+                createNewEventTab.setText("New Ticker");
+                selectTab.select(createNewEventTab);
+                
                 createbtn.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
@@ -399,10 +385,18 @@ public class WindowSocialMain extends Application {
                         refresh();
                         pubSubControl.nodeErstellen(eventnametextField.getText()); // erstellt neue Node
                         tabPane.getTabs().remove(createNewEventTab);
-                        selectTab.select(tab1);
-
+                        create.setDisable(false);
+                        events = tevents.eventList().get(ticklist.getItems().size()-1);
+                        neuerTicker(events);
                     }
                 });
+                
+                createNewEventTab.setOnClosed(new EventHandler<javafx.event.Event>() {
+                        @Override
+                        public void handle(javafx.event.Event e) {
+                             create.setDisable(false);
+                        }
+                    });
 
 
                 geoGridNew.add(eventname, 1, 0);
