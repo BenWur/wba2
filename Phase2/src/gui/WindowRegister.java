@@ -175,10 +175,11 @@ public class WindowRegister extends Application {
                     //XMPP neuer User
                     XMPPConnect connection = XMPPConnect.getInstance();
                     connection.register(textField.getText(), passwd.getText());
-
-                    WindowSocialMain loggedin = new WindowSocialMain();
-                    loggedin.user = textField.getText();
-                    loggedin.start(primaryStage);
+                    if(connection.login(textField.getText(), passwd.getText())){
+                    	WindowSocialMain loggedin = new WindowSocialMain();
+                        loggedin.user = textField.getText();
+                        loggedin.start(primaryStage);
+                    }
                 }
             }
         });
