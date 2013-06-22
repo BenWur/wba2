@@ -29,15 +29,14 @@ public class WindowRegister extends Application {
 
     @Override
     public void start(final Stage primaryStage) {
-    	
-    	Image image1 = new Image("file:Logo/Logo.png");
-    	// simple displays ImageView the image as is
+
+        Image image1 = new Image("file:Logo/Logo.png");
         ImageView iv1 = new ImageView();
         iv1.setLayoutX(5);
         iv1.setLayoutY(5);
         iv1.setFitWidth(290);
         iv1.setImage(image1);
-    	
+
         primaryStage.setResizable(false);
 
         final Label errmessage = new Label();
@@ -52,7 +51,7 @@ public class WindowRegister extends Application {
         textField.setLayoutX(50);
         textField.setLayoutY(77);
         textField.setMinWidth(200);
-        
+
         Label passwordLabel = new Label("Password:");
         passwordLabel.setLayoutX(50);
         passwordLabel.setLayoutY(103);
@@ -135,11 +134,11 @@ public class WindowRegister extends Application {
             public void handle(ActionEvent event) {
                 WindowLogin backlogin = new WindowLogin();
                 try {
-					backlogin.start(primaryStage);
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                    backlogin.start(primaryStage);
+                } catch (MalformedURLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -169,14 +168,14 @@ public class WindowRegister extends Application {
                         userdata.put("gender", "Female");
                     }
                     userdata.put("bday", bdayField.getText());
-                    userdata.put("country", countryc.getValue().toString());;
+                    userdata.put("country", countryc.getValue().toString());
                     register.createUser(userdata);
-                    
+
                     //XMPP neuer User
                     XMPPConnect connection = XMPPConnect.getInstance();
                     connection.register(textField.getText(), passwd.getText());
-                    if(connection.login(textField.getText(), passwd.getText())){
-                    	WindowSocialMain loggedin = new WindowSocialMain();
+                    if (connection.login(textField.getText(), passwd.getText())) {
+                        WindowSocialMain loggedin = new WindowSocialMain();
                         loggedin.userName = textField.getText();
                         loggedin.start(primaryStage);
                     }

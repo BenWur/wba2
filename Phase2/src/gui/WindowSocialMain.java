@@ -4,11 +4,8 @@ import eventlist.Event;
 import guidata.Register;
 import guidata.TickerEvents;
 import guidata.UserContent;
-import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import nodepackage.PubSubController;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -35,7 +32,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class WindowSocialMain extends Application {
-    
+
     public String userName;					// aktueller Nutzer
     private Tab tab1;
     private Tab tab2;
@@ -60,66 +57,64 @@ public class WindowSocialMain extends Application {
     }
 
     public void refresh() {
-    	
-	        items = FXCollections.observableArrayList();
-	        tickerListe.getItems().removeAll(items);
-	        for (int i = 0; i < tickerEvents.eventList().size(); i++) {
-	            items.add(tickerEvents.eventList().get(i).getEventname());
-	        }
-	        tickerListe.setItems(items);
-    	
+
+        items = FXCollections.observableArrayList();
+        tickerListe.getItems().clear();
+        for (int i = 0; i < tickerEvents.eventList().size(); i++) {
+            items.add(tickerEvents.eventList().get(i).getEventname());
+        }
+        tickerListe.setItems(items);
+
     }
-    
-    public void search(String searchText){
-    	items = FXCollections.observableArrayList();
-        tickerListe.getItems().removeAll(items);
+
+    public void search(String searchText) {
+        items = FXCollections.observableArrayList();
+        tickerListe.getItems().clear();
         for (int i = 0; i < tickerEvents.searchEvent(searchText).size(); i++) {
-        	items.add(tickerEvents.searchEvent(searchText).get(i).getEventname());
+            items.add(tickerEvents.searchEvent(searchText).get(i).getEventname());
         }
         tickerListe.setItems(items);
     }
-    
-    public int auswahl(String auswahlText){
-    	int id=0;
-    	for(int i = 0; i < tickerEvents.eventList().size(); i++){
-    		if(tickerEvents.eventList().get(i).getEventname().equals(auswahlText)){
-    			id = tickerEvents.eventList().get(i).getEventID().intValue();
-    		}
-    	}
-    	return id-1;
+
+    public int auswahl(String auswahlText) {
+        int id = 0;
+        for (int i = 0; i < tickerEvents.eventList().size(); i++) {
+            if (tickerEvents.eventList().get(i).getEventname().equals(auswahlText)) {
+                id = tickerEvents.eventList().get(i).getEventID().intValue();
+            }
+        }
+        return id - 1;
     }
-    
+
     public void neuerTicker(Event events) {
-                for (Tab opentab : tabPane.getTabs()) {
-                    if (opentab.getText().equals(events.getEventname())) {
-                        return;
-                    }
+        for (Tab opentab : tabPane.getTabs()) {
+            if (opentab.getText().equals(events.getEventname())) {
+                return;
+            }
+        }
+
+        if (tabPane.getTabs().size() < 6) {
+            final EventTabPanel gejointerTab = new EventTabPanel(events);
+            gejointerTab.user = userName;
+            Tab tab = new Tab();
+            tab.setText(events.getEventname());
+
+            tab.setContent(gejointerTab);
+            tabPane.getTabs().add(tab);
+            selectTab.select(tab);
+
+            pubSubControl.nodeAbonnieren(events.getEventname(), gejointerTab);
+            System.out.println(events.getEventname());
+
+            tab.setOnClosed(new EventHandler<javafx.event.Event>() {
+                @Override
+                public void handle(javafx.event.Event e) {
+                    Tab alt = (Tab) e.getSource();
+                    pubSubControl.nodeKuendigen(alt.getText(), gejointerTab);
+                    selectTab.select(0);
                 }
-                 
-                if (tabPane.getTabs().size() < 6) {
-                    //&& !ticklist.getSelectionModel().isEmpty()
-                    final EventTabPanel gejointerTab = new EventTabPanel(events);
-                    gejointerTab.user = userName;
-                    Tab tab = new Tab();
-                    tab.setText(events.getEventname());
-
-                    tab.setContent(gejointerTab);
-                    tabPane.getTabs().add(tab);
-                    selectTab.select(tab);
-
-                    pubSubControl.nodeAbonnieren(events.getEventname(), gejointerTab);
-                    System.out.println(events.getEventname());
-                
-
-                    tab.setOnClosed(new EventHandler<javafx.event.Event>() {
-                        @Override
-                        public void handle(javafx.event.Event e) {
-                            Tab alt = (Tab) e.getSource();
-                            pubSubControl.nodeKuendigen(alt.getText(), gejointerTab);
-                            selectTab.select(0);
-                        }
-                    });
-                }
+            });
+        }
     }
 
     @Override
@@ -151,8 +146,6 @@ public class WindowSocialMain extends Application {
             }
         });
 
-        //final joinTicker = new Button("Join");
-
         final GridPane geoGrid = new GridPane();
         ColumnConstraints column1 = new ColumnConstraints();
         column1.setPercentWidth(50);
@@ -164,7 +157,7 @@ public class WindowSocialMain extends Application {
 
         final HBox hbox = new HBox(); // hbox für horizontal aligment
         hbox.setSpacing(10);
-        
+
         final HBox searchbox = new HBox();
         searchbox.setSpacing(10);
 
@@ -182,30 +175,30 @@ public class WindowSocialMain extends Application {
 
         userInfo = new UserContent();
         Label profildata = new Label("Ihre Profildaten:");
-        
+
         Label userinfo = new Label("Username:");
         Label username = new Label(userInfo.userInfo(userName).getUsername());
-        
+
         Label userfnamet = new Label("Vorname:");
         Label userfname = new Label(userInfo.userInfo(userName).getVorname());
-        
+
         Label nameText = new Label("Nachname:");
         Label nameTextField = new Label(userInfo.userInfo(userName).getName());
-        
+
         Label geschlechtText = new Label("Geschlecht:");
         Label geschlecht = new Label(userInfo.userInfo(userName).getGender());
-         
+
         Label gebText = new Label("Geburtsdatum:");
         Label geb = new Label(userInfo.userInfo(userName).getGeburtsdatum().toString());
-        
+
         Label landText = new Label("Land:");
-        Register register= new Register();
+        Register register = new Register();
         final ChoiceBox land = new ChoiceBox(FXCollections.observableArrayList(register.countrylist()));
         land.getSelectionModel().select(userInfo.userInfo(userName).getLand().value());
-        
+
         Label stadtText = new Label("Stadt:");
         final TextField stadt = new TextField(userInfo.userInfo(userName).getStadt());
-        
+
         Button userBearbeiten = new Button("Bearbeiten");
 
         geoGrid2.setMaxWidth(350);
@@ -225,13 +218,13 @@ public class WindowSocialMain extends Application {
         geoGrid2.add(stadtText, 1, 8);
         geoGrid2.add(stadt, 2, 8);
         geoGrid2.add(userBearbeiten, 1, 9);
-        
+
         userBearbeiten.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	UserContent userChange = new UserContent();
-            	userChange.userChange(userInfo.userInfo(userName), land.getSelectionModel().getSelectedItem().toString(), stadt.getText());
-            	userInfo = new UserContent();
+                UserContent userChange = new UserContent();
+                userChange.userChange(userInfo.userInfo(userName), land.getSelectionModel().getSelectedItem().toString(), stadt.getText());
+                userInfo = new UserContent();
             }
         });
 
@@ -246,33 +239,30 @@ public class WindowSocialMain extends Application {
         tickerListe = new ListView<String>();
         tickerEvents = new TickerEvents();
         items = FXCollections.observableArrayList();
-        
+
         for (int i = 0; i < tickerEvents.eventList().size(); i++) {
             items.add(tickerEvents.eventList().get(i).getEventname());
         }
         tickerListe.setItems(items);
 
 
-
         final Button joinTicker = new Button("Join");
 
         final Label welcome = new Label();
         welcome.setText("Hello, " + userName + "!");
-        
+
         final TextField searchEvent = new TextField();
-        
+
         Button searchbtn = new Button("Search");
         searchbtn.setDefaultButton(true);
-         searchbtn.setOnAction(new EventHandler<ActionEvent>() {
+        searchbtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	String searchText = searchEvent.getText();
+                String searchText = searchEvent.getText();
                 search(searchText);
             }
         });
-         
-         
-         
+
 
         final Label beschreibung = new Label();
         final Label eventBeschreibung = new Label();
@@ -316,7 +306,7 @@ public class WindowSocialMain extends Application {
                         eventstart.setText("Start:");
                         eventend.setText("End:");
                         eventscore.setText("Score:");
-                        
+
                         String itemName = tickerListe.getSelectionModel().getSelectedItem();
                         int id = auswahl(itemName);
                         eventBeschreibung.setText(tickerEvents.eventList().get(id).getEventbeschreibung());
@@ -330,23 +320,23 @@ public class WindowSocialMain extends Application {
                 }
             }
         });
-        
+
 /////////////////////////////////////
 
         joinTicker.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	String itemName = tickerListe.getSelectionModel().getSelectedItem();
+                String itemName = tickerListe.getSelectionModel().getSelectedItem();
                 int id = auswahl(itemName);
                 if (tickerListe.getSelectionModel().isEmpty()) {
-                events = tickerEvents.eventList().get(0);
+                    events = tickerEvents.eventList().get(0);
                 } else {
-                events = tickerEvents.eventList().get(id);
+                    events = tickerEvents.eventList().get(id);
                 }
                 neuerTicker(events);
             }
         });
-        
+
         final Button create = new Button("Create Ticker");
         create.setMinWidth(50);
 
@@ -360,11 +350,11 @@ public class WindowSocialMain extends Application {
         });
 
 /////////////////
-        
+
         create.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                
+
                 final GridPane geoGridNew = new GridPane(); // Grid fuer new ticker
                 geoGridNew.setHgap(5); // Abstand links/rechts
                 geoGridNew.setVgap(5); // Abstand oben/unten
@@ -386,8 +376,7 @@ public class WindowSocialMain extends Application {
                 final TextField eventbeschreibungField1 = new TextField();
 
                 final Label eventtyp = new Label("Event type:");
-                final ChoiceBox typchoice = new ChoiceBox(FXCollections
-                        .observableArrayList("Football", "Baseball",
+                final ChoiceBox typchoice = new ChoiceBox(FXCollections.observableArrayList("Football", "Baseball",
                         "Basketball", "Formula 1"));
                 typchoice.getSelectionModel().selectFirst();
 
@@ -401,12 +390,12 @@ public class WindowSocialMain extends Application {
 
                 Button createbtn = new Button();
                 createbtn.setText("Create");
-                
+
                 createNewEventTab = new Tab();
                 create.setDisable(true);
                 createNewEventTab.setText("New Ticker");
                 selectTab.select(createNewEventTab);
-                
+
                 createbtn.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
@@ -430,18 +419,17 @@ public class WindowSocialMain extends Application {
                         pubSubControl.nodeErstellen(eventnametextField.getText()); // erstellt neue Node
                         tabPane.getTabs().remove(createNewEventTab);
                         create.setDisable(false);
-                        events = tickerEvents.eventList().get(tickerListe.getItems().size()-1);
+                        events = tickerEvents.eventList().get(tickerListe.getItems().size() - 1);
                         neuerTicker(events);
                     }
                 });
-                
-                createNewEventTab.setOnClosed(new EventHandler<javafx.event.Event>() {
-                        @Override
-                        public void handle(javafx.event.Event e) {
-                             create.setDisable(false);
-                        }
-                    });
 
+                createNewEventTab.setOnClosed(new EventHandler<javafx.event.Event>() {
+                    @Override
+                    public void handle(javafx.event.Event e) {
+                        create.setDisable(false);
+                    }
+                });
 
                 geoGridNew.add(eventname, 1, 0);
                 geoGridNew.add(eventnametextField, 1, 1);
@@ -461,10 +449,7 @@ public class WindowSocialMain extends Application {
             }
         });
 
-
-
         Label tickertext = new Label("Choose the ticker you'd like to join");
-
 
         hbox.getChildren().addAll(joinTicker, refresh);
         geoGrid.add(tickertext, 0, 0);
@@ -473,7 +458,7 @@ public class WindowSocialMain extends Application {
         geoGrid.add(create, 1, 2);
         geoGrid.add(hbox, 0, 2);
         geoGrid.add(geoGrid3, 1, 1);
-        
+
         searchbox.getChildren().addAll(searchEvent, searchbtn);
         geoGrid3.add(searchbox, 0, 1);
         geoGrid3.add(eventname, 0, 3);
@@ -498,7 +483,7 @@ public class WindowSocialMain extends Application {
         root.getChildren().add(tabPane);
 
         primaryStage.show();
-    };
+    }
 
     /**
      * The main() method is ignored in correctly deployed JavaFX application.

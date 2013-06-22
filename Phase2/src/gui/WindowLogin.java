@@ -1,9 +1,6 @@
 package gui;
 
-
-
 import java.net.MalformedURLException;
-
 import nodepackage.XMPPConnect;
 import guidata.Register;
 import javafx.application.Application;
@@ -24,17 +21,17 @@ public class WindowLogin extends Application {
 
     @Override
     public void start(final Stage primaryStage) throws MalformedURLException {
-        
+
         primaryStage.getIcons().add(new Image("file:logo/icon.png"));
 
-    	Image image1 = new Image("file:logo/logo.png");
-    	// simple displays ImageView the image as is
+        Image image1 = new Image("file:logo/logo.png");
+        // simple displays ImageView the image as is
         ImageView iv1 = new ImageView();
         iv1.setLayoutX(5);
         iv1.setLayoutY(5);
         iv1.setFitWidth(290);
         iv1.setImage(image1);
-        
+
         primaryStage.setResizable(false);
 
         final Label errmessage = new Label();
@@ -99,7 +96,7 @@ public class WindowLogin extends Application {
                 }
             }
         });
-        
+
         AnchorPane root = new AnchorPane();
         root.getChildren().add(iv1);
         root.getChildren().add(btn);
@@ -109,9 +106,9 @@ public class WindowLogin extends Application {
         root.getChildren().add(textField);
         root.getChildren().add(passField1);
         root.getChildren().add(errmessage);
-        
+
         Scene scene = new Scene(root, 300, 200, Color.CHARTREUSE);
-        
+
 
         primaryStage.setTitle("SocialTicker | Login");
         primaryStage.setScene(scene);

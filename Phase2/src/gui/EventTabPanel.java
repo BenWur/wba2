@@ -3,7 +3,6 @@ package gui;
 import eventcontentlist.Kommentar;
 import eventcontentlist.TickerBeitrag;
 import eventlist.Event;
-
 import guidata.TickerContent;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -25,23 +24,21 @@ import org.jivesoftware.smackx.pubsub.Item;
 import org.jivesoftware.smackx.pubsub.ItemPublishEvent;
 import org.jivesoftware.smackx.pubsub.listener.ItemEventListener;
 
-/**
+/*
  *
  * @author Dario & Ben
  * 
  */
-
 public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
 
     private ListView<String> liveticks;
     private ListView<String> comments;
     private TickerContent cevents;
     private ObservableList<String> items;
-    private ObservableList<String> comitems; 
+    private ObservableList<String> comitems;
     private PubSubController pubSubControl;
     public String user;
     private Event events;
-    
     final StackPane sp1 = new StackPane();
     final StackPane sp2 = new StackPane();
     final TextField chatText = new TextField();
@@ -55,10 +52,10 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
         }
         update();
     }
-    
+
     public void update() {
         List<TickerBeitrag> tickerBeitrag = cevents.contentList(events.getEventID().intValue()).getTickerBeitrag();
-        
+
         for (int f = items.size(); f < tickerBeitrag.size(); f++) {
             System.out.println("update:" + tickerBeitrag.get(f).getZeit());
 
@@ -67,14 +64,14 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
         liveticks.setItems(items);
         updateComment();
     }
-    
+
     public void updateComment() {
         int index3 = liveticks.getSelectionModel().getSelectedIndex();
         List<Kommentar> kommentare = cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(index3).getKommentar();
-        
-        for (int f = comitems.size() ; f < kommentare.size(); f++) {
+
+        for (int f = comitems.size(); f < kommentare.size(); f++) {
             comitems.add(kommentare.get(f).getKommentarUser() + " wrote:\n"
-            + kommentare.get(f).getKommentarText());
+                    + kommentare.get(f).getKommentarText());
         }
         comments.setItems(comitems);
     }
@@ -97,7 +94,7 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
         this.getRowConstraints().addAll(row1, row2);
 
         SplitPane sp = new SplitPane();
-        
+
         pubSubControl = new PubSubController();
         liveticks = new ListView<String>();
         comments = new ListView<String>();
@@ -117,23 +114,23 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
         this.add(sp, 0, 0);
 
         for (int f = 0; f < cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().size(); f++) {
-            items.add(cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getZeit() + ": " 
+            items.add(cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getZeit() + ": "
                     + cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(f).getText());
             liveticks.setItems(items);
         }
-        
+
         liveticks.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
                     if (mouseEvent.getClickCount() == 1) {
-                       comments.getItems().removeAll(comitems);
-                       updateComment();
+                        comments.getItems().removeAll(comitems);
+                        updateComment();
                     }
                 }
             }
         });
-        
+
         sendchat.setDefaultButton(true);
         sendchat.setOnAction(new EventHandler<ActionEvent>() {
             @Override
