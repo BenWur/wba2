@@ -49,6 +49,7 @@ public class WindowSocialMain extends Application {
     private static WindowSocialMain instance;
     private Event events = null;
     private UserContent info;
+    private TextField searchEvent;
 
     //dient zur persistenten Speicherung
     public static WindowSocialMain getInstance() {
@@ -60,12 +61,33 @@ public class WindowSocialMain extends Application {
     }
 
     public void refresh() {
-        items = FXCollections.observableArrayList();
+    	
+	        items = FXCollections.observableArrayList();
+	        ticklist.getItems().removeAll(items);
+	        for (int i = 0; i < tevents.eventList().size(); i++) {
+	            items.add(tevents.eventList().get(i).getEventname());
+	        }
+	        ticklist.setItems(items);
+    	
+    }
+    
+    public void search(){
+    	items = FXCollections.observableArrayList();
         ticklist.getItems().removeAll(items);
-        for (int i = 0; i < tevents.eventList().size(); i++) {
-            items.add(tevents.eventList().get(i).getEventname());
+        for (int i = 0; i < tevents.searchEvent(searchEvent.getText()).size(); i++) {
+        	items.add(tevents.searchEvent(searchEvent.getText()).get(i).getEventname());
         }
         ticklist.setItems(items);
+    }
+    
+    public int auswahl(String auswahl){
+    	int id=0;
+    	for(int i = 0; i < tevents.eventList().size(); i++){
+    		if(tevents.eventList().get(i).getEventname().equals(auswahl)){
+    			id = tevents.eventList().get(i).getEventID().intValue();
+    		}
+    	}
+    	return id-1;
     }
     
     public void neuerTicker(Event events) {
@@ -239,24 +261,14 @@ public class WindowSocialMain extends Application {
         final Label welcome = new Label();
         welcome.setText("Hello, " + user + "!");
         
-        final TextField searchEvent = new TextField();
+        searchEvent = new TextField();
         
         Button searchbtn = new Button("Search");
         // ab heir meister ben
          searchbtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                ArrayList<String> newitems = new ArrayList<String>();
-                for (int i = 0; i < tevents.searchEvent(searchEvent.getText()).size(); i++) {
-                    newitems.add(tevents.searchEvent(searchEvent.getText()).get(i).getEventname());
-
-                    if (ticklist.getItems().contains(newitems.get(i))) {
-                        ticklist.getItems().get(i);
-                        //ticklist.getItems().get(i);        
-                        System.out.println(ticklist.getItems().get(i));
-                    }
-
-                }
+                search();
             }
         });
          //hier ende
@@ -306,14 +318,16 @@ public class WindowSocialMain extends Application {
                         eventstart.setText("Start:");
                         eventend.setText("End:");
                         eventscore.setText("Score:");
-                        int index = ticklist.getSelectionModel().getSelectedIndex();
-                        eventBeschreibung.setText(tevents.eventList().get(index).getEventbeschreibung());
-                        eventnametext.setText(tevents.eventList().get(index).getEventname());
-                        eventtyptext.setText(tevents.eventList().get(index).getEventtyp());
-                        eventadmintext.setText(tevents.eventList().get(index).getUsername());
-                        eventstarttext.setText(tevents.eventList().get(index).getEventstart().toXMLFormat());
-                        eventendtext.setText(tevents.eventList().get(index).getEventdauer().toXMLFormat());
-                        eventscoretext.setText(tevents.eventList().get(index).getEventbewertung().toString());
+                        
+                        String itemName = ticklist.getSelectionModel().getSelectedItem();
+                        int id = auswahl(itemName);
+                        eventBeschreibung.setText(tevents.eventList().get(id).getEventbeschreibung());
+                        eventnametext.setText(tevents.eventList().get(id).getEventname());
+                        eventtyptext.setText(tevents.eventList().get(id).getEventtyp());
+                        eventadmintext.setText(tevents.eventList().get(id).getUsername());
+                        eventstarttext.setText(tevents.eventList().get(id).getEventstart().toXMLFormat());
+                        eventendtext.setText(tevents.eventList().get(id).getEventdauer().toXMLFormat());
+                        eventscoretext.setText(tevents.eventList().get(id).getEventbewertung().toString());
                     }
                 }
             }
@@ -324,10 +338,12 @@ public class WindowSocialMain extends Application {
         joinTicker.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+            	String itemName = ticklist.getSelectionModel().getSelectedItem();
+                int id = auswahl(itemName);
                 if (ticklist.getSelectionModel().isEmpty()) {
                 events = tevents.eventList().get(0);
                 } else {
-                events = tevents.eventList().get(ticklist.getSelectionModel().getSelectedIndex());
+                events = tevents.eventList().get(id);
                 }
                 neuerTicker(events);
             }
