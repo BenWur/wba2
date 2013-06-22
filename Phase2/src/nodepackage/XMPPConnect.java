@@ -1,5 +1,6 @@
 package nodepackage;
 
+import org.jivesoftware.smack.AccountManager;
 import org.jivesoftware.smack.Connection;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.SASLAuthentication;
@@ -10,6 +11,7 @@ public class XMPPConnect {
 	
 	public Connection conn = null;
 	private static XMPPConnect instance;
+	
 
 	//dient zur persistenten Speicherung der Verbindung
 	public static XMPPConnect getInstance(){
@@ -30,6 +32,19 @@ public class XMPPConnect {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void register(String username, String password){
+		AccountManager register = new AccountManager(conn);
+		try {
+			register.createAccount(username, password);
+			System.out.println(username+" wurde erstellt!");
+		} catch (XMPPException e) {
+			// TODO Auto-generated catch block
+			System.out.println(username+" wurde nicht erstellt!");
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public boolean login(String username, String password){

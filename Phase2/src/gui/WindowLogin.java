@@ -60,8 +60,9 @@ public class WindowLogin extends Application {
         passField1.setMinWidth(200);
 
         Button reg = new Button();
-        reg.setLayoutX(122);
-        reg.setLayoutY(192);
+        reg.setLayoutX(160);
+        reg.setLayoutY(162);
+        reg.setMinWidth(90);
         reg.setText("Register");
         reg.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -73,8 +74,9 @@ public class WindowLogin extends Application {
 
         Button btn = new Button();
         btn.setDefaultButton(true);
-        btn.setLayoutX(122);
+        btn.setLayoutX(50);
         btn.setLayoutY(162);
+        btn.setMinWidth(90);
         btn.setText("Login");
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -108,7 +110,8 @@ public class WindowLogin extends Application {
         root.getChildren().add(passField1);
         root.getChildren().add(errmessage);
         
-        Scene scene = new Scene(root, 300, 230);
+        Scene scene = new Scene(root, 300, 200, Color.CHARTREUSE);
+        
 
         primaryStage.setTitle("SocialTicker | Login");
         primaryStage.setScene(scene);
