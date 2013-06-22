@@ -4,6 +4,7 @@ import eventlist.Event;
 import guidata.Register;
 import guidata.TickerEvents;
 import guidata.UserContent;
+import java.util.ArrayList;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -60,7 +61,7 @@ public class WindowSocialMain extends Application {
 
     public void refresh() {
         items = FXCollections.observableArrayList();
-        ticklist.getItems().setAll(items);
+        ticklist.getItems().removeAll(items);
         for (int i = 0; i < tevents.eventList().size(); i++) {
             items.add(tevents.eventList().get(i).getEventname());
         }
@@ -143,6 +144,9 @@ public class WindowSocialMain extends Application {
 
         final HBox hbox = new HBox(); // hbox für horizontal aligment
         hbox.setSpacing(10);
+        
+        final HBox searchbox = new HBox();
+        searchbox.setSpacing(10);
 
         final GridPane geoGrid2 = new GridPane();
         geoGrid2.setHgap(10); // Abstand links/rechts
@@ -222,6 +226,7 @@ public class WindowSocialMain extends Application {
         ticklist = new ListView<String>();
         tevents = new TickerEvents();
         items = FXCollections.observableArrayList();
+        
         for (int i = 0; i < tevents.eventList().size(); i++) {
             items.add(tevents.eventList().get(i).getEventname());
         }
@@ -233,6 +238,31 @@ public class WindowSocialMain extends Application {
 
         final Label welcome = new Label();
         welcome.setText("Hello, " + user + "!");
+        
+        final TextField searchEvent = new TextField();
+        
+        Button searchbtn = new Button("Search");
+        // ab heir meister ben
+         searchbtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ArrayList<String> newitems = new ArrayList<String>();
+                for (int i = 0; i < tevents.searchEvent(searchEvent.getText()).size(); i++) {
+                    newitems.add(tevents.searchEvent(searchEvent.getText()).get(i).getEventname());
+
+                    if (ticklist.getItems().contains(newitems.get(i))) {
+                        ticklist.getItems().get(i);
+                        //ticklist.getItems().get(i);        
+                        System.out.println(ticklist.getItems().get(i));
+                    }
+
+                }
+            }
+        });
+         //hier ende
+         
+         
+         
 
         final Label beschreibung = new Label();
         final Label eventBeschreibung = new Label();
@@ -428,21 +458,24 @@ public class WindowSocialMain extends Application {
         geoGrid.add(welcome, 1, 0);
         geoGrid.add(create, 1, 2);
         geoGrid.add(hbox, 0, 2);
-        geoGrid3.add(eventname, 0, 0);
-        geoGrid3.add(eventnametext, 0, 1);
-        geoGrid3.add(beschreibung, 0, 2);
-        geoGrid3.add(eventBeschreibung, 0, 3);
-        geoGrid3.add(eventtyp, 0, 4);
-        geoGrid3.add(eventtyptext, 0, 5);
-        geoGrid3.add(eventadmin, 0, 6);
-        geoGrid3.add(eventadmintext, 0, 7);
-        geoGrid3.add(eventstart, 0, 8);
-        geoGrid3.add(eventstarttext, 0, 9);
-        geoGrid3.add(eventend, 0, 10);
-        geoGrid3.add(eventendtext, 0, 11);
-        geoGrid3.add(eventscore, 0, 12);
-        geoGrid3.add(eventscoretext, 0, 13);
         geoGrid.add(geoGrid3, 1, 1);
+        
+        searchbox.getChildren().addAll(searchEvent, searchbtn);
+        geoGrid3.add(searchbox, 0, 1);
+        geoGrid3.add(eventname, 0, 3);
+        geoGrid3.add(eventnametext, 0, 4);
+        geoGrid3.add(beschreibung, 0, 5);
+        geoGrid3.add(eventBeschreibung, 0, 6);
+        geoGrid3.add(eventtyp, 0, 7);
+        geoGrid3.add(eventtyptext, 0, 8);
+        geoGrid3.add(eventadmin, 0, 9);
+        geoGrid3.add(eventadmintext, 0, 10);
+        geoGrid3.add(eventstart, 0, 11);
+        geoGrid3.add(eventstarttext, 0, 12);
+        geoGrid3.add(eventend, 0, 13);
+        geoGrid3.add(eventendtext, 0, 14);
+        geoGrid3.add(eventscore, 0, 15);
+        geoGrid3.add(eventscoretext, 0, 16);
 
         tab1.setContent(geoGrid);
         tab2.setContent(geoGrid2);
@@ -451,7 +484,7 @@ public class WindowSocialMain extends Application {
         root.getChildren().add(tabPane);
 
         primaryStage.show();
-    }
+    };
 
     /**
      * The main() method is ignored in correctly deployed JavaFX application.

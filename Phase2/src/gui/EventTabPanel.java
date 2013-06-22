@@ -71,7 +71,7 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
     public void updateComment() {
         int index3 = liveticks.getSelectionModel().getSelectedIndex();
         List<Kommentar> kommentare = cevents.contentList(events.getEventID().intValue()).getTickerBeitrag().get(index3).getKommentar();
-        //comments.clear();
+        
         for (int f = comitems.size() ; f < kommentare.size(); f++) {
             comitems.add(kommentare.get(f).getKommentarUser() + " wrote:\n"
             + kommentare.get(f).getKommentarText());

@@ -54,8 +54,19 @@ public class TickerEvents {
 	        return evnt;
 	   }
         
-        public void createEvent(Map<String, String> eventdata) {
-       new NewEvent(eventdata);
+    public List<Event> searchEvent(String EventName)
+	   {   
+	       String url = "http://localhost:4434/events?name="+EventName;
+	       WebResource wrs = Client.create().resource(url);
+	       
+	       Eventlist evnt = wrs.accept("application/xml").get(Eventlist.class);
+	        
+	        
+	        return evnt.getEvent();
+	   }
+        
+    public void createEvent(Map<String, String> eventdata) {
+   new NewEvent(eventdata);
    }
    public void createBeitrag(int ID, String beitrag) {
     	new NewBeitrag(ID, beitrag);
