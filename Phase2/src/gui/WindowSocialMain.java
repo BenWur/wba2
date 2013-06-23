@@ -33,38 +33,26 @@ import javafx.stage.Stage;
 
 public class WindowSocialMain extends Application {
 
-    public String userName;					// aktueller Nutzer
-    private Tab tab1;
-    private Tab tab2;
-    private Tab createNewEventTab;			//Tab zum erstellen neuer Events
-    private PubSubController pubSubControl; //zum Verwalten der Nodes
-    private ListView<String> tickerListe;	//Liste für alle Events in angezeigten Liste
-    private TickerEvents tickerEvents;		//Zum verwalten der Events
-    private ObservableList<String> items;	// items zum füllen der Liste
-    private SingleSelectionModel<Tab> selectTab;
-    private TabPane tabPane = new TabPane();
-    private static WindowSocialMain instance; //TODO WE NEED?!
-    private Event events = null;			// Ein Event
-    private UserContent userInfo;			//Info eines Users
-
-    //dient zur persistenten Speicherung
-    public static WindowSocialMain getInstance() {
-        if (instance == null) {
-            System.out.println("Fehler, das geht nicht.");
-            return null;
-        }
-        return instance;
-    }
+    public String userName;                         // aktueller Nutzer
+    private Tab tab1;                               // Haupt-Tab
+    private Tab tab2;                               // Profil-Tab
+    private Tab createNewEventTab;                  // Tab zum Erstellen neuer Events
+    private PubSubController pubSubControl;         // zum Verwalten der Nodes
+    private ListView<String> tickerListe;           // Liste für alle Events in angezeigten Liste
+    private TickerEvents tickerEvents;              // Zum verwalten der Events
+    private ObservableList<String> items;           // items zum füllen der Liste
+    private SingleSelectionModel<Tab> selectTab;    // Ermoeglicht Selektierung einzelner Tabs
+    private TabPane tabPane = new TabPane();        // TabPane, enthaelt alle Tabs
+    private Event events = null;                    // Ein Event
+    private UserContent userInfo;                   // Info eines Users
 
     public void refresh() {
-
         items = FXCollections.observableArrayList();
         tickerListe.getItems().clear();
         for (int i = 0; i < tickerEvents.eventList().size(); i++) {
             items.add(tickerEvents.eventList().get(i).getEventname());
         }
         tickerListe.setItems(items);
-
     }
 
     public void search(String searchText) {
@@ -93,7 +81,7 @@ public class WindowSocialMain extends Application {
             }
         }
 
-        if (tabPane.getTabs().size() < 6) {
+        if (tabPane.getTabs().size() < 7) {  // Maximale Anzahl an offene Tabs (2 + 5)
             final EventTabPanel gejointerTab = new EventTabPanel(events);
             gejointerTab.user = userName;
             Tab tab = new Tab();
@@ -120,11 +108,8 @@ public class WindowSocialMain extends Application {
     @Override
     public void start(final Stage primaryStage) {
 
-        if (instance == null) {
-            instance = this;
-        }
-
         pubSubControl = new PubSubController();
+
         primaryStage.setResizable(false);
         primaryStage.setTitle("SocialTicker");
 
@@ -240,11 +225,7 @@ public class WindowSocialMain extends Application {
         tickerEvents = new TickerEvents();
         items = FXCollections.observableArrayList();
 
-        for (int i = 0; i < tickerEvents.eventList().size(); i++) {
-            items.add(tickerEvents.eventList().get(i).getEventname());
-        }
-        tickerListe.setItems(items);
-
+        refresh();
 
         final Button joinTicker = new Button("Join");
 
@@ -262,7 +243,6 @@ public class WindowSocialMain extends Application {
                 search(searchText);
             }
         });
-
 
         final Label beschreibung = new Label();
         final Label eventBeschreibung = new Label();
@@ -442,7 +422,6 @@ public class WindowSocialMain extends Application {
                 geoGridNew.add(ende, 1, 8);
                 geoGridNew.add(endeField, 1, 9);
                 geoGridNew.add(createbtn, 1, 10);
-
 
                 createNewEventTab.setContent(geoGridNew);
                 tabPane.getTabs().add(createNewEventTab);

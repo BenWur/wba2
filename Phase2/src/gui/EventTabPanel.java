@@ -135,7 +135,7 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
         sendchat.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (liveticks.getSelectionModel().isEmpty()) {
+                if (liveticks.getSelectionModel().isEmpty() && user.equals(events.getUsername())) {
                     String beitrag = chatText.getText();
                     chatText.clear();
                     int eventnr = events.getEventID().intValue();
