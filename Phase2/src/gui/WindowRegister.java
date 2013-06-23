@@ -206,7 +206,7 @@ public class WindowRegister extends Application {
         root.getChildren().add(btn);
         root.getChildren().add(backbtn);
 
-        Scene scene = new Scene(root, 300, 470, Color.CHARTREUSE);
+        Scene scene = new Scene(root, 300, 470);
 
         primaryStage.setTitle("SocialTicker | Register");
         primaryStage.setScene(scene);

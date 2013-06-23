@@ -116,7 +116,7 @@ public class WindowLogin extends Application {
         root.getChildren().add(passField1);
         root.getChildren().add(errmessage);
 
-        Scene scene = new Scene(root, 300, 200, Color.CHARTREUSE);
+        Scene scene = new Scene(root, 300, 200);
 
 
         primaryStage.setTitle("SocialTicker | Login");
