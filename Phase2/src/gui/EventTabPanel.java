@@ -127,6 +127,9 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
                         comments.getItems().removeAll(comitems);
                         updateComment();
                     }
+                    if (mouseEvent.getClickCount() == 2) {
+                        liveticks.getSelectionModel().clearSelection();
+                    }
                 }
             }
         });
