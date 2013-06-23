@@ -17,24 +17,32 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/**
+ * Login-Fenster hiermit wird alles gestartet
+ * @author Ben & Dario
+ */
 public class WindowLogin extends Application {
 
+	/**
+	 * Hier beginnt alles.
+	 * Hauptsächlich dafür da, das einloggen zu verwalten
+	 * @param primaryStage
+	 */
     @Override
     public void start(final Stage primaryStage) throws MalformedURLException {
 
+    	//Logo und Banner einbinden
         primaryStage.getIcons().add(new Image("file:logo/icon.png"));
-
         Image image1 = new Image("file:logo/logo.png");
-        // simple displays ImageView the image as is
         ImageView iv1 = new ImageView();
         iv1.setLayoutX(5);
         iv1.setLayoutY(5);
         iv1.setFitWidth(290);
         iv1.setImage(image1);
 
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(false);	//Damit die Größe fix ist
 
-        final Label errmessage = new Label();
+        final Label errmessage = new Label();	//Errormessage falls Login falsch ist
         errmessage.setLayoutX(50);
         errmessage.setLayoutY(141);
 
@@ -65,7 +73,7 @@ public class WindowLogin extends Application {
             @Override
             public void handle(ActionEvent event) {
                 WindowRegister newuser = new WindowRegister();
-                newuser.start(primaryStage); //oeffnet neue stage
+                newuser.start(primaryStage); 	//oeffnet neue stage
             }
         });
 
@@ -78,25 +86,26 @@ public class WindowLogin extends Application {
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Register register = new Register();
+                Register register = new Register();	//Register verwaltet Login
                 errmessage.setText("");
-                if (register.login(textField.getText())) {
+                if (register.login(textField.getText())) {	//Falls Name in xml existiert
                     WindowSocialMain loggedin = new WindowSocialMain();
-                    loggedin.userName = register.loggedInUser;
-                    XMPPConnect connection = XMPPConnect.getInstance();
-                    if (connection.login(loggedin.userName, passField1.getText())) {
+                    loggedin.userName = register.loggedInUser;	//username wird uebergeben
+                    XMPPConnect connection = XMPPConnect.getInstance();	//connection wird lokal gespeichert
+                    if (connection.login(loggedin.userName, passField1.getText())) {	//falls connection klappt
                         loggedin.start(primaryStage);		//Zum Einloggen auf dem XMPP Server
                     } else {
                         errmessage.setText("Your username or password is incorrect!");
                         errmessage.setTextFill(Color.rgb(210, 39, 30));
                     }
                 } else {
-                    errmessage.setText("Your username or password is incorrect!");
+                    errmessage.setText("Your username is incorrect!");
                     errmessage.setTextFill(Color.rgb(210, 39, 30));
                 }
             }
         });
 
+        //Elemente werden hinzugefügt
         AnchorPane root = new AnchorPane();
         root.getChildren().add(iv1);
         root.getChildren().add(btn);
