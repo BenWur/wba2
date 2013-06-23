@@ -14,91 +14,97 @@ import userlist.Userlist;
 
 /**
  * DataHandler zum verwalten der Restabfragen der User
+ *
  * @author Ben & Dario
  *
  */
-
 public class DataHandlerUser {
-	private Userlist users = null;
-	private Marshaller marshaller = null;
 
-	public DataHandlerUser() {
-		JAXBContext jc;
-		try {
-			//benötigte Objekte
-			jc = JAXBContext.newInstance(Userlist.class);
-			Unmarshaller um = jc.createUnmarshaller();
-			users = (Userlist) um.unmarshal(new File("XML/Userlist.xml"));
-			marshaller = jc.createMarshaller();
-			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+    private Userlist users = null;
+    private Marshaller marshaller = null;
 
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		}
+    public DataHandlerUser() {
+        JAXBContext jc;
+        try {
+            //benötigte Objekte
+            jc = JAXBContext.newInstance(Userlist.class);
+            Unmarshaller um = jc.createUnmarshaller();
+            users = (Userlist) um.unmarshal(new File("XML/Userlist.xml"));
+            marshaller = jc.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
-	}
-	//gibt alle User zurück
-	public Userlist getUsers() {
-		return this.users;
-	}
-	//gibt gestimmten User zurück
-	public User getUserbyID(int id) {
-		return this.users.getUser().get(id - 1);
-	}
-	//schreibt neuen User
-	public URI writeNewUser(User user) {
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
 
-		List<User> userliste = users.getUser();
-		userliste.add(user);	//fügt User zur Liste hinzu
-		
-		this.savePersistent();
-		return URI.create("http://localhost:4434/users/" + user.getUserID().toString());
+    }
+    //gibt alle User zurück
 
-	}
-	//ändert bestimmten User 
-	public URI writeUser(User user, int id) {
+    public Userlist getUsers() {
+        return this.users;
+    }
+    //gibt gestimmten User zurück
 
-		List<User> userliste = users.getUser();
+    public User getUserbyID(int id) {
+        return this.users.getUser().get(id - 1);
+    }
+    //schreibt neuen User
 
-		int i = 0;
-		//Abfrage für den bestimmten User
-		for (User us : userliste) {
-			if (us.getUserID().intValue()==id) {
-				userliste.set(i, user);	//ändert User an der Stelle i
-			}
-			i++;
-		}
+    public URI writeNewUser(User user) {
 
-		this.savePersistent();
+        List<User> userliste = users.getUser();
+        userliste.add(user);	//fügt User zur Liste hinzu
 
-		return URI.create("http://localhost:4434/users/" + id);
+        this.savePersistent();
+        return URI.create("http://localhost:4434/users/" + user.getUserID().toString());
 
-	}
-	//löscht bestimmten User 
-	public void delete(int id) {
+    }
+    //ändert bestimmten User 
 
-		List<User> userliste = users.getUser();
+    public URI writeUser(User user, int id) {
 
-		int i = 0;	//Zählvariable
-		//Abfrage um User zu bestimmen
-		for (User us : userliste) {
-			if (us.getUserID().intValue()==id) {
-				userliste.remove(i);	//entfernt User an der Stelle i
-			}
-			i++;
-		}
+        List<User> userliste = users.getUser();
 
-		this.savePersistent();
+        int i = 0;
+        //Abfrage für den bestimmten User
+        for (User us : userliste) {
+            if (us.getUserID().intValue() == id) {
+                userliste.set(i, user);	//ändert User an der Stelle i
+            }
+            i++;
+        }
 
-	}
-	//speichert ab
-	private void savePersistent() {
-		try {
-			marshaller.marshal(users, new File("XML/Userlist.xml"));
-		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+        this.savePersistent();
 
+        return URI.create("http://localhost:4434/users/" + id);
+
+    }
+    //löscht bestimmten User 
+
+    public void delete(int id) {
+
+        List<User> userliste = users.getUser();
+
+        int i = 0;	//Zählvariable
+        //Abfrage um User zu bestimmen
+        for (User us : userliste) {
+            if (us.getUserID().intValue() == id) {
+                userliste.remove(i);	//entfernt User an der Stelle i
+            }
+            i++;
+        }
+
+        this.savePersistent();
+
+    }
+    //speichert ab
+
+    private void savePersistent() {
+        try {
+            marshaller.marshal(users, new File("XML/Userlist.xml"));
+        } catch (JAXBException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 }

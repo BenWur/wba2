@@ -16,20 +16,21 @@ import userlist.User;
 
 /**
  * Erstellt neuen User
+ *
  * @author Dario & Ben
  */
-
 public class NewUser {
 
-	/**
-	 * Konstruktor eines neuen Nutzers
-	 * @param eventID, beitrag
-	 */
+    /**
+     * Konstruktor eines neuen Nutzers
+     *
+     * @param eventID, beitrag
+     */
     public NewUser(Map<String, String> userdata) {
 
         //neuen User anlegen
         User user = new ObjectFactory().createUser();
-        
+
         //Userdaten gemäß der xsd füllen
         XMLGregorianCalendar xbday = null;
         try {
@@ -37,7 +38,7 @@ public class NewUser {
         } catch (DatatypeConfigurationException ex) {
             Logger.getLogger(NewUser.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         user.setUsername(userdata.get("name"));
         user.setVorname(userdata.get("fname"));
         user.setName(userdata.get("lname"));
@@ -46,9 +47,9 @@ public class NewUser {
         user.setGeburtsdatum(xbday);
         user.setLand(LandType.fromValue(userdata.get("country")));
 
-        
+
         String url = "http://localhost:4434/users";			//url der Ressource
-        WebResource wrs = Client.create().resource(url);	
+        WebResource wrs = Client.create().resource(url);
 
         //erstellt user und gibt einen Response zurück. Server übernimmt die genaue Verwaltung
         ClientResponse cr = wrs.accept("text/html").type(MediaType.APPLICATION_XML).entity(user).post(ClientResponse.class);

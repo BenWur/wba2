@@ -14,95 +14,99 @@ import eventlist.Eventlist;
 
 /**
  * DataHandler zum verwalten der Restabfragen des Events
+ *
  * @author Ben & Dario
  *
  */
-
 public class DataHandlerEvent {
-	
-	private Eventlist events = null;
-	private Marshaller marshaller = null;
-	private DataHandlerEventContent content = null;
 
-	public DataHandlerEvent() {
-		JAXBContext jc;
-		try {
-			jc = JAXBContext.newInstance(Eventlist.class); 	//Kontext
-			Unmarshaller um = jc.createUnmarshaller();		// Unmarshaller erstellen
-			events = (Eventlist) um.unmarshal(new File("XML/Eventlist.xml")); 	//events beinhaltet alles aus Eventlist.xml
-			marshaller = jc.createMarshaller();				// Marshaller erstellen
-			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);	//damit text formatiert gespeichert wird
+    private Eventlist events = null;
+    private Marshaller marshaller = null;
+    private DataHandlerEventContent content = null;
 
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		}
+    public DataHandlerEvent() {
+        JAXBContext jc;
+        try {
+            jc = JAXBContext.newInstance(Eventlist.class); 	//Kontext
+            Unmarshaller um = jc.createUnmarshaller();		// Unmarshaller erstellen
+            events = (Eventlist) um.unmarshal(new File("XML/Eventlist.xml")); 	//events beinhaltet alles aus Eventlist.xml
+            marshaller = jc.createMarshaller();				// Marshaller erstellen
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);	//damit text formatiert gespeichert wird
 
-	}
-	//gibt alle Events zurück
-	public Eventlist getEvents() {
-		return this.events;
-	}
-	//gibt ein bestimmtes Event zurück
-	public Event getEventbyID(int id) {
-		return this.events.getEvent().get(id - 1);
-	}
-	//erstellt neues Event
-	public URI writeNewEvent(Event event) {
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
 
-		List<Event> eventliste = events.getEvent();
-		eventliste.add(event);	//fügt neues Event hinzu
-		
-		this.savePersistent();	//speichert aktuelle Daten
-		return URI.create("http://localhost:4434/events/" + event.getEventID().toString());	//erstellt URI
+    }
+    //gibt alle Events zurück
 
-	}
-	//ändert ein Event
-	public URI writeEvent(Event event, int id) {
+    public Eventlist getEvents() {
+        return this.events;
+    }
+    //gibt ein bestimmtes Event zurück
 
-		List<Event> eventliste = events.getEvent();
+    public Event getEventbyID(int id) {
+        return this.events.getEvent().get(id - 1);
+    }
+    //erstellt neues Event
 
-		int i = 0; //Zählvariable
-		//bestimmt das zugehörige Event 
-		for (Event ev : eventliste) {
-			if (ev.getEventID().intValue()==id) {
-				eventliste.set(i, event);	//ändert das ausgewählte Event
-			}
-			i++;
-		}
+    public URI writeNewEvent(Event event) {
 
-		this.savePersistent();
+        List<Event> eventliste = events.getEvent();
+        eventliste.add(event);	//fügt neues Event hinzu
 
-		return URI.create("http://localhost:4434/events/" + id);
+        this.savePersistent();	//speichert aktuelle Daten
+        return URI.create("http://localhost:4434/events/" + event.getEventID().toString());	//erstellt URI
 
-	}
-	//löscht Event mit angegebener ID
-	public void delete(int id) {
+    }
+    //ändert ein Event
 
-		List<Event> eventliste = events.getEvent();
+    public URI writeEvent(Event event, int id) {
 
-		int i = 0;
-		//fragt Event ab
-		for (Event ev : eventliste) {
-			if (ev.getEventID().intValue()==id) {
-				eventliste.remove(i);	//löscht das Event
-			}
-			i++;
-		}
-		
-		content.delete(id);
+        List<Event> eventliste = events.getEvent();
 
-	    this.savePersistent();
+        int i = 0; //Zählvariable
+        //bestimmt das zugehörige Event 
+        for (Event ev : eventliste) {
+            if (ev.getEventID().intValue() == id) {
+                eventliste.set(i, event);	//ändert das ausgewählte Event
+            }
+            i++;
+        }
 
-	}
-	//speichert in Eventlist ab
-	private void savePersistent() {
-		try {
-			marshaller.marshal(events, new File("XML/Eventlist.xml"));
-		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
+        this.savePersistent();
 
+        return URI.create("http://localhost:4434/events/" + id);
+
+    }
+    //löscht Event mit angegebener ID
+
+    public void delete(int id) {
+
+        List<Event> eventliste = events.getEvent();
+
+        int i = 0;
+        //fragt Event ab
+        for (Event ev : eventliste) {
+            if (ev.getEventID().intValue() == id) {
+                eventliste.remove(i);	//löscht das Event
+            }
+            i++;
+        }
+
+        content.delete(id);
+
+        this.savePersistent();
+
+    }
+    //speichert in Eventlist ab
+
+    private void savePersistent() {
+        try {
+            marshaller.marshal(events, new File("XML/Eventlist.xml"));
+        } catch (JAXBException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 }

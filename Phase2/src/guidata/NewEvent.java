@@ -20,20 +20,21 @@ import eventlist.Event;
 
 /**
  * Erstellt neues Event
+ *
  * @author Dario & Ben
  */
-
 public class NewEvent {
 
-	/**
-	 * Konstruktor eines neuen Events
-	 * @param eventdate Map der Eventdaten
-	 */
-	public NewEvent(Map<String, String> eventdata) {
+    /**
+     * Konstruktor eines neuen Events
+     *
+     * @param eventdate Map der Eventdaten
+     */
+    public NewEvent(Map<String, String> eventdata) {
 
         //neues Event anlegen
         Event event = new ObjectFactory().createEvent();
-        
+
         //Befüllung gemäß der xsd
         XMLGregorianCalendar start = null;
         XMLGregorianCalendar ende = null;
@@ -44,7 +45,7 @@ public class NewEvent {
         } catch (DatatypeConfigurationException ex) {
             Logger.getLogger(NewEvent.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         event.setUsername(eventdata.get("admin"));
         event.setEventname(eventdata.get("name"));
         event.setEventbeschreibung(eventdata.get("beschr"));
@@ -55,34 +56,30 @@ public class NewEvent {
 
         String url = "http://localhost:4434/events";
         WebResource wrs = Client.create().resource(url);//erstellt neues Event
-        
-        
+
+
         //erstellt Event und gibt einen Response zurück. Server übernimmt die genaue Verwaltung
         ClientResponse cr = wrs.accept("text/html").type(MediaType.APPLICATION_XML).entity(event).post(ClientResponse.class);	//POST
         System.out.println(cr.getStatus());
-        
+
         TickerEvents tickev = new TickerEvents();
         List<Event> liste = tickev.eventList();
         BigInteger id = null;
-        for(Event ev:liste){
-        	if(ev.getEventname().equals(event.getEventname())){	
-        		//EventID richtig setzen
-        		id = ev.getEventID();
-        	}
+        for (Event ev : liste) {
+            if (ev.getEventname().equals(event.getEventname())) {
+                //EventID richtig setzen
+                id = ev.getEventID();
+            }
         }
-        
+
         Eventcontent newContent = new Eventcontent();			//Content muss gleichzeitig angelegt werden
-		newContent.setAktuellerStand(null);
-		newContent.setEventID(id);
-		
-		String urlcontent = "http://localhost:4434/events/"+id+"/eventcontent";
+        newContent.setAktuellerStand(null);
+        newContent.setEventID(id);
+
+        String urlcontent = "http://localhost:4434/events/" + id + "/eventcontent";
         WebResource wrscontent = Client.create().resource(urlcontent);//erstellt neues Event
         //erstellt Event und gibt einen Response zurück. Server übernimmt die genaue Verwaltung
         ClientResponse crcontent = wrscontent.accept("text/html").type(MediaType.APPLICATION_XML).entity(newContent).post(ClientResponse.class);
         System.out.println(crcontent.getStatus());
-        
-        
-        
-		
     }
 }

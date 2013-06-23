@@ -27,18 +27,20 @@ import javafx.stage.Stage;
 
 /**
  * Fenster zur Registrierung
+ *
  * @author Ben & Dario
  */
 public class WindowRegister extends Application {
-	
-	/**
-	 * Startet das neue Registrierungs-Fenster
-	 * @param primaryStage
-	 */
+
+    /**
+     * Startet das neue Registrierungs-Fenster
+     *
+     * @param primaryStage
+     */
     @Override
     public void start(final Stage primaryStage) {
 
-    	//Image einbinden
+        //Image einbinden
         Image image1 = new Image("file:Logo/Logo.png");
         ImageView iv1 = new ImageView();
         iv1.setLayoutX(5);
@@ -165,7 +167,7 @@ public class WindowRegister extends Application {
                     errmessage.setTextFill(Color.rgb(210, 39, 30));
                     errmessage.setText("Sorry, username already taken or invalid!");
                 } else {
-                	//Legt neuen User an
+                    //Legt neuen User an
                     Map<String, String> userdata = new HashMap<String, String>();
                     userdata.put("name", textField.getText());
                     userdata.put("fname", fnameField1.getText());

@@ -26,9 +26,9 @@ import org.jivesoftware.smackx.pubsub.listener.ItemEventListener;
 
 /**
  * Verwaltung des gejointen Events
+ *
  * @author Dario & Ben
  */
-
 public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
 
     private ListView<String> beitraege;			//beiträge zeigt alle Beiträge
@@ -41,10 +41,11 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
     private Event events;						//die Events
     final StackPane sp1 = new StackPane();		//Beitrag Spalte		
     final StackPane sp2 = new StackPane();		//Kommentar Spalte
-    final TextField chatText = new TextField();	
+    final TextField chatText = new TextField();
 
     /**
      * Methode für den pubSubController. Löst das aktualisieren der Liste aus
+     *
      * @param items
      */
     public void handlePublishedItems(ItemPublishEvent<Item> items) {
@@ -58,7 +59,7 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
     }
 
     /**
-     * Methode zum aktualisieren der Beitrag Liste 
+     * Methode zum aktualisieren der Beitrag Liste
      */
     public void update() {
         List<TickerBeitrag> tickerBeitrag = eventContent.contentList(events.getEventID().intValue()).getTickerBeitrag();
@@ -69,22 +70,23 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
         beitraege.setItems(beitragItems);	//Beiträge werden neu hinzugefügt
         updateComment();				  	//Kommentare werden aktualisiert
     }
-    
+
     /**
-     * Methode zum aktualisieren der Kommentar Liste 
+     * Methode zum aktualisieren der Kommentar Liste
      */
     public void updateComment() {
         int selectedIndex = beitraege.getSelectionModel().getSelectedIndex();
         List<Kommentar> kommentare = eventContent.contentList(events.getEventID().intValue()).getTickerBeitrag().get(selectedIndex).getKommentar();
         for (int f = commentItems.size(); f < kommentare.size(); f++) {
-            commentItems.add(kommentare.get(f).getKommentarUser() +" wrote:\n"+ kommentare.get(f).getKommentarText());
+            commentItems.add(kommentare.get(f).getKommentarUser() + " wrote:\n" + kommentare.get(f).getKommentarText());
         }
         comments.setItems(commentItems);	//Kommentare werden hinzugefügt
     }
-    
+
     /**
      * Haupt-Methode für alle Funktionen
-     * @param events Das übergebene Event 
+     *
+     * @param events Das übergebene Event
      */
     public EventTabPanel(final Event events) {
         this.events = events;	//Event wird übergeben
@@ -96,7 +98,7 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
         eventContent = new TickerContent();
         beitragItems = FXCollections.observableArrayList();
         commentItems = FXCollections.observableArrayList();
-        
+
         this.setHgap(5); // Abstand links/rechts
         this.setVgap(5); // Abstand oben/unten
 
@@ -111,7 +113,7 @@ public class EventTabPanel extends GridPane implements ItemEventListener<Item> {
         this.getColumnConstraints().addAll(column1, column2);
         this.getRowConstraints().addAll(row1, row2);
 
-        
+
 
         sp1.getChildren().add(beitraege);
         sp2.getChildren().add(comments);

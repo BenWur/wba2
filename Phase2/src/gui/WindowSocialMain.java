@@ -4,8 +4,11 @@ import eventlist.Event;
 import guidata.Register;
 import guidata.TickerEvents;
 import guidata.UserContent;
+import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import nodepackage.PubSubController;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -32,14 +35,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import nodepackage.XMPPConnect;
+import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.packet.Presence;
 
 /**
- * In der WindowSocialMain finden alle wichtigen Aktivitäten statt. 
- * Diese Methode ist sozusagen das Hauptmenü
+ * In der WindowSocialMain finden alle wichtigen Aktivitäten statt. Diese
+ * Methode ist sozusagen das Hauptmenü
+ *
  * @author Ben & Dario
  *
  */
-
 public class WindowSocialMain extends Application {
 
     public String userName;                         // aktueller Nutzer
@@ -70,6 +76,7 @@ public class WindowSocialMain extends Application {
 
     /**
      * Diese Methode dient zum Suchen eines Events
+     *
      * @param searchText den Eventnamen des gesuchten Events
      */
     public void search(String searchText) {
@@ -83,6 +90,7 @@ public class WindowSocialMain extends Application {
 
     /**
      * Diese Methode gibt die ID des ausgewählten Events zurück
+     *
      * @param auswahlText den Eventnamen des ausgewählten Events
      */
     public int auswahl(String auswahlText) {
@@ -96,8 +104,10 @@ public class WindowSocialMain extends Application {
     }
 
     /**
-     * Diese Methode öffnet einen neuen Ticker falls die maximal Zahl noch nicht erreicht wurde
-     * @param events 
+     * Diese Methode öffnet einen neuen Ticker falls die maximal Zahl noch nicht
+     * erreicht wurde
+     *
+     * @param events
      */
     public void neuerTicker(Event events) {
         for (Tab opentab : tabPane.getTabs()) {
@@ -131,41 +141,40 @@ public class WindowSocialMain extends Application {
 
     /**
      * In dieser Methode werden alle Funktionen ausgeführt
+     *
      * @param pimaryStage
      */
-    
     @Override
-    public void start(final Stage primaryStage) {							
+    public void start(final Stage primaryStage) {
 
         pubSubControl = new PubSubController();		//Zur Verwaltung der Nodes
         userInfo = new UserContent();				//Zur Verwaltung der Userdaten
         final GridPane eventInfoFenster = new GridPane(); //Zeigt Infos zu einem Event
-        final GridPane userFenster= new GridPane();	// userFenster ist das Fenster der Userdaten und zur Verwaltung dieser
+        final GridPane userFenster = new GridPane();	// userFenster ist das Fenster der Userdaten und zur Verwaltung dieser
         final GridPane tickerFenster = new GridPane();	//tickerFenster beinhaltet die Auswahl der Events
-        
+
         primaryStage.setResizable(false);
         primaryStage.setTitle("SocialTicker");
 
-        final AnchorPane root = new AnchorPane();	
+        final AnchorPane root = new AnchorPane();
         primaryStage.setScene(new Scene(root, 480, 380));
 
         tabPane.setPrefSize(490, 380);
         selectTab = tabPane.getSelectionModel();	//SelectTab dient zur Auswahl von Tabs
-        
+
         // Dient dazu, dass die ersten zwei Tabs nicht geschlossen werden können
         tabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
             @Override
-            public void changed(ObservableValue<? extends Tab> tab,Tab oldTab, Tab newTab) {
+            public void changed(ObservableValue<? extends Tab> tab, Tab oldTab, Tab newTab) {
                 if (newTab.equals(tab1) || newTab.equals(tab2)) {
                     tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
-                } 
-                else {
+                } else {
                     tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.SELECTED_TAB);
                 }
             }
         });
 
-       
+
         ColumnConstraints column1 = new ColumnConstraints();
         column1.setPercentWidth(50);
         ColumnConstraints column2 = new ColumnConstraints();
@@ -180,7 +189,7 @@ public class WindowSocialMain extends Application {
         final HBox searchbox = new HBox();
         searchbox.setSpacing(10);
 
-        
+
         userFenster.setHgap(10); // Abstand links/rechts
         userFenster.setVgap(10); // Abstand oben/unten
 
@@ -228,6 +237,8 @@ public class WindowSocialMain extends Application {
 
         Button userBearbeiten = new Button("Bearbeiten");
 
+        Button logout = new Button("Logout");
+
         userFenster.setMaxWidth(350);
         userFenster.add(profildata, 1, 1);
         userFenster.add(userinfo, 1, 2);
@@ -245,6 +256,7 @@ public class WindowSocialMain extends Application {
         userFenster.add(stadtText, 1, 8);
         userFenster.add(stadt, 2, 8);
         userFenster.add(userBearbeiten, 1, 9);
+        userFenster.add(logout, 1, 11);
 
         //Falls der userBearbeiten-Button aktiviert wird
         userBearbeiten.setOnAction(new EventHandler<ActionEvent>() {
@@ -256,7 +268,24 @@ public class WindowSocialMain extends Application {
             }
         });
 
-        
+        logout.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                WindowLogin backtologin = new WindowLogin();
+                XMPPConnect connection = XMPPConnect.getInstance();	//connection wird lokal gespeichert
+                Presence offlinePres = new Presence(Presence.Type.unavailable, "", 1, Presence.Mode.away);
+                connection.conn.disconnect(offlinePres); //schliesst verbindung und sendet Presence = unavailable
+                try {
+                    connection.conn.connect();          //oeffnet wieder verbindung
+                    backtologin.start(primaryStage); 	//oeffnet login stage
+                } catch (XMPPException ex) {
+                    Logger.getLogger(WindowSocialMain.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(WindowSocialMain.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+
 
         tab1 = new Tab();
         tab1.setText("Live Tickers");
@@ -284,7 +313,7 @@ public class WindowSocialMain extends Application {
                 search(searchText);
             }
         });
-        
+
         //ab hier werden die Eventinfos befüllt
         final Label beschreibung = new Label();
         final Label eventBeschreibung = new Label();
@@ -323,7 +352,7 @@ public class WindowSocialMain extends Application {
                         joinTicker.fire();		//Joint dem Ticker
                     }
                     if (mouseEvent.getClickCount() == 1) {
-                    	//Die Eventinfos werden befüllt
+                        //Die Eventinfos werden befüllt
                         eventname.setText("Name:");
                         eventname.setFont(bold);
                         beschreibung.setText("Description:");
@@ -396,15 +425,13 @@ public class WindowSocialMain extends Application {
                 column3.setPercentWidth(30);
                 neuesEventFenster.getColumnConstraints().addAll(column1, column2, column3);
 
-                final Label errmessage = new Label();	
+                final Label errmessage = new Label();
                 final Label eventname = new Label("Event name:");
                 final TextField eventnametextField = new TextField();
                 final Label eventbeschreibung = new Label("Event description:");
                 final TextField eventbeschreibungField1 = new TextField();
                 final Label eventtyp = new Label("Event type:");
-                final ChoiceBox typchoice = new ChoiceBox(FXCollections.observableArrayList("Football","American Football"
-                		, "Baseball", "Handball", "Running", "Boxing", "Tennis", "Table Tennis", "Golf", "Volleyball"
-                		, "Basketball", "Formula 1", "Others"));
+                final ChoiceBox typchoice = new ChoiceBox(FXCollections.observableArrayList("Football", "American Football", "Baseball", "Handball", "Running", "Boxing", "Tennis", "Table Tennis", "Golf", "Volleyball", "Basketball", "Formula 1", "Others"));
                 typchoice.getSelectionModel().selectFirst();
                 final Label start = new Label("Event start:");
                 final TextField startField = new TextField();
@@ -417,7 +444,7 @@ public class WindowSocialMain extends Application {
                 Button createbtn = new Button();	//Button zum erstellen
                 createbtn.setText("Create");
 
-                
+
                 create.setDisable(true);
                 createNewEventTab.setText("New Ticker");
                 selectTab.select(createNewEventTab);  //wählt den Tab aus zum erstellen
@@ -432,7 +459,7 @@ public class WindowSocialMain extends Application {
                         Map<String, String> eventdata = new HashMap<String, String>();
                         eventdata.put("admin", userName);
                         eventdata.put("name", eventnametextField.getText());
-                        eventdata.put("beschr",eventbeschreibungField1.getText());
+                        eventdata.put("beschr", eventbeschreibungField1.getText());
                         eventdata.put("typ", typchoice.getSelectionModel().getSelectedItem().toString());
                         eventdata.put("start", startField.getText() + ":00");
                         eventdata.put("ende", endeField.getText() + ":00");
@@ -441,9 +468,9 @@ public class WindowSocialMain extends Application {
                         make.createEvent(eventdata);	//übergibt Map damit das Event angelegt wird
 
                         refresh();						//aktualisiert direkt die Liste
-                        
+
                         pubSubControl.nodeErstellen(eventnametextField.getText()); // erstellt neue Node
-                        
+
                         tabPane.getTabs().remove(createNewEventTab);	//entfernt den Tab
                         create.setDisable(false);
                         events = tickerEvents.eventList().get(tickerListe.getItems().size() - 1);
@@ -457,7 +484,7 @@ public class WindowSocialMain extends Application {
                         create.setDisable(false);		//neue Events sind wieder erstellbar falls man createTab schließt
                     }
                 });
-                
+
                 neuesEventFenster.add(eventname, 1, 0);
                 neuesEventFenster.add(eventnametextField, 1, 1);
                 neuesEventFenster.add(eventbeschreibung, 1, 2);

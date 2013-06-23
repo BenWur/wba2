@@ -19,19 +19,20 @@ import javafx.stage.Stage;
 
 /**
  * Login-Fenster hiermit wird alles gestartet
+ *
  * @author Ben & Dario
  */
 public class WindowLogin extends Application {
 
-	/**
-	 * Hier beginnt alles.
-	 * Hauptsächlich dafür da, das einloggen zu verwalten
-	 * @param primaryStage
-	 */
+    /**
+     * Hier beginnt alles. Hauptsächlich dafür da, das einloggen zu verwalten
+     *
+     * @param primaryStage
+     */
     @Override
     public void start(final Stage primaryStage) throws MalformedURLException {
 
-    	//Logo und Banner einbinden
+        //Logo und Banner einbinden
         primaryStage.getIcons().add(new Image("file:logo/icon.png"));
         Image image1 = new Image("file:logo/logo.png");
         ImageView iv1 = new ImageView();
