@@ -25,11 +25,20 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/**
+ * Fenster zur Registrierung
+ * @author Ben & Dario
+ */
 public class WindowRegister extends Application {
-
+	
+	/**
+	 * Startet das neue Registrierungs-Fenster
+	 * @param primaryStage
+	 */
     @Override
     public void start(final Stage primaryStage) {
 
+    	//Image einbinden
         Image image1 = new Image("file:Logo/Logo.png");
         ImageView iv1 = new ImageView();
         iv1.setLayoutX(5);
@@ -60,7 +69,7 @@ public class WindowRegister extends Application {
         passwd.setLayoutX(50);
         passwd.setLayoutY(119);
         passwd.setMinWidth(200);
-////////
+
         Label fname = new Label("First name:");
         fname.setLayoutX(50);
         fname.setLayoutY(145);
@@ -110,7 +119,7 @@ public class WindowRegister extends Application {
         country.setLayoutY(313);
 
         Register register = new Register();
-        final ChoiceBox countryc = new ChoiceBox(FXCollections.observableArrayList(register.countrylist()));
+        final ChoiceBox countryc = new ChoiceBox(FXCollections.observableArrayList(register.countrylist())); //ChoiceBox der verfügbaren Länder
         countryc.getSelectionModel().selectFirst();
         countryc.setLayoutX(122);
         countryc.setLayoutY(329);
@@ -136,7 +145,6 @@ public class WindowRegister extends Application {
                 try {
                     backlogin.start(primaryStage);
                 } catch (MalformedURLException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
@@ -157,6 +165,7 @@ public class WindowRegister extends Application {
                     errmessage.setTextFill(Color.rgb(210, 39, 30));
                     errmessage.setText("Sorry, username already taken or invalid!");
                 } else {
+                	//Legt neuen User an
                     Map<String, String> userdata = new HashMap<String, String>();
                     userdata.put("name", textField.getText());
                     userdata.put("fname", fnameField1.getText());
@@ -173,11 +182,11 @@ public class WindowRegister extends Application {
 
                     //XMPP neuer User
                     XMPPConnect connection = XMPPConnect.getInstance();
-                    connection.register(textField.getText(), passwd.getText());
+                    connection.register(textField.getText(), passwd.getText());	//registriert neuen User
                     if (connection.login(textField.getText(), passwd.getText())) {
                         WindowSocialMain loggedin = new WindowSocialMain();
-                        loggedin.userName = textField.getText();
-                        loggedin.start(primaryStage);
+                        loggedin.userName = textField.getText();				//username wird übergeben
+                        loggedin.start(primaryStage);							//Social Main wird gestartet
                     }
                 }
             }

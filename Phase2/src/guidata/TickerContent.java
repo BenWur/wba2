@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package guidata;
 
 import com.sun.jersey.api.client.Client;
@@ -9,23 +6,34 @@ import com.sun.jersey.api.client.WebResource;
 import eventcontentlist.Eventcontent;
 
 /**
- *
- * @author Dario
+ * Verwaltung vom Ticker Content
+ * @author Dario & Ben
  */
 public class TickerContent {
-    public Eventcontent contentList(int EventID)
-	   {   
-	       String url = "http://localhost:4434/events/"+EventID+"/eventcontent";
-	       WebResource wrs = Client.create().resource(url);
-	       
-	       Eventcontent ev = wrs.accept("application/xml").get(Eventcontent.class);
-	        
-	     return ev;
-	    }
-    public void createBeitrag(int ID, String beitrag) {
-    	new NewBeitrag(ID, beitrag);
-   }
-        
+	
+	/**
+	 * Gibt ein Content zurück
+	 * @param eventID
+	 */
+    public Eventcontent contentList(int eventID){   
+       String url = "http://localhost:4434/events/"+eventID+"/eventcontent";
+       WebResource wrs = Client.create().resource(url);
+       Eventcontent ev = wrs.accept("application/xml").get(Eventcontent.class);
+       return ev;
+    }
+    
+    /**
+	 * Erstellt ein Beitrag
+	 * @param id, beitrag
+	 */
+    public void createBeitrag(int id, String beitrag) {
+    	new NewBeitrag(id, beitrag);
+    }
+    
+    /**
+	 * Erstellt ein Kommentar
+	 * @param eventID, tickerID, username, beitrag
+	 */
     public void createKommentar(int eventID, int tickerID, String username, String beitrag) {
         new NewKommentar(eventID, tickerID, username, beitrag);
     }

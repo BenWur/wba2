@@ -1,47 +1,44 @@
 package guidata;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.ws.rs.core.MediaType;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 import userlist.LandType;
-import userlist.ObjectFactory;
 import userlist.User;
 import userlist.Userlist;
 
 /**
- *
+ * Verwaltung von Usern
  * @author Dario & Ben
  */
-
 public class UserContent {
     
-    public User userInfo(String username)
-	   {   
+	/**
+	 * Überprüft ob der User existiert
+	 * @param username
+	 */
+    public User userInfo(String username){   
 	       String url = "http://localhost:4434/users/";
 	       WebResource wrs = Client.create().resource(url);
-	       
 	       Userlist ev = wrs.accept("application/xml").get(Userlist.class);
 	       
-           for (int i = 0; i < ev.getUser().size(); i++)
-           {
+           for (int i = 0; i < ev.getUser().size(); i++){
         	   	if (ev.getUser().get(i).getUsername().equals(username)){
         	   		return ev.getUser().get(i);
         	   	}
            }
            return null;
-        }
+    }
     
+    /**
+	 * Ändert Userdaten
+	 * @param user, land, stadt
+	 */
    public void userChange(User user, String land, String stadt){
-	 //neuen User anlegen
+	   //neuen User anlegen
        user.setLand(LandType.fromValue(land));
        user.setStadt(stadt);
        

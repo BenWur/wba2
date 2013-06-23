@@ -21,6 +21,10 @@ import userlist.User;
 
 public class NewUser {
 
+	/**
+	 * Konstruktor eines neuen Nutzers
+	 * @param eventID, beitrag
+	 */
     public NewUser(Map<String, String> userdata) {
 
         //neuen User anlegen
@@ -44,7 +48,7 @@ public class NewUser {
 
         
         String url = "http://localhost:4434/users";			//url der Ressource
-        WebResource wrs = Client.create().resource(url);	//erstellt neuen User
+        WebResource wrs = Client.create().resource(url);	
 
         //erstellt user und gibt einen Response zurück. Server übernimmt die genaue Verwaltung
         ClientResponse cr = wrs.accept("text/html").type(MediaType.APPLICATION_XML).entity(user).post(ClientResponse.class);

@@ -25,7 +25,11 @@ import eventlist.Event;
 
 public class NewEvent {
 
-public NewEvent(Map<String, String> eventdata) {
+	/**
+	 * Konstruktor eines neuen Events
+	 * @param eventdate Map der Eventdaten
+	 */
+	public NewEvent(Map<String, String> eventdata) {
 
         //neues Event anlegen
         Event event = new ObjectFactory().createEvent();
@@ -54,19 +58,20 @@ public NewEvent(Map<String, String> eventdata) {
         
         
         //erstellt Event und gibt einen Response zurück. Server übernimmt die genaue Verwaltung
-        ClientResponse cr = wrs.accept("text/html").type(MediaType.APPLICATION_XML).entity(event).post(ClientResponse.class);
+        ClientResponse cr = wrs.accept("text/html").type(MediaType.APPLICATION_XML).entity(event).post(ClientResponse.class);	//POST
         System.out.println(cr.getStatus());
         
         TickerEvents tickev = new TickerEvents();
         List<Event> liste = tickev.eventList();
         BigInteger id = null;
         for(Event ev:liste){
-        	if(ev.getEventname().equals(event.getEventname())){
+        	if(ev.getEventname().equals(event.getEventname())){	
+        		//EventID richtig setzen
         		id = ev.getEventID();
         	}
         }
         
-        Eventcontent newContent = new Eventcontent();
+        Eventcontent newContent = new Eventcontent();			//Content muss gleichzeitig angelegt werden
 		newContent.setAktuellerStand(null);
 		newContent.setEventID(id);
 		

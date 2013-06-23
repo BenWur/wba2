@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package guidata;
 
 import java.math.BigInteger;
@@ -13,65 +10,81 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
- * @author Dario
+ * Verwaltung vom Ticker Events
+ * @author Dario & Ben
  */
 public class TickerEvents {
     
-	public List<Event> eventList()
-	   {   
-	       String url = "http://localhost:4434/events";
-	       WebResource wrs = Client.create().resource(url);
-	       
-	       Eventlist ev = wrs.accept("application/xml").get(Eventlist.class);
+	/**
+	 * Gibt Liste der Events zurück
+	 */
+	public List<Event> eventList(){   
+	     String url = "http://localhost:4434/events";
+	     WebResource wrs = Client.create().resource(url);
+	     Eventlist ev = wrs.accept("application/xml").get(Eventlist.class);
 	        
 	     return ev.getEvent();
-	    }  
+	}  
 	        
-        
-        public int eventInfo(String EventName) {
-                    
-             List<Event> events = eventList();
-             BigInteger eventId = null;
-             
-             for(int i=0; i<events.size();i++){
-                 if(events.get(i).getEventname().equals(EventName)){
-                     eventId = events.get(i).getEventID();
-                 }
+	/**
+	 * Gibt die ID eines Events zurück
+	 * @param eventName
+	 */   
+	public int eventInfo(String eventName) {
+                
+         List<Event> events = eventList();
+         BigInteger eventId = null;
+         //Geht alle Events durch
+         for(int i=0; i<events.size();i++){
+             if(events.get(i).getEventname().equals(eventName)){
+                 eventId = events.get(i).getEventID();
              }
-	        return eventId.intValue()-1;
-        }
+         }
+        return eventId.intValue()-1;
+    }
         
-
-	public Event getEventContent(int EventID)
-	   {   
-	       String url = "http://localhost:4434/events/"+EventID;
+	/**
+	 * Gibt Content eines Events zurück
+	 * @param eventID
+	 */
+	public Event getEventContent(int eventID){   
+	     String url = "http://localhost:4434/events/"+eventID;
+	     WebResource wrs = Client.create().resource(url);  
+	     Event evnt = wrs.accept("application/xml").get(Event.class);  
+	     return evnt;
+	}
+     
+	/**
+	 * Filter von Events durch Query Param
+	 * @param eventName
+	 */
+    public List<Event> searchEvent(String eventName){   
+	       String url = "http://localhost:4434/events?name="+eventName;
 	       WebResource wrs = Client.create().resource(url);
-	       
-	       Event evnt = wrs.accept("application/xml").get(Event.class);
-	        
-	        
-	        return evnt;
-	   }
-        
-    public List<Event> searchEvent(String EventName)
-	   {   
-	       String url = "http://localhost:4434/events?name="+EventName;
-	       WebResource wrs = Client.create().resource(url);
-	       
-	       Eventlist evnt = wrs.accept("application/xml").get(Eventlist.class);
-	        
-	        
-	        return evnt.getEvent();
-	   }
-        
+	       Eventlist evnt = wrs.accept("application/xml").get(Eventlist.class); 
+	       return evnt.getEvent();
+    }
+     
+    /**
+	 * Erstellt neues Event
+	 * @param eventdata
+	 */
     public void createEvent(Map<String, String> eventdata) {
-   new NewEvent(eventdata);
-   }
-   public void createBeitrag(int ID, String beitrag) {
+    	new NewEvent(eventdata);
+    }
+    
+    /**
+	 * Erstellt neuen Beitrag
+	 * @param eventdata
+	 */
+    public void createBeitrag(int ID, String beitrag) {
     	new NewBeitrag(ID, beitrag);
-   }
-        
+    }
+    
+    /**
+   	 * Erstellt neuen Kommentar
+   	 * @param eventID, tickerID, username, beitrag
+   	 */
     public void createKommentar(int eventID, int tickerID, String username, String beitrag) {
         new NewKommentar(eventID, tickerID, username, beitrag);
     }

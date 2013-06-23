@@ -118,7 +118,6 @@ public class WindowLogin extends Application {
 
         Scene scene = new Scene(root, 300, 200);
 
-
         primaryStage.setTitle("SocialTicker | Login");
         primaryStage.setScene(scene);
         primaryStage.show();

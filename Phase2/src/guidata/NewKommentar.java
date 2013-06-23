@@ -21,6 +21,10 @@ import javax.ws.rs.core.MediaType;
 
 public class NewKommentar {
     
+	/**
+	 * Konstruktor eines neuen Kommentars
+	 * @param eventID, beitrag
+	 */
     public NewKommentar(int eventID,int beitragID,String username, String kommentar) {
     	//neuen Kommentar anlegen
     	Kommentar kommi = new ObjectFactory().createKommentar();
