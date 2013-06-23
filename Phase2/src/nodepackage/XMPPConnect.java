@@ -7,13 +7,18 @@ import org.jivesoftware.smack.SASLAuthentication;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 
+/**
+ * Dient zur Verwaltung der Verbindung zum Server
+ * @author Dario & Ben
+ */
 public class XMPPConnect {
 	
 	public Connection conn = null;
 	private static XMPPConnect instance;
 	
-
-	//dient zur persistenten Speicherung der Verbindung
+	/**
+     * Dient zur persistenten Speicherung der Verbindung
+     */
 	public static XMPPConnect getInstance(){
 		if(instance==null){
 			instance=new XMPPConnect();
@@ -21,32 +26,40 @@ public class XMPPConnect {
 		return instance;
 	}
 	
+	/**
+	 * Konstruktor
+	 */
 	private XMPPConnect(){
 		// Create a connection to the jabber.org server on a specific port.
 		ConnectionConfiguration config = new ConnectionConfiguration("localhost", 5222);
 		conn = new XMPPConnection(config);
-		
 		try {
 			conn.connect();
 		} catch (XMPPException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Erstellt neuen Nutzer auf dem Server
+	 * @param username, password
+	 */
 	public void register(String username, String password){
 		AccountManager register = new AccountManager(conn);
 		try {
 			register.createAccount(username, password);
 			System.out.println(username+" wurde erstellt!");
 		} catch (XMPPException e) {
-			// TODO Auto-generated catch block
 			System.out.println(username+" wurde nicht erstellt!");
 			e.printStackTrace();
 		}
 		
 	}
 	
+	/**
+	 * Logt einen Nutzer ein
+	 * @param username, password
+	 */
 	public boolean login(String username, String password){
 		System.out.println("einloggen");
 		SASLAuthentication.supportSASLMechanism( "PLAIN", 0 );
@@ -55,7 +68,6 @@ public class XMPPConnect {
 			System.out.println("Erfolgreich eingeloggt!");
 			return true;
 		} catch (XMPPException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
