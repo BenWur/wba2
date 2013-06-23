@@ -1,21 +1,3 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <eventlist>
-    <event eventID="1">
-        <eventname>dasdassadsad</eventname>
-        <eventbeschreibung>aasddssadsd</eventbeschreibung>
-        <username>drdare</username>
-        <eventtyp>Football</eventtyp>
-        <eventstart>11:22:00</eventstart>
-        <eventdauer>12:33:00</eventdauer>
-        <eventbewertung>5</eventbewertung>
-    </event>
-    <event eventID="2">
-        <eventname>sadasasdsad</eventname>
-        <eventbeschreibung>assadasdsad</eventbeschreibung>
-        <username>admin</username>
-        <eventtyp>Football</eventtyp>
-        <eventstart>11:22:00</eventstart>
-        <eventdauer>12:43:00</eventdauer>
-        <eventbewertung>5</eventbewertung>
-    </event>
 </eventlist>

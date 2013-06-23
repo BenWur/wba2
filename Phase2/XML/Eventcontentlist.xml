@@ -1,16 +1,3 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <eventcontentlist>
-    <eventcontent eventID="1">
-        <tickerBeitrag zeit="14:34:24" tickerBeitragID="1">
-            <text>sdasdassadsad</text>
-        </tickerBeitrag>
-        <tickerBeitrag zeit="14:36:20" tickerBeitragID="2">
-            <text>sadadsads</text>
-        </tickerBeitrag>
-    </eventcontent>
-    <eventcontent eventID="2">
-        <tickerBeitrag zeit="14:36:22" tickerBeitragID="1">
-            <text>sadsadadssad</text>
-        </tickerBeitrag>
-    </eventcontent>
 </eventcontentlist>
