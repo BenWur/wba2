@@ -40,8 +40,8 @@ public class WindowRegister extends Application {
         primaryStage.setResizable(false);
 
         final Label errmessage = new Label();
-        errmessage.setLayoutX(20);
-        errmessage.setLayoutY(397);
+        errmessage.setLayoutX(50);
+        errmessage.setLayoutY(394);
 
         Label name = new Label("Username:");
         name.setLayoutX(50);
@@ -153,7 +153,7 @@ public class WindowRegister extends Application {
             public void handle(ActionEvent event) {
                 Register register = new Register();
                 errmessage.setText("");
-                if (register.login(textField.getText())) {
+                if (textField.getText().isEmpty() || textField.getText().length() < 3) {
                     errmessage.setTextFill(Color.rgb(210, 39, 30));
                     errmessage.setText("Sorry, username already taken or invalid!");
                 } else {
@@ -186,24 +186,24 @@ public class WindowRegister extends Application {
         AnchorPane root = new AnchorPane();
         root.getChildren().add(iv1);
         root.getChildren().add(passwordLabel);
-        root.getChildren().add(passwd);
-        root.getChildren().add(btn);
         root.getChildren().add(name);
         root.getChildren().add(fname);
         root.getChildren().add(lname);
         root.getChildren().add(bday);
         root.getChildren().add(textField);
+        root.getChildren().add(passwd);
         root.getChildren().add(fnameField1);
         root.getChildren().add(lnameField1);
-        root.getChildren().add(bdayField);
         root.getChildren().add(errmessage);
-        root.getChildren().add(gname);
         root.getChildren().add(gbm);
         root.getChildren().add(gbf);
+        root.getChildren().add(bdayField);
+        root.getChildren().add(gname);
         root.getChildren().add(country);
         root.getChildren().add(countryc);
         root.getChildren().add(city);
         root.getChildren().add(cityField);
+        root.getChildren().add(btn);
         root.getChildren().add(backbtn);
 
         Scene scene = new Scene(root, 300, 470, Color.CHARTREUSE);

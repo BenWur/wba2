@@ -36,7 +36,7 @@ public class WindowLogin extends Application {
 
         final Label errmessage = new Label();
         errmessage.setLayoutX(50);
-        errmessage.setLayoutY(110);
+        errmessage.setLayoutY(141);
 
         Label name = new Label("Username:");
         name.setLayoutX(50);
