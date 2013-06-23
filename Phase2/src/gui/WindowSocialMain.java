@@ -54,7 +54,7 @@ public class WindowSocialMain extends Application {
     private TabPane tabPane = new TabPane();        // TabPane, enthaelt alle Tabs
     private Event events = null;                    // Ein Event
     private UserContent userInfo;                   // Info eines Users
-    private Font bold = Font.font(null, FontWeight.BOLD, 13);
+    private Font bold = Font.font(null, FontWeight.BOLD, 13);	//Um Label BOLD zu machen
 
     /**
      * Diese Methode aktualisiert alle Events im Ticker
